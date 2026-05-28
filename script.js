@@ -420,6 +420,59 @@ function typeWriter() {
 }
 if(typeText) typeWriter();
 
+// --- Animated Counter for Hero Stats ---
+function animateCounter(element, target, duration) {
+    let start = 0;
+    const startTime = performance.now();
+    
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Ease out cubic
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(easeOut * target);
+        
+        element.textContent = current;
+        
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        }
+    }
+    
+    requestAnimationFrame(update);
+}
+
+const statNums = document.querySelectorAll('.stat-num');
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const target = parseInt(entry.target.textContent);
+            animateCounter(entry.target, target, 1500);
+            statsObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+statNums.forEach(num => {
+    statsObserver.observe(num);
+});
+
+// --- Subtle Parallax on Hero Section ---
+const heroImage = document.querySelector('.hero-image');
+const heroContent = document.querySelector('.hero-content');
+
+if (heroImage && heroContent) {
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        if (scrolled < window.innerHeight) {
+            heroImage.style.transform = `translateY(${scrolled * 0.15}px)`;
+            heroContent.style.transform = `translateY(${scrolled * 0.08}px)`;
+            heroContent.style.opacity = 1 - (scrolled / (window.innerHeight * 0.8));
+        }
+    });
+}
+
 // Mobile Hamburger Menu
 const menuToggle = document.getElementById('mobile-menu');
 const navMenu = document.querySelector('.nav-menu');
@@ -518,30 +571,43 @@ window.stopCoverSlideshow = function(projectId, cardElement) {
 };
 
 
-// --- Active Navbar Highlighter ---
+// --- Active Navbar Highlighter + Smart Navbar ---
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-links a');
+    const navbar = document.querySelector('.navbar');
+    let lastScrollY = window.scrollY;
+    let ticking = false;
 
-    window.addEventListener('scroll', () => {
-        let current = '';
+    function updateNavbar() {
+        const scrollY = window.scrollY;
         
+        // Smart navbar: hide on scroll down, show on scroll up
+        if (scrollY > 100) {
+            if (scrollY > lastScrollY && scrollY > 300) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+        } else {
+            navbar.style.transform = 'translateY(0)';
+        }
+        
+        // Scrollspy logic
+        let current = '';
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
-            // Add a 200px offset to trigger slightly before reaching the section
-            if (window.scrollY >= sectionTop - 200) {
+            if (scrollY >= sectionTop - 200) {
                 current = section.getAttribute('id');
             }
         });
 
-        // Special case: If user is at the absolute top
-        if (window.scrollY < 50) {
+        if (scrollY < 50) {
             current = 'hero';
         }
 
-        // Special case: If user scrolled to the absolute bottom
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
-            current = 'contact'; // Contact is the last section
+        if ((window.innerHeight + scrollY) >= document.body.offsetHeight - 10) {
+            current = 'contact';
         }
 
         navLinks.forEach(link => {
@@ -550,5 +616,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 link.classList.add('active');
             }
         });
+        
+        lastScrollY = scrollY;
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateNavbar);
+            ticking = true;
+        }
     });
+    
+    // Trigger once on load
+    updateNavbar();
 });
+
+// --- Cursor Glow Trail ---
+if (window.matchMedia('(pointer: fine)').matches) {
+    const cursor = document.createElement('div');
+    cursor.style.cssText = `
+        position: fixed;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(100, 255, 218, 0.06) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.15s ease;
+        transform: translate(-50%, -50%);
+    `;
+    document.body.appendChild(cursor);
+    
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+}
