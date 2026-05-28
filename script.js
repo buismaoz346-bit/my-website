@@ -384,8 +384,6 @@ window.addEventListener('touchmove', function(e) {
     }
 }, { passive: false });
 
-
-
 // Typewriter Effect
 const roles = ["Hardware Developer", "PCB Designer", "Embedded Engineer"];
 let roleIndex = 0;
@@ -458,21 +456,6 @@ statNums.forEach(num => {
     statsObserver.observe(num);
 });
 
-// --- Subtle Parallax on Hero Section ---
-const heroImage = document.querySelector('.hero-image');
-const heroContent = document.querySelector('.hero-content');
-
-if (heroImage && heroContent) {
-    window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-        if (scrolled < window.innerHeight) {
-            heroImage.style.transform = `translateY(${scrolled * 0.15}px)`;
-            heroContent.style.transform = `translateY(${scrolled * 0.08}px)`;
-            heroContent.style.opacity = 1 - (scrolled / (window.innerHeight * 0.8));
-        }
-    });
-}
-
 // Mobile Hamburger Menu
 const menuToggle = document.getElementById('mobile-menu');
 const navMenu = document.querySelector('.nav-menu');
@@ -523,8 +506,6 @@ window.navigateLightbox = function(direction) {
     const lightboxImg = document.getElementById('lightbox-img');
     lightboxImg.src = currentLightboxImages[currentLightboxIndex].src;
 };
-
-
 
 // Also let users click to advance immediately
 window.navigateProjectGalleryClick = function(projectId, direction, event) {
@@ -632,129 +613,23 @@ document.addEventListener('DOMContentLoaded', () => {
     updateNavbar();
 });
 
-// --- Cursor Glow Trail ---
+// --- Cursor Glow (GPU Optimized) ---
 if (window.matchMedia('(pointer: fine)').matches) {
     const cursor = document.createElement('div');
-    cursor.style.cssText = `
-        position: fixed;
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(100, 255, 218, 0.06) 0%, transparent 70%);
-        pointer-events: none;
-        z-index: 999;
-        transition: transform 0.15s ease;
-        transform: translate(-50%, -50%);
-    `;
+    cursor.style.cssText = 'position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(100,255,218,0.06) 0%,transparent 70%);pointer-events:none;z-index:999;will-change:transform;left:0;top:0;';
     document.body.appendChild(cursor);
-    
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-    });
+    let mx = 0, my = 0;
+    document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; }, { passive: true });
+    (function updateCursor() {
+        cursor.style.transform = `translate(${mx - 150}px, ${my - 150}px)`;
+        requestAnimationFrame(updateCursor);
+    })();
 }
-
-
-// --- EFFECT 1: Scroll Progress Bar ---
-const progressBar = document.createElement('div');
-progressBar.className = 'scroll-progress';
-document.body.appendChild(progressBar);
-
-window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = (scrollTop / docHeight) * 100;
-    progressBar.style.width = scrollPercent + '%';
-});
-
-// --- EFFECT 2: Back to Top Button ---
-const backToTop = document.createElement('button');
-backToTop.className = 'back-to-top';
-backToTop.innerHTML = '↑';
-backToTop.setAttribute('aria-label', 'Back to top');
-document.body.appendChild(backToTop);
-
-backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-        backToTop.classList.add('visible');
-    } else {
-        backToTop.classList.remove('visible');
-    }
-});
-
-// --- EFFECT 3: Glass Panel Mouse Tracking Glow ---
-document.querySelectorAll('.glass-panel').forEach(panel => {
-    panel.addEventListener('mousemove', (e) => {
-        const rect = panel.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        panel.style.setProperty('--mouse-x', x + '%');
-        panel.style.setProperty('--mouse-y', y + '%');
-    });
-});
-
-// --- EFFECT 4: Smooth Staggered Reveal ---
-const revealElements = document.querySelectorAll('.timeline-item, .cert-card, .premium-skill-card, .trait-card');
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }, index * 80);
-            revealObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.1 });
-
-revealElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-    revealObserver.observe(el);
-});
-
-// --- EFFECT 5: Smooth Section Title Reveal ---
-const sectionTitles = document.querySelectorAll('.section-title');
-const titleObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            entry.target.style.filter = 'blur(0)';
-            titleObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.3 });
-
-sectionTitles.forEach(title => {
-    title.style.opacity = '0';
-    title.style.transform = 'translateY(20px)';
-    title.style.filter = 'blur(5px)';
-    title.style.transition = 'opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease';
-    titleObserver.observe(title);
-});
-
-// --- EFFECT 6: Magnetic Hover on Buttons ---
-document.querySelectorAll('.btn-primary, .btn-secondary, .btn-download').forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-    });
 
     btn.addEventListener('mouseleave', () => {
         btn.style.transform = 'translate(0, 0)';
     });
 });
-
-// --- EFFECT 7: Typing Sound Effect for Typewriter ---
-let typeClickCtx = null;
 
 function playTypeClick() {
     if (!typeClickCtx) {
@@ -784,49 +659,7 @@ if (typewriterEl) {
 
 // Page load animation removed - was causing blur screen bug
 
-// --- EFFECT 9: Active section subtle bg highlight ---
-const allSections = document.querySelectorAll('section');
-const sectionGlowObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.transition = 'box-shadow 1s ease';
-        }
-    });
-}, { threshold: 0.2 });
-
 allSections.forEach(s => sectionGlowObserver.observe(s));
-
-// --- EFFECT 10: Image Lazy Load Fade In ---
-document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-    img.style.opacity = '0';
-    img.style.transition = 'opacity 0.5s ease';
-    
-    if (img.complete) {
-        img.style.opacity = '1';
-    } else {
-        img.addEventListener('load', () => {
-            img.style.opacity = '1';
-        });
-    }
-});
-
-
-// --- PREMIUM EFFECT: Smooth 3D Tilt on Trait Cards ---
-document.querySelectorAll('.trait-card, .premium-skill-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width;
-        const y = (e.clientY - rect.top) / rect.height;
-        const tiltX = (y - 0.5) * 10;
-        const tiltY = (x - 0.5) * -10;
-        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-8px)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-        card.style.transition = 'transform 0.5s ease';
-    });
-});
 
 // --- PREMIUM EFFECT: Keyboard Navigation Enhancement ---
 document.addEventListener('keydown', (e) => {
@@ -850,17 +683,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// --- PREMIUM EFFECT: Smooth Scroll Reveal for all hidden elements ---
-const smoothRevealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-            entry.target.style.transitionDelay = (i * 50) + 'ms';
-            entry.target.classList.add('show');
-            smoothRevealObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
-
 // --- PREMIUM EFFECT: Double-click to top ---
 let lastClickTime = 0;
 document.querySelector('.navbar')?.addEventListener('click', (e) => {
@@ -873,150 +695,36 @@ document.querySelector('.navbar')?.addEventListener('click', (e) => {
     }
 });
 
-// --- PREMIUM EFFECT: Active Section Background Subtle Pulse ---
-const activeSectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-        }
-    });
-}, { threshold: 0.3 });
-
 document.querySelectorAll('section').forEach(s => activeSectionObserver.observe(s));
 
 // --- ADD MASSIVE JS EFFECTS ---
-
-// 1. Orbs Background
-const body = document.body;
-for (let i = 1; i <= 3; i++) {
-    const orb = document.createElement('div');
-    orb.className = `orb orb-${i}`;
-    body.appendChild(orb);
-}
-
-// 2. Click Particle Explosion
-document.addEventListener('click', (e) => {
-    const rect = document.body.getBoundingClientRect();
-    for (let i = 0; i < 8; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'click-particle';
-        particle.style.left = `${e.clientX}px`;
-        particle.style.top = `${e.clientY + window.scrollY}px`;
-        const tx = (Math.random() - 0.5) * 100;
-        const ty = (Math.random() - 0.5) * 100;
-        particle.style.setProperty('--tx', `${tx}px`);
-        particle.style.setProperty('--ty', `${ty}px`);
-        body.appendChild(particle);
-        setTimeout(() => particle.remove(), 600);
-    }
-});
-
-// 3. Magnetic Buttons Engine
-document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        btn.style.setProperty('--mx', `${x - rect.width/2}px`);
-        btn.style.setProperty('--my', `${y - rect.height/2}px`);
-    });
-});
-
-
 
 // --- ULTRA-PREMIUM 1000X JS ENGINE ---
 
 // 1. Canvas Engine Removed for Performance
 
-// 2. Kinetic Text Engine Wrapper (Fixed Word Wrap)
-document.querySelectorAll('h1, h2, .role').forEach(el => {
-    if (el.classList.contains('kinetic-text')) return;
-    const words = el.innerText.split(' ');
-    el.innerHTML = '';
-    el.classList.add('kinetic-text');
-    let letterIndex = 0;
-    words.forEach((word, wordIndex) => {
-        const wordSpan = document.createElement('span');
-        wordSpan.style.display = 'inline-block';
-        wordSpan.style.whiteSpace = 'nowrap';
-        for (let i = 0; i < word.length; i++) {
-            const charSpan = document.createElement('span');
-            charSpan.innerText = word[i];
-            charSpan.style.display = 'inline-block';
-            charSpan.style.transition = 'transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            charSpan.style.animationDelay = `${letterIndex * 0.03}s`;
-            wordSpan.appendChild(charSpan);
-            letterIndex++;
-        }
-        el.appendChild(wordSpan);
-        if (wordIndex < words.length - 1) {
-            const spaceSpan = document.createElement('span');
-            spaceSpan.innerHTML = '&nbsp;';
-            el.appendChild(spaceSpan);
-            letterIndex++;
-        }
-    });
-});
+// --- UNIFIED SCROLL HANDLER (One rAF for everything) ---
+const scrollBar = document.createElement('div');
+scrollBar.className = 'scroll-progress';
+document.body.appendChild(scrollBar);
 
-// 3. Inject Infinite Marquee dynamically before footer
-const footer = document.querySelector('footer');
-if (footer && !document.querySelector('.marquee-container')) {
-    const marqueeHTML = `
-        <div class="marquee-container">
-            <div class="marquee-content">
-                <span class="marquee-item">HARDWARE ENGINEERING</span>
-                <span class="marquee-item">★</span>
-                <span class="marquee-item">PCB DESIGN</span>
-                <span class="marquee-item">★</span>
-                <span class="marquee-item">FIRMWARE</span>
-                <span class="marquee-item">★</span>
-                <span class="marquee-item">INTERNET OF THINGS</span>
-                <span class="marquee-item">★</span>
-                <span class="marquee-item">HARDWARE ENGINEERING</span>
-                <span class="marquee-item">★</span>
-                <span class="marquee-item">PCB DESIGN</span>
-                <span class="marquee-item">★</span>
-                <span class="marquee-item">FIRMWARE</span>
-                <span class="marquee-item">★</span>
-                <span class="marquee-item">INTERNET OF THINGS</span>
-                <span class="marquee-item">★</span>
-            </div>
-        </div>
-    `;
-    footer.insertAdjacentHTML('beforebegin', marqueeHTML);
-}
+const topBtn = document.createElement('button');
+topBtn.className = 'back-to-top';
+topBtn.innerHTML = '↑';
+topBtn.setAttribute('aria-label', 'Back to top');
+document.body.appendChild(topBtn);
+topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-// 4. Inject floating 3D ambient shapes
-if (!document.querySelector('.bg-shape')) {
-    const s1 = document.createElement('div'); s1.className = 'bg-shape bg-shape-1';
-    const s2 = document.createElement('div'); s2.className = 'bg-shape bg-shape-2';
-    document.body.appendChild(s1);
-    document.body.appendChild(s2);
-}
-
-// 5. Scroll Progress Rotator
-const scrollRotator = document.createElement('div');
-scrollRotator.style.cssText = `
-    position: fixed; bottom: 30px; left: 30px; width: 60px; height: 60px;
-    background: conic-gradient(var(--primary) 0%, transparent 0%);
-    border-radius: 50%; z-index: 1000; pointer-events: none; opacity: 0.7;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 20px rgba(100,255,218,0.2);
-`;
-const innerRotator = document.createElement('div');
-innerRotator.style.cssText = `
-    width: 50px; height: 50px; background: var(--bg-color);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    color: var(--primary); font-family: 'Outfit'; font-weight: bold; font-size: 0.8rem;
-`;
-scrollRotator.appendChild(innerRotator);
-document.body.appendChild(scrollRotator);
-
+let sTick = false;
 window.addEventListener('scroll', () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    scrollRotator.style.background = `conic-gradient(var(--primary) ${scrolled}%, transparent 0%)`;
-    innerRotator.innerText = Math.round(scrolled) + '%';
-});
-
+    if (!sTick) {
+        requestAnimationFrame(() => {
+            const sy = window.scrollY;
+            const dh = document.documentElement.scrollHeight - window.innerHeight;
+            scrollBar.style.width = ((sy / dh) * 100) + '%';
+            topBtn.classList.toggle('visible', sy > 500);
+            sTick = false;
+        });
+        sTick = true;
+    }
+}, { passive: true });

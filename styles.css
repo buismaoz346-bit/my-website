@@ -1268,12 +1268,6 @@ footer::before {
     100% { background-position: 0% 50%; }
 }
 
-
-
-
-
-
-
 /* --- Mobile Fixes --- */
 @media (max-width: 768px) {
     .name {
@@ -2107,8 +2101,7 @@ footer::before {
     animation: skeletonShimmer 1.5s ease infinite;
 }
 
-@keyframes skeletonShimmer {
-    0% { background-position: 200% 0; }
+
     100% { background-position: -200% 0; }
 }
 
@@ -2137,7 +2130,7 @@ footer::before {
 }
 
 .featured-project {
-    animation: neonPulse 3s ease-in-out infinite;
+    
 }
 
 /* E3: Gradient Border on All Cards */
@@ -2433,9 +2426,7 @@ img {
 }
 
 /* E46: Smooth All Transitions */
-*, *::before, *::after {
-    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-}
+
 
 /* --- ADVANCED HOVER STATES --- */
 
@@ -2461,10 +2452,6 @@ img {
 /* E50: About Card Expand */
 .about-card {
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.about-card:hover {
-    padding: 4.5rem;
 }
 
 /* --- SCROLL-LINKED VISUAL EFFECTS --- */
@@ -2999,19 +2986,14 @@ section {
    ============================================================ */
 
 /* --- GLITCH & DISTORTION EFFECTS --- */
-@keyframes glitch-anim {
-  0% { clip-path: inset(10% 0 80% 0); transform: translate(-2px, 2px); }
+
   20% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -2px); }
   40% { clip-path: inset(50% 0 30% 0); transform: translate(2px, 2px); }
   60% { clip-path: inset(0% 0 100% 0); transform: translate(-2px, -2px); }
   80% { clip-path: inset(20% 0 60% 0); transform: translate(2px, 2px); }
   100% { clip-path: inset(30% 0 20% 0); transform: translate(-2px, -2px); }
 }
-.name:hover {
-    animation: glitch-anim 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-    color: var(--primary);
-    text-shadow: 2px 2px var(--secondary-light), -2px -2px var(--text-main);
-}
+
 
 /* --- ADVANCED GRADIENT BORDERS --- */
 .glass-panel::before {
@@ -3061,19 +3043,16 @@ section {
     color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
-    animation: shimmer 5s linear infinite;
+    
 }
 
 /* --- LIQUID / WATER DISTORTION ON IMAGES --- */
-@keyframes liquid-float {
-    0% { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
+
     33% { border-radius: 60% 40% 40% 60% / 40% 60% 40% 60%; }
     66% { border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%; }
     100% { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
 }
-.image-wrapper img {
-    animation: liquid-float 8s ease-in-out infinite;
-}
+
 
 /* --- NEON PULSE BORDERS ON SKILLS --- */
 @keyframes neon-pulse-border {
@@ -3094,42 +3073,11 @@ section {
 }
 
 /* --- BACKGROUND ORB PARTICLES --- */
-.orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    z-index: -2;
-    opacity: 0.3;
-    animation: orb-drift 20s infinite alternate ease-in-out;
-}
-.orb-1 { background: rgba(100, 255, 218, 0.15); width: 400px; height: 400px; top: 10%; left: -10%; }
-.orb-2 { background: rgba(37, 99, 235, 0.1); width: 500px; height: 500px; top: 40%; right: -20%; }
-.orb-3 { background: rgba(100, 255, 218, 0.1); width: 300px; height: 300px; bottom: 10%; left: 20%; }
 
-@keyframes orb-drift {
-    0% { transform: translate(0, 0) scale(1); }
     100% { transform: translate(100px, -100px) scale(1.2); }
 }
 
 /* --- TEXT REVEAL MASKS --- */
-.reveal-text {
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
-}
-.reveal-text::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--primary);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
-}
-.reveal-text.show::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
 
 /* --- FLIP CARDS EFFECT FOR AWARDS --- */
 .award-card-inner {
@@ -3141,42 +3089,13 @@ section {
 }
 
 /* --- CONTINUOUS SCROLL TICKER --- */
-@keyframes ticker {
-    0% { transform: translate3d(0, 0, 0); }
+
     100% { transform: translate3d(-50%, 0, 0); }
-}
-.ticker-wrap {
-    overflow: hidden;
-    white-space: nowrap;
-    background: rgba(10, 25, 47, 0.5);
-    padding: 10px 0;
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
-}
-.ticker-track {
-    display: inline-block;
-    animation: ticker 30s linear infinite;
-}
-.ticker-item {
-    display: inline-block;
-    padding: 0 2rem;
-    color: var(--primary);
-    font-weight: 600;
-    letter-spacing: 2px;
 }
 
 /* --- EXPLOSION PARTICLES ON CLICK --- */
-.click-particle {
-    position: absolute;
-    width: 8px; height: 8px;
-    background: var(--primary);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    animation: pop 0.6s cubic-bezier(0, 0.9, 0.3, 1) forwards;
-}
-@keyframes pop {
-    0% { transform: scale(1); opacity: 1; }
+
+
     100% { transform: scale(0) translate(var(--tx), var(--ty)); opacity: 0; }
 }
 
@@ -3208,9 +3127,6 @@ p a:hover::before {
     box-shadow: 0 20px 40px -10px rgba(100, 255, 218, 0.3);
 }
 
-
-
-
 /* ============================================================
    ULTRA-PREMIUM 1000X ENGINE: KINETIC TYPOGRAPHY & FLUID DYNAMICS
    ============================================================ */
@@ -3222,16 +3138,8 @@ p a:hover::before {
 }
 
 /* --- KINETIC TYPOGRAPHY --- */
-@keyframes letter-bounce {
-    0%, 100% { transform: translateY(0) scale(1); color: inherit; }
+
     50% { transform: translateY(-10px) scale(1.2); color: var(--primary); text-shadow: 0 0 20px var(--primary); }
-}
-.kinetic-text span span {
-    display: inline-block;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.kinetic-text:hover span span {
-    animation: letter-bounce 0.5s ease forwards;
 }
 
 /* --- ADVANCED REFRACTION GLASS --- */
@@ -3250,8 +3158,7 @@ p a:hover::before {
     transform: skewX(-20deg);
     animation: premium-shine 6s infinite;
 }
-@keyframes premium-shine {
-    0% { left: -100%; }
+
     20% { left: 200%; }
     100% { left: 200%; }
 }
@@ -3275,8 +3182,7 @@ p a:hover::before {
 .cert-card:hover::before {
     opacity: 0.5;
 }
-@keyframes holo-border {
-    0% { background-position: 0% 50%; }
+
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
@@ -3288,82 +3194,26 @@ p a:hover::before {
 }
 
 /* --- FLOATING 3D SHAPES (CSS DRAWN) --- */
-.bg-shape {
-    position: absolute;
-    background: linear-gradient(135deg, var(--primary), transparent);
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    filter: blur(40px);
-    opacity: 0.15;
-    z-index: -1;
-    animation: morph-shape 15s ease-in-out infinite alternate;
-}
-.bg-shape-1 { top: 20%; left: 10%; width: 300px; height: 300px; }
-.bg-shape-2 { bottom: 20%; right: 10%; width: 400px; height: 400px; animation-delay: -5s; background: linear-gradient(135deg, #ff00ff, transparent); }
 
-@keyframes morph-shape {
-    0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(0deg) scale(1); }
     50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; transform: rotate(180deg) scale(1.2); }
     100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(360deg) scale(1); }
 }
 
 /* --- INFINITE MARQUEE --- */
-.marquee-container {
-    width: 100vw;
-    overflow: hidden;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    background: rgba(100, 255, 218, 0.05);
-    padding: 2rem 0;
-    border-top: 1px solid rgba(100, 255, 218, 0.2);
-    border-bottom: 1px solid rgba(100, 255, 218, 0.2);
-    transform: rotate(-2deg) scale(1.05);
-    margin-top: 4rem;
-    margin-bottom: 4rem;
-    z-index: 10;
-}
-.marquee-content {
-    display: flex;
-    width: max-content;
-    animation: scroll-left 20s linear infinite;
-}
-.marquee-item {
-    font-family: 'Outfit', sans-serif;
-    font-size: 3rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--primary);
-    margin: 0 2rem;
-    transition: all 0.3s ease;
-}
-.marquee-item:hover {
-    color: var(--primary);
-    -webkit-text-stroke: 0px;
-    text-shadow: 0 0 20px rgba(100, 255, 218, 0.6);
-}
-@keyframes scroll-left {
-    0% { transform: translateX(0); }
+
     100% { transform: translateX(-50%); }
 }
 
 /* --- GLOWING SCANLINE EXPERIMENT --- */
-.hero-image::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 10%;
-    background: linear-gradient(to bottom, transparent, rgba(100, 255, 218, 0.5), transparent);
-    animation: scanline 4s linear infinite;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.5s;
-}
-.hero-image:hover::after {
-    opacity: 1;
-}
-@keyframes scanline {
-    0% { top: -10%; }
+
     100% { top: 110%; }
+}
+
+/* --- GPU PERFORMANCE HINTS --- */
+.navbar { will-change: transform; }
+.scroll-progress { will-change: width; }
+.back-to-top { will-change: opacity, transform; }
+.glass-panel, .cert-card, .trait-card, .premium-skill-card {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
