@@ -552,3 +552,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// === PREMIUM EFFECTS (Lightweight, GPU-optimized) ===
+
+// 1. Scroll Progress Bar + Back to Top (ONE scroll listener)
+const scrollBar = document.createElement('div');
+scrollBar.className = 'scroll-progress';
+document.body.appendChild(scrollBar);
+
+const topBtn = document.createElement('button');
+topBtn.className = 'back-to-top';
+topBtn.innerHTML = '↑';
+topBtn.setAttribute('aria-label', 'Back to top');
+document.body.appendChild(topBtn);
+topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+let raf = false;
+window.addEventListener('scroll', () => {
+    if (!raf) {
+        requestAnimationFrame(() => {
+            const y = window.scrollY;
+            const h = document.documentElement.scrollHeight - window.innerHeight;
+            scrollBar.style.width = ((y / h) * 100) + '%';
+            topBtn.classList.toggle('visible', y > 500);
+            raf = false;
+        });
+        raf = true;
+    }
+}, { passive: true });
+
+// 2. Cursor Glow (GPU-only, uses transform not left/top)
+if (window.matchMedia('(pointer: fine)').matches) {
+    const g = document.createElement('div');
+    g.style.cssText = 'position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(100,255,218,0.05) 0%,transparent 70%);pointer-events:none;z-index:999;will-change:transform;left:0;top:0;';
+    document.body.appendChild(g);
+    let gx = 0, gy = 0;
+    document.addEventListener('mousemove', e => { gx = e.clientX; gy = e.clientY; }, { passive: true });
+    (function mv() { g.style.transform = `translate(${gx-150}px,${gy-150}px)`; requestAnimationFrame(mv); })();
+}
+
+// 3. Animated Counters (one-time, IntersectionObserver)
+function animateNum(el, target, ms) {
+    const t0 = performance.now();
+    (function tick(now) {
+        const p = Math.min((now - t0) / ms, 1);
+        el.textContent = Math.round((1 - Math.pow(1 - p, 3)) * target);
+        if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+}
+const nums = document.querySelectorAll('.stat-num');
+if (nums.length) {
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { animateNum(e.target, parseInt(e.target.textContent), 1500); io.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    nums.forEach(n => io.observe(n));
+}
