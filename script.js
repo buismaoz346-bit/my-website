@@ -59,55 +59,121 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.querySelector('.lightbox-close');
     const clickableImages = document.querySelectorAll('.clickable-image');
+    let activeLightboxSource = null;
 
     if (lightbox && lightboxImg && closeBtn) {
+        
+        function openLightboxFLIP(sourceImg) {
+            activeLightboxSource = sourceImg;
+            
+            // Initial setup
+            lightboxImg.style.transition = 'none';
+            lightbox.style.display = 'flex';
+            lightboxImg.src = sourceImg.src;
+            
+            // Calculate FLIP
+            const sourceRect = sourceImg.getBoundingClientRect();
+            
+            // Force browser to calculate full size target by temporarily resetting transforms
+            lightboxImg.style.transform = 'translate(0, 0) scale(1, 1)';
+            lightboxImg.style.maxWidth = '90%';
+            lightboxImg.style.maxHeight = '90vh';
+            
+            // Wait a tick for image to load/size
+            setTimeout(() => {
+                const targetRect = lightboxImg.getBoundingClientRect();
+                const targetLeft = targetRect.left;
+                const targetTop = targetRect.top;
+                
+                const scaleX = sourceRect.width / targetRect.width;
+                const scaleY = sourceRect.height / targetRect.height;
+                const translateX = sourceRect.left - targetLeft;
+                const translateY = sourceRect.top - targetTop;
+                
+                lightboxImg.style.transformOrigin = 'top left';
+                lightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
+                lightboxImg.style.opacity = '0';
+                
+                void lightboxImg.offsetWidth; // force reflow
+                
+                // Add show class for backdrop fade
+                lightbox.classList.add('show-lightbox');
+                document.body.style.overflow = 'hidden';
+                
+                lightboxImg.style.transition = 'transform 0.7s cubic-bezier(0.34, 1.2, 0.64, 1), opacity 0.5s ease';
+                lightboxImg.style.transform = 'translate(0, 0) scale(1, 1)';
+                lightboxImg.style.opacity = '1';
+            }, 10);
+        }
+
+        function closeLightboxFLIP() {
+            if (activeLightboxSource) {
+                const sourceRect = activeLightboxSource.getBoundingClientRect();
+                
+                lightboxImg.style.transition = 'none';
+                lightboxImg.style.transform = 'translate(0, 0) scale(1, 1)';
+                
+                const targetRect = lightboxImg.getBoundingClientRect();
+                const targetLeft = targetRect.left;
+                const targetTop = targetRect.top;
+                
+                lightboxImg.style.transform = 'translate(0, 0) scale(1, 1)';
+                void lightboxImg.offsetWidth;
+                
+                const scaleX = sourceRect.width / targetRect.width;
+                const scaleY = sourceRect.height / targetRect.height;
+                const translateX = sourceRect.left - targetLeft;
+                const translateY = sourceRect.top - targetTop;
+                
+                lightboxImg.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease';
+                lightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
+                lightboxImg.style.opacity = '0';
+            }
+            
+            lightbox.classList.remove('show-lightbox');
+            
+            setTimeout(() => {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                activeLightboxSource = null;
+            }, 600);
+        }
+
         // Open lightbox on image click
         clickableImages.forEach(img => {
             img.addEventListener('click', function(e) {
-                e.stopPropagation(); // prevent card click from firing twice
-                lightbox.style.display = 'flex';
-                lightboxImg.src = this.src;
+                e.stopPropagation();
                 currentLightboxImages = Array.from(clickableImages);
                 currentLightboxIndex = currentLightboxImages.indexOf(this);
-                // Prevent scrolling on body when lightbox is open
-                document.body.style.overflow = 'hidden';
+                openLightboxFLIP(this);
             });
         });
 
         // Make entire cert card clickable
         const certCards = document.querySelectorAll('.cert-card');
         certCards.forEach(card => {
-            card.addEventListener('click', function() {
+            card.addEventListener('click', function(e) {
+                // If they clicked the image directly, the image listener already fired
+                if(e.target.classList.contains('clickable-image')) return;
                 const img = this.querySelector('.clickable-image');
                 if (img) {
-                    lightbox.style.display = 'flex';
-                    lightboxImg.src = img.src;
                     currentLightboxImages = Array.from(document.querySelectorAll('.cert-card .clickable-image'));
                     currentLightboxIndex = currentLightboxImages.indexOf(img);
-                    document.body.style.overflow = 'hidden';
+                    openLightboxFLIP(img);
                 }
             });
         });
 
-        // Close lightbox on close button click
-        closeBtn.addEventListener('click', function() {
-            lightbox.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-
-        // Close lightbox on background click
+        // Close lightbox
+        closeBtn.addEventListener('click', closeLightboxFLIP);
         lightbox.addEventListener('click', function(e) {
             if (e.target === lightbox) {
-                lightbox.style.display = 'none';
-                document.body.style.overflow = 'auto';
+                closeLightboxFLIP();
             }
         });
-        
-        // Close lightbox on escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && lightbox.style.display === 'flex') {
-                lightbox.style.display = 'none';
-                document.body.style.overflow = 'auto';
+                closeLightboxFLIP();
             }
         });
     }
