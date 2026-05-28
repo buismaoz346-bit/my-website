@@ -1655,3 +1655,5 @@ footer {
     max-height: 90vh;
     object-fit: contain;
 }
+
+.gallery-main-img { transition: opacity 0.15s ease, transform 0.15s ease; }

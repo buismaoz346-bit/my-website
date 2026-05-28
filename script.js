@@ -152,7 +152,15 @@ window.addEventListener('click', function(event) {
 
 function setGalleryMain(projectId, thumbElement, src) {
     const mainImg = document.getElementById('gallery-main-img-' + projectId);
-    if(mainImg) mainImg.src = src;
+    if(mainImg) {
+        mainImg.style.opacity = '0.4';
+        mainImg.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+            mainImg.src = src;
+            mainImg.style.opacity = '1';
+            mainImg.style.transform = 'scale(1)';
+        }, 150);
+    }
     
     const thumbs = document.querySelectorAll('#project-modal-' + projectId + ' .gallery-thumbnails img');
     thumbs.forEach(t => t.classList.remove('active-thumb'));
@@ -330,27 +338,28 @@ let holdTimeout;
 window.startGalleryHold = function(projectId, direction, event) {
     if(event) {
         event.stopPropagation();
-        // Prevent default behavior like drag-selecting the image on desktop
-        if(event.type === 'mousedown') event.preventDefault();
     }
-    
-    // Advance immediately once
-    navigateProjectGallery(projectId, direction);
     
     // Clear any existing timers
     clearInterval(galleryHoldInterval);
     clearTimeout(holdTimeout);
     
-    // Wait 400ms before starting continuous scroll (distinguish between click and hold)
+    // Start continuous scroll after 300ms of hovering
     holdTimeout = setTimeout(() => {
         galleryHoldInterval = setInterval(() => {
             navigateProjectGallery(projectId, direction);
-        }, 500); // 500ms between pictures during hold
-    }, 400);
+        }, 600); // 600ms between pictures during hover
+    }, 300);
 };
 
 window.stopGalleryHold = function(event) {
     if(event) event.stopPropagation();
     clearTimeout(holdTimeout);
     clearInterval(galleryHoldInterval);
+};
+
+// Also let users click to advance immediately
+window.navigateProjectGalleryClick = function(projectId, direction, event) {
+    if(event) event.stopPropagation();
+    navigateProjectGallery(projectId, direction);
 };
