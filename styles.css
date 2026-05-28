@@ -1237,3 +1237,29 @@ footer {
         font-size: 2rem !important;
     }
 }
+
+/* --- Mobile Performance & Lag Fixes --- */
+@media (max-width: 768px) {
+    body {
+        /* Disable heavy infinite background animation on mobile to save battery and fix lag */
+        animation: none !important;
+        background-size: auto !important;
+    }
+    
+    .glass-panel {
+        /* Reduce expensive blur effect which causes scrolling lag on mid-range phones */
+        backdrop-filter: blur(4px) !important;
+        -webkit-backdrop-filter: blur(4px) !important;
+    }
+    
+    .hidden {
+        /* Disable the translateY transform on mobile fade-ins to prevent layout thrashing */
+        transform: translateY(0) scale(1) !important;
+        transition: opacity 0.5s ease !important;
+    }
+    
+    /* Ensure all elements obey max-width so there's no horizontal scrolling lag */
+    * {
+        max-width: 100vw;
+    }
+}
