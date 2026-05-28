@@ -244,17 +244,3 @@ window.addEventListener('load', () => {
         }
     }, 1000);
 });
-
-
-    }
-});
-
-// Add hover effect
-document.querySelectorAll('a, button, .glass-panel').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        document.body.classList.add('cursor-hover');
-    });
-    el.addEventListener('mouseleave', () => {
-        document.body.classList.remove('cursor-hover');
-    });
-});
