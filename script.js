@@ -922,151 +922,40 @@ document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
     });
 });
 
-// 4. Noise Overlay for Cinematic Feel
-const noise = document.createElement('div');
-noise.className = 'noise-overlay';
-body.appendChild(noise);
 
-// 5. Scroll Velocity Skew (Smooth skewing on fast scroll)
-let skewTicking = false;
-let lastScrollPos = window.scrollY;
-const mainContent = document.querySelector('main') || document.body;
-window.addEventListener('scroll', () => {
-    if (!skewTicking) {
-        window.requestAnimationFrame(() => {
-            const currentScrollPos = window.scrollY;
-            const velocity = currentScrollPos - lastScrollPos;
-            const skewAmount = Math.max(Math.min(velocity * 0.05, 5), -5);
-            document.querySelectorAll('section').forEach(sec => {
-                sec.style.transform = `skewY(${skewAmount}deg)`;
-                setTimeout(() => {
-                    sec.style.transform = `skewY(0deg)`;
-                    sec.style.transition = 'transform 0.5s ease-out';
-                }, 100);
-            });
-            lastScrollPos = currentScrollPos;
-            skewTicking = false;
-        });
-        skewTicking = true;
-    }
-});
 
 // --- ULTRA-PREMIUM 1000X JS ENGINE ---
 
-// 1. Interactive Canvas Matrix/Constellation Engine
-const canvas = document.getElementById('ultra-engine-canvas');
-if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let width, height;
-    let particles = [];
-    
-    function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-    }
-    
-    window.addEventListener('resize', resize);
-    resize();
-    
-    const mouse = { x: null, y: null, radius: 150 };
-    window.addEventListener('mousemove', (e) => {
-        mouse.x = e.x;
-        mouse.y = e.y;
-    });
-    
-    class Particle {
-        constructor(x, y, dx, dy, size) {
-            this.x = x; this.y = y; this.dx = dx; this.dy = dy; this.size = size;
-            this.baseX = this.x; this.baseY = this.y;
-        }
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-            ctx.fillStyle = 'rgba(100, 255, 218, 0.3)';
-            ctx.fill();
-        }
-        update() {
-            if (this.x > width || this.x < 0) this.dx = -this.dx;
-            if (this.y > height || this.y < 0) this.dy = -this.dy;
-            
-            // Mouse interaction
-            if (mouse.x != null) {
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < mouse.radius) {
-                    const forceDirectionX = dx / distance;
-                    const forceDirectionY = dy / distance;
-                    const force = (mouse.radius - distance) / mouse.radius;
-                    this.x -= forceDirectionX * force * 5;
-                    this.y -= forceDirectionY * force * 5;
-                } else {
-                    if (this.x !== this.baseX) {
-                        let dx = this.x - this.baseX;
-                        this.x -= dx / 20;
-                    }
-                    if (this.y !== this.baseY) {
-                        let dy = this.y - this.baseY;
-                        this.y -= dy / 20;
-                    }
-                }
-            }
-            this.x += this.dx;
-            this.y += this.dy;
-            this.draw();
-        }
-    }
-    
-    for (let i = 0; i < 100; i++) {
-        let size = Math.random() * 2 + 1;
-        let x = Math.random() * (innerWidth - size * 2) + size;
-        let y = Math.random() * (innerHeight - size * 2) + size;
-        let dx = (Math.random() - 0.5) * 1;
-        let dy = (Math.random() - 0.5) * 1;
-        particles.push(new Particle(x, y, dx, dy, size));
-    }
-    
-    function animate() {
-        requestAnimationFrame(animate);
-        ctx.clearRect(0, 0, innerWidth, innerHeight);
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update();
-        }
-        // Connect particles
-        for (let a = 0; a < particles.length; a++) {
-            for (let b = a; b < particles.length; b++) {
-                let dx = particles[a].x - particles[b].x;
-                let dy = particles[a].y - particles[b].y;
-                let dist = Math.sqrt(dx*dx + dy*dy);
-                if (dist < 100) {
-                    ctx.beginPath();
-                    ctx.strokeStyle = `rgba(100, 255, 218, ${1 - dist/100})`;
-                    ctx.lineWidth = 1;
-                    ctx.moveTo(particles[a].x, particles[a].y);
-                    ctx.lineTo(particles[b].x, particles[b].y);
-                    ctx.stroke();
-                }
-            }
-        }
-    }
-    animate();
-}
+// 1. Canvas Engine Removed for Performance
 
-// 2. Kinetic Text Engine Wrapper
+// 2. Kinetic Text Engine Wrapper (Fixed Word Wrap)
 document.querySelectorAll('h1, h2, .role').forEach(el => {
-    // Skip if already split
     if (el.classList.contains('kinetic-text')) return;
-    
-    const text = el.innerText;
+    const words = el.innerText.split(' ');
     el.innerHTML = '';
     el.classList.add('kinetic-text');
-    
-    for (let i = 0; i < text.length; i++) {
-        const span = document.createElement('span');
-        span.innerText = text[i] === ' ' ? '\u00A0' : text[i];
-        span.style.animationDelay = `${i * 0.03}s`;
-        el.appendChild(span);
-    }
+    let letterIndex = 0;
+    words.forEach((word, wordIndex) => {
+        const wordSpan = document.createElement('span');
+        wordSpan.style.display = 'inline-block';
+        wordSpan.style.whiteSpace = 'nowrap';
+        for (let i = 0; i < word.length; i++) {
+            const charSpan = document.createElement('span');
+            charSpan.innerText = word[i];
+            charSpan.style.display = 'inline-block';
+            charSpan.style.transition = 'transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            charSpan.style.animationDelay = `${letterIndex * 0.03}s`;
+            wordSpan.appendChild(charSpan);
+            letterIndex++;
+        }
+        el.appendChild(wordSpan);
+        if (wordIndex < words.length - 1) {
+            const spaceSpan = document.createElement('span');
+            spaceSpan.innerHTML = '&nbsp;';
+            el.appendChild(spaceSpan);
+            letterIndex++;
+        }
+    });
 });
 
 // 3. Inject Infinite Marquee dynamically before footer
@@ -1131,12 +1020,3 @@ window.addEventListener('scroll', () => {
     innerRotator.innerText = Math.round(scrolled) + '%';
 });
 
-// 6. Extreme Parallax Engine on MouseMove
-document.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    const y = (e.clientY / window.innerHeight - 0.5) * 20;
-    
-    document.querySelectorAll('.glass-panel, .image-wrapper').forEach(el => {
-        el.style.transform = `translate(${-x}px, ${-y}px)`;
-    });
-});
