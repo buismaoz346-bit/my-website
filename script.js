@@ -384,6 +384,8 @@ window.addEventListener('touchmove', function(e) {
     }
 }, { passive: false });
 
+
+
 // Typewriter Effect
 const roles = ["Hardware Developer", "PCB Designer", "Embedded Engineer"];
 let roleIndex = 0;
@@ -507,6 +509,8 @@ window.navigateLightbox = function(direction) {
     lightboxImg.src = currentLightboxImages[currentLightboxIndex].src;
 };
 
+
+
 // Also let users click to advance immediately
 window.navigateProjectGalleryClick = function(projectId, direction, event) {
     if(event) event.stopPropagation();
@@ -613,53 +617,151 @@ document.addEventListener('DOMContentLoaded', () => {
     updateNavbar();
 });
 
-// --- Cursor Glow (GPU Optimized) ---
+// --- Cursor Glow Trail ---
 if (window.matchMedia('(pointer: fine)').matches) {
     const cursor = document.createElement('div');
-    cursor.style.cssText = 'position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(100,255,218,0.06) 0%,transparent 70%);pointer-events:none;z-index:999;will-change:transform;left:0;top:0;';
+    cursor.style.cssText = `
+        position: fixed;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(100, 255, 218, 0.06) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 999;
+        transition: transform 0.15s ease;
+        will-change: transform;
+        left: 0;
+        top: 0;
+    `;
     document.body.appendChild(cursor);
-    let mx = 0, my = 0;
-    document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; }, { passive: true });
-    (function updateCursor() {
-        cursor.style.transform = `translate(${mx - 150}px, ${my - 150}px)`;
-        requestAnimationFrame(updateCursor);
+    
+    let cx = 0, cy = 0;
+    document.addEventListener('mousemove', (e) => { cx = e.clientX; cy = e.clientY; }, { passive: true });
+    (function moveCursor() {
+        cursor.style.transform = `translate(${cx - 150}px, ${cy - 150}px)`;
+        requestAnimationFrame(moveCursor);
     })();
 }
+
+
+// --- EFFECT 1: Scroll Progress Bar ---
+const progressBar = document.createElement('div');
+progressBar.className = 'scroll-progress';
+document.body.appendChild(progressBar);
+
+window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    progressBar.style.width = scrollPercent + '%';
+});
+
+// --- EFFECT 2: Back to Top Button ---
+const backToTop = document.createElement('button');
+backToTop.className = 'back-to-top';
+backToTop.innerHTML = '↑';
+backToTop.setAttribute('aria-label', 'Back to top');
+document.body.appendChild(backToTop);
+
+backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+        backToTop.classList.add('visible');
+    } else {
+        backToTop.classList.remove('visible');
+    }
+});
+
+// --- EFFECT 3: Glass Panel Mouse Tracking Glow ---
+document.querySelectorAll('.glass-panel').forEach(panel => {
+    panel.addEventListener('mousemove', (e) => {
+        const rect = panel.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        panel.style.setProperty('--mouse-x', x + '%');
+        panel.style.setProperty('--mouse-y', y + '%');
+    });
+});
+
+// --- EFFECT 4: Smooth Staggered Reveal ---
+const revealElements = document.querySelectorAll('.timeline-item, .cert-card, .premium-skill-card, .trait-card');
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }, index * 80);
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+
+revealElements.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+    revealObserver.observe(el);
+});
+
+// --- EFFECT 5: Smooth Section Title Reveal ---
+const sectionTitles = document.querySelectorAll('.section-title');
+const titleObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            entry.target.style.filter = 'blur(0)';
+            titleObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.3 });
+
+sectionTitles.forEach(title => {
+    title.style.opacity = '0';
+    title.style.transform = 'translateY(20px)';
+    title.style.filter = 'blur(5px)';
+    title.style.transition = 'opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease';
+    titleObserver.observe(title);
+});
+
+// --- EFFECT 6: Magnetic Hover on Buttons ---
+document.querySelectorAll('.btn-primary, .btn-secondary, .btn-download').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+    });
 
     btn.addEventListener('mouseleave', () => {
         btn.style.transform = 'translate(0, 0)';
     });
 });
 
-function playTypeClick() {
-    if (!typeClickCtx) {
-        try {
-            typeClickCtx = new (window.AudioContext || window.webkitAudioContext)();
-        } catch(e) { return; }
-    }
-    if (typeClickCtx.state === 'suspended') return;
-    
-    const osc = typeClickCtx.createOscillator();
-    const gain = typeClickCtx.createGain();
-    osc.connect(gain);
-    gain.connect(typeClickCtx.destination);
-    osc.frequency.setValueAtTime(800 + Math.random() * 400, typeClickCtx.currentTime);
-    gain.gain.setValueAtTime(0.02, typeClickCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, typeClickCtx.currentTime + 0.05);
-    osc.start(typeClickCtx.currentTime);
-    osc.stop(typeClickCtx.currentTime + 0.05);
-}
+/ Page load animation removed - was causing blur screen bug
 
-// Hook into typewriter - observe text changes
-const typewriterEl = document.querySelector('.typewriter-text');
-if (typewriterEl) {
-    const typeObserver = new MutationObserver(() => playTypeClick());
-    typeObserver.observe(typewriterEl, { childList: true, characterData: true, subtree: true });
-}
 
-// Page load animation removed - was causing blur screen bug
 
 allSections.forEach(s => sectionGlowObserver.observe(s));
+
+// --- EFFECT 10: Image Lazy Load Fade In ---
+document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+    img.style.opacity = '0';
+    img.style.transition = 'opacity 0.5s ease';
+    
+    if (img.complete) {
+        img.style.opacity = '1';
+    } else {
+        img.addEventListener('load', () => {
+            img.style.opacity = '1';
+        });
+    }
+});
+
 
 // --- PREMIUM EFFECT: Keyboard Navigation Enhancement ---
 document.addEventListener('keydown', (e) => {
@@ -683,6 +785,8 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+
+
 // --- PREMIUM EFFECT: Double-click to top ---
 let lastClickTime = 0;
 document.querySelector('.navbar')?.addEventListener('click', (e) => {
@@ -695,36 +799,18 @@ document.querySelector('.navbar')?.addEventListener('click', (e) => {
     }
 });
 
+
+
 document.querySelectorAll('section').forEach(s => activeSectionObserver.observe(s));
 
 // --- ADD MASSIVE JS EFFECTS ---
+
+
+
+
 
 // --- ULTRA-PREMIUM 1000X JS ENGINE ---
 
 // 1. Canvas Engine Removed for Performance
 
-// --- UNIFIED SCROLL HANDLER (One rAF for everything) ---
-const scrollBar = document.createElement('div');
-scrollBar.className = 'scroll-progress';
-document.body.appendChild(scrollBar);
 
-const topBtn = document.createElement('button');
-topBtn.className = 'back-to-top';
-topBtn.innerHTML = '↑';
-topBtn.setAttribute('aria-label', 'Back to top');
-document.body.appendChild(topBtn);
-topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-let sTick = false;
-window.addEventListener('scroll', () => {
-    if (!sTick) {
-        requestAnimationFrame(() => {
-            const sy = window.scrollY;
-            const dh = document.documentElement.scrollHeight - window.innerHeight;
-            scrollBar.style.width = ((sy / dh) * 100) + '%';
-            topBtn.classList.toggle('visible', sy > 500);
-            sTick = false;
-        });
-        sTick = true;
-    }
-}, { passive: true });
