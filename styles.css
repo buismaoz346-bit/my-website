@@ -227,15 +227,17 @@ ul {
 
 .nav-links {
     display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
+    gap: 1.2rem;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
 .nav-links a {
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: var(--text-main);
     position: relative;
+    white-space: nowrap;
 }
 
 .nav-links a::after {
