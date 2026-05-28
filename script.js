@@ -67,6 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.stopPropagation(); // prevent card click from firing twice
                 lightbox.style.display = 'flex';
                 lightboxImg.src = this.src;
+                currentLightboxImages = Array.from(clickableImages);
+                currentLightboxIndex = currentLightboxImages.indexOf(this);
                 // Prevent scrolling on body when lightbox is open
                 document.body.style.overflow = 'hidden';
             });
@@ -80,6 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (img) {
                     lightbox.style.display = 'flex';
                     lightboxImg.src = img.src;
+                    currentLightboxImages = Array.from(document.querySelectorAll('.cert-card .clickable-image'));
+                    currentLightboxIndex = currentLightboxImages.indexOf(img);
                     document.body.style.overflow = 'hidden';
                 }
             });
@@ -287,3 +291,35 @@ if (menuToggle && navMenu) {
         });
     });
 }
+
+// --- Gallery Navigation Logic ---
+window.navigateProjectGallery = function(projectId, direction) {
+    const thumbs = Array.from(document.querySelectorAll('#project-modal-' + projectId + ' .gallery-thumbnails img'));
+    const currentActive = document.querySelector('#project-modal-' + projectId + ' .gallery-thumbnails img.active-thumb');
+    
+    let currentIndex = thumbs.indexOf(currentActive);
+    if(currentIndex === -1) currentIndex = 0;
+    
+    let nextIndex = currentIndex + direction;
+    if(nextIndex < 0) nextIndex = thumbs.length - 1; // loop to end
+    if(nextIndex >= thumbs.length) nextIndex = 0; // loop to start
+    
+    const nextThumb = thumbs[nextIndex];
+    if(nextThumb) {
+        setGalleryMain(projectId, nextThumb, nextThumb.src);
+    }
+};
+
+let currentLightboxImages = [];
+let currentLightboxIndex = 0;
+
+window.navigateLightbox = function(direction) {
+    if(currentLightboxImages.length === 0) return;
+    
+    currentLightboxIndex += direction;
+    if(currentLightboxIndex < 0) currentLightboxIndex = currentLightboxImages.length - 1;
+    if(currentLightboxIndex >= currentLightboxImages.length) currentLightboxIndex = 0;
+    
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = currentLightboxImages[currentLightboxIndex].src;
+};
