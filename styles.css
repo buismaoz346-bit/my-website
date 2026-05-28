@@ -28,7 +28,9 @@
 body {
     font-family: 'Inter', sans-serif;
     color: var(--text-main);
-    background-color: var(--bg-color);
+    background: linear-gradient(-45deg, #f8fafc, #e2e8f0, #f1f5f9, #f8fafc);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     line-height: 1.6;
     overflow-x: hidden;
 }
@@ -1152,4 +1154,30 @@ footer {
 
 .face-id-shake {
     animation: faceIdShake 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both !important;
+}
+
+/* --- Premium Enhancements --- */
+::selection {
+    background: var(--primary);
+    color: #fff;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
