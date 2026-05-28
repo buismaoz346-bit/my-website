@@ -42,25 +42,7 @@ body {
     overflow-x: hidden;
 }
 
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        radial-gradient(2px 2px at 20% 30%, rgba(100, 255, 218, 0.15), transparent),
-        radial-gradient(2px 2px at 80% 70%, rgba(100, 255, 218, 0.1), transparent),
-        radial-gradient(1px 1px at 40% 80%, rgba(100, 255, 218, 0.12), transparent),
-        radial-gradient(1px 1px at 70% 20%, rgba(100, 255, 218, 0.08), transparent),
-        radial-gradient(2px 2px at 60% 50%, rgba(100, 255, 218, 0.1), transparent);
-    background-size: 250px 250px, 300px 300px, 200px 200px, 350px 350px, 280px 280px;
-    animation: particleDrift 20s linear infinite;
-    pointer-events: none;
-    z-index: -1;
-    opacity: 0.6;
-}
+/* body::before particle overlay removed - caused lightbox stacking issues */
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Outfit', sans-serif;
@@ -818,7 +800,7 @@ ul {
 .modal {
     display: none; 
     position: fixed; 
-    z-index: 2500; 
+    z-index: 11000; 
     left: 0;
     top: 0;
     width: 100%; 
@@ -1957,7 +1939,7 @@ footer::before {
 }
 
 .image-wrapper {
-    animation: float 6s ease-in-out infinite, breatheGlow 4s ease-in-out infinite !important;
+    animation: float 6s ease-in-out infinite;
 }
 
 /* EFFECT 15: Smooth Link Underline Grow */
@@ -2064,11 +2046,7 @@ footer::before {
     animation: blink 1s step-end infinite;
 }
 
-/* EFFECT 23: Premium Modal Backdrop Blur */
-.modal {
-    backdrop-filter: blur(12px) saturate(150%);
-    -webkit-backdrop-filter: blur(12px) saturate(150%);
-}
+/* EFFECT 23: Removed - was causing blur screen bug */
 
 /* EFFECT 24: Gallery Thumbnail Glow */
 .gallery-thumbnails img.active-thumb {
@@ -2137,4 +2115,880 @@ footer::before {
 .cert-image img {
     position: relative;
     z-index: 1;
+}
+
+
+/* ============================================================
+   100+ MEGA PREMIUM EFFECTS
+   ============================================================ */
+
+/* --- GLOW & NEON EFFECTS --- */
+
+/* E1: Neon Text Glow on Hover for Section Titles */
+.section-title:hover {
+    text-shadow: 0 0 20px rgba(100, 255, 218, 0.5), 0 0 40px rgba(100, 255, 218, 0.3);
+    transition: text-shadow 0.3s ease;
+}
+
+/* E2: Pulsing Neon Border on Featured Project */
+@keyframes neonPulse {
+    0%, 100% { box-shadow: 0 0 5px rgba(100, 255, 218, 0.2), 0 0 20px rgba(100, 255, 218, 0.1); }
+    50% { box-shadow: 0 0 15px rgba(100, 255, 218, 0.4), 0 0 40px rgba(100, 255, 218, 0.2); }
+}
+
+.featured-project {
+    animation: neonPulse 3s ease-in-out infinite;
+}
+
+/* E3: Gradient Border on All Cards */
+.glass-panel {
+    border: 1px solid transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+/* E4: Button Glow Intensify */
+.btn-primary:hover {
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.6), 0 6px 20px rgba(37, 99, 235, 0.23) !important;
+}
+
+/* E5: Secondary Button Glow */
+.btn-secondary:hover {
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.4);
+    text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+}
+
+/* --- HOVER TRANSFORMS --- */
+
+/* E6: Card Perspective Tilt on Hover */
+.trait-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+/* E7: Project Card Scale Pop */
+.project-card:hover {
+    z-index: 2;
+}
+
+/* E8: Cert Card Lift & Shadow */
+.cert-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(100, 255, 218, 0.1) !important;
+}
+
+/* E9: Timeline Content Slide */
+.timeline-content {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timeline-item:hover .timeline-content {
+    transform: translateX(10px);
+}
+
+/* E10: Premium Skill Card Lift */
+.premium-skill-card {
+    transform-origin: center bottom;
+}
+
+.premium-skill-card:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 25px rgba(100, 255, 218, 0.15) !important;
+}
+
+/* --- TEXT EFFECTS --- */
+
+/* E11: Gradient Role Text */
+.role {
+    background: linear-gradient(90deg, var(--primary), #80ffe1, var(--primary));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 6s ease infinite;
+}
+
+/* E12: About Card Text Glow on Hover */
+.about-card:hover p {
+    color: var(--text-main);
+    transition: color 0.5s ease;
+}
+
+/* E13: Tech Stack Tag Style */
+.tech-stack {
+    display: inline-block;
+    padding: 0.2rem 0;
+    letter-spacing: 0.5px;
+}
+
+/* E14: Timeline Category Glow */
+.timeline-category {
+    box-shadow: 0 2px 10px rgba(100, 255, 218, 0.3);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover .timeline-category {
+    box-shadow: 0 2px 20px rgba(100, 255, 218, 0.5);
+    transform: scale(1.05);
+}
+
+/* E15: Timeline Date Hover */
+.timeline-date {
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover .timeline-date {
+    background: rgba(100, 255, 218, 0.15);
+    color: #fff;
+}
+
+/* --- ANIMATION KEYFRAMES --- */
+
+/* E16: Smooth Bounce */
+@keyframes smoothBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* E17: Wiggle */
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(2deg); }
+    75% { transform: rotate(-2deg); }
+}
+
+/* E18: Scale Pulse */
+@keyframes scalePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* E19: Slide In Right */
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* E20: Fade In Up */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* E21: Rotate In */
+@keyframes rotateIn {
+    from { opacity: 0; transform: rotate(-10deg) scale(0.9); }
+    to { opacity: 1; transform: rotate(0) scale(1); }
+}
+
+/* E22: Blur In */
+@keyframes blurIn {
+    from { opacity: 0; filter: blur(10px); }
+    to { opacity: 1; filter: blur(0); }
+}
+
+/* E23: Glow Pulse */
+@keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 5px rgba(100, 255, 218, 0.3); }
+    50% { box-shadow: 0 0 25px rgba(100, 255, 218, 0.6); }
+}
+
+/* E24: Float Rotate */
+@keyframes floatRotate {
+    0% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-5px) rotate(1deg); }
+    50% { transform: translateY(-10px) rotate(0deg); }
+    75% { transform: translateY(-5px) rotate(-1deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* E25: Border Glow */
+@keyframes borderGlow {
+    0%, 100% { border-color: rgba(100, 255, 218, 0.2); }
+    50% { border-color: rgba(100, 255, 218, 0.6); }
+}
+
+/* --- MICRO INTERACTIONS --- */
+
+/* E26: Download Button Arrow Bounce */
+.btn-download:hover .icon {
+    animation: smoothBounce 0.6s ease infinite;
+}
+
+/* E27: Explore Work Button Arrow */
+.btn-primary:active {
+    transform: scale(0.96) !important;
+    transition: transform 0.1s ease;
+}
+
+/* E28: Card Click Feedback */
+.project-card:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s ease;
+}
+
+/* E29: Cert Card Click */
+.cert-card:active {
+    transform: scale(0.97) translateY(-5px) !important;
+}
+
+/* E30: Nav Link Click Flash */
+.nav-links a:active {
+    color: #fff !important;
+    text-shadow: 0 0 20px var(--primary);
+}
+
+/* --- BORDERS & OUTLINES --- */
+
+/* E31: Focus Ring Glow */
+a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* E32: Input Focus Glow (if any forms added) */
+input:focus, textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
+    outline: none;
+}
+
+/* E33: Modal Content Glow Border */
+.modal-content {
+    border: 2px solid var(--primary) !important;
+    box-shadow: 0 0 30px rgba(100, 255, 218, 0.2), 0 25px 50px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* E34: Gallery Main Image Border Glow on Hover */
+.gallery-main-img:hover {
+    border-color: var(--primary);
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+}
+
+/* --- BACKGROUND & GRADIENT EFFECTS --- */
+
+/* E35: Section Subtle BG Gradient */
+.about-section {
+    background: linear-gradient(180deg, transparent 0%, rgba(100, 255, 218, 0.02) 50%, transparent 100%);
+}
+
+/* E36: Traits Section BG */
+.traits-section {
+    background: linear-gradient(180deg, transparent 0%, rgba(100, 255, 218, 0.015) 50%, transparent 100%);
+}
+
+/* E37: Experience Section BG */
+.experience-section {
+    background: linear-gradient(180deg, transparent 0%, rgba(100, 255, 218, 0.02) 50%, transparent 100%);
+}
+
+/* E38: Education Section BG */
+.education-section {
+    background: linear-gradient(180deg, transparent 0%, rgba(100, 255, 218, 0.015) 50%, transparent 100%);
+}
+
+/* E39: Contact Section BG */
+.contact-section {
+    background: linear-gradient(180deg, transparent 0%, rgba(100, 255, 218, 0.025) 50%, transparent 100%);
+}
+
+/* --- TYPOGRAPHY ENHANCEMENTS --- */
+
+/* E40: Improved Paragraph Line Height */
+.about-card p, .timeline-content p, .cert-info p {
+    line-height: 1.75;
+}
+
+/* E41: Strong Text Glow */
+.summary-list strong {
+    text-shadow: 0 0 1px rgba(100, 255, 218, 0.1);
+}
+
+/* E42: Heading Tracking */
+h2 { letter-spacing: -0.5px; }
+h3 { letter-spacing: -0.3px; }
+
+/* E43: Fancy Blockquote Style */
+blockquote {
+    border-left: 3px solid var(--primary);
+    padding-left: 1.5rem;
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+/* --- LOADING & TRANSITION EFFECTS --- */
+
+/* E44: Page Fade In */
+body {
+    animation: pageFadeIn 0.8s ease forwards;
+}
+
+@keyframes pageFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* E45: Image Load Transition */
+img {
+    transition: opacity 0.5s ease;
+}
+
+/* E46: Smooth All Transitions */
+*, *::before, *::after {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- ADVANCED HOVER STATES --- */
+
+/* E47: Project BG Smooth Transition */
+.project-bg {
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* E48: Featured Project Overlay Slide */
+.featured-project:hover .project-content-overlay {
+    padding-left: 2.5rem;
+}
+
+/* E49: Project Link Arrow Animation */
+.project-link {
+    transition: all 0.3s ease;
+}
+
+.project-card:hover .project-link {
+    letter-spacing: 1px;
+}
+
+/* E50: About Card Expand */
+.about-card {
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-card:hover {
+    padding: 4.5rem;
+}
+
+/* --- SCROLL-LINKED VISUAL EFFECTS --- */
+
+/* E51: Smooth Scroll Snap Hint */
+html {
+    scroll-behavior: smooth;
+}
+
+/* E52: Overscroll Color */
+body {
+    overscroll-behavior: none;
+}
+
+/* --- SHADOW EFFECTS --- */
+
+/* E53: Deep Shadow on Hero Buttons */
+.hero-buttons .btn-primary {
+    box-shadow: 0 4px 14px 0 rgba(100, 255, 218, 0.3);
+}
+
+.hero-buttons .btn-primary:hover {
+    box-shadow: 0 8px 28px 0 rgba(100, 255, 218, 0.5) !important;
+}
+
+/* E54: Inset Shadow on Timeline Content */
+.timeline-content:hover {
+    box-shadow: inset 0 0 30px rgba(100, 255, 218, 0.03), var(--shadow-neon);
+}
+
+/* E55: Long Shadow on Contact Icons */
+.contact-item:hover .contact-icon {
+    box-shadow: 0 15px 35px rgba(100, 255, 218, 0.15);
+}
+
+/* --- CREATIVE BORDERS --- */
+
+/* E56: Dotted Accent Line */
+.accent-line {
+    background: repeating-linear-gradient(
+        90deg,
+        var(--primary) 0px,
+        var(--primary) 4px,
+        transparent 4px,
+        transparent 8px
+    );
+}
+
+/* E57: Double Border Effect on Edu Cards */
+.edu-card::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 1px solid rgba(100, 255, 218, 0.05);
+    border-radius: 12px;
+    pointer-events: none;
+    transition: border-color 0.3s ease;
+}
+
+.edu-card:hover::after {
+    border-color: rgba(100, 255, 218, 0.15);
+}
+
+/* --- ICON & EMOJI EFFECTS --- */
+
+/* E58: Trait Icon Glow */
+.icon-wrapper {
+    text-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
+    background: rgba(100, 255, 218, 0.08) !important;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+/* E59: Contact Icon Border Glow */
+.contact-icon {
+    border: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+.contact-item:hover .contact-icon {
+    border-color: var(--primary);
+    background: rgba(100, 255, 218, 0.1) !important;
+}
+
+/* --- RESPONSIVE ANIMATION TWEAKS --- */
+
+/* E60: Disable heavy animations on reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* --- PREMIUM SCROLLBAR TRACK --- */
+
+/* E61: Scrollbar Track Gradient */
+::-webkit-scrollbar-track {
+    background: linear-gradient(to bottom, var(--bg-color), var(--secondary-light));
+}
+
+/* --- FOOTER ENHANCEMENTS --- */
+
+/* E62: Footer Link Hover */
+footer a {
+    color: var(--primary);
+    transition: all 0.3s ease;
+}
+
+footer a:hover {
+    text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+}
+
+/* E63: Footer Text Spacing */
+footer p {
+    letter-spacing: 0.5px;
+}
+
+/* --- NAVBAR ENHANCEMENTS --- */
+
+/* E64: Navbar Glass Effect Stronger */
+.navbar {
+    background: rgba(10, 25, 47, 0.85) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+}
+
+/* E65: Logo Glow on Hover */
+.logo:hover {
+    text-shadow: 0 0 20px rgba(100, 255, 218, 0.5);
+    transition: text-shadow 0.3s ease;
+}
+
+/* E66: Logo Letter Animation */
+.logo {
+    transition: all 0.3s ease;
+}
+
+.logo:hover {
+    letter-spacing: 1px;
+}
+
+/* --- GALLERY ENHANCEMENTS --- */
+
+/* E67: Thumbnail Hover Scale */
+.gallery-thumbnails img:hover {
+    transform: translateY(-4px) scale(1.1) !important;
+}
+
+/* E68: Gallery Image Transition */
+.gallery-main-img {
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* --- MODAL ENHANCEMENTS --- */
+
+/* E69: Modal Description List Marker */
+.modal-description li::before {
+    text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+}
+
+/* E70: Modal Info Title Glow */
+.modal-info h2 {
+    text-shadow: 0 0 1px rgba(100, 255, 218, 0.1);
+}
+
+/* --- STAT EFFECTS --- */
+
+/* E71: Stat Number Glow */
+.stat-num {
+    text-shadow: 0 0 15px rgba(100, 255, 218, 0.4);
+    transition: all 0.3s ease;
+}
+
+.stat:hover .stat-num {
+    text-shadow: 0 0 25px rgba(100, 255, 218, 0.7);
+    transform: scale(1.1);
+    display: inline-block;
+}
+
+/* E72: Hero Stats Container Glow on Hover */
+.hero-stats:hover {
+    background: rgba(100, 255, 218, 0.03);
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+}
+
+.hero-stats {
+    transition: all 0.4s ease;
+    padding: 0.5rem 0;
+}
+
+/* --- PREMIUM CARD OVERLAYS --- */
+
+/* E73: Skill Card Corner Accent */
+.premium-skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 0 0 2px 0;
+    transition: width 0.4s ease;
+}
+
+.premium-skill-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 40px;
+    background: var(--primary);
+    border-radius: 0 0 0 2px;
+    transition: height 0.4s ease;
+}
+
+.premium-skill-card:hover::before {
+    width: 80px;
+}
+
+.premium-skill-card:hover::after {
+    height: 80px;
+}
+
+.premium-skill-card {
+    position: relative;
+    overflow: hidden;
+}
+
+/* E74: Trait Card Top Accent Line */
+.trait-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 0 0 2px 2px;
+    transition: width 0.3s ease;
+}
+
+.trait-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.trait-card:hover::before {
+    width: 80%;
+}
+
+/* E75: Edu Card Left Accent */
+.edu-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 30%;
+    background: var(--primary);
+    border-radius: 0 2px 2px 0;
+    transition: height 0.4s ease;
+}
+
+.edu-card {
+    position: relative;
+}
+
+.edu-card:hover::before {
+    height: 60%;
+}
+
+/* --- ADVANCED TYPOGRAPHY --- */
+
+/* E76: Smooth Font Rendering */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* E77: Enhanced Section Title */
+.section-title {
+    transition: all 0.4s ease;
+}
+
+/* --- COLOR TRANSITIONS --- */
+
+/* E78: Link Color Transition */
+a {
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* E79: Project Summary Fade on Hover */
+.project-summary {
+    transition: color 0.3s ease;
+}
+
+.featured-project:hover .project-summary {
+    color: var(--text-main);
+}
+
+/* --- LAYOUT POLISH --- */
+
+/* E80: Smooth Gap Between Sections */
+section {
+    position: relative;
+}
+
+/* E81: Section Divider Gradient */
+section + section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.15), transparent);
+    z-index: 0;
+}
+
+/* --- GLASSMORPHISM UPGRADES --- */
+
+/* E82: Premium Glass Card Blur */
+.glass-panel {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* E83: Glass Card Inner Shadow */
+.glass-panel:hover {
+    box-shadow: var(--shadow-neon), inset 0 1px 0 rgba(100, 255, 218, 0.1);
+}
+
+/* --- CREATIVE EFFECTS --- */
+
+/* E84: Staggered List Arrow Color */
+.summary-list li::before {
+    transition: all 0.3s ease;
+}
+
+.summary-list li:hover::before {
+    transform: translateX(5px);
+    text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+}
+
+/* E85: Smooth Link Hover Color */
+.edu-link {
+    position: relative;
+}
+
+.edu-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.edu-link:hover::after {
+    width: 100%;
+}
+
+/* E86: View Certificate/Award Link Effect */
+.cert-info .project-link {
+    transition: all 0.3s ease;
+}
+
+.cert-card:hover .cert-info .project-link {
+    transform: translateX(5px);
+    text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+}
+
+/* --- PARTICLE & AMBIENT EFFECTS (SAFE VERSION) --- */
+
+/* E87: Ambient Corner Glow Top-Left */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(100, 255, 218, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    animation: floatRotate 15s ease-in-out infinite;
+}
+
+/* E88: Ambient Corner Glow Bottom-Right */
+.hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(100, 255, 218, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    animation: floatRotate 20s ease-in-out infinite reverse;
+}
+
+/* E89: Contact Section Ambient */
+.contact-section::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(100, 255, 218, 0.04) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* --- SMOOTH HOVER STATE TRANSITIONS --- */
+
+/* E90: All Cards Smooth Transition */
+.trait-card, .cert-card, .edu-card, .premium-skill-card, .project-card, .about-card, .contact-card {
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* E91: Smooth Transform Origin */
+.trait-card, .cert-card, .edu-card, .premium-skill-card {
+    transform-origin: center center;
+}
+
+/* --- CUSTOM HIGHLIGHT COLORS --- */
+
+/* E92: Link Selection Color */
+a::selection {
+    background: var(--primary);
+    color: var(--secondary);
+}
+
+/* E93: Code Selection */
+code::selection {
+    background: var(--primary);
+    color: var(--secondary);
+}
+
+/* --- PREMIUM FINISH TOUCHES --- */
+
+/* E94: Smooth Image Border Radius */
+.cert-image img, .gallery-main-img, .lightbox-content {
+    border-radius: 12px;
+}
+
+/* E95: Card Content Padding Smooth */
+.cert-info {
+    transition: padding 0.3s ease;
+}
+
+.cert-card:hover .cert-info {
+    padding-left: 1.8rem;
+}
+
+/* E96: Timeline Line Subtle Width Transition */
+.timeline::before {
+    transition: width 0.3s ease;
+}
+
+/* E97: Modal Close Button Rotation */
+.modal-close:hover {
+    transform: rotate(90deg);
+    transition: transform 0.3s ease;
+}
+
+/* E98: Lightbox Close Rotation */
+.lightbox-close:hover {
+    transform: rotate(90deg);
+    color: var(--primary) !important;
+}
+
+/* E99: Smooth Letter Spacing on Greeting */
+.greeting {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.9rem !important;
+}
+
+/* E100: Premium Cursor for Interactive Elements */
+.project-card, .cert-card, .btn-primary, .btn-secondary, .btn-download, .nav-links a {
+    cursor: pointer;
+}
+
+/* E101: Hover Background Shift on About Card */
+.about-card:hover {
+    background: rgba(17, 34, 64, 0.9);
+}
+
+/* E102: Contact Card Glow */
+.contact-card:hover {
+    border-color: var(--primary);
+}
+
+/* E103: Premium Software Card Description */
+.premium-skill-card p {
+    transition: color 0.3s ease;
+}
+
+.premium-skill-card:hover p {
+    color: var(--text-main);
+}
+
+/* E104: Role Text Size Pulse */
+.role span {
+    display: inline-block;
+}
+
+/* E105: Smooth Section Padding */
+section {
+    transition: padding 0.5s ease;
 }

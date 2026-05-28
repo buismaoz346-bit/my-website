@@ -782,16 +782,7 @@ if (typewriterEl) {
     typeObserver.observe(typewriterEl, { childList: true, characterData: true, subtree: true });
 }
 
-// --- EFFECT 8: Page Load Animation ---
-window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.6s ease';
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            document.body.style.opacity = '1';
-        });
-    });
-});
+// Page load animation removed - was causing blur screen bug
 
 // --- EFFECT 9: Active section subtle bg highlight ---
 const allSections = document.querySelectorAll('section');
@@ -818,3 +809,77 @@ document.querySelectorAll('img[loading="lazy"]').forEach(img => {
         });
     }
 });
+
+
+// --- PREMIUM EFFECT: Smooth 3D Tilt on Trait Cards ---
+document.querySelectorAll('.trait-card, .premium-skill-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        const tiltX = (y - 0.5) * 10;
+        const tiltY = (x - 0.5) * -10;
+        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-8px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+        card.style.transition = 'transform 0.5s ease';
+    });
+});
+
+// --- PREMIUM EFFECT: Keyboard Navigation Enhancement ---
+document.addEventListener('keydown', (e) => {
+    // Escape closes any open modal
+    const openModals = document.querySelectorAll('.modal.show-modal');
+    if (e.key === 'Escape' && openModals.length > 0) {
+        openModals.forEach(modal => {
+            const id = modal.id.replace('project-modal-', '');
+            closeProjectModal(id);
+        });
+    }
+    
+    // Arrow keys for gallery navigation in open modal
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        const openModal = document.querySelector('.modal.show-modal');
+        if (openModal) {
+            const projectId = openModal.id.replace('project-modal-', '');
+            const direction = e.key === 'ArrowRight' ? 1 : -1;
+            navigateProjectGallery(projectId, direction);
+        }
+    }
+});
+
+// --- PREMIUM EFFECT: Smooth Scroll Reveal for all hidden elements ---
+const smoothRevealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+            entry.target.style.transitionDelay = (i * 50) + 'ms';
+            entry.target.classList.add('show');
+            smoothRevealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
+
+// --- PREMIUM EFFECT: Double-click to top ---
+let lastClickTime = 0;
+document.querySelector('.navbar')?.addEventListener('click', (e) => {
+    if (e.target.closest('.logo')) {
+        const now = Date.now();
+        if (now - lastClickTime < 400) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        lastClickTime = now;
+    }
+});
+
+// --- PREMIUM EFFECT: Active Section Background Subtle Pulse ---
+const activeSectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+        }
+    });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('section').forEach(s => activeSectionObserver.observe(s));
