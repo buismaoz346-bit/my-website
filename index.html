@@ -10,6 +10,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=2">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Syed Maoz Arif | Hardware Developer">
+    <meta property="og:description" content="Portfolio of Syed Maoz Arif, a Hardware Developer & Electronics Engineer specializing in PCB Design and Embedded Systems.">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon (SVG) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%2364ffda%22 font-family=%22sans-serif%22 font-weight=%22bold%22>SMA</text></svg>">
+
 </head>
 <body>
     
@@ -18,7 +27,14 @@
     <header class="navbar hidden">
         <div class="nav-container">
             <div class="logo">Syed Maoz Arif</div>
-            <nav>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+            <nav class="nav-menu">
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
                     <li><a href="#traits">Traits</a></li>
@@ -28,6 +44,7 @@
                     <li><a href="#certifications">Certifications</a></li>
                     <li><a href="#awards">Awards</a></li>
                     <li><a href="#projects">Projects</a></li>
+                    <li><a href="Documents/CV1.pdf" target="_blank" class="nav-cv-link">Resume</a></li>
                     <li><a href="#contact" class="btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.9rem;">Contact</a></li>
                 </ul>
             </nav>
@@ -38,24 +55,41 @@
     <section id="hero" class="hero-section">
         <div class="hero-container container">
             <div class="hero-content hidden delay-1">
+                <div class="freelance-badge">
+                    <span class="dot"></span> Currently open to freelance
+                </div>
                 <h2 class="greeting">Hello, my name is</h2>
                 <h1 class="name">Syed Maoz Arif</h1>
-                <h3 class="role">Hardware Developer & Electronics Engineer</h3>
+                <h3 class="role">I am a <span class="typewriter-text"></span><span class="cursor">|</span></h3>
+                
+                <div class="hero-stats">
+                    <div class="stat"><span class="stat-num">6</span> Projects</div>
+                    <div class="stat-divider">·</div>
+                    <div class="stat"><span class="stat-num">4</span> Awards</div>
+                    <div class="stat-divider">·</div>
+                    <div class="stat"><span class="stat-num">2</span> Platforms</div>
+                </div>
+
                 <div class="hero-buttons">
-                    <a href="#about" class="btn-primary">Explore My Work</a>
+                    <a href="#projects" class="btn-primary">Explore My Work</a>
                     <a href="Documents/CV1.pdf" target="_blank" class="btn-download">
-                        <span class="icon">📄</span> View CV
+                        <span class="icon">📄</span> Download CV
                     </a>
                 </div>
             </div>
             <div class="hero-image hidden delay-2">
-                <div class="image-wrapper">
-                    <img src="Picture/my_pic.png" alt="Syed Maoz Arif">
+                <div class="image-wrapper pcb-render">
+                    <img loading="lazy" src="Documents/Projects/P6/Cover.png" alt="IncliSense PCB Render">
                 </div>
             </div>
         </div>
-        <div class="hero-background"></div>
     </section>
+    
+    <!-- Trust Signals Strip -->
+    <div class="trust-strip container hidden delay-3">
+        <img loading="lazy" src="Picture/Altium_Designer_Essentail_Certificate.jpg" alt="Altium" class="trust-logo">
+        <img loading="lazy" src="Picture/IET on campus.jpeg" alt="IET" class="trust-logo">
+    </div>
 
     <!-- About Section -->
     <section id="about" class="about-section container">
@@ -248,7 +282,7 @@
             <!-- COMSATS -->
             <div class="edu-card glass-panel hidden delay-1">
                 <div class="edu-logo-wrapper">
-                    <img src="Picture/Comsat_logo.jpg" alt="COMSATS University Logo" class="edu-logo-img">
+                    <img loading="lazy" src="Picture/Comsat_logo.jpg" alt="COMSATS University Logo" class="edu-logo-img">
                 </div>
                 <div class="edu-content">
                     <span class="edu-date">2024 - 2028 (Expected)</span>
@@ -263,7 +297,7 @@
             <!-- Peace Group -->
             <div class="edu-card glass-panel hidden delay-2">
                 <div class="edu-logo-wrapper">
-                    <img src="Picture/Peace_logo.jpg" alt="Peace Group of School & College Logo" class="edu-logo-img">
+                    <img loading="lazy" src="Picture/Peace_logo.jpg" alt="Peace Group of School & College Logo" class="edu-logo-img">
                 </div>
                 <div class="edu-content">
                     <span class="edu-date">Completed 2024</span>
@@ -285,7 +319,7 @@
             <!-- 1. Generative AI -->
             <div class="cert-card glass-panel hidden delay-1">
                 <div class="cert-image">
-                    <img src="Picture/Outskill_coc.jpg" alt="Outskill Generative AI Certification" class="clickable-image">
+                    <img loading="lazy" src="Picture/Outskill_coc.jpg" alt="Outskill Generative AI Certification" class="clickable-image">
                 </div>
                 <div class="cert-info">
 <h3>Generative AI Mastermind</h3>
@@ -297,7 +331,7 @@
             <!-- 2. Altium Essentials (April 5, 2026) -->
             <div class="cert-card glass-panel hidden delay-2">
                 <div class="cert-image">
-                    <img src="Picture/Altium_Designer_Essentail_Certificate.jpg" alt="Altium Designer Essentials Certification" class="clickable-image">
+                    <img loading="lazy" src="Picture/Altium_Designer_Essentail_Certificate.jpg" alt="Altium Designer Essentials Certification" class="clickable-image">
                 </div>
                 <div class="cert-info">
 <h3>Altium Certified: Designer Essentials</h3>
@@ -309,7 +343,7 @@
             <!-- 3. Altium Basic -->
             <div class="cert-card glass-panel hidden delay-3">
                 <div class="cert-image">
-                    <img src="Picture/Altium_basic_pcb_design_course.jpg" alt="Altium Certification" class="clickable-image">
+                    <img loading="lazy" src="Picture/Altium_basic_pcb_design_course.jpg" alt="Altium Certification" class="clickable-image">
                 </div>
                 <div class="cert-info">
 <h3>Altium Education PCB Basic Design Course</h3>
@@ -321,7 +355,7 @@
             <!-- 4. Best Project (Feb 23, 2026) -->
             <div class="cert-card glass-panel hidden delay-1">
                 <div class="cert-image">
-                    <img src="Picture/Best project.jpeg" alt="Best Project Award" class="clickable-image">
+                    <img loading="lazy" src="Picture/Best project.jpeg" alt="Best Project Award" class="clickable-image">
                 </div>
                 <div class="cert-info">
 <h3>Best Project Award</h3>
@@ -333,7 +367,7 @@
             <!-- 5. Inovatex (Feb 23, 2026) -->
             <div class="cert-card glass-panel hidden delay-2">
                 <div class="cert-image">
-                    <img src="Picture/inovatex project 2025.jpeg" alt="Inovatex Project 2025" class="clickable-image">
+                    <img loading="lazy" src="Picture/inovatex project 2025.jpeg" alt="Inovatex Project 2025" class="clickable-image">
                 </div>
                 <div class="cert-info">
 <h3>Inovatex Project 2025</h3>
@@ -345,7 +379,7 @@
             <!-- 6. Kangaroo (Feb 23, 2026) -->
             <div class="cert-card glass-panel hidden delay-3">
                 <div class="cert-image">
-                    <img src="Picture/Kangroo test.jpeg" alt="Kangaroo Test Achievement" class="clickable-image">
+                    <img loading="lazy" src="Picture/Kangroo test.jpeg" alt="Kangaroo Test Achievement" class="clickable-image">
                 </div>
                 <div class="cert-info">
 <h3>Kangaroo Test Achievement</h3>
@@ -357,7 +391,7 @@
             <!-- 7. IET Leadership (Feb 23, 2026) -->
             <div class="cert-card glass-panel hidden delay-1">
                 <div class="cert-image">
-                    <img src="Picture/IET on campus membership officer.jpeg" alt="IET On Campus Membership Officer" class="clickable-image">
+                    <img loading="lazy" src="Picture/IET on campus membership officer.jpeg" alt="IET On Campus Membership Officer" class="clickable-image">
                 </div>
                 <div class="cert-info">
 <h3>IET On Campus Leadership</h3>
@@ -369,7 +403,7 @@
             <!-- 8. Arduino (Feb 23, 2026) -->
             <div class="cert-card glass-panel hidden delay-2">
                 <div class="cert-image">
-                    <img src="Picture/Arduino and iot course cardiff institute.jpeg" alt="Arduino and IoT Course" class="clickable-image">
+                    <img loading="lazy" src="Picture/Arduino and iot course cardiff institute.jpeg" alt="Arduino and IoT Course" class="clickable-image">
                 </div>
                 <div class="cert-info">
 <h3>Arduino & IoT - Cardiff Institute</h3>
@@ -381,7 +415,7 @@
             <!-- 9. Practical Entrepreneurship (Feb 23, 2026) -->
             <div class="cert-card glass-panel hidden delay-3">
                 <div class="cert-image">
-                    <img src="Picture/Practical enterpnuershi[.jpeg" alt="Practical Entrepreneurship" class="clickable-image">
+                    <img loading="lazy" src="Picture/Practical enterpnuershi[.jpeg" alt="Practical Entrepreneurship" class="clickable-image">
                 </div>
                 <div class="cert-info">
 <h3>Practical Entrepreneurship</h3>
@@ -393,7 +427,7 @@
             <!-- 10. Unleashing Creativity (Feb 23, 2026) -->
             <div class="cert-card glass-panel hidden delay-1">
                 <div class="cert-image">
-                    <img src="Picture/Unleashing Creativity with Ai.jpeg" alt="Unleashing Creativity with AI" class="clickable-image">
+                    <img loading="lazy" src="Picture/Unleashing Creativity with Ai.jpeg" alt="Unleashing Creativity with AI" class="clickable-image">
                 </div>
                 <div class="cert-info">
 <h3>Unleashing Creativity with AI</h3>
@@ -405,7 +439,7 @@
             <!-- 11. IET Recognition (Feb 23, 2026) -->
             <div class="cert-card glass-panel hidden delay-2">
                 <div class="cert-image">
-                    <img src="Picture/IET on campus.jpeg" alt="IET On Campus Recognition" class="clickable-image">
+                    <img loading="lazy" src="Picture/IET on campus.jpeg" alt="IET On Campus Recognition" class="clickable-image">
                 </div>
                 <div class="cert-info">
 <h3>IET On Campus Recognition</h3>
@@ -425,7 +459,7 @@
             <!-- 1. Best Project (A1) -->
             <div class="cert-card glass-panel hidden delay-1">
                 <div class="cert-image">
-                    <img src="Documents/Award/A1/Best project.jpeg" alt="Best Project Award" class="clickable-image">
+                    <img loading="lazy" src="Documents/Award/A1/Best project.jpeg" alt="Best Project Award" class="clickable-image">
                 </div>
                 <div class="cert-info">
                     <h3>Best Project Award</h3>
@@ -437,7 +471,7 @@
             <!-- 2. Best Circuit Design (A2) -->
             <div class="cert-card glass-panel hidden delay-2">
                 <div class="cert-image">
-                    <img src="Documents/Award/A2/Cover.jpg" alt="1st Position - Best Circuit Design" class="clickable-image">
+                    <img loading="lazy" src="Documents/Award/A2/Cover.jpg" alt="1st Position - Best Circuit Design" class="clickable-image">
                 </div>
                 <div class="cert-info">
                     <h3>1st Position - Best Circuit Design</h3>
@@ -449,7 +483,7 @@
             <!-- 3. Altium Designer Essentials (A3) -->
             <div class="cert-card glass-panel hidden delay-3">
                 <div class="cert-image">
-                    <img src="Documents/Award/A3/Altium_Designer_Essentail_Certificate.jpg" alt="Altium Designer Essentials" class="clickable-image">
+                    <img loading="lazy" src="Documents/Award/A3/Altium_Designer_Essentail_Certificate.jpg" alt="Altium Designer Essentials" class="clickable-image">
                 </div>
                 <div class="cert-info">
                     <h3>Altium Designer Essentials</h3>
@@ -461,7 +495,7 @@
             <!-- 4. Instructables Contest Winner (A4) -->
             <div class="cert-card glass-panel hidden delay-4">
                 <div class="cert-image">
-                    <img src="Documents/Award/A4/Cover.png" alt="Instructables Contest Winner" class="clickable-image">
+                    <img loading="lazy" src="Documents/Award/A4/Cover.png" alt="Instructables Contest Winner" class="clickable-image">
                 </div>
                 <div class="cert-info">
                     <h3>Instructables Contest Winner</h3>
@@ -477,54 +511,65 @@
         <div class="container">
             <h2 class="section-title text-center hidden">Projects</h2>
             <div class="projects-grid">
-                <div class="project-card glass-panel hidden delay-1" onclick="openProjectModal('p1')">
-                    <div class="project-image" style="background-image: url('Documents/Projects/P1/Cover.jpg');"></div>
-                    <div class="project-content">
-                        <h3>Smart Lighting System with Obstacle Detection</h3>
-                        <p class="tech-stack">Altium Designer, ATMEGA328PB-AU, VL53L0X ToF Sensor, TP4056, USB-C</p>
-                        <span class="project-link">View Details →</span>
-                    </div>
-                </div>
-                <div class="project-card glass-panel hidden delay-2" onclick="openProjectModal('p2')">
-                    <div class="project-image" style="background-image: url('Documents/Projects/P2/Cover.jpg');"></div>
-                    <div class="project-content">
-                        <h3>Omni-Sense Node: Mixed-Signal DAQ</h3>
-                        <p class="tech-stack">ESP32, SPI, PWM, RC522 RFID, MQ-Series Sensors</p>
-                        <span class="project-link">View Details →</span>
-                    </div>
-                </div>
-                <div class="project-card glass-panel hidden delay-3" onclick="openProjectModal('p3')">
-                    <div class="project-image" style="background-image: url('Documents/Projects/P3/Cover.jpg');"></div>
-                    <div class="project-content">
-                        <h3>Power Regulator and LED Board</h3>
-                        <p class="tech-stack">Altium Designer, Regulator IC, PCB Design</p>
-                        <span class="project-link">View Details →</span>
-                    </div>
-                </div>
-                <div class="project-card glass-panel hidden delay-4" onclick="openProjectModal('p4')">
-                    <div class="project-image" style="background-image: url('Documents/Projects/P4/Cover.jpg');"></div>
-                    <div class="project-content">
-                        <h3>6S UAV Battery Management System</h3>
-                        <p class="tech-stack">BQ76930, XT60, MOSFETs, UAV BMS</p>
-                        <span class="project-link">View Details →</span>
-                    </div>
-                </div>
-                <div class="project-card glass-panel hidden delay-5" onclick="openProjectModal('p5')">
-                    <div class="project-image" style="background-image: url('Documents/Projects/P5/Cover.jpg');"></div>
-                    <div class="project-content">
-                        <h3>Mixed-Signal RF Transceiver Board</h3>
-                        <p class="tech-stack">ESP32, RF TX/RX, 50Ω Impedance, Signal Integrity</p>
-                        <span class="project-link">View Details →</span>
-                    </div>
-                </div>
-                <div class="project-card glass-panel hidden delay-4" onclick="openProjectModal('p6')">
-                    <div class="project-image" style="background-image: url('Documents/Projects/P6/Cover.png');"></div>
-                    <div class="project-content">
+                
+                <!-- Featured Project (Full Width) -->
+                <div class="project-card featured-project glass-panel hidden delay-1" onclick="openProjectModal('p6')">
+                    <div class="project-bg" style="background-image: url('Documents/Projects/P6/Cover.png');"></div>
+                    <div class="project-content-overlay">
+                        <div class="featured-label">⭐ Featured Project</div>
                         <h3>IncliSense Digital Level</h3>
-                        <p class="tech-stack">Arduino Nano, MPU6050, IoT, 3D Printing</p>
-                        <span class="project-link">View Details →</span>
+                        <p class="tech-stack">Arduino Nano · MPU6050 · IoT · 3D Printing</p>
+                        <p class="project-summary">A precision digital leveling device built to provide high-accuracy numerical feedback, featuring PC telemetry and a responsive 11-LED interface.</p>
+                        <span class="project-link">View Case Study &rarr;</span>
                     </div>
                 </div>
+
+                <!-- Regular Grid Projects -->
+                <div class="project-card glass-panel hidden delay-2" onclick="openProjectModal('p1')">
+                    <div class="project-bg" style="background-image: url('Documents/Projects/P1/Cover.jpg');"></div>
+                    <div class="project-content-overlay">
+                        <h3>Smart Lighting System</h3>
+                        <p class="tech-stack">Altium · ATMEGA328PB-AU · ToF</p>
+                        <span class="project-link">View Details &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-panel hidden delay-3" onclick="openProjectModal('p2')">
+                    <div class="project-bg" style="background-image: url('Documents/Projects/P2/Cover.jpg');"></div>
+                    <div class="project-content-overlay">
+                        <h3>Omni-Sense Node</h3>
+                        <p class="tech-stack">ESP32 · SPI · PWM · RFID</p>
+                        <span class="project-link">View Details &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-panel hidden delay-4" onclick="openProjectModal('p3')">
+                    <div class="project-bg" style="background-image: url('Documents/Projects/P3/Cover.jpg');"></div>
+                    <div class="project-content-overlay">
+                        <h3>Power Regulator Board</h3>
+                        <p class="tech-stack">Altium · Regulator IC</p>
+                        <span class="project-link">View Details &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-panel hidden delay-5" onclick="openProjectModal('p4')">
+                    <div class="project-bg" style="background-image: url('Documents/Projects/P4/Cover.jpg');"></div>
+                    <div class="project-content-overlay">
+                        <h3>6S UAV BMS</h3>
+                        <p class="tech-stack">BQ76930 · XT60 · MOSFETs</p>
+                        <span class="project-link">View Details &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-panel hidden delay-6" onclick="openProjectModal('p5')">
+                    <div class="project-bg" style="background-image: url('Documents/Projects/P5/Cover.jpg');"></div>
+                    <div class="project-content-overlay">
+                        <h3>Mixed-Signal RF Board</h3>
+                        <p class="tech-stack">ESP32 · RF TX/RX · 50Ω Impedance</p>
+                        <span class="project-link">View Details &rarr;</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -581,14 +626,14 @@
             <span class="modal-close" onclick="closeProjectModal('p1')">&times;</span>
             <div class="modal-body">
                 <div class="modal-gallery">
-                    <img src="Documents/Projects/P1/Cover.jpg" class="gallery-main-img" id="gallery-main-img-p1">
+                    <img loading="lazy" src="Documents/Projects/P1/Cover.jpg" class="gallery-main-img" id="gallery-main-img-p1">
                     <div class="gallery-thumbnails">
-                        <img src="Documents/Projects/P1/Cover.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/Cover.jpg')" class="active-thumb">
-                        <img src="Documents/Projects/P1/1st.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/1st.jpg')">
-                        <img src="Documents/Projects/P1/2nd.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/2nd.jpg')">
-                        <img src="Documents/Projects/P1/3rd.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/3rd.jpg')">
-                        <img src="Documents/Projects/P1/4th.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/4th.jpg')">
-                        <img src="Documents/Projects/P1/5th.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/5th.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P1/Cover.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/Cover.jpg')" class="active-thumb">
+                        <img loading="lazy" src="Documents/Projects/P1/1st.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/1st.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P1/2nd.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/2nd.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P1/3rd.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/3rd.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P1/4th.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/4th.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P1/5th.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/5th.jpg')">
                     </div>
                 </div>
                 <div class="modal-info">
@@ -616,21 +661,21 @@
             <span class="modal-close" onclick="closeProjectModal('p2')">&times;</span>
             <div class="modal-body">
                 <div class="modal-gallery">
-                    <img src="Documents/Projects/P2/Cover.jpg" class="gallery-main-img" id="gallery-main-img-p2">
+                    <img loading="lazy" src="Documents/Projects/P2/Cover.jpg" class="gallery-main-img" id="gallery-main-img-p2">
                     <div class="gallery-thumbnails">
-                        <img src="Documents/Projects/P2/Cover.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/Cover.jpg')" class="active-thumb">
-                        <img src="Documents/Projects/P2/2.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/2.jpg')">
-                        <img src="Documents/Projects/P2/3.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/3.jpg')">
-                        <img src="Documents/Projects/P2/4.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/4.jpg')">
-                        <img src="Documents/Projects/P2/5.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/5.jpg')">
-                        <img src="Documents/Projects/P2/6.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/6.jpg')">
-                        <img src="Documents/Projects/P2/7.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/7.jpg')">
-                        <img src="Documents/Projects/P2/8.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/8.jpg')">
-                        <img src="Documents/Projects/P2/9.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/9.jpg')">
-                        <img src="Documents/Projects/P2/10.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/10.jpg')">
-                        <img src="Documents/Projects/P2/11.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/11.jpg')">
-                        <img src="Documents/Projects/P2/12.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/12.jpg')">
-                        <img src="Documents/Projects/P2/13.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/13.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P2/Cover.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/Cover.jpg')" class="active-thumb">
+                        <img loading="lazy" src="Documents/Projects/P2/2.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/2.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P2/3.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/3.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P2/4.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/4.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P2/5.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/5.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P2/6.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/6.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P2/7.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/7.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P2/8.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/8.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P2/9.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/9.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P2/10.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/10.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P2/11.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/11.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P2/12.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/12.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P2/13.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/P2/13.jpg')">
                     </div>
                 </div>
                 <div class="modal-info">
@@ -658,13 +703,13 @@
             <span class="modal-close" onclick="closeProjectModal('p3')">&times;</span>
             <div class="modal-body">
                 <div class="modal-gallery">
-                    <img src="Documents/Projects/P3/Cover.jpg" class="gallery-main-img" id="gallery-main-img-p3">
+                    <img loading="lazy" src="Documents/Projects/P3/Cover.jpg" class="gallery-main-img" id="gallery-main-img-p3">
                     <div class="gallery-thumbnails">
-                        <img src="Documents/Projects/P3/Cover.jpg" onclick="setGalleryMain('p3', this, 'Documents/Projects/P3/Cover.jpg')" class="active-thumb">
-                        <img src="Documents/Projects/P3/1.jpg" onclick="setGalleryMain('p3', this, 'Documents/Projects/P3/1.jpg')">
-                        <img src="Documents/Projects/P3/2.jpg" onclick="setGalleryMain('p3', this, 'Documents/Projects/P3/2.jpg')">
-                        <img src="Documents/Projects/P3/3.jpg" onclick="setGalleryMain('p3', this, 'Documents/Projects/P3/3.jpg')">
-                        <img src="Documents/Projects/P3/4.jpg" onclick="setGalleryMain('p3', this, 'Documents/Projects/P3/4.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P3/Cover.jpg" onclick="setGalleryMain('p3', this, 'Documents/Projects/P3/Cover.jpg')" class="active-thumb">
+                        <img loading="lazy" src="Documents/Projects/P3/1.jpg" onclick="setGalleryMain('p3', this, 'Documents/Projects/P3/1.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P3/2.jpg" onclick="setGalleryMain('p3', this, 'Documents/Projects/P3/2.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P3/3.jpg" onclick="setGalleryMain('p3', this, 'Documents/Projects/P3/3.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P3/4.jpg" onclick="setGalleryMain('p3', this, 'Documents/Projects/P3/4.jpg')">
                     </div>
                 </div>
                 <div class="modal-info">
@@ -691,9 +736,9 @@
             <span class="modal-close" onclick="closeProjectModal('p4')">&times;</span>
             <div class="modal-body">
                 <div class="modal-gallery">
-                    <img src="Documents/Projects/P4/Cover.jpg" class="gallery-main-img" id="gallery-main-img-p4">
+                    <img loading="lazy" src="Documents/Projects/P4/Cover.jpg" class="gallery-main-img" id="gallery-main-img-p4">
                     <div class="gallery-thumbnails">
-                        <img src="Documents/Projects/P4/Cover.jpg" onclick="setGalleryMain('p4', this, 'Documents/Projects/P4/Cover.jpg')" class="active-thumb">
+                        <img loading="lazy" src="Documents/Projects/P4/Cover.jpg" onclick="setGalleryMain('p4', this, 'Documents/Projects/P4/Cover.jpg')" class="active-thumb">
                     </div>
                 </div>
                 <div class="modal-info">
@@ -720,16 +765,16 @@
             <span class="modal-close" onclick="closeProjectModal('p5')">&times;</span>
             <div class="modal-body">
                 <div class="modal-gallery">
-                    <img src="Documents/Projects/P5/Cover.jpg" class="gallery-main-img" id="gallery-main-img-p5">
+                    <img loading="lazy" src="Documents/Projects/P5/Cover.jpg" class="gallery-main-img" id="gallery-main-img-p5">
                     <div class="gallery-thumbnails">
-                        <img src="Documents/Projects/P5/Cover.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/Cover.jpg')" class="active-thumb">
-                        <img src="Documents/Projects/P5/1.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/1.jpg')">
-                        <img src="Documents/Projects/P5/2.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/2.jpg')">
-                        <img src="Documents/Projects/P5/3.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/3.jpg')">
-                        <img src="Documents/Projects/P5/4.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/4.jpg')">
-                        <img src="Documents/Projects/P5/5.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/5.jpg')">
-                        <img src="Documents/Projects/P5/6.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/6.jpg')">
-                        <img src="Documents/Projects/P5/7.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/7.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P5/Cover.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/Cover.jpg')" class="active-thumb">
+                        <img loading="lazy" src="Documents/Projects/P5/1.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/1.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P5/2.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/2.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P5/3.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/3.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P5/4.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/4.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P5/5.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/5.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P5/6.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/6.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P5/7.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/7.jpg')">
                     </div>
                 </div>
                 <div class="modal-info">
@@ -757,12 +802,12 @@
             <span class="modal-close" onclick="closeProjectModal('p6')">&times;</span>
             <div class="modal-body">
                 <div class="modal-gallery">
-                    <img src="Documents/Projects/P6/Cover.png" class="gallery-main-img" id="gallery-main-img-p6">
+                    <img loading="lazy" src="Documents/Projects/P6/Cover.png" class="gallery-main-img" id="gallery-main-img-p6">
                     <div class="gallery-thumbnails">
-                        <img src="Documents/Projects/P6/Cover.png" onclick="setGalleryMain('p6', this, 'Documents/Projects/P6/Cover.png')" class="active-thumb">
-                        <img src="Documents/Projects/P6/3.jpeg" onclick="setGalleryMain('p6', this, 'Documents/Projects/P6/3.jpeg')">
-                        <img src="Documents/Projects/P6/4.jpeg" onclick="setGalleryMain('p6', this, 'Documents/Projects/P6/4.jpeg')">
-                        <img src="Documents/Projects/P6/5.png" onclick="setGalleryMain('p6', this, 'Documents/Projects/P6/5.png')">
+                        <img loading="lazy" src="Documents/Projects/P6/Cover.png" onclick="setGalleryMain('p6', this, 'Documents/Projects/P6/Cover.png')" class="active-thumb">
+                        <img loading="lazy" src="Documents/Projects/P6/3.jpeg" onclick="setGalleryMain('p6', this, 'Documents/Projects/P6/3.jpeg')">
+                        <img loading="lazy" src="Documents/Projects/P6/4.jpeg" onclick="setGalleryMain('p6', this, 'Documents/Projects/P6/4.jpeg')">
+                        <img loading="lazy" src="Documents/Projects/P6/5.png" onclick="setGalleryMain('p6', this, 'Documents/Projects/P6/5.png')">
                     </div>
                     <div style="margin-top: 1.5rem;">
                         <video width="100%" controls style="border-radius: 8px; box-shadow: var(--shadow-md);">

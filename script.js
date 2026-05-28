@@ -234,3 +234,56 @@ window.addEventListener('touchmove', function(e) {
 }, { passive: false });
 
 
+
+// Typewriter Effect
+const roles = ["Hardware Developer", "PCB Designer", "Embedded Engineer"];
+let roleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typeText = document.querySelector('.typewriter-text');
+
+function typeWriter() {
+    if(!typeText) return;
+    const currentRole = roles[roleIndex];
+    
+    if (isDeleting) {
+        typeText.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+    } else {
+        typeText.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+    }
+
+    let typeSpeed = isDeleting ? 50 : 100;
+
+    if (!isDeleting && charIndex === currentRole.length) {
+        typeSpeed = 2000; // Pause at end
+        isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        typeSpeed = 500; // Pause before new word
+    }
+
+    setTimeout(typeWriter, typeSpeed);
+}
+if(typeText) typeWriter();
+
+// Mobile Hamburger Menu
+const menuToggle = document.getElementById('mobile-menu');
+const navMenu = document.querySelector('.nav-menu');
+
+if (menuToggle && navMenu) {
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
+}
