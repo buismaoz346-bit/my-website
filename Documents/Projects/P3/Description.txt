@@ -1,0 +1,8 @@
+Excited to share my project: a Power Regulator and LED Board designed in Altium Designer! 🚀
+As a 4th-semester EEE student, taking this from schematic to a fully routed board has been an incredible hands-on learning experience.
+How it works: The board is designed to take an unregulated input voltage and step it down to a clean, stable DC output. The layout incorporates filtering capacitors and a regulator IC to ensure steady power delivery to safely drive the onboard LED indicators.
+A major focus of this build was implementing top and bottom layer Polygon Pours (Copper Pours) to create robust Ground (GND) planes. This was a crucial step for:
+✅ Thermal Management: Acting as a heatsink for the power regulator. 
+✅ Signal Integrity: Providing a low-impedance return path. 
+✅ Noise Reduction: Shielding the circuit from EMI.
+Looking forward to bringing these hardware design skills into more complex IoT and embedded system projects! 💡

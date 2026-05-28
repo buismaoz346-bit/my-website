@@ -1,0 +1,9 @@
+Just wrapped up the layout for a new mixed-signal RF transceiver board! 🚀
+Designing a PCB that integrates a noisy digital ESP32 module with highly sensitive RF TX/RX chains is always a fun challenge in signal integrity.
+A few technical highlights from this layout:
+ 🔹 Routed the RF pathways with a strict 50Ω impedance profile (17.6 mil trace width).
+ 🔹 Implemented a unified ground plane strategy to mitigate digital noise coupling. 
+🔹 Built a complete Faraday cage using continuous polygon pours and exactly 312 stitching vias to isolate the RF traces. 
+🔹 Added coplanar waveguide via fencing along the RF lines to prevent signal leakage. 
+🔹 Enforced a strict copper keepout beneath the ESP32 antenna to ensure unattenuated Wi-Fi/Bluetooth performance.
+Everything successfully passed DRC and the Gerbers/CPL files are ready for manufacturing. Looking forward to testing the physical board soon! 

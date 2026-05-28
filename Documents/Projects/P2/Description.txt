@@ -1,0 +1,7 @@
+Omni-Sense Node: Mixed-Signal DAQ and Embedded Control System
+Overview: Developed a centralized Data Acquisition (DAQ) and control system using an ESP32 microcontroller, integrating 15 heterogeneous peripheral devices. The project focuses on solving hardware-level challenges such as power distribution, signal integrity, and multi-protocol data handling in a mixed-signal environment.
+Technical Achievements:
+Power Architecture & Logic Compliance: Engineered a dual-rail power distribution network to safely isolate high-current 5V loads (MQ-series gas sensors, relays, servos) from 3.3V logic components. Implemented voltage divider networks to step down 5V analog outputs, ensuring safe logic-level compliance for the MCU.
+I/O Optimization & Telemetry: Strategically mapped all continuous analog sensor acquisitions to the ESP32's ADC1 hardware to bypass structural conflicts with the internal Wi-Fi drivers, ensuring uninterrupted wireless telemetry.
+Multi-Protocol Integration: Successfully managed asynchronous data streams and control signals across multiple protocols, including SPI (RC522 RFID), PWM (Servo actuation), and raw Analog/Digital discrete I/O.
+Signal Integrity: Mitigated electromechanical noise and inductive kickback from actuators (servos and dual-channel relays) using localized decoupling and strict ground-plane management to prevent MCU brownouts or resets.

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syed Maoz Arif - Portfolio & CV</title>
+    <meta name="description" content="Portfolio of Syed Maoz Arif, a Hardware Developer and Electronics Engineer.">
+    <!-- Google Fonts: Outfit for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar hidden">
+        <div class="nav-container">
+            <div class="logo">Syed Maoz Arif</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#traits">Traits</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#certifications">Certifications</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact" class="btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.9rem;">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-container container">
+            <div class="hero-content hidden delay-1">
+                <h2 class="greeting">Hello, my name is</h2>
+                <h1 class="name">Syed Maoz Arif</h1>
+                <h3 class="role">Hardware Developer & Electronics Engineer</h3>
+                <div class="hero-buttons">
+                    <a href="#about" class="btn-primary">Explore My Work</a>
+                    <a href="Documents/CV1.pdf" target="_blank" class="btn-download">
+                        <span class="icon">📄</span> View CV
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image hidden delay-2">
+                <div class="image-wrapper">
+                    <img src="Picture/my_pic.png" alt="Syed Maoz Arif">
+                </div>
+            </div>
+        </div>
+        <div class="hero-background"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section container">
+        <div class="about-card glass-panel hidden">
+            <h2 class="section-title">About me</h2>
+            <p>I'm a hardware developer and electronics engineering student in my 4th semester at COMSATS University, with hands-on experience in multi-layer PCB design and embedded systems. I don't just study engineering I build things that work in the real world, from first schematic to final production.</p>
+            <p>Beyond the lab, I believe great engineers also lead. As Membership Head for IET On Campus and a Cabinet Member of the Youth Parliament Pakistan, I've learned that the best solutions come from people who can both think critically and bring others together.</p>
+            <p>I'm always chasing the intersection of technical depth and real-world impact and I'm just getting started.</p>
+            <a href="#traits" class="btn-secondary mt-4">Discover More</a>
+        </div>
+    </section>
+
+    <!-- Traits Section (What defines...) -->
+    <section id="traits" class="traits-section container">
+        <div class="section-header hidden">
+            <h2 class="section-title">What defines Maoz Arif?</h2>
+        </div>
+        
+        <div class="traits-summary glass-panel hidden">
+            <ul class="summary-list">
+                <li><strong>Engineering Academic:</strong> 4th-semester Electrical (Electronics) Engineering undergraduate at COMSATS University Abbottabad.</li>
+                <li><strong>Technical Specialist:</strong> Expert in multi-layer PCB design, embedded systems/IoT (ESP32, STM32), and 3D mechanical modeling.</li>
+                <li><strong>Active Freelancer:</strong> Professional hardware and mechanical designer providing services on Fiverr and Upwork.</li>
+                <li><strong>Recognized Innovator:</strong> Altium Global Scholarship awardee and runner-up in the Instructables Sensors Contest.</li>
+                <li><strong>Community Leader:</strong> Membership Head for IET On Campus and Cabinet Member of the Youth Parliament Pakistan.</li>
+                <li><strong>Versatile Developer:</strong> Proficient in Altium Designer, Autodesk Fusion 360, Python, and LaTeX.</li>
+                <li><strong>Sports Enthusiast:</strong> Active in cricket, table tennis, and trekking.</li>
+            </ul>
+        </div>
+        
+        <div class="traits-grid">
+            <div class="trait-card hidden delay-1">
+                <div class="icon-wrapper">🏔️</div>
+                <h3>Adventure</h3>
+                <p>I have a deep appreciation for the outdoors. Trekking and exploring new places fuel my creativity and keep me grounded when I'm away from the workbench.</p>
+            </div>
+            <div class="trait-card hidden delay-2">
+                <div class="icon-wrapper">📚</div>
+                <h3>Learning</h3>
+                <p>I'm constantly pushing the boundaries of my knowledge. Whether it's mastering a new CAD tool or diving into advanced electronics, I believe growth happens outside the comfort zone.</p>
+            </div>
+            <div class="trait-card hidden delay-3">
+                <div class="icon-wrapper">🤝</div>
+                <h3>Connections</h3>
+                <p>Engineering is as much about people as it is about technology. I thrive on collaborating, sharing ideas, and building meaningful relationships with peers and mentors.</p>
+            </div>
+            <div class="trait-card hidden delay-4">
+                <div class="icon-wrapper">💡</div>
+                <h3>Innovation</h3>
+                <p>I never settle for the standard answer. My goal is to design elegant, functional solutions to complex hardware problems that make a tangible difference.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <h2 class="section-title text-center hidden">Skills</h2>
+            
+            <div class="skills-grid">
+                <!-- Skill 1 -->
+                <div class="skill-item hidden">
+                    <div class="skill-info">
+                        <h3>PCB Design & Hardware Engineering</h3>
+                        <span>95%</span>
+                    </div>
+                    <p class="skill-desc">Professional multi-layer board development, schematic capture, and manufacturing preparation using Altium Designer and Altium 365.</p>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="95%"></div>
+                    </div>
+                </div>
+
+                <!-- Skill 2 -->
+                <div class="skill-item hidden">
+                    <div class="skill-info">
+                        <h3>Embedded Systems & IoT</h3>
+                        <span>92%</span>
+                    </div>
+                    <p class="skill-desc">Firmware development and sensor integration for ESP32, STM32, and Arduino, including real-time data streaming via MQTT and Firebase.</p>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="92%"></div>
+                    </div>
+                </div>
+
+                <!-- Skill 3 -->
+                <div class="skill-item hidden">
+                    <div class="skill-info">
+                        <h3>3D Modeling & CAD</h3>
+                        <span>90%</span>
+                    </div>
+                    <p class="skill-desc">Mechanical product design, parametric modeling, and assembly creation for 3D printing using Autodesk Fusion 360 and Inventor.</p>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="90%"></div>
+                    </div>
+                </div>
+
+                <!-- Skill 4 -->
+                <div class="skill-item hidden">
+                    <div class="skill-info">
+                        <h3>Programming & Technical Writing</h3>
+                        <span>88%</span>
+                    </div>
+                    <p class="skill-desc">Object-oriented programming and automation using Python, alongside professional document and report formatting utilizing LaTeX and Overleaf.</p>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="88%"></div>
+                    </div>
+                </div>
+
+                <!-- Skill 5 -->
+                <div class="skill-item hidden">
+                    <div class="skill-info">
+                        <h3>Leadership & Project Management</h3>
+                        <span>95%</span>
+                    </div>
+                    <p class="skill-desc">Delivering freelance engineering projects on Upwork and Fiverr, combined with organizational leadership as Membership Head for IET On Campus and a Cabinet Member of the Youth Parliament Pakistan.</p>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="95%"></div>
+                    </div>
+                </div>
+
+                <!-- Skill 6 -->
+                <div class="skill-item hidden">
+                    <div class="skill-info">
+                        <h3>Interpersonal Skills</h3>
+                        <span>99%</span>
+                    </div>
+                    <p class="skill-desc">Public Speaking, Teamwork Skills, Communication, Collaboration, Empathy.</p>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="99%"></div>
+                    </div>
+                </div>
+
+                <!-- Skill 7 -->
+                <div class="skill-item hidden">
+                    <div class="skill-info">
+                        <h3>Critical Thinking</h3>
+                        <span>92%</span>
+                    </div>
+                    <p class="skill-desc">Creativity, Problem Solving, Organization.</p>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="92%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience-section container">
+        <h2 class="section-title text-center hidden">My Experience</h2>
+        
+        <div class="timeline">
+            <!-- Professional Experience -->
+            <div class="timeline-item hidden">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-panel">
+                    <span class="timeline-category">Professional</span>
+                    <h3 class="timeline-company">Fiverr & Upwork</h3>
+                    <h4 class="timeline-role">Freelance Hardware & Mechanical Designer</h4>
+                    <p>Providing professional PCB design, multi-layer board development, and 3D modeling services to international clients.</p>
+                </div>
+            </div>
+
+            <!-- Leadership Experience -->
+            <div class="timeline-item hidden">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-panel">
+                    <span class="timeline-category">Leadership</span>
+                    <span class="timeline-date">May 2025 - Present</span>
+                    <h3 class="timeline-company">IET On Campus Abbottabad</h3>
+                    <h4 class="timeline-role">Membership Head</h4>
+                    <p>Leading membership initiatives and organizing technical events, including coordinating workshops like Computer Vision & AI in UAVs.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item hidden">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-panel">
+                    <span class="timeline-category">Leadership</span>
+                    <span class="timeline-date">2025 - 2027 Session</span>
+                    <h3 class="timeline-company">Youth Parliament Pakistan</h3>
+                    <h4 class="timeline-role">Cabinet Member</h4>
+                    <p>Serving in a leadership capacity for youth advocacy and policy discussions.</p>
+                </div>
+            </div>
+
+            <!-- Project & Competition -->
+            <div class="timeline-item hidden">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-panel">
+                    <span class="timeline-category">Award</span>
+                    <span class="timeline-date">March 2026</span>
+                    <h3 class="timeline-company">Altium Global Scholarship Program</h3>
+                    <h4 class="timeline-role">Awardee</h4>
+                    <p>Selected as an emerging engineer for professional development and technical excellence.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item hidden">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-panel">
+                    <span class="timeline-category">Award</span>
+                    <span class="timeline-date">April 2026</span>
+                    <h3 class="timeline-company">Instructables Sensors Contest 2026</h3>
+                    <h4 class="timeline-role">Runner-Up</h4>
+                    <p>Recognized for designing and developing the "IncliSense" project.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item hidden">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-panel">
+                    <span class="timeline-category">Project</span>
+                    <span class="timeline-date">February 2026</span>
+                    <h3 class="timeline-company">Omni-Sense Node</h3>
+                    <h4 class="timeline-role">Lead Developer</h4>
+                    <p>Engineered a comprehensive data acquisition and control system utilizing an ESP32 and 15 peripheral devices for mixed-signal management.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item hidden">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-panel">
+                    <span class="timeline-category">Project</span>
+                    <span class="timeline-date">February 2026</span>
+                    <h3 class="timeline-company">Smart Home Automation System</h3>
+                    <h4 class="timeline-role">Developer</h4>
+                    <p>Designed custom PCB layouts and programmed ESP32 microcontrollers for an integrated home automation prototype.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Education Section -->
+    <section id="education" class="education-section container">
+        <h2 class="section-title text-center hidden">Education</h2>
+        
+        <div class="education-grid">
+            <!-- COMSATS -->
+            <div class="edu-card glass-panel hidden delay-1">
+                <div class="edu-logo-wrapper">
+                    <img src="Picture/Comsat_logo.jpg" alt="COMSATS University Logo" class="edu-logo-img">
+                </div>
+                <div class="edu-content">
+                    <span class="edu-date">2024 - 2028 (Expected)</span>
+                    <h3>COMSATS University Islamabad</h3>
+                    <h4>Abbottabad Campus</h4>
+                    <p class="edu-degree">BSc Electrical and Electronics Engineering (EEE)</p>
+                    <p class="tech-stack">Embedded Systems, PCB Design, Signal Integrity, IoT</p>
+                    <a href="https://cuiatd.edu.pk/" target="_blank" rel="noopener noreferrer" class="edu-link">Visit University →</a>
+                </div>
+            </div>
+
+            <!-- Peace Group -->
+            <div class="edu-card glass-panel hidden delay-2">
+                <div class="edu-logo-wrapper">
+                    <img src="Picture/Peace_logo.jpg" alt="Peace Group of School & College Logo" class="edu-logo-img">
+                </div>
+                <div class="edu-content">
+                    <span class="edu-date">Completed 2024</span>
+                    <h3>Peace Group of School & College</h3>
+                    <h4>Abbottabad</h4>
+                    <p class="edu-degree">FSc Pre-Engineering</p>
+                    <p class="tech-stack">Mathematics, Physics, Analytical Reasoning</p>
+                    <a href="https://www.peace.edu.pk/" target="_blank" rel="noopener noreferrer" class="edu-link">Visit College →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="certifications-section container">
+        <h2 class="section-title text-center hidden">Certifications & Awards</h2>
+        
+        <div class="cert-grid">
+            <!-- 1. Generative AI -->
+            <div class="cert-card glass-panel hidden delay-1">
+                <div class="cert-image">
+                    <img src="Picture/Outskill_coc.jpg" alt="Outskill Generative AI Certification" class="clickable-image">
+                </div>
+                <div class="cert-info">
+<h3>Generative AI Mastermind</h3>
+                    <p>Certificate of Completion awarded for successfully finishing the Generative AI Mastermind program, demonstrating a foundational understanding of generative AI technologies.</p>
+                    <span class="project-link" style="margin-top: 1rem;">View Certificate &rarr;</span>
+                </div>
+            </div>
+
+            <!-- 2. Altium Essentials (April 5, 2026) -->
+            <div class="cert-card glass-panel hidden delay-2">
+                <div class="cert-image">
+                    <img src="Picture/Altium_Designer_Essentail_Certificate.jpg" alt="Altium Designer Essentials Certification" class="clickable-image">
+                </div>
+                <div class="cert-info">
+<h3>Altium Certified: Designer Essentials</h3>
+                    <p>Successfully fulfilled the official certification requirements for the Altium Designer Essentials program on April 5, 2026, demonstrating formal training and proficiency in industry-standard electronics design software.</p>
+                    <span class="project-link" style="margin-top: 1rem;">View Certificate &rarr;</span>
+                </div>
+            </div>
+
+            <!-- 3. Altium Basic -->
+            <div class="cert-card glass-panel hidden delay-3">
+                <div class="cert-image">
+                    <img src="Picture/Altium_basic_pcb_design_course.jpg" alt="Altium Certification" class="clickable-image">
+                </div>
+                <div class="cert-info">
+<h3>Altium Education PCB Basic Design Course</h3>
+                    <p>Completed the Altium Education PCB Basic Design Course. This demonstrates foundational expertise in PCB layout, schematic capture, and preparing boards for manufacturing using industry-standard tools.</p>
+                    <span class="project-link" style="margin-top: 1rem;">View Certificate &rarr;</span>
+                </div>
+            </div>
+
+            <!-- 4. Best Project (Feb 23, 2026) -->
+            <div class="cert-card glass-panel hidden delay-1">
+                <div class="cert-image">
+                    <img src="Picture/Best project.jpeg" alt="Best Project Award" class="clickable-image">
+                </div>
+                <div class="cert-info">
+<h3>Best Project Award</h3>
+                    <p>Received the Best Project Award for demonstrating exceptional excellence in engineering design, technical innovation, and practical execution.</p>
+                    <span class="project-link" style="margin-top: 1rem;">View Certificate &rarr;</span>
+                </div>
+            </div>
+
+            <!-- 5. Inovatex (Feb 23, 2026) -->
+            <div class="cert-card glass-panel hidden delay-2">
+                <div class="cert-image">
+                    <img src="Picture/inovatex project 2025.jpeg" alt="Inovatex Project 2025" class="clickable-image">
+                </div>
+                <div class="cert-info">
+<h3>Inovatex Project 2025</h3>
+                    <p>Recognized for outstanding contribution to the Inovatex Project 2025, showcasing forward-thinking design and complex technical execution.</p>
+                    <span class="project-link" style="margin-top: 1rem;">View Certificate &rarr;</span>
+                </div>
+            </div>
+
+            <!-- 6. Kangaroo (Feb 23, 2026) -->
+            <div class="cert-card glass-panel hidden delay-3">
+                <div class="cert-image">
+                    <img src="Picture/Kangroo test.jpeg" alt="Kangaroo Test Achievement" class="clickable-image">
+                </div>
+                <div class="cert-info">
+<h3>Kangaroo Test Achievement</h3>
+                    <p>Successfully participated in the prestigious Kangaroo Test, demonstrating strong analytical, mathematical, and problem-solving skills.</p>
+                    <span class="project-link" style="margin-top: 1rem;">View Certificate &rarr;</span>
+                </div>
+            </div>
+
+            <!-- 7. IET Leadership (Feb 23, 2026) -->
+            <div class="cert-card glass-panel hidden delay-1">
+                <div class="cert-image">
+                    <img src="Picture/IET on campus membership officer.jpeg" alt="IET On Campus Membership Officer" class="clickable-image">
+                </div>
+                <div class="cert-info">
+<h3>IET On Campus Leadership</h3>
+                    <p>Recognized for exceptional leadership and organizational contributions as a Membership Officer for the IET On Campus community.</p>
+                    <span class="project-link" style="margin-top: 1rem;">View Certificate &rarr;</span>
+                </div>
+            </div>
+
+            <!-- 8. Arduino (Feb 23, 2026) -->
+            <div class="cert-card glass-panel hidden delay-2">
+                <div class="cert-image">
+                    <img src="Picture/Arduino and iot course cardiff institute.jpeg" alt="Arduino and IoT Course" class="clickable-image">
+                </div>
+                <div class="cert-info">
+<h3>Arduino & IoT - Cardiff Institute</h3>
+                    <p>Completed the comprehensive Arduino and IoT course from Cardiff Institute, gaining hands-on experience in building smart, connected hardware devices and sensor networks.</p>
+                    <span class="project-link" style="margin-top: 1rem;">View Certificate &rarr;</span>
+                </div>
+            </div>
+
+            <!-- 9. Practical Entrepreneurship (Feb 23, 2026) -->
+            <div class="cert-card glass-panel hidden delay-3">
+                <div class="cert-image">
+                    <img src="Picture/Practical enterpnuershi[.jpeg" alt="Practical Entrepreneurship" class="clickable-image">
+                </div>
+                <div class="cert-info">
+<h3>Practical Entrepreneurship</h3>
+                    <p>Completed intensive training in Practical Entrepreneurship, learning how to bridge the gap between technical engineering solutions and real-world business applications.</p>
+                    <span class="project-link" style="margin-top: 1rem;">View Certificate &rarr;</span>
+                </div>
+            </div>
+
+            <!-- 10. Unleashing Creativity (Feb 23, 2026) -->
+            <div class="cert-card glass-panel hidden delay-1">
+                <div class="cert-image">
+                    <img src="Picture/Unleashing Creativity with Ai.jpeg" alt="Unleashing Creativity with AI" class="clickable-image">
+                </div>
+                <div class="cert-info">
+<h3>Unleashing Creativity with AI</h3>
+                    <p>Participated in the Unleashing Creativity with AI program, exploring innovative applications and the intersection of artificial intelligence with creative engineering processes.</p>
+                    <span class="project-link" style="margin-top: 1rem;">View Certificate &rarr;</span>
+                </div>
+            </div>
+
+            <!-- 11. IET Recognition (Feb 23, 2026) -->
+            <div class="cert-card glass-panel hidden delay-2">
+                <div class="cert-image">
+                    <img src="Picture/IET on campus.jpeg" alt="IET On Campus Recognition" class="clickable-image">
+                </div>
+                <div class="cert-info">
+<h3>IET On Campus Recognition</h3>
+                    <p>Acknowledged for active participation and dedication to the IET On Campus community, fostering technical growth and professional collaboration.</p>
+                    <span class="project-link" style="margin-top: 1rem;">View Certificate &rarr;</span>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2 class="section-title text-center hidden">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card glass-panel hidden delay-1" onclick="openProjectModal('p1')">
+                    <div class="project-image" style="background-image: url('Documents/Projects/P1/Cover.jpg');"></div>
+                    <div class="project-content">
+                        <h3>Smart Lighting System with Obstacle Detection</h3>
+                        <p class="tech-stack">Altium Designer, ATMEGA328PB-AU, VL53L0X ToF Sensor, TP4056, USB-C</p>
+                        <span class="project-link">View Details →</span>
+                    </div>
+                </div>
+                <div class="project-card glass-panel hidden delay-2" onclick="openProjectModal('p2')">
+                    <div class="project-image" style="background-image: url('Documents/Projects/p2/Cover.jpg');"></div>
+                    <div class="project-content">
+                        <h3>Omni-Sense Node: Mixed-Signal DAQ</h3>
+                        <p class="tech-stack">ESP32, SPI, PWM, RC522 RFID, MQ-Series Sensors</p>
+                        <span class="project-link">View Details →</span>
+                    </div>
+                </div>
+                <div class="project-card glass-panel hidden delay-3" onclick="openProjectModal('p3')">
+                    <div class="project-image" style="background-image: url('Documents/Projects/P3/Cover.jpg');"></div>
+                    <div class="project-content">
+                        <h3>Power Regulator and LED Board</h3>
+                        <p class="tech-stack">Altium Designer, Regulator IC, PCB Design</p>
+                        <span class="project-link">View Details →</span>
+                    </div>
+                </div>
+                <div class="project-card glass-panel hidden delay-4" onclick="openProjectModal('p4')">
+                    <div class="project-image" style="background-image: url('Documents/Projects/P4/Cover.jpg');"></div>
+                    <div class="project-content">
+                        <h3>6S UAV Battery Management System</h3>
+                        <p class="tech-stack">BQ76930, XT60, MOSFETs, UAV BMS</p>
+                        <span class="project-link">View Details →</span>
+                    </div>
+                </div>
+                <div class="project-card glass-panel hidden delay-5" onclick="openProjectModal('p5')">
+                    <div class="project-image" style="background-image: url('Documents/Projects/P5/Cover.jpg');"></div>
+                    <div class="project-content">
+                        <h3>Mixed-Signal RF Transceiver Board</h3>
+                        <p class="tech-stack">ESP32, RF TX/RX, 50Ω Impedance, Signal Integrity</p>
+                        <span class="project-link">View Details →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section container">
+        <h2 class="section-title text-center hidden">Get In Touch</h2>
+        <div class="contact-card glass-panel hidden">
+            <p class="contact-lead text-center">I'm currently looking for new opportunities and collaborations. My inbox is always open!</p>
+            
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-details">
+                        <h4>Email</h4>
+                        <a href="mailto:syedmaoza@gmail.com">syedmaoza@gmail.com</a>
+                        <br>
+                        <a href="mailto:FA24-EEE-014@cuiatd.edu.pk">FA24-EEE-014@cuiatd.edu.pk</a>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-details">
+                        <h4>Phone</h4>
+                        <a href="tel:+923219143144">+92 321 914 3144</a>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">🌐</div>
+                    <div class="contact-details">
+                        <h4>Social</h4>
+                        <a href="https://www.linkedin.com/in/syed-maoz" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                        <br>
+                        <a href="https://www.facebook.com/syedmaozarif" target="_blank" rel="noopener noreferrer">Facebook</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2026 Syed Maoz Arif. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Project 1 Modal -->
+    <div id="project-modal-p1" class="modal">
+        <div class="modal-content glass-panel">
+            <span class="modal-close" onclick="closeProjectModal('p1')">&times;</span>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <img src="Documents/Projects/P1/Cover.jpg" class="gallery-main-img" id="gallery-main-img-p1">
+                    <div class="gallery-thumbnails">
+                        <img src="Documents/Projects/P1/Cover.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/Cover.jpg')" class="active-thumb">
+                        <img src="Documents/Projects/P1/1st.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/1st.jpg')">
+                        <img src="Documents/Projects/P1/2nd.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/2nd.jpg')">
+                        <img src="Documents/Projects/P1/3rd.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/3rd.jpg')">
+                        <img src="Documents/Projects/P1/4th.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/4th.jpg')">
+                        <img src="Documents/Projects/P1/5th.jpg" onclick="setGalleryMain('p1', this, 'Documents/Projects/P1/5th.jpg')">
+                    </div>
+                </div>
+                <div class="modal-info">
+                    <h2>Smart Lighting System with Obstacle Detection</h2>
+                    <p class="tech-stack-details"><strong>Technologies:</strong> Altium Designer, ATMEGA328PB-AU, VL53L0X ToF Sensor, TP4056, USB-C</p>
+                    <div class="modal-description">
+                        <h3>Overview</h3>
+                        <p>Designed and engineered a custom printed circuit board for an automated lighting solution. The system utilizes an ATMEGA328PB-AU microcontroller and a VL53L0X Time-of-Flight sensor to provide precise distance tracking and responsive illumination.</p>
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li><strong>Custom PCB Design:</strong> Developed the schematic and routed the board using Altium Designer, focusing on optimized power delivery.</li>
+                            <li><strong>Precision Sensing:</strong> Integrated a VL53L0X Time-of-Flight sensor for accurate obstacle detection.</li>
+                            <li><strong>Custom Illumination:</strong> Engineered independently controlled dual LED arrays (White and Yellow) for versatile lighting outputs.</li>
+                            <li><strong>Power Management:</strong> Implemented a dedicated TP4056-based USB-C charging circuit to ensure safe and efficient power handling.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 2 Modal -->
+    <div id="project-modal-p2" class="modal">
+        <div class="modal-content glass-panel">
+            <span class="modal-close" onclick="closeProjectModal('p2')">&times;</span>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <img src="Documents/Projects/p2/Cover.jpg" class="gallery-main-img" id="gallery-main-img-p2">
+                    <div class="gallery-thumbnails">
+                        <img src="Documents/Projects/p2/Cover.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/p2/Cover.jpg')" class="active-thumb">
+                        <img src="Documents/Projects/p2/2.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/p2/2.jpg')">
+                        <img src="Documents/Projects/p2/3.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/p2/3.jpg')">
+                        <img src="Documents/Projects/p2/4.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/p2/4.jpg')">
+                        <img src="Documents/Projects/p2/5.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/p2/5.jpg')">
+                        <img src="Documents/Projects/p2/6.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/p2/6.jpg')">
+                        <img src="Documents/Projects/p2/7.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/p2/7.jpg')">
+                        <img src="Documents/Projects/p2/8.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/p2/8.jpg')">
+                        <img src="Documents/Projects/p2/9.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/p2/9.jpg')">
+                        <img src="Documents/Projects/p2/10.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/p2/10.jpg')">
+                        <img src="Documents/Projects/p2/11.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/p2/11.jpg')">
+                        <img src="Documents/Projects/p2/12.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/p2/12.jpg')">
+                        <img src="Documents/Projects/p2/13.jpg" onclick="setGalleryMain('p2', this, 'Documents/Projects/p2/13.jpg')">
+                    </div>
+                </div>
+                <div class="modal-info">
+                    <h2>Omni-Sense Node: Mixed-Signal DAQ</h2>
+                    <p class="tech-stack-details"><strong>Technologies:</strong> ESP32, SPI, PWM, RC522 RFID, MQ-Series Sensors</p>
+                    <div class="modal-description">
+                        <h3>Overview</h3>
+                        <p>Developed a centralized Data Acquisition (DAQ) and control system using an ESP32 microcontroller, integrating 15 heterogeneous peripheral devices. The project focuses on solving hardware-level challenges such as power distribution, signal integrity, and multi-protocol data handling in a mixed-signal environment.</p>
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li><strong>Power Architecture & Logic Compliance:</strong> Engineered a dual-rail power distribution network to safely isolate high-current 5V loads from 3.3V logic components, implementing voltage divider networks for safe logic-level compliance.</li>
+                            <li><strong>I/O Optimization & Telemetry:</strong> Strategically mapped all continuous analog sensor acquisitions to the ESP32's ADC1 hardware to bypass structural conflicts with internal Wi-Fi drivers, ensuring uninterrupted telemetry.</li>
+                            <li><strong>Multi-Protocol Integration:</strong> Successfully managed asynchronous data streams and control signals across multiple protocols, including SPI (RC522 RFID), PWM (Servo actuation), and raw Analog/Digital discrete I/O.</li>
+                            <li><strong>Signal Integrity:</strong> Mitigated electromechanical noise and inductive kickback from actuators using localized decoupling and strict ground-plane management to prevent MCU brownouts.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 3 Modal -->
+    <div id="project-modal-p3" class="modal">
+        <div class="modal-content glass-panel">
+            <span class="modal-close" onclick="closeProjectModal('p3')">&times;</span>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <img src="Documents/Projects/P3/Cover.jpg" class="gallery-main-img" id="gallery-main-img-p3">
+                    <div class="gallery-thumbnails">
+                        <img src="Documents/Projects/P3/Cover.jpg" onclick="setGalleryMain('p3', this, 'Documents/Projects/P3/Cover.jpg')" class="active-thumb">
+                        <img src="Documents/Projects/P3/1.jpg" onclick="setGalleryMain('p3', this, 'Documents/Projects/P3/1.jpg')">
+                        <img src="Documents/Projects/P3/2.jpg" onclick="setGalleryMain('p3', this, 'Documents/Projects/P3/2.jpg')">
+                        <img src="Documents/Projects/P3/3.jpg" onclick="setGalleryMain('p3', this, 'Documents/Projects/P3/3.jpg')">
+                        <img src="Documents/Projects/P3/4.jpg" onclick="setGalleryMain('p3', this, 'Documents/Projects/P3/4.jpg')">
+                    </div>
+                </div>
+                <div class="modal-info">
+                    <h2>Power Regulator and LED Board</h2>
+                    <p class="tech-stack-details"><strong>Technologies:</strong> Altium Designer, Regulator IC, PCB Design</p>
+                    <div class="modal-description">
+                        <h3>Overview</h3>
+                        <p>Designed a Power Regulator and LED Board in Altium Designer to take an unregulated input voltage and step it down to a clean, stable DC output, incorporating filtering capacitors and a regulator IC.</p>
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li><strong>Thermal Management:</strong> Top and bottom layer Polygon Pours acting as a heatsink for the power regulator.</li>
+                            <li><strong>Signal Integrity:</strong> Providing a low-impedance return path.</li>
+                            <li><strong>Noise Reduction:</strong> Shielding the circuit from EMI.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 4 Modal -->
+    <div id="project-modal-p4" class="modal">
+        <div class="modal-content glass-panel">
+            <span class="modal-close" onclick="closeProjectModal('p4')">&times;</span>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <img src="Documents/Projects/P4/Cover.jpg" class="gallery-main-img" id="gallery-main-img-p4">
+                    <div class="gallery-thumbnails">
+                        <img src="Documents/Projects/P4/Cover.jpg" onclick="setGalleryMain('p4', this, 'Documents/Projects/P4/Cover.jpg')" class="active-thumb">
+                    </div>
+                </div>
+                <div class="modal-info">
+                    <h2>6S UAV Battery Management System</h2>
+                    <p class="tech-stack-details"><strong>Technologies:</strong> BQ76930, XT60, MOSFETs, UAV BMS</p>
+                    <div class="modal-description">
+                        <h3>Overview</h3>
+                        <p>Finished the main schematic for a 6S UAV Battery Management System, focusing on hardware-level safety and high-current power distribution to tame raw chemical energy safely.</p>
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li><strong>Core Monitoring:</strong> Utilized the BQ76930 battery monitor IC at the core.</li>
+                            <li><strong>Power Connectivity:</strong> Included XT60 connectors for main input and load output.</li>
+                            <li><strong>Hardware Safety:</strong> Dedicated charge and discharge MOSFETs alongside hardware-level telemetry headers to ensure reliability without depending entirely on software.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 5 Modal -->
+    <div id="project-modal-p5" class="modal">
+        <div class="modal-content glass-panel">
+            <span class="modal-close" onclick="closeProjectModal('p5')">&times;</span>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <img src="Documents/Projects/P5/Cover.jpg" class="gallery-main-img" id="gallery-main-img-p5">
+                    <div class="gallery-thumbnails">
+                        <img src="Documents/Projects/P5/Cover.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/Cover.jpg')" class="active-thumb">
+                        <img src="Documents/Projects/P5/1.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/1.jpg')">
+                        <img src="Documents/Projects/P5/2.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/2.jpg')">
+                        <img src="Documents/Projects/P5/3.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/3.jpg')">
+                        <img src="Documents/Projects/P5/4.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/4.jpg')">
+                        <img src="Documents/Projects/P5/5.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/5.jpg')">
+                        <img src="Documents/Projects/P5/6.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/6.jpg')">
+                        <img src="Documents/Projects/P5/7.jpg" onclick="setGalleryMain('p5', this, 'Documents/Projects/P5/7.jpg')">
+                    </div>
+                </div>
+                <div class="modal-info">
+                    <h2>Mixed-Signal RF Transceiver Board</h2>
+                    <p class="tech-stack-details"><strong>Technologies:</strong> ESP32, RF TX/RX, 50Ω Impedance, Signal Integrity</p>
+                    <div class="modal-description">
+                        <h3>Overview</h3>
+                        <p>Wrapped up the layout for a new mixed-signal RF transceiver board, solving signal integrity challenges by integrating a noisy digital ESP32 module with highly sensitive RF TX/RX chains.</p>
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li><strong>Impedance Control:</strong> Routed RF pathways with a strict 50Ω impedance profile (17.6 mil trace width).</li>
+                            <li><strong>Noise Mitigation:</strong> Implemented a unified ground plane strategy and built a complete Faraday cage using continuous polygon pours and exactly 312 stitching vias.</li>
+                            <li><strong>Signal Leakage Prevention:</strong> Added coplanar waveguide via fencing along the RF lines.</li>
+                            <li><strong>Wi-Fi/Bluetooth Performance:</strong> Enforced a strict copper keepout beneath the ESP32 antenna to ensure unattenuated wireless performance.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

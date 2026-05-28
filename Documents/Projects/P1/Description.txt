@@ -1,0 +1,15 @@
+Project Title: Smart Lighting System with Obstacle Detection
+Tools & Technologies: Altium Designer, ATMEGA328PB-AU, VL53L0X ToF Sensor, TP4056, USB-C
+
+Overview:
+Designed and engineered a custom printed circuit board for an automated lighting solution. The system utilizes an ATMEGA328PB-AU microcontroller and a VL53L0X Time-of-Flight sensor to provide precise distance tracking and responsive illumination.
+
+Key Features:
+
+Custom PCB Design: Developed the schematic and routed the board using Altium Designer, focusing on optimized power delivery.
+
+Precision Sensing: Integrated a VL53L0X Time-of-Flight sensor for accurate obstacle detection.
+
+Custom Illumination: Engineered independently controlled dual LED arrays (White and Yellow) for versatile lighting outputs.
+
+Power Management: Implemented a dedicated TP4056-based USB-C charging circuit to ensure safe and efficient power handling.
