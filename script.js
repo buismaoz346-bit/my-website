@@ -332,34 +332,48 @@ window.navigateLightbox = function(direction) {
     lightboxImg.src = currentLightboxImages[currentLightboxIndex].src;
 };
 
-let galleryHoldInterval;
-let holdTimeout;
 
-window.startGalleryHold = function(projectId, direction, event) {
-    if(event) {
-        event.stopPropagation();
-    }
-    
-    // Clear any existing timers
-    clearInterval(galleryHoldInterval);
-    clearTimeout(holdTimeout);
-    
-    // Start continuous scroll after 300ms of hovering
-    holdTimeout = setTimeout(() => {
-        galleryHoldInterval = setInterval(() => {
-            navigateProjectGallery(projectId, direction);
-        }, 600); // 600ms between pictures during hover
-    }, 300);
-};
-
-window.stopGalleryHold = function(event) {
-    if(event) event.stopPropagation();
-    clearTimeout(holdTimeout);
-    clearInterval(galleryHoldInterval);
-};
 
 // Also let users click to advance immediately
 window.navigateProjectGalleryClick = function(projectId, direction, event) {
     if(event) event.stopPropagation();
     navigateProjectGallery(projectId, direction);
+};
+
+let coverSlideshowIntervals = {};
+let coverOriginalBg = {};
+
+window.startCoverSlideshow = function(projectId, cardElement) {
+    const bgElement = cardElement.querySelector('.project-bg');
+    if(!bgElement) return;
+    
+    if(!coverOriginalBg[projectId]) {
+        coverOriginalBg[projectId] = bgElement.style.backgroundImage;
+    }
+    
+    const thumbs = Array.from(document.querySelectorAll('#project-modal-' + projectId + ' .gallery-thumbnails img'));
+    if(thumbs.length <= 1) return;
+    
+    let currentIndex = 0;
+    
+    // Clear any existing interval just in case
+    clearInterval(coverSlideshowIntervals[projectId]);
+    
+    coverSlideshowIntervals[projectId] = setInterval(() => {
+        currentIndex++;
+        if(currentIndex >= thumbs.length) currentIndex = 0;
+        
+        const nextSrc = thumbs[currentIndex].src;
+        // The background image url expects a format like url('...')
+        bgElement.style.backgroundImage = `url('${nextSrc}')`;
+    }, 700); // cycle every 700ms
+};
+
+window.stopCoverSlideshow = function(projectId, cardElement) {
+    clearInterval(coverSlideshowIntervals[projectId]);
+    
+    const bgElement = cardElement.querySelector('.project-bg');
+    if(bgElement && coverOriginalBg[projectId]) {
+        bgElement.style.backgroundImage = coverOriginalBg[projectId];
+    }
 };
