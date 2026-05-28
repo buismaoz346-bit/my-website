@@ -461,6 +461,14 @@
                         <span class="project-link">View Details →</span>
                     </div>
                 </div>
+                <div class="project-card glass-panel hidden delay-4" onclick="openProjectModal('p6')">
+                    <div class="project-image" style="background-image: url('Documents/Projects/P6/Cover.png');"></div>
+                    <div class="project-content">
+                        <h3>IncliSense Digital Level</h3>
+                        <p class="tech-stack">Arduino Nano, MPU6050, IoT, 3D Printing</p>
+                        <span class="project-link">View Details →</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -681,6 +689,45 @@
                             <li><strong>Signal Leakage Prevention:</strong> Added coplanar waveguide via fencing along the RF lines.</li>
                             <li><strong>Wi-Fi/Bluetooth Performance:</strong> Enforced a strict copper keepout beneath the ESP32 antenna to ensure unattenuated wireless performance.</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 6 Modal -->
+    <div id="project-modal-p6" class="modal">
+        <div class="modal-content glass-panel">
+            <span class="modal-close" onclick="closeProjectModal('p6')">&times;</span>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <img src="Documents/Projects/P6/Cover.png" class="gallery-main-img" id="gallery-main-img-p6">
+                    <div class="gallery-thumbnails">
+                        <img src="Documents/Projects/P6/Cover.png" onclick="setGalleryMain('p6', this, 'Documents/Projects/P6/Cover.png')" class="active-thumb">
+                        <img src="Documents/Projects/P6/3.jpeg" onclick="setGalleryMain('p6', this, 'Documents/Projects/P6/3.jpeg')">
+                        <img src="Documents/Projects/P6/4.jpeg" onclick="setGalleryMain('p6', this, 'Documents/Projects/P6/4.jpeg')">
+                        <img src="Documents/Projects/P6/5.png" onclick="setGalleryMain('p6', this, 'Documents/Projects/P6/5.png')">
+                    </div>
+                </div>
+                <div class="modal-info">
+                    <h2>IncliSense Precision Digital Level</h2>
+                    <p class="tech-stack-details"><strong>Technologies:</strong> Arduino Nano, MPU6050, 3D Printing (ABS), PC Telemetry</p>
+                    <div class="modal-description">
+                        <h3>Overview</h3>
+                        <p>The IncliSense project is a precision digital leveling device built to provide high-accuracy numerical feedback, improving upon traditional mechanical levels.</p>
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li><strong>Hardware:</strong> Driven by an Arduino Nano and an MPU6050 accelerometer/gyroscope.</li>
+                            <li><strong>Data Processing:</strong> Processes dual-axis spatial data to trigger a responsive interface of 11 LEDs and an integrated buzzer.</li>
+                            <li><strong>Enclosure:</strong> Housed in a custom 3D-printed ABS enclosure.</li>
+                            <li><strong>Connectivity:</strong> Features PC telemetry for IoT connectivity, making it a robust, industrial-grade engineering prototype.</li>
+                        </ul>
+                        <div style="margin-top: 1.5rem;">
+                            <video width="100%" controls style="border-radius: 8px; box-shadow: var(--shadow-md);">
+                                <source src="Documents/Projects/P6/2.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
                     </div>
                 </div>
             </div>
