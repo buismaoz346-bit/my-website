@@ -165,18 +165,20 @@ function initAudio() {
     }
 }
 
-// User interaction unlocks audio context
 document.addEventListener('click', initAudio, { once: true });
 document.addEventListener('touchstart', initAudio, { once: true });
 
-function playOverscrollSound() {
-    // If audio context is not ready or user hasn't interacted, just do the visual shake
+function playOverscrollSound(e) {
+    if (e && e.cancelable) {
+        e.preventDefault(); // Stop native rubber-banding
+    }
+    
     if (tapticAudioCtx && tapticAudioCtx.state === 'suspended') {
         tapticAudioCtx.resume();
     }
     
     const now = Date.now();
-    if (now - lastOverscrollTime < 500) return;
+    if (now - lastOverscrollTime < 400) return; // Wait 400ms before allowing another shake
     lastOverscrollTime = now;
     
     // Play double taptic sound if audio is ready
@@ -201,33 +203,19 @@ function playOverscrollSound() {
         oscillator.stop(tapticAudioCtx.currentTime + 0.15);
     }
     
-    // Face ID shake effect
-    const body = document.body;
-    let shakes = [15, -15, 10, -10, 5, -5, 0];
-    let i = 0;
-    
-    body.style.transition = 'transform 0.04s ease-in-out';
-    
-    function nextShake() {
-        if (i < shakes.length) {
-            body.style.transform = `translateX(${shakes[i]}px)`;
-            i++;
-            setTimeout(nextShake, 40);
-        } else {
-            body.style.transition = '';
-            body.style.transform = '';
-        }
-    }
-    nextShake();
+    // Pure CSS horizontal shake
+    document.body.classList.remove('face-id-shake');
+    void document.body.offsetWidth; // Trigger reflow
+    document.body.classList.add('face-id-shake');
 }
 
 window.addEventListener('wheel', function(e) {
     if (e.deltaY < 0 && window.scrollY <= 0) {
-        playOverscrollSound();
+        playOverscrollSound(e);
     } else if (e.deltaY > 0 && Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight) {
-        playOverscrollSound();
+        playOverscrollSound(e);
     }
-}, { passive: true });
+}, { passive: false });
 
 let touchStartY = 0;
 window.addEventListener('touchstart', function(e) {
@@ -239,8 +227,8 @@ window.addEventListener('touchmove', function(e) {
     let deltaY = touchStartY - touchEndY; 
     
     if (deltaY < -5 && window.scrollY <= 0) {
-        playOverscrollSound();
+        playOverscrollSound(e);
     } else if (deltaY > 5 && Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight) {
-        playOverscrollSound();
+        playOverscrollSound(e);
     }
-}, { passive: true });
+}, { passive: false });
