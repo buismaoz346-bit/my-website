@@ -1,19 +1,19 @@
 /* Global Variables & Theme */
 :root {
-    --primary: #2563eb;
-    --primary-light: #3b82f6;
-    --primary-glow: rgba(37, 99, 235, 0.4);
-    --secondary: #0f172a;
-    --bg-color: #f8fafc;
-    --bg-glass: rgba(255, 255, 255, 0.65);
-    --text-main: #334155;
-    --text-muted: #64748b;
-    --border-color: rgba(226, 232, 240, 0.8);
-    --border-glow: rgba(37, 99, 235, 0.3);
-    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
-    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-    --shadow-neon: 0 0 20px var(--primary-glow), 0 0 40px rgba(37, 99, 235, 0.1);
+    --primary: #3b82f6;
+    --primary-light: #60a5fa;
+    --primary-glow: rgba(59, 130, 246, 0.5);
+    --secondary: #ffffff;
+    --bg-color: #09090b;
+    --bg-glass: rgba(255, 255, 255, 0.03);
+    --text-main: #a1a1aa;
+    --text-muted: #71717a;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-glow: rgba(59, 130, 246, 0.4);
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    --shadow-neon: 0 0 20px var(--primary-glow), 0 0 40px rgba(59, 130, 246, 0.15);
     --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -28,7 +28,7 @@
 body {
     font-family: 'Inter', sans-serif;
     color: var(--text-main);
-    background: linear-gradient(-45deg, #f8fafc, #e2e8f0, #f1f5f9, #f8fafc);
+    background: linear-gradient(-45deg, #09090b, #18181b, #09090b, #000000); cursor: none;
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     line-height: 1.6;
@@ -96,7 +96,7 @@ ul {
 
 .glass-panel:hover {
     box-shadow: var(--shadow-neon);
-    transform: translateY(-8px) scale(1.01);
+    transform: translateY(-12px) scale(1.02);
     border-color: var(--border-glow);
 }
 
@@ -294,13 +294,14 @@ ul {
 }
 
 .name {
-    font-size: 4.5rem;
+    font-size: 5.5rem;
     font-weight: 800;
     margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #3b82f6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    letter-spacing: -1px;
+    letter-spacing: -2px;
+    line-height: 1.1;
 }
 
 .role {
@@ -945,6 +946,12 @@ ul {
 }
 
 .projects-grid {
+    column-count: 2;
+    column-gap: 2rem;
+}
+.project-card {
+    break-inside: avoid;
+    margin-bottom: 2rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2.5rem;
@@ -1181,3 +1188,49 @@ footer {
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
+
+/* --- Premium Cursor --- */
+.cursor-dot, .cursor-outline {
+    position: fixed;
+    top: 0; left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+}
+.cursor-dot {
+    width: 8px; height: 8px;
+    background: var(--primary);
+}
+.cursor-outline {
+    width: 40px; height: 40px;
+    border: 2px solid var(--primary-glow);
+    transition: width 0.2s, height 0.2s;
+}
+.cursor-hover .cursor-outline {
+    width: 60px; height: 60px;
+    background: rgba(59, 130, 246, 0.1);
+}
+
+/* --- Loader --- */
+#loader {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #09090b;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+}
+.loader-core {
+    width: 50px; height: 50px;
+    border: 3px solid transparent;
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* Fix links to use cursor */
+a, button, .glass-panel { cursor: none; }
