@@ -323,3 +323,34 @@ window.navigateLightbox = function(direction) {
     const lightboxImg = document.getElementById('lightbox-img');
     lightboxImg.src = currentLightboxImages[currentLightboxIndex].src;
 };
+
+let galleryHoldInterval;
+let holdTimeout;
+
+window.startGalleryHold = function(projectId, direction, event) {
+    if(event) {
+        event.stopPropagation();
+        // Prevent default behavior like drag-selecting the image on desktop
+        if(event.type === 'mousedown') event.preventDefault();
+    }
+    
+    // Advance immediately once
+    navigateProjectGallery(projectId, direction);
+    
+    // Clear any existing timers
+    clearInterval(galleryHoldInterval);
+    clearTimeout(holdTimeout);
+    
+    // Wait 400ms before starting continuous scroll (distinguish between click and hold)
+    holdTimeout = setTimeout(() => {
+        galleryHoldInterval = setInterval(() => {
+            navigateProjectGallery(projectId, direction);
+        }, 500); // 500ms between pictures during hold
+    }, 400);
+};
+
+window.stopGalleryHold = function(event) {
+    if(event) event.stopPropagation();
+    clearTimeout(holdTimeout);
+    clearInterval(galleryHoldInterval);
+};
