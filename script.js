@@ -165,52 +165,62 @@ function initAudio() {
     }
 }
 
-// Initialize audio context on first user interaction (browser policy)
+// User interaction unlocks audio context
 document.addEventListener('click', initAudio, { once: true });
 document.addEventListener('touchstart', initAudio, { once: true });
 
 function playOverscrollSound() {
-    if (!tapticAudioCtx) return;
-    
-    const now = Date.now();
-    // Prevent spamming the sound (debounce 400ms)
-    if (now - lastOverscrollTime < 400) return;
-    lastOverscrollTime = now;
-    
-    if (tapticAudioCtx.state === 'suspended') {
+    // If audio context is not ready or user hasn't interacted, just do the visual shake
+    if (tapticAudioCtx && tapticAudioCtx.state === 'suspended') {
         tapticAudioCtx.resume();
     }
     
-    const oscillator = tapticAudioCtx.createOscillator();
-    const gainNode = tapticAudioCtx.createGain();
+    const now = Date.now();
+    if (now - lastOverscrollTime < 500) return;
+    lastOverscrollTime = now;
     
-    oscillator.connect(gainNode);
-    gainNode.connect(tapticAudioCtx.destination);
-    
-    // Taptic bump sound: low frequency, very short duration
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(120, tapticAudioCtx.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(30, tapticAudioCtx.currentTime + 0.05);
-    
-    gainNode.gain.setValueAtTime(0.5, tapticAudioCtx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, tapticAudioCtx.currentTime + 0.05);
-    
-    oscillator.start(tapticAudioCtx.currentTime);
-    oscillator.stop(tapticAudioCtx.currentTime + 0.05);
-    
-    // Add a visual 'bump' effect to the body
-    document.body.style.transition = 'transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-    if (window.scrollY <= 0) {
-        document.body.style.transform = 'translateY(15px)';
-    } else {
-        document.body.style.transform = 'translateY(-15px)';
+    // Play double taptic sound if audio is ready
+    if (tapticAudioCtx) {
+        const oscillator = tapticAudioCtx.createOscillator();
+        const gainNode = tapticAudioCtx.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(tapticAudioCtx.destination);
+        
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(100, tapticAudioCtx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(30, tapticAudioCtx.currentTime + 0.15);
+        
+        gainNode.gain.setValueAtTime(0, tapticAudioCtx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.5, tapticAudioCtx.currentTime + 0.01);
+        gainNode.gain.linearRampToValueAtTime(0, tapticAudioCtx.currentTime + 0.05);
+        gainNode.gain.linearRampToValueAtTime(0.5, tapticAudioCtx.currentTime + 0.08);
+        gainNode.gain.linearRampToValueAtTime(0, tapticAudioCtx.currentTime + 0.12);
+        
+        oscillator.start(tapticAudioCtx.currentTime);
+        oscillator.stop(tapticAudioCtx.currentTime + 0.15);
     }
-    setTimeout(() => {
-        document.body.style.transform = 'translateY(0)';
-    }, 100);
+    
+    // Face ID shake effect
+    const body = document.body;
+    let shakes = [15, -15, 10, -10, 5, -5, 0];
+    let i = 0;
+    
+    body.style.transition = 'transform 0.04s ease-in-out';
+    
+    function nextShake() {
+        if (i < shakes.length) {
+            body.style.transform = `translateX(${shakes[i]}px)`;
+            i++;
+            setTimeout(nextShake, 40);
+        } else {
+            body.style.transition = '';
+            body.style.transform = '';
+        }
+    }
+    nextShake();
 }
 
-// Track wheel overscroll (desktop)
 window.addEventListener('wheel', function(e) {
     if (e.deltaY < 0 && window.scrollY <= 0) {
         playOverscrollSound();
@@ -219,7 +229,6 @@ window.addEventListener('wheel', function(e) {
     }
 }, { passive: true });
 
-// Track touch overscroll (mobile)
 let touchStartY = 0;
 window.addEventListener('touchstart', function(e) {
     touchStartY = e.touches[0].clientY;
@@ -235,4 +244,3 @@ window.addEventListener('touchmove', function(e) {
         playOverscrollSound();
     }
 }, { passive: true });
-
