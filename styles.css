@@ -905,15 +905,16 @@ ul {
 .lightbox {
     display: none;
     position: fixed;
-    z-index: 2000;
-    padding-top: 60px;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(8px);
+    background-color: rgba(10, 25, 47, 0.95);
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
 .lightbox-content {
@@ -924,7 +925,7 @@ ul {
     object-fit: contain;
     border-radius: 8px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    animation: zoom 0.3s ease-out;
+    /* animation removed for FLIP */
 }
 
 @keyframes zoom {
@@ -1662,3 +1663,5 @@ footer {
 }
 
 .gallery-main-img { transition: opacity 0.15s ease, transform 0.15s ease; }
+
+.lightbox.show-lightbox { opacity: 1; }

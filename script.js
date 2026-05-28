@@ -163,7 +163,7 @@ window.openProjectModal = function(projectId, cardElement) {
         document.body.style.overflow = 'hidden';
         
         // Animate to full size
-        modalContent.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease';
+        modalContent.style.transition = 'transform 0.7s cubic-bezier(0.34, 1.2, 0.64, 1), opacity 0.5s ease';
         modalContent.style.transform = 'translate(0, 0) scale(1, 1)';
         modalContent.style.opacity = '1';
     }
@@ -194,7 +194,7 @@ window.closeProjectModal = function(projectId) {
             const translateX = cardRect.left - targetLeft;
             const translateY = cardRect.top - targetTop;
             
-            modalContent.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease';
+            modalContent.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease';
             modalContent.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
             modalContent.style.opacity = '0';
         } else {
@@ -208,7 +208,7 @@ window.closeProjectModal = function(projectId) {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
             activeProjectCard = null;
-        }, 400);
+        }, 600);
     }
 };
 
