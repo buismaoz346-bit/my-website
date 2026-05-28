@@ -114,38 +114,111 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Project Modal Functionality
-function openProjectModal(projectId) {
+let activeProjectCard = null;
+
+window.openProjectModal = function(projectId, cardElement) {
     const modal = document.getElementById('project-modal-' + projectId);
     if(modal) {
+        activeProjectCard = cardElement;
+        const modalContent = modal.querySelector('.modal-content');
+        
+        // Prepare for animation
+        modalContent.style.transition = 'none';
         modal.style.display = 'block';
-        // Trigger reflow
-        void modal.offsetWidth;
+        
+        // If we clicked a card, calculate FLIP positions
+        if (cardElement) {
+            const cardRect = cardElement.getBoundingClientRect();
+            
+            // Wait for display:block to calculate modal dimensions properly
+            const targetWidth = modalContent.offsetWidth;
+            const targetHeight = modalContent.offsetHeight;
+            
+            // Calculate where the modal naturally sits
+            const rect = modalContent.getBoundingClientRect();
+            const targetLeft = rect.left;
+            const targetTop = rect.top;
+            
+            // Scale and Translate from card to target
+            const scaleX = cardRect.width / targetWidth;
+            const scaleY = cardRect.height / targetHeight;
+            
+            const translateX = cardRect.left - targetLeft;
+            const translateY = cardRect.top - targetTop;
+            
+            // Initial state: shrunk and positioned over the card
+            modalContent.style.transformOrigin = 'top left';
+            modalContent.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
+            modalContent.style.opacity = '0';
+        } else {
+            modalContent.style.transform = 'translateY(20px) scale(0.95)';
+            modalContent.style.opacity = '0';
+        }
+        
+        // Force reflow
+        void modalContent.offsetWidth;
+        
+        // Add class to trigger background fade
         modal.classList.add('show-modal');
         document.body.style.overflow = 'hidden';
+        
+        // Animate to full size
+        modalContent.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease';
+        modalContent.style.transform = 'translate(0, 0) scale(1, 1)';
+        modalContent.style.opacity = '1';
     }
-}
+};
 
-function closeProjectModal(projectId) {
+window.closeProjectModal = function(projectId) {
     const modal = document.getElementById('project-modal-' + projectId);
     if(modal) {
+        const modalContent = modal.querySelector('.modal-content');
+        
+        // Animate back to card
+        if (activeProjectCard) {
+            const cardRect = activeProjectCard.getBoundingClientRect();
+            const rect = modalContent.getBoundingClientRect();
+            
+            // Reset transform to calculate raw target
+            modalContent.style.transition = 'none';
+            modalContent.style.transform = 'translate(0, 0) scale(1, 1)';
+            const targetLeft = modalContent.getBoundingClientRect().left;
+            const targetTop = modalContent.getBoundingClientRect().top;
+            
+            // Put transform back instantly
+            modalContent.style.transform = 'translate(0, 0) scale(1, 1)';
+            void modalContent.offsetWidth;
+            
+            const scaleX = cardRect.width / modalContent.offsetWidth;
+            const scaleY = cardRect.height / modalContent.offsetHeight;
+            const translateX = cardRect.left - targetLeft;
+            const translateY = cardRect.top - targetTop;
+            
+            modalContent.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease';
+            modalContent.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
+            modalContent.style.opacity = '0';
+        } else {
+            modalContent.style.transform = 'translateY(20px) scale(0.95)';
+            modalContent.style.opacity = '0';
+        }
+        
         modal.classList.remove('show-modal');
+        
         setTimeout(() => {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
-        }, 300);
+            activeProjectCard = null;
+        }, 400);
     }
-}
+};
 
-// Close project modal if clicked outside of content
+// Update window click for modal closing
 window.addEventListener('click', function(event) {
     const modals = document.querySelectorAll('.modal');
     modals.forEach(modal => {
-        if (event.target == modal) {
-            modal.classList.remove('show-modal');
-            setTimeout(() => {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }, 300);
+        if (event.target == modal && modal.classList.contains('show-modal')) {
+            const projectId = modal.id.replace('project-modal-', '');
+            closeProjectModal(projectId);
         }
     });
 });
