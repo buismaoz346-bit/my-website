@@ -883,3 +883,70 @@ const activeSectionObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 
 document.querySelectorAll('section').forEach(s => activeSectionObserver.observe(s));
+
+// --- ADD MASSIVE JS EFFECTS ---
+
+// 1. Orbs Background
+const body = document.body;
+for (let i = 1; i <= 3; i++) {
+    const orb = document.createElement('div');
+    orb.className = `orb orb-${i}`;
+    body.appendChild(orb);
+}
+
+// 2. Click Particle Explosion
+document.addEventListener('click', (e) => {
+    const rect = document.body.getBoundingClientRect();
+    for (let i = 0; i < 8; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'click-particle';
+        particle.style.left = `${e.clientX}px`;
+        particle.style.top = `${e.clientY + window.scrollY}px`;
+        const tx = (Math.random() - 0.5) * 100;
+        const ty = (Math.random() - 0.5) * 100;
+        particle.style.setProperty('--tx', `${tx}px`);
+        particle.style.setProperty('--ty', `${ty}px`);
+        body.appendChild(particle);
+        setTimeout(() => particle.remove(), 600);
+    }
+});
+
+// 3. Magnetic Buttons Engine
+document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        btn.style.setProperty('--mx', `${x - rect.width/2}px`);
+        btn.style.setProperty('--my', `${y - rect.height/2}px`);
+    });
+});
+
+// 4. Noise Overlay for Cinematic Feel
+const noise = document.createElement('div');
+noise.className = 'noise-overlay';
+body.appendChild(noise);
+
+// 5. Scroll Velocity Skew (Smooth skewing on fast scroll)
+let skewTicking = false;
+let lastScrollPos = window.scrollY;
+const mainContent = document.querySelector('main') || document.body;
+window.addEventListener('scroll', () => {
+    if (!skewTicking) {
+        window.requestAnimationFrame(() => {
+            const currentScrollPos = window.scrollY;
+            const velocity = currentScrollPos - lastScrollPos;
+            const skewAmount = Math.max(Math.min(velocity * 0.05, 5), -5);
+            document.querySelectorAll('section').forEach(sec => {
+                sec.style.transform = `skewY(${skewAmount}deg)`;
+                setTimeout(() => {
+                    sec.style.transform = `skewY(0deg)`;
+                    sec.style.transition = 'transform 0.5s ease-out';
+                }, 100);
+            });
+            lastScrollPos = currentScrollPos;
+            skewTicking = false;
+        });
+        skewTicking = true;
+    }
+});
