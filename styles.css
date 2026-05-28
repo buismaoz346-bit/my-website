@@ -2,16 +2,19 @@
 :root {
     --primary: #2563eb;
     --primary-light: #3b82f6;
+    --primary-glow: rgba(37, 99, 235, 0.4);
     --secondary: #0f172a;
     --bg-color: #f8fafc;
-    --bg-glass: rgba(255, 255, 255, 0.7);
+    --bg-glass: rgba(255, 255, 255, 0.65);
     --text-main: #334155;
     --text-muted: #64748b;
     --border-color: rgba(226, 232, 240, 0.8);
+    --border-glow: rgba(37, 99, 235, 0.3);
     --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
     --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-neon: 0 0 20px var(--primary-glow), 0 0 40px rgba(37, 99, 235, 0.1);
+    --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Reset & Base Styles */
@@ -64,17 +67,35 @@ ul {
 /* Glassmorphism Panel */
 .glass-panel {
     background: var(--bg-glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--border-color);
     border-radius: 1rem;
     box-shadow: var(--shadow-md);
     transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    transition: all 0.75s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.glass-panel:hover::before {
+    left: 150%;
 }
 
 .glass-panel:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-5px);
+    box-shadow: var(--shadow-neon);
+    transform: translateY(-8px) scale(1.01);
+    border-color: var(--border-glow);
 }
 
 /* Buttons */
@@ -254,6 +275,7 @@ ul {
     overflow: hidden;
     border: 8px solid #fff;
     box-shadow: var(--shadow-lg);
+    animation: float 6s ease-in-out infinite;
 }
 
 .image-wrapper img {
@@ -291,11 +313,12 @@ ul {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 60vw;
-    height: 60vw;
-    background: radial-gradient(circle, rgba(37,99,235,0.05) 0%, rgba(248,250,252,0) 70%);
+    width: 70vw;
+    height: 70vw;
+    background: radial-gradient(circle, rgba(37,99,235,0.08) 0%, rgba(248,250,252,0) 70%);
     z-index: 1;
     pointer-events: none;
+    animation: pulseGlow 8s ease-in-out infinite alternate;
 }
 
 /* About Section */
@@ -1039,13 +1062,13 @@ footer {
 /* Animations (Intersection Observer Targets) */
 .hidden {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: translateY(40px) scale(0.98);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .show {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
 }
 
 .delay-1 { transition-delay: 100ms; }
@@ -1090,4 +1113,16 @@ footer {
     .timeline-item {
         padding-left: 45px;
     }
+}
+
+/* Keyframes for Futuristic Animations */
+@keyframes float {
+    0% { transform: translateY(0px); box-shadow: var(--shadow-lg); }
+    50% { transform: translateY(-15px); box-shadow: var(--shadow-neon); }
+    100% { transform: translateY(0px); box-shadow: var(--shadow-lg); }
+}
+
+@keyframes pulseGlow {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+    100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
 }
