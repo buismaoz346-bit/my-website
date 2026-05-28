@@ -201,7 +201,7 @@ ul {
     top: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(248, 250, 252, 0.8);
+    background: rgba(10, 25, 47, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     padding: 1rem 0;
