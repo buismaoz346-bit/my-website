@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=7">
+    <link rel="stylesheet" href="styles.css?v=8">
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Syed Maoz Arif | Hardware Developer">
@@ -21,6 +21,7 @@
 
 </head>
 <body>
+    <canvas id="ultra-engine-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1;"></canvas>
     
 
     <!-- Header / Navbar -->
@@ -991,5 +992,21 @@
     </div>
 
     <script src="script.js"></script>
-    </body>
+    
+    <!-- ULTRA PREMIUM SVG FILTERS -->
+    <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="liquid-distortion">
+          <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+        <filter id="rgb-split">
+          <feOffset dx="3" dy="0" in="SourceGraphic" result="red-shift" />
+          <feOffset dx="-3" dy="0" in="SourceGraphic" result="blue-shift" />
+          <feBlend mode="screen" in="red-shift" in2="blue-shift" />
+        </filter>
+      </defs>
+    </svg>
+
+</body>
 </html>

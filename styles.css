@@ -3217,3 +3217,161 @@ p a:hover::before {
     opacity: 0.03;
     background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
 }
+
+
+/* ============================================================
+   ULTRA-PREMIUM 1000X ENGINE: KINETIC TYPOGRAPHY & FLUID DYNAMICS
+   ============================================================ */
+
+/* --- DYNAMIC RGB SPLIT ON HOVER --- */
+.glass-panel:hover img, .image-wrapper:hover img {
+    filter: url(#rgb-split);
+    transition: filter 0.3s ease;
+}
+
+/* --- KINETIC TYPOGRAPHY --- */
+@keyframes letter-bounce {
+    0%, 100% { transform: translateY(0) scale(1); color: inherit; }
+    50% { transform: translateY(-10px) scale(1.2); color: var(--primary); text-shadow: 0 0 20px var(--primary); }
+}
+.kinetic-text span {
+    display: inline-block;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.kinetic-text:hover span {
+    animation: letter-bounce 0.5s ease forwards;
+}
+
+/* --- ADVANCED REFRACTION GLASS --- */
+.premium-skill-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+.premium-skill-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: skewX(-20deg);
+    animation: premium-shine 6s infinite;
+}
+@keyframes premium-shine {
+    0% { left: -100%; }
+    20% { left: 200%; }
+    100% { left: 200%; }
+}
+
+/* --- HOLOGRAPHIC BORDERS --- */
+.cert-card {
+    position: relative;
+}
+.cert-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff, #00ffff);
+    background-size: 400% 400%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s;
+    animation: holo-border 3s linear infinite;
+}
+.cert-card:hover::before {
+    opacity: 0.5;
+}
+@keyframes holo-border {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- LIQUID TEXT HOVER --- */
+.nav-links a:hover {
+    filter: url(#liquid-distortion);
+    color: var(--primary-light);
+}
+
+/* --- FLOATING 3D SHAPES (CSS DRAWN) --- */
+.bg-shape {
+    position: absolute;
+    background: linear-gradient(135deg, var(--primary), transparent);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    filter: blur(40px);
+    opacity: 0.15;
+    z-index: -1;
+    animation: morph-shape 15s ease-in-out infinite alternate;
+}
+.bg-shape-1 { top: 20%; left: 10%; width: 300px; height: 300px; }
+.bg-shape-2 { bottom: 20%; right: 10%; width: 400px; height: 400px; animation-delay: -5s; background: linear-gradient(135deg, #ff00ff, transparent); }
+
+@keyframes morph-shape {
+    0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(0deg) scale(1); }
+    50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; transform: rotate(180deg) scale(1.2); }
+    100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(360deg) scale(1); }
+}
+
+/* --- INFINITE MARQUEE --- */
+.marquee-container {
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background: rgba(100, 255, 218, 0.05);
+    padding: 2rem 0;
+    border-top: 1px solid rgba(100, 255, 218, 0.2);
+    border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+    transform: rotate(-2deg) scale(1.05);
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    z-index: 10;
+}
+.marquee-content {
+    display: flex;
+    width: max-content;
+    animation: scroll-left 20s linear infinite;
+}
+.marquee-item {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--primary);
+    margin: 0 2rem;
+    transition: all 0.3s ease;
+}
+.marquee-item:hover {
+    color: var(--primary);
+    -webkit-text-stroke: 0px;
+    text-shadow: 0 0 20px rgba(100, 255, 218, 0.6);
+}
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* --- GLOWING SCANLINE EXPERIMENT --- */
+.hero-image::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 10%;
+    background: linear-gradient(to bottom, transparent, rgba(100, 255, 218, 0.5), transparent);
+    animation: scanline 4s linear infinite;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+.hero-image:hover::after {
+    opacity: 1;
+}
+@keyframes scanline {
+    0% { top: -10%; }
+    100% { top: 110%; }
+}

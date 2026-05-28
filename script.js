@@ -950,3 +950,193 @@ window.addEventListener('scroll', () => {
         skewTicking = true;
     }
 });
+
+// --- ULTRA-PREMIUM 1000X JS ENGINE ---
+
+// 1. Interactive Canvas Matrix/Constellation Engine
+const canvas = document.getElementById('ultra-engine-canvas');
+if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    }
+    
+    window.addEventListener('resize', resize);
+    resize();
+    
+    const mouse = { x: null, y: null, radius: 150 };
+    window.addEventListener('mousemove', (e) => {
+        mouse.x = e.x;
+        mouse.y = e.y;
+    });
+    
+    class Particle {
+        constructor(x, y, dx, dy, size) {
+            this.x = x; this.y = y; this.dx = dx; this.dy = dy; this.size = size;
+            this.baseX = this.x; this.baseY = this.y;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+            ctx.fillStyle = 'rgba(100, 255, 218, 0.3)';
+            ctx.fill();
+        }
+        update() {
+            if (this.x > width || this.x < 0) this.dx = -this.dx;
+            if (this.y > height || this.y < 0) this.dy = -this.dy;
+            
+            // Mouse interaction
+            if (mouse.x != null) {
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    const forceDirectionX = dx / distance;
+                    const forceDirectionY = dy / distance;
+                    const force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= forceDirectionX * force * 5;
+                    this.y -= forceDirectionY * force * 5;
+                } else {
+                    if (this.x !== this.baseX) {
+                        let dx = this.x - this.baseX;
+                        this.x -= dx / 20;
+                    }
+                    if (this.y !== this.baseY) {
+                        let dy = this.y - this.baseY;
+                        this.y -= dy / 20;
+                    }
+                }
+            }
+            this.x += this.dx;
+            this.y += this.dy;
+            this.draw();
+        }
+    }
+    
+    for (let i = 0; i < 100; i++) {
+        let size = Math.random() * 2 + 1;
+        let x = Math.random() * (innerWidth - size * 2) + size;
+        let y = Math.random() * (innerHeight - size * 2) + size;
+        let dx = (Math.random() - 0.5) * 1;
+        let dy = (Math.random() - 0.5) * 1;
+        particles.push(new Particle(x, y, dx, dy, size));
+    }
+    
+    function animate() {
+        requestAnimationFrame(animate);
+        ctx.clearRect(0, 0, innerWidth, innerHeight);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+        }
+        // Connect particles
+        for (let a = 0; a < particles.length; a++) {
+            for (let b = a; b < particles.length; b++) {
+                let dx = particles[a].x - particles[b].x;
+                let dy = particles[a].y - particles[b].y;
+                let dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < 100) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(100, 255, 218, ${1 - dist/100})`;
+                    ctx.lineWidth = 1;
+                    ctx.moveTo(particles[a].x, particles[a].y);
+                    ctx.lineTo(particles[b].x, particles[b].y);
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+    animate();
+}
+
+// 2. Kinetic Text Engine Wrapper
+document.querySelectorAll('h1, h2, .role').forEach(el => {
+    // Skip if already split
+    if (el.classList.contains('kinetic-text')) return;
+    
+    const text = el.innerText;
+    el.innerHTML = '';
+    el.classList.add('kinetic-text');
+    
+    for (let i = 0; i < text.length; i++) {
+        const span = document.createElement('span');
+        span.innerText = text[i] === ' ' ? '\u00A0' : text[i];
+        span.style.animationDelay = `${i * 0.03}s`;
+        el.appendChild(span);
+    }
+});
+
+// 3. Inject Infinite Marquee dynamically before footer
+const footer = document.querySelector('footer');
+if (footer && !document.querySelector('.marquee-container')) {
+    const marqueeHTML = `
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <span class="marquee-item">HARDWARE ENGINEERING</span>
+                <span class="marquee-item">★</span>
+                <span class="marquee-item">PCB DESIGN</span>
+                <span class="marquee-item">★</span>
+                <span class="marquee-item">FIRMWARE</span>
+                <span class="marquee-item">★</span>
+                <span class="marquee-item">INTERNET OF THINGS</span>
+                <span class="marquee-item">★</span>
+                <span class="marquee-item">HARDWARE ENGINEERING</span>
+                <span class="marquee-item">★</span>
+                <span class="marquee-item">PCB DESIGN</span>
+                <span class="marquee-item">★</span>
+                <span class="marquee-item">FIRMWARE</span>
+                <span class="marquee-item">★</span>
+                <span class="marquee-item">INTERNET OF THINGS</span>
+                <span class="marquee-item">★</span>
+            </div>
+        </div>
+    `;
+    footer.insertAdjacentHTML('beforebegin', marqueeHTML);
+}
+
+// 4. Inject floating 3D ambient shapes
+if (!document.querySelector('.bg-shape')) {
+    const s1 = document.createElement('div'); s1.className = 'bg-shape bg-shape-1';
+    const s2 = document.createElement('div'); s2.className = 'bg-shape bg-shape-2';
+    document.body.appendChild(s1);
+    document.body.appendChild(s2);
+}
+
+// 5. Scroll Progress Rotator
+const scrollRotator = document.createElement('div');
+scrollRotator.style.cssText = `
+    position: fixed; bottom: 30px; left: 30px; width: 60px; height: 60px;
+    background: conic-gradient(var(--primary) 0%, transparent 0%);
+    border-radius: 50%; z-index: 1000; pointer-events: none; opacity: 0.7;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 20px rgba(100,255,218,0.2);
+`;
+const innerRotator = document.createElement('div');
+innerRotator.style.cssText = `
+    width: 50px; height: 50px; background: var(--bg-color);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    color: var(--primary); font-family: 'Outfit'; font-weight: bold; font-size: 0.8rem;
+`;
+scrollRotator.appendChild(innerRotator);
+document.body.appendChild(scrollRotator);
+
+window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    scrollRotator.style.background = `conic-gradient(var(--primary) ${scrolled}%, transparent 0%)`;
+    innerRotator.innerText = Math.round(scrolled) + '%';
+});
+
+// 6. Extreme Parallax Engine on MouseMove
+document.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    
+    document.querySelectorAll('.glass-panel, .image-wrapper').forEach(el => {
+        el.style.transform = `translate(${-x}px, ${-y}px)`;
+    });
+});
