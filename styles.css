@@ -1198,3 +1198,42 @@ footer {
 
 
 
+
+/* --- Mobile Fixes --- */
+@media (max-width: 768px) {
+    .name {
+        font-size: 2.8rem !important;
+        letter-spacing: -0.5px !important;
+    }
+    
+    .projects-grid {
+        column-count: 1 !important;
+    }
+    
+    .image-wrapper {
+        width: 250px !important;
+        height: 250px !important;
+    }
+    
+    .traits-grid, .skills-grid, .cert-grid, .education-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .hero-container {
+        flex-direction: column-reverse;
+        text-align: center;
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .name {
+        font-size: 2.2rem !important;
+    }
+    .role {
+        font-size: 1.2rem !important;
+    }
+    .section-title {
+        font-size: 2rem !important;
+    }
+}
