@@ -523,29 +523,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-links a');
 
-    const observerOptions = {
-        root: null,
-        rootMargin: '-20% 0px -60% 0px', // Trigger when section crosses the middle upper part of the screen
-        threshold: 0
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Remove active class from all links
-                navLinks.forEach(link => link.classList.remove('active'));
-                
-                // Add active class to corresponding link
-                const id = entry.target.getAttribute('id');
-                const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                }
+    window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            // Add a 200px offset to trigger slightly before reaching the section
+            if (window.scrollY >= sectionTop - 200) {
+                current = section.getAttribute('id');
             }
         });
-    }, observerOptions);
 
-    sections.forEach(section => {
-        observer.observe(section);
+        // Special case: If user is at the absolute top
+        if (window.scrollY < 50) {
+            current = 'hero';
+        }
+
+        // Special case: If user scrolled to the absolute bottom
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
+            current = 'contact'; // Contact is the last section
+        }
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
     });
 });
