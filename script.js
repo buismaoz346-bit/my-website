@@ -154,3 +154,85 @@ function setGalleryMain(projectId, thumbElement, src) {
     thumbs.forEach(t => t.classList.remove('active-thumb'));
     if(thumbElement) thumbElement.classList.add('active-thumb');
 }
+
+// --- Overscroll Taptic Sound Effect ---
+let tapticAudioCtx = null;
+let lastOverscrollTime = 0;
+
+function initAudio() {
+    if (!tapticAudioCtx) {
+        tapticAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+}
+
+// Initialize audio context on first user interaction (browser policy)
+document.addEventListener('click', initAudio, { once: true });
+document.addEventListener('touchstart', initAudio, { once: true });
+
+function playOverscrollSound() {
+    if (!tapticAudioCtx) return;
+    
+    const now = Date.now();
+    // Prevent spamming the sound (debounce 400ms)
+    if (now - lastOverscrollTime < 400) return;
+    lastOverscrollTime = now;
+    
+    if (tapticAudioCtx.state === 'suspended') {
+        tapticAudioCtx.resume();
+    }
+    
+    const oscillator = tapticAudioCtx.createOscillator();
+    const gainNode = tapticAudioCtx.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(tapticAudioCtx.destination);
+    
+    // Taptic bump sound: low frequency, very short duration
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(120, tapticAudioCtx.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(30, tapticAudioCtx.currentTime + 0.05);
+    
+    gainNode.gain.setValueAtTime(0.5, tapticAudioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, tapticAudioCtx.currentTime + 0.05);
+    
+    oscillator.start(tapticAudioCtx.currentTime);
+    oscillator.stop(tapticAudioCtx.currentTime + 0.05);
+    
+    // Add a visual 'bump' effect to the body
+    document.body.style.transition = 'transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+    if (window.scrollY <= 0) {
+        document.body.style.transform = 'translateY(15px)';
+    } else {
+        document.body.style.transform = 'translateY(-15px)';
+    }
+    setTimeout(() => {
+        document.body.style.transform = 'translateY(0)';
+    }, 100);
+}
+
+// Track wheel overscroll (desktop)
+window.addEventListener('wheel', function(e) {
+    if (e.deltaY < 0 && window.scrollY <= 0) {
+        playOverscrollSound();
+    } else if (e.deltaY > 0 && Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight) {
+        playOverscrollSound();
+    }
+}, { passive: true });
+
+// Track touch overscroll (mobile)
+let touchStartY = 0;
+window.addEventListener('touchstart', function(e) {
+    touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+window.addEventListener('touchmove', function(e) {
+    let touchEndY = e.touches[0].clientY;
+    let deltaY = touchStartY - touchEndY; 
+    
+    if (deltaY < -5 && window.scrollY <= 0) {
+        playOverscrollSound();
+    } else if (deltaY > 5 && Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight) {
+        playOverscrollSound();
+    }
+}, { passive: true });
+
