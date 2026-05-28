@@ -1589,6 +1589,7 @@ footer {
     padding: 2.5rem 2rem;
     background: var(--secondary-light);
     border: 1px solid var(--border-color);
+    border-radius: 12px;
     transition: var(--transition);
 }
 
