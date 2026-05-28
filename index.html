@@ -36,16 +36,27 @@
 
             <nav class="nav-menu">
                 <ul class="nav-links">
+
                     <li><a href="#about">About</a></li>
+
                     <li><a href="#traits">Traits</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#education">Education</a></li>
-                    <li><a href="#certifications">Certifications</a></li>
-                    <li><a href="#awards">Awards</a></li>
+
                     <li><a href="#projects">Projects</a></li>
+
+                    <li><a href="#experience">Experience</a></li>
+
+                    <li><a href="#skills">Skills</a></li>
+
                     <li><a href="#software">Software</a></li>
+
+                    <li><a href="#certifications">Certifications</a></li>
+
+                    <li><a href="#awards">Awards</a></li>
+
+                    <li><a href="#education">Education</a></li>
+
                     <li><a href="Documents/CV1.pdf" target="_blank" class="nav-cv-link">Resume</a></li>
+
                     <li><a href="#contact" class="btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.9rem;">Contact</a></li>
                 </ul>
             </nav>
@@ -84,9 +95,8 @@
             </div>
         </div>
     </section>
-    
 
-    <!-- About Section -->
+<!-- About Section -->
     <section id="about" class="about-section container">
         <div class="about-card glass-panel hidden">
             <h2 class="section-title">About me</h2>
@@ -97,7 +107,7 @@
         </div>
     </section>
 
-    <!-- Traits Section (What defines...) -->
+<!-- Traits Section (What defines...) -->
     <section id="traits" class="traits-section container">
         <div class="section-header hidden">
             <h2 class="section-title">What defines Maoz Arif?</h2>
@@ -139,8 +149,141 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
-        <!-- Skills Section -->
+<!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2 class="section-title text-center hidden">Projects</h2>
+            <div class="projects-grid">
+                
+                <!-- Featured Project (Full Width) -->
+                <div class="project-card featured-project glass-panel hidden delay-1" onclick="openProjectModal('p6', this)" onmouseenter="startCoverSlideshow('p6', this)" onmouseleave="stopCoverSlideshow('p6', this)">
+                    <div class="project-bg" style="background-image: url('Documents/Projects/P6/Cover.png');"></div>
+                    <div class="project-content-overlay">
+                        <div class="featured-label">⭐ Featured Project</div>
+                        <h3>IncliSense Digital Level</h3>
+                        <p class="tech-stack">Arduino Nano · MPU6050 · IoT · 3D Printing</p>
+                        <p class="project-summary">A precision digital leveling device built to provide high-accuracy numerical feedback, featuring PC telemetry and a responsive 11-LED interface.</p>
+                        <span class="project-link">View Case Study &rarr;</span>
+                    </div>
+                </div>
+
+                <!-- Regular Grid Projects -->
+                <div class="project-card glass-panel hidden delay-2" onclick="openProjectModal('p1', this)" onmouseenter="startCoverSlideshow('p1', this)" onmouseleave="stopCoverSlideshow('p1', this)">
+                    <div class="project-bg" style="background-image: url('Documents/Projects/P1/Cover.jpg');"></div>
+                    <div class="project-content-overlay">
+                        <h3>Smart Lighting System</h3>
+                        <p class="tech-stack">Altium · ATMEGA328PB-AU · ToF</p>
+                        <span class="project-link">View Details &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-panel hidden delay-3" onclick="openProjectModal('p2', this)" onmouseenter="startCoverSlideshow('p2', this)" onmouseleave="stopCoverSlideshow('p2', this)">
+                    <div class="project-bg" style="background-image: url('Documents/Projects/P2/Cover.jpg');"></div>
+                    <div class="project-content-overlay">
+                        <h3>Omni-Sense Node</h3>
+                        <p class="tech-stack">ESP32 · SPI · PWM · RFID</p>
+                        <span class="project-link">View Details &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-panel hidden delay-4" onclick="openProjectModal('p3', this)" onmouseenter="startCoverSlideshow('p3', this)" onmouseleave="stopCoverSlideshow('p3', this)">
+                    <div class="project-bg" style="background-image: url('Documents/Projects/P3/Cover.jpg');"></div>
+                    <div class="project-content-overlay">
+                        <h3>Power Regulator Board</h3>
+                        <p class="tech-stack">Altium · Regulator IC</p>
+                        <span class="project-link">View Details &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-panel hidden delay-5" onclick="openProjectModal('p4', this)" onmouseenter="startCoverSlideshow('p4', this)" onmouseleave="stopCoverSlideshow('p4', this)">
+                    <div class="project-bg" style="background-image: url('Documents/Projects/P4/Cover.jpg');"></div>
+                    <div class="project-content-overlay">
+                        <h3>6S UAV BMS</h3>
+                        <p class="tech-stack">BQ76930 · XT60 · MOSFETs</p>
+                        <span class="project-link">View Details &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-panel hidden delay-6" onclick="openProjectModal('p5', this)" onmouseenter="startCoverSlideshow('p5', this)" onmouseleave="stopCoverSlideshow('p5', this)">
+                    <div class="project-bg" style="background-image: url('Documents/Projects/P5/Cover.jpg');"></div>
+                    <div class="project-content-overlay">
+                        <h3>Mixed-Signal RF Board</h3>
+                        <p class="tech-stack">ESP32 · RF TX/RX · 50Ω Impedance</p>
+                        <span class="project-link">View Details &rarr;</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+<!-- Experience Section -->
+    <section id="experience" class="experience-section container">
+        <h2 class="section-title text-center hidden">My Experience</h2>
+        
+        <div class="timeline">
+            <!-- 3. IET On Campus Abbottabad -->
+            <div class="timeline-item hidden">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-panel">
+                    <span class="timeline-category">Leadership</span>
+                    <span class="timeline-date">May 2025 - Present</span>
+                    <h3 class="timeline-company">IET On Campus Abbottabad</h3>
+                    <h4 class="timeline-role">Membership Head</h4>
+                    <p>Leading membership initiatives and organizing technical events, including coordinating workshops like Computer Vision & AI in UAVs.</p>
+                </div>
+            </div>
+
+            <!-- 4. Youth Parliament Pakistan -->
+            <div class="timeline-item hidden">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-panel">
+                    <span class="timeline-category">Leadership</span>
+                    <span class="timeline-date">2025 - 2027 Session</span>
+                    <h3 class="timeline-company">Youth Parliament Pakistan</h3>
+                    <h4 class="timeline-role">Cabinet Member</h4>
+                    <p>Serving in a leadership capacity for youth advocacy and policy discussions.</p>
+                </div>
+            </div>
+
+            <!-- 1. Instructables Contest -->
+            <div class="timeline-item hidden">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-panel">
+                    <span class="timeline-category">Award</span>
+                    <span class="timeline-date">April 2026</span>
+                    <h3 class="timeline-company">Instructables Sensors Contest 2026</h3>
+                    <h4 class="timeline-role">Runner-Up</h4>
+                    <p>Recognized for designing and developing the "IncliSense" project.</p>
+                </div>
+            </div>
+
+            <!-- 2. Altium Global Scholarship Program -->
+            <div class="timeline-item hidden">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-panel">
+                    <span class="timeline-category">Award</span>
+                    <span class="timeline-date">March 2026</span>
+                    <h3 class="timeline-company">Altium Global Scholarship Program</h3>
+                    <h4 class="timeline-role">Awardee</h4>
+                    <p>Selected as an emerging engineer for professional development and technical excellence.</p>
+                </div>
+            </div>
+
+            <!-- 5. Fiverr & Upwork -->
+            <div class="timeline-item hidden">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-panel">
+                    <span class="timeline-category">Professional</span>
+                    <h3 class="timeline-company">Fiverr & Upwork</h3>
+                    <h4 class="timeline-role">Freelance Hardware & Mechanical Designer</h4>
+                    <p>Providing professional PCB design, multi-layer board development, and 3D modeling services to international clients.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Skills Section -->
     <section id="skills" class="skills-section">
         <div class="container">
             <h2 class="section-title text-center hidden">Skills</h2>
@@ -222,7 +365,7 @@
         </div>
     </section>
 
-    <!-- Technical Software Suite Section -->
+<!-- Technical Software Suite Section -->
     <section id="software" class="skills-section" style="padding-top: 50px;">
         <div class="container">
             <h2 class="section-title text-center hidden">Technical Software Suite</h2>
@@ -317,110 +460,7 @@
         </div>
     </section>
 
-
-    <!-- Experience Section -->
-    <section id="experience" class="experience-section container">
-        <h2 class="section-title text-center hidden">My Experience</h2>
-        
-        <div class="timeline">
-            <!-- 3. IET On Campus Abbottabad -->
-            <div class="timeline-item hidden">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content glass-panel">
-                    <span class="timeline-category">Leadership</span>
-                    <span class="timeline-date">May 2025 - Present</span>
-                    <h3 class="timeline-company">IET On Campus Abbottabad</h3>
-                    <h4 class="timeline-role">Membership Head</h4>
-                    <p>Leading membership initiatives and organizing technical events, including coordinating workshops like Computer Vision & AI in UAVs.</p>
-                </div>
-            </div>
-
-            <!-- 4. Youth Parliament Pakistan -->
-            <div class="timeline-item hidden">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content glass-panel">
-                    <span class="timeline-category">Leadership</span>
-                    <span class="timeline-date">2025 - 2027 Session</span>
-                    <h3 class="timeline-company">Youth Parliament Pakistan</h3>
-                    <h4 class="timeline-role">Cabinet Member</h4>
-                    <p>Serving in a leadership capacity for youth advocacy and policy discussions.</p>
-                </div>
-            </div>
-
-            <!-- 1. Instructables Contest -->
-            <div class="timeline-item hidden">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content glass-panel">
-                    <span class="timeline-category">Award</span>
-                    <span class="timeline-date">April 2026</span>
-                    <h3 class="timeline-company">Instructables Sensors Contest 2026</h3>
-                    <h4 class="timeline-role">Runner-Up</h4>
-                    <p>Recognized for designing and developing the "IncliSense" project.</p>
-                </div>
-            </div>
-
-            <!-- 2. Altium Global Scholarship Program -->
-            <div class="timeline-item hidden">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content glass-panel">
-                    <span class="timeline-category">Award</span>
-                    <span class="timeline-date">March 2026</span>
-                    <h3 class="timeline-company">Altium Global Scholarship Program</h3>
-                    <h4 class="timeline-role">Awardee</h4>
-                    <p>Selected as an emerging engineer for professional development and technical excellence.</p>
-                </div>
-            </div>
-
-            <!-- 5. Fiverr & Upwork -->
-            <div class="timeline-item hidden">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content glass-panel">
-                    <span class="timeline-category">Professional</span>
-                    <h3 class="timeline-company">Fiverr & Upwork</h3>
-                    <h4 class="timeline-role">Freelance Hardware & Mechanical Designer</h4>
-                    <p>Providing professional PCB design, multi-layer board development, and 3D modeling services to international clients.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Education Section -->
-    <section id="education" class="education-section container">
-        <h2 class="section-title text-center hidden">Education</h2>
-        
-        <div class="education-grid">
-            <!-- COMSATS -->
-            <div class="edu-card glass-panel hidden delay-1">
-                <div class="edu-logo-wrapper">
-                    <img loading="lazy" src="Picture/Comsat_logo.jpg" alt="COMSATS University Logo" class="edu-logo-img">
-                </div>
-                <div class="edu-content">
-                    <span class="edu-date">2024 - 2028 (Expected)</span>
-                    <h3>COMSATS University Islamabad</h3>
-                    <h4>Abbottabad Campus</h4>
-                    <p class="edu-degree">BSc Electrical and Electronics Engineering (EEE)</p>
-                    <p class="tech-stack">Embedded Systems, PCB Design, Signal Integrity, IoT</p>
-                    <a href="https://cuiatd.edu.pk/" target="_blank" rel="noopener noreferrer" class="edu-link">Visit University →</a>
-                </div>
-            </div>
-
-            <!-- Peace Group -->
-            <div class="edu-card glass-panel hidden delay-2">
-                <div class="edu-logo-wrapper">
-                    <img loading="lazy" src="Picture/Peace_logo.jpg" alt="Peace Group of School & College Logo" class="edu-logo-img">
-                </div>
-                <div class="edu-content">
-                    <span class="edu-date">Completed 2024</span>
-                    <h3>Peace Group of School & College</h3>
-                    <h4>Abbottabad</h4>
-                    <p class="edu-degree">FSc Pre-Engineering</p>
-                    <p class="tech-stack">Mathematics, Physics, Analytical Reasoning</p>
-                    <a href="https://www.peace.edu.pk/" target="_blank" rel="noopener noreferrer" class="edu-link">Visit College →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certifications Section -->
+<!-- Certifications Section -->
     <section id="certifications" class="certifications-section container">
         <h2 class="section-title text-center hidden">Certifications</h2>
         
@@ -560,7 +600,7 @@
         </div>
     </section>
 
-    <!-- Awards Section -->
+<!-- Awards Section -->
     <section id="awards" class="certifications-section container">
         <h2 class="section-title text-center hidden">Awards</h2>
         
@@ -615,75 +655,44 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects-section">
-        <div class="container">
-            <h2 class="section-title text-center hidden">Projects</h2>
-            <div class="projects-grid">
-                
-                <!-- Featured Project (Full Width) -->
-                <div class="project-card featured-project glass-panel hidden delay-1" onclick="openProjectModal('p6', this)" onmouseenter="startCoverSlideshow('p6', this)" onmouseleave="stopCoverSlideshow('p6', this)">
-                    <div class="project-bg" style="background-image: url('Documents/Projects/P6/Cover.png');"></div>
-                    <div class="project-content-overlay">
-                        <div class="featured-label">⭐ Featured Project</div>
-                        <h3>IncliSense Digital Level</h3>
-                        <p class="tech-stack">Arduino Nano · MPU6050 · IoT · 3D Printing</p>
-                        <p class="project-summary">A precision digital leveling device built to provide high-accuracy numerical feedback, featuring PC telemetry and a responsive 11-LED interface.</p>
-                        <span class="project-link">View Case Study &rarr;</span>
-                    </div>
+<!-- Education Section -->
+    <section id="education" class="education-section container">
+        <h2 class="section-title text-center hidden">Education</h2>
+        
+        <div class="education-grid">
+            <!-- COMSATS -->
+            <div class="edu-card glass-panel hidden delay-1">
+                <div class="edu-logo-wrapper">
+                    <img loading="lazy" src="Picture/Comsat_logo.jpg" alt="COMSATS University Logo" class="edu-logo-img">
                 </div>
-
-                <!-- Regular Grid Projects -->
-                <div class="project-card glass-panel hidden delay-2" onclick="openProjectModal('p1', this)" onmouseenter="startCoverSlideshow('p1', this)" onmouseleave="stopCoverSlideshow('p1', this)">
-                    <div class="project-bg" style="background-image: url('Documents/Projects/P1/Cover.jpg');"></div>
-                    <div class="project-content-overlay">
-                        <h3>Smart Lighting System</h3>
-                        <p class="tech-stack">Altium · ATMEGA328PB-AU · ToF</p>
-                        <span class="project-link">View Details &rarr;</span>
-                    </div>
+                <div class="edu-content">
+                    <span class="edu-date">2024 - 2028 (Expected)</span>
+                    <h3>COMSATS University Islamabad</h3>
+                    <h4>Abbottabad Campus</h4>
+                    <p class="edu-degree">BSc Electrical and Electronics Engineering (EEE)</p>
+                    <p class="tech-stack">Embedded Systems, PCB Design, Signal Integrity, IoT</p>
+                    <a href="https://cuiatd.edu.pk/" target="_blank" rel="noopener noreferrer" class="edu-link">Visit University →</a>
                 </div>
+            </div>
 
-                <div class="project-card glass-panel hidden delay-3" onclick="openProjectModal('p2', this)" onmouseenter="startCoverSlideshow('p2', this)" onmouseleave="stopCoverSlideshow('p2', this)">
-                    <div class="project-bg" style="background-image: url('Documents/Projects/P2/Cover.jpg');"></div>
-                    <div class="project-content-overlay">
-                        <h3>Omni-Sense Node</h3>
-                        <p class="tech-stack">ESP32 · SPI · PWM · RFID</p>
-                        <span class="project-link">View Details &rarr;</span>
-                    </div>
+            <!-- Peace Group -->
+            <div class="edu-card glass-panel hidden delay-2">
+                <div class="edu-logo-wrapper">
+                    <img loading="lazy" src="Picture/Peace_logo.jpg" alt="Peace Group of School & College Logo" class="edu-logo-img">
                 </div>
-
-                <div class="project-card glass-panel hidden delay-4" onclick="openProjectModal('p3', this)" onmouseenter="startCoverSlideshow('p3', this)" onmouseleave="stopCoverSlideshow('p3', this)">
-                    <div class="project-bg" style="background-image: url('Documents/Projects/P3/Cover.jpg');"></div>
-                    <div class="project-content-overlay">
-                        <h3>Power Regulator Board</h3>
-                        <p class="tech-stack">Altium · Regulator IC</p>
-                        <span class="project-link">View Details &rarr;</span>
-                    </div>
+                <div class="edu-content">
+                    <span class="edu-date">Completed 2024</span>
+                    <h3>Peace Group of School & College</h3>
+                    <h4>Abbottabad</h4>
+                    <p class="edu-degree">FSc Pre-Engineering</p>
+                    <p class="tech-stack">Mathematics, Physics, Analytical Reasoning</p>
+                    <a href="https://www.peace.edu.pk/" target="_blank" rel="noopener noreferrer" class="edu-link">Visit College →</a>
                 </div>
-
-                <div class="project-card glass-panel hidden delay-5" onclick="openProjectModal('p4', this)" onmouseenter="startCoverSlideshow('p4', this)" onmouseleave="stopCoverSlideshow('p4', this)">
-                    <div class="project-bg" style="background-image: url('Documents/Projects/P4/Cover.jpg');"></div>
-                    <div class="project-content-overlay">
-                        <h3>6S UAV BMS</h3>
-                        <p class="tech-stack">BQ76930 · XT60 · MOSFETs</p>
-                        <span class="project-link">View Details &rarr;</span>
-                    </div>
-                </div>
-
-                <div class="project-card glass-panel hidden delay-6" onclick="openProjectModal('p5', this)" onmouseenter="startCoverSlideshow('p5', this)" onmouseleave="stopCoverSlideshow('p5', this)">
-                    <div class="project-bg" style="background-image: url('Documents/Projects/P5/Cover.jpg');"></div>
-                    <div class="project-content-overlay">
-                        <h3>Mixed-Signal RF Board</h3>
-                        <p class="tech-stack">ESP32 · RF TX/RX · 50Ω Impedance</p>
-                        <span class="project-link">View Details &rarr;</span>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+<!-- Contact Section -->
     <section id="contact" class="contact-section container">
         <h2 class="section-title text-center hidden">Get In Touch</h2>
         <div class="contact-card glass-panel hidden">

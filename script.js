@@ -516,3 +516,36 @@ window.stopCoverSlideshow = function(projectId, cardElement) {
         bgElement.style.backgroundImage = coverOriginalBg[projectId];
     }
 };
+
+
+// --- Active Navbar Highlighter ---
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -60% 0px', // Trigger when section crosses the middle upper part of the screen
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Remove active class from all links
+                navLinks.forEach(link => link.classList.remove('active'));
+                
+                // Add active class to corresponding link
+                const id = entry.target.getAttribute('id');
+                const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});

@@ -235,10 +235,31 @@ ul {
     font-weight: 500;
     font-size: 0.95rem;
     color: var(--text-main);
+    position: relative;
 }
 
-.nav-links a:hover {
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.8);
+    border-radius: 2px;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
     color: var(--primary);
+    text-shadow: 0 0 8px rgba(100, 255, 218, 0.3);
 }
 
 /* Hero Section */
