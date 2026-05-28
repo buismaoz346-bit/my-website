@@ -420,44 +420,6 @@ function typeWriter() {
 }
 if(typeText) typeWriter();
 
-// --- Animated Counter for Hero Stats ---
-function animateCounter(element, target, duration) {
-    let start = 0;
-    const startTime = performance.now();
-    
-    function update(currentTime) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        
-        // Ease out cubic
-        const easeOut = 1 - Math.pow(1 - progress, 3);
-        const current = Math.round(easeOut * target);
-        
-        element.textContent = current;
-        
-        if (progress < 1) {
-            requestAnimationFrame(update);
-        }
-    }
-    
-    requestAnimationFrame(update);
-}
-
-const statNums = document.querySelectorAll('.stat-num');
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const target = parseInt(entry.target.textContent);
-            animateCounter(entry.target, target, 1500);
-            statsObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.5 });
-
-statNums.forEach(num => {
-    statsObserver.observe(num);
-});
-
 // Mobile Hamburger Menu
 const menuToggle = document.getElementById('mobile-menu');
 const navMenu = document.querySelector('.nav-menu');
@@ -556,43 +518,30 @@ window.stopCoverSlideshow = function(projectId, cardElement) {
 };
 
 
-// --- Active Navbar Highlighter + Smart Navbar ---
+// --- Active Navbar Highlighter ---
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-links a');
-    const navbar = document.querySelector('.navbar');
-    let lastScrollY = window.scrollY;
-    let ticking = false;
 
-    function updateNavbar() {
-        const scrollY = window.scrollY;
-        
-        // Smart navbar: hide on scroll down, show on scroll up
-        if (scrollY > 100) {
-            if (scrollY > lastScrollY && scrollY > 300) {
-                navbar.style.transform = 'translateY(-100%)';
-            } else {
-                navbar.style.transform = 'translateY(0)';
-            }
-        } else {
-            navbar.style.transform = 'translateY(0)';
-        }
-        
-        // Scrollspy logic
+    window.addEventListener('scroll', () => {
         let current = '';
+        
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
-            if (scrollY >= sectionTop - 200) {
+            // Add a 200px offset to trigger slightly before reaching the section
+            if (window.scrollY >= sectionTop - 200) {
                 current = section.getAttribute('id');
             }
         });
 
-        if (scrollY < 50) {
+        // Special case: If user is at the absolute top
+        if (window.scrollY < 50) {
             current = 'hero';
         }
 
-        if ((window.innerHeight + scrollY) >= document.body.offsetHeight - 10) {
-            current = 'contact';
+        // Special case: If user scrolled to the absolute bottom
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
+            current = 'contact'; // Contact is the last section
         }
 
         navLinks.forEach(link => {
@@ -601,216 +550,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 link.classList.add('active');
             }
         });
-        
-        lastScrollY = scrollY;
-        ticking = false;
-    }
-
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            requestAnimationFrame(updateNavbar);
-            ticking = true;
-        }
-    });
-    
-    // Trigger once on load
-    updateNavbar();
-});
-
-// --- Cursor Glow Trail ---
-if (window.matchMedia('(pointer: fine)').matches) {
-    const cursor = document.createElement('div');
-    cursor.style.cssText = `
-        position: fixed;
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(100, 255, 218, 0.06) 0%, transparent 70%);
-        pointer-events: none;
-        z-index: 999;
-        transition: transform 0.15s ease;
-        will-change: transform;
-        left: 0;
-        top: 0;
-    `;
-    document.body.appendChild(cursor);
-    
-    let cx = 0, cy = 0;
-    document.addEventListener('mousemove', (e) => { cx = e.clientX; cy = e.clientY; }, { passive: true });
-    (function moveCursor() {
-        cursor.style.transform = `translate(${cx - 150}px, ${cy - 150}px)`;
-        requestAnimationFrame(moveCursor);
-    })();
-}
-
-
-// --- EFFECT 1: Scroll Progress Bar ---
-const progressBar = document.createElement('div');
-progressBar.className = 'scroll-progress';
-document.body.appendChild(progressBar);
-
-window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = (scrollTop / docHeight) * 100;
-    progressBar.style.width = scrollPercent + '%';
-});
-
-// --- EFFECT 2: Back to Top Button ---
-const backToTop = document.createElement('button');
-backToTop.className = 'back-to-top';
-backToTop.innerHTML = '↑';
-backToTop.setAttribute('aria-label', 'Back to top');
-document.body.appendChild(backToTop);
-
-backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-        backToTop.classList.add('visible');
-    } else {
-        backToTop.classList.remove('visible');
-    }
-});
-
-// --- EFFECT 3: Glass Panel Mouse Tracking Glow ---
-document.querySelectorAll('.glass-panel').forEach(panel => {
-    panel.addEventListener('mousemove', (e) => {
-        const rect = panel.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        panel.style.setProperty('--mouse-x', x + '%');
-        panel.style.setProperty('--mouse-y', y + '%');
     });
 });
-
-// --- EFFECT 4: Smooth Staggered Reveal ---
-const revealElements = document.querySelectorAll('.timeline-item, .cert-card, .premium-skill-card, .trait-card');
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }, index * 80);
-            revealObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.1 });
-
-revealElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-    revealObserver.observe(el);
-});
-
-// --- EFFECT 5: Smooth Section Title Reveal ---
-const sectionTitles = document.querySelectorAll('.section-title');
-const titleObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            entry.target.style.filter = 'blur(0)';
-            titleObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.3 });
-
-sectionTitles.forEach(title => {
-    title.style.opacity = '0';
-    title.style.transform = 'translateY(20px)';
-    title.style.filter = 'blur(5px)';
-    title.style.transition = 'opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease';
-    titleObserver.observe(title);
-});
-
-// --- EFFECT 6: Magnetic Hover on Buttons ---
-document.querySelectorAll('.btn-primary, .btn-secondary, .btn-download').forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-    });
-
-    btn.addEventListener('mouseleave', () => {
-        btn.style.transform = 'translate(0, 0)';
-    });
-});
-
-/ Page load animation removed - was causing blur screen bug
-
-
-
-allSections.forEach(s => sectionGlowObserver.observe(s));
-
-// --- EFFECT 10: Image Lazy Load Fade In ---
-document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-    img.style.opacity = '0';
-    img.style.transition = 'opacity 0.5s ease';
-    
-    if (img.complete) {
-        img.style.opacity = '1';
-    } else {
-        img.addEventListener('load', () => {
-            img.style.opacity = '1';
-        });
-    }
-});
-
-
-// --- PREMIUM EFFECT: Keyboard Navigation Enhancement ---
-document.addEventListener('keydown', (e) => {
-    // Escape closes any open modal
-    const openModals = document.querySelectorAll('.modal.show-modal');
-    if (e.key === 'Escape' && openModals.length > 0) {
-        openModals.forEach(modal => {
-            const id = modal.id.replace('project-modal-', '');
-            closeProjectModal(id);
-        });
-    }
-    
-    // Arrow keys for gallery navigation in open modal
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-        const openModal = document.querySelector('.modal.show-modal');
-        if (openModal) {
-            const projectId = openModal.id.replace('project-modal-', '');
-            const direction = e.key === 'ArrowRight' ? 1 : -1;
-            navigateProjectGallery(projectId, direction);
-        }
-    }
-});
-
-
-
-// --- PREMIUM EFFECT: Double-click to top ---
-let lastClickTime = 0;
-document.querySelector('.navbar')?.addEventListener('click', (e) => {
-    if (e.target.closest('.logo')) {
-        const now = Date.now();
-        if (now - lastClickTime < 400) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        lastClickTime = now;
-    }
-});
-
-
-
-document.querySelectorAll('section').forEach(s => activeSectionObserver.observe(s));
-
-// --- ADD MASSIVE JS EFFECTS ---
-
-
-
-
-
-// --- ULTRA-PREMIUM 1000X JS ENGINE ---
-
-// 1. Canvas Engine Removed for Performance
-
-
