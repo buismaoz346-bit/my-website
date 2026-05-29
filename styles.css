@@ -1,22 +1,32 @@
 /* Global Variables & Theme */
 :root {
-    --primary: #64ffda;
-    --primary-light: #80ffe1;
-    --primary-glow: rgba(100, 255, 218, 0.4);
-    --secondary: #0a192f;
-    --secondary-light: #112240;
-    --secondary-lightest: #233554;
-    --accent: #ffd700;
-    --bg-color: #0a192f;
-    --bg-glass: rgba(17, 34, 64, 0.7);
-    --text-main: #ccd6f6;
-    --text-muted: #8892b0;
-    --border-color: rgba(100, 255, 218, 0.15);
-    --border-glow: rgba(100, 255, 218, 0.3);
-    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
-    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-    --shadow-neon: 0 0 20px var(--primary-glow), 0 0 40px rgba(37, 99, 235, 0.1);
+    /* Liquid Glass Theme Colors */
+    --primary: #00E5E5; /* Electric Cyan */
+    --primary-light: #4DFFFF;
+    --primary-glow: rgba(0, 229, 229, 0.4);
+    
+    --secondary: #5758BB; /* Cyber Violet */
+    --secondary-light: #7E7FD5;
+    
+    --accent: #00FFC2; /* Mint */
+    
+    --bg-color: #0F172A; /* Deep Obsidian */
+    
+    /* True Glass Variables */
+    --bg-glass: rgba(255, 255, 255, 0.04); /* Lighter glass */
+    --bg-glass-hover: rgba(255, 255, 255, 0.08);
+    
+    --text-main: #FFFFFF;
+    --text-muted: #94A3B8;
+    
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-glow: rgba(0, 229, 229, 0.3);
+    
+    --shadow-sm: 0 4px 30px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.3);
+    --shadow-neon: 0 0 20px var(--primary-glow), 0 0 40px rgba(87, 88, 187, 0.2);
+    
     --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -32,13 +42,32 @@ body {
     font-family: 'Inter', sans-serif;
     color: var(--text-main);
     background-color: var(--bg-color);
+    
+    /* Animated Mesh Gradient Background */
     background-image: 
-        linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
-    background-position: center center;
+        radial-gradient(at 0% 0%, rgba(87, 88, 187, 0.35) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(0, 229, 229, 0.25) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(87, 88, 187, 0.35) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(0, 229, 229, 0.25) 0px, transparent 50%);
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    
     line-height: 1.6;
     overflow-x: hidden;
+    position: relative;
+}
+
+/* Overlay grid pattern for texture */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -1;
+    pointer-events: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -83,13 +112,20 @@ ul {
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    transform: translateZ(0); /* Hardware acceleration */
+}
+
+.glass-panel:hover {
+    background: var(--bg-glass-hover);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.3);
 }
 
 .glass-panel::before {
     content: '';
     position: absolute;
     top: 0; left: -100%; width: 50%; height: 100%;
-    background: linear-gradient(to right, rgba(100, 255, 218, 0) 0%, rgba(100, 255, 218, 0.1) 50%, rgba(100, 255, 218, 0) 100%);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
     transform: skewX(-25deg);
     transition: all 0.75s ease;
     z-index: 1;
@@ -120,16 +156,16 @@ ul {
 
 .btn-primary {
     background: var(--primary);
-    color: #fff;
+    color: var(--bg-color); /* Dark text for contrast on cyan */
     border: none;
-    box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39);
+    box-shadow: 0 4px 14px 0 rgba(0, 229, 229, 0.4);
 }
 
 .btn-primary:hover {
     background: var(--primary-light);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.23);
-    color: #fff;
+    box-shadow: 0 6px 20px rgba(0, 229, 229, 0.6);
+    color: var(--bg-color);
 }
 
 .btn-secondary {
@@ -154,10 +190,10 @@ ul {
     font-family: 'Outfit', sans-serif;
     letter-spacing: 0.5px;
     cursor: pointer;
-    background: linear-gradient(135deg, var(--secondary) 0%, #1e293b 100%);
+    background: linear-gradient(135deg, var(--secondary) 0%, rgba(87, 88, 187, 0.5) 100%);
     color: #fff;
-    border: none;
-    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(87, 88, 187, 0.4);
     position: relative;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -195,16 +231,22 @@ ul {
     transform: translateY(3px) scale(1.1);
 }
 
-/* Navbar */
+/* Navbar (Floating Glass Pill) */
 .navbar {
     position: fixed;
-    top: 0;
-    width: 100%;
+    top: 1rem;
+    left: 0; right: 0;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
     z-index: 1000;
-    background: rgba(10, 25, 47, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-color);
-    padding: 1rem 0;
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    padding: 0.5rem 0;
+    box-shadow: var(--shadow-lg);
     transition: var(--transition);
 }
 
