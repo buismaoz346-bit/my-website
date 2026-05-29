@@ -2163,3 +2163,548 @@ section { transition: padding 0.5s ease; }
 .navbar { will-change: transform; }
 .scroll-progress { will-change: width; }
 .back-to-top { will-change: opacity, transform; }
+
+
+/* ============ PREMIUM INTERACTIVE FEATURES ============ */
+
+/* --- F1: Keyboard Shortcuts Hint Icon --- */
+.kbd-hint-btn {
+    position: fixed;
+    bottom: 5.5rem;
+    right: 2rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--secondary-light);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 998;
+    opacity: 0.6;
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+.kbd-hint-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(100,255,218,0.3);
+    border-color: var(--primary);
+}
+
+/* --- F2: Shortcuts Modal --- */
+.shortcuts-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    background: rgba(10,25,47,0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.shortcuts-modal-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+.shortcuts-modal {
+    background: var(--secondary-light);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 2.5rem;
+    max-width: 480px;
+    width: 90%;
+    transform: translateY(20px) scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.shortcuts-modal-overlay.visible .shortcuts-modal {
+    transform: translateY(0) scale(1);
+}
+.shortcuts-modal h3 {
+    color: var(--primary);
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.shortcut-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(100,255,218,0.08);
+}
+.shortcut-row:last-child { border-bottom: none; }
+.shortcut-row span { color: var(--text-muted); font-size: 0.9rem; }
+.shortcut-key {
+    background: var(--secondary-lightest);
+    color: var(--primary);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid var(--border-color);
+    min-width: 28px;
+    text-align: center;
+}
+.shortcuts-modal-close {
+    display: block;
+    margin: 1.5rem auto 0;
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 0.4rem 1.5rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+.shortcuts-modal-close:hover {
+    background: var(--primary);
+    color: var(--secondary);
+}
+
+/* --- F3: Animated Skill Progress Bars --- */
+.skill-progress-bar {
+    width: 100%;
+    height: 3px;
+    background: rgba(100,255,218,0.1);
+    border-radius: 2px;
+    margin-top: 1.2rem;
+    overflow: hidden;
+}
+.skill-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    border-radius: 2px;
+    transition: width 1.2s cubic-bezier(0.22,1,0.36,1);
+    box-shadow: 0 0 6px rgba(100,255,218,0.4);
+}
+.skill-progress-bar.animated .skill-progress-fill {
+    width: var(--progress-width);
+}
+
+/* --- F4: Project Hover Tooltips --- */
+.project-card {
+    position: relative;
+}
+.project-tooltip {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(10,25,47,0.92);
+    border: 1px solid var(--border-color);
+    color: var(--primary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+    white-space: nowrap;
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.project-card:hover .project-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- F5: Konami Code & Easter Egg Modal --- */
+.easter-egg-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 3500;
+    background: rgba(10,25,47,0.9);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.easter-egg-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+.easter-egg-content {
+    text-align: center;
+    transform: scale(0.8);
+    transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+.easter-egg-overlay.visible .easter-egg-content {
+    transform: scale(1);
+}
+.easter-egg-content .ee-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1rem;
+    animation: eeBounce 0.6s ease infinite alternate;
+}
+.easter-egg-content h2 {
+    color: var(--primary);
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+}
+.easter-egg-content p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 320px;
+}
+@keyframes eeBounce {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-8px); }
+}
+
+/* --- F6: Section Reveal Counter Badge --- */
+.section-counter-badge {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    background: var(--secondary-light);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 0.4rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    z-index: 998;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    box-shadow: var(--shadow-sm);
+}
+.section-counter-badge.visible {
+    opacity: 0.8;
+    transform: translateY(0);
+}
+.section-counter-badge.complete {
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+}
+.section-counter-badge .counter-highlight {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* --- F7: Nav Link Ripple Effect --- */
+.nav-links a {
+    overflow: hidden;
+}
+.nav-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(100,255,218,0.25);
+    transform: scale(0);
+    animation: navRippleAnim 0.5s ease-out forwards;
+    pointer-events: none;
+}
+@keyframes navRippleAnim {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* --- F8: Reading Time Estimator --- */
+.reading-time {
+    display: inline-block;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-family: 'Inter', sans-serif;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+    letter-spacing: 0.3px;
+}
+.reading-time::before {
+    content: '📖 ';
+}
+
+/* ============================================================
+   SCROLL-DRIVEN ANIMATIONS & ADVANCED MICRO-INTERACTIONS
+   Uses modern CSS animation-timeline (progressive enhancement)
+   ============================================================ */
+
+/* Scroll-driven reveal - only for browsers that support it */
+@supports (animation-timeline: view()) {
+    .hidden {
+        animation: scrollReveal linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 40%;
+    }
+    
+    @keyframes scrollReveal {
+        from { opacity: 0; transform: translateY(30px) scale(0.97); filter: blur(4px); }
+        to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+    
+    /* Staggered reveals for grid items */
+    .trait-card:nth-child(2) { animation-range: entry 5% entry 45%; }
+    .trait-card:nth-child(3) { animation-range: entry 10% entry 50%; }
+    .trait-card:nth-child(4) { animation-range: entry 15% entry 55%; }
+    
+    .cert-card:nth-child(odd) {
+        animation: scrollRevealLeft linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 40%;
+    }
+    .cert-card:nth-child(even) {
+        animation: scrollRevealRight linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 40%;
+    }
+    
+    @keyframes scrollRevealLeft {
+        from { opacity: 0; transform: translateX(-30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes scrollRevealRight {
+        from { opacity: 0; transform: translateX(30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    
+    /* Section titles zoom in */
+    .section-title {
+        animation: titleZoom linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 35%;
+    }
+    @keyframes titleZoom {
+        from { opacity: 0; transform: scale(0.85); letter-spacing: 5px; }
+        to { opacity: 1; transform: scale(1); letter-spacing: normal; }
+    }
+    
+    /* Timeline items slide in from alternating sides */
+    .timeline-item:nth-child(odd) .timeline-content {
+        animation: scrollRevealLeft linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 40%;
+    }
+    .timeline-item:nth-child(even) .timeline-content {
+        animation: scrollRevealRight linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 40%;
+    }
+    
+    /* Timeline dots pop in */
+    .timeline-dot {
+        animation: dotPop linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 30%;
+    }
+    @keyframes dotPop {
+        from { transform: scale(0); }
+        to { transform: scale(1); }
+    }
+    
+    /* Education cards slide up with rotation */
+    .edu-card {
+        animation: cardSlideRotate linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 40%;
+    }
+    @keyframes cardSlideRotate {
+        from { opacity: 0; transform: translateY(40px) rotate(2deg); }
+        to { opacity: 1; transform: translateY(0) rotate(0deg); }
+    }
+    
+    /* Skill cards scale in */
+    .premium-skill-card {
+        animation: skillCardReveal linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 35%;
+    }
+    @keyframes skillCardReveal {
+        from { opacity: 0; transform: scale(0.9) translateY(20px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    
+    /* Contact items bounce in */
+    .contact-item {
+        animation: contactBounce linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 40%;
+    }
+    @keyframes contactBounce {
+        0% { opacity: 0; transform: translateY(30px); }
+        60% { transform: translateY(-5px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Footer fade up */
+    footer {
+        animation: scrollReveal linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 50%;
+    }
+}
+
+/* ============================================================
+   ADVANCED HOVER STATES - Depth & Dimensionality  
+   ============================================================ */
+
+/* Card 3D perspective on hover */
+.trait-card, .cert-card, .edu-card, .premium-skill-card {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+/* Cert card stacked shadow effect */
+.cert-card:hover {
+    box-shadow: 
+        0 1px 1px rgba(0,0,0,0.08),
+        0 2px 2px rgba(0,0,0,0.08),
+        0 4px 4px rgba(0,0,0,0.08),
+        0 8px 8px rgba(0,0,0,0.08),
+        0 16px 16px rgba(0,0,0,0.08),
+        0 0 20px rgba(100,255,218,0.1) !important;
+}
+
+/* Image container overflow clip */
+.cert-image {
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+/* Smooth image zoom on hover */
+.cert-image img {
+    transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease !important;
+}
+.cert-card:hover .cert-image img {
+    transform: scale(1.05) !important;
+    filter: brightness(1.1) contrast(1.05);
+}
+
+/* Project card overlay gradient */
+.project-content-overlay {
+    transition: background 0.5s ease;
+}
+.project-card:hover .project-content-overlay {
+    background: linear-gradient(to top, rgba(10,25,47,0.98) 0%, rgba(10,25,47,0.7) 60%, transparent 100%) !important;
+}
+
+/* Featured project label glow */
+.featured-label {
+    text-shadow: 0 0 10px rgba(255,215,0,0.5);
+    transition: all 0.3s ease;
+}
+.featured-project:hover .featured-label {
+    text-shadow: 0 0 20px rgba(255,215,0,0.8);
+    letter-spacing: 1px;
+}
+
+/* ============================================================
+   TEXT EFFECTS & TYPOGRAPHY ENHANCEMENTS
+   ============================================================ */
+
+/* Hero name text shadow for depth */
+.hero-section .name {
+    text-shadow: 0 0 40px rgba(100,255,218,0.15);
+}
+
+/* Section title gradient underline animation */
+.section-title {
+    position: relative;
+    display: inline-block;
+}
+
+/* About section first letter drop cap */
+.about-card > p:first-of-type::first-letter {
+    font-size: 2.5em;
+    float: left;
+    line-height: 0.8;
+    margin-right: 8px;
+    margin-top: 4px;
+    color: var(--primary);
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Smooth color transition for all text */
+h3, h4, p { transition: color 0.3s ease; }
+
+/* ============================================================
+   FORM & INPUT ENHANCEMENTS
+   ============================================================ */
+
+/* Enhanced text selection across the site */
+::selection {
+    background: rgba(100,255,218,0.3);
+    color: #fff;
+    text-shadow: none;
+}
+
+/* ============================================================
+   LOADING STATE & PAGE TRANSITION
+   ============================================================ */
+
+/* Page entrance animation */
+body {
+    animation: pageEntrance 0.8s ease forwards;
+}
+@keyframes pageEntrance {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Smooth anchor transitions */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ============================================================
+   PRINT STYLES (for Resume/Portfolio printing)
+   ============================================================ */
+@media print {
+    .navbar, .back-to-top, .scroll-progress, .ai-toggle-btn, .ai-overlay { display: none !important; }
+    body { background: #fff !important; color: #000 !important; }
+    .glass-panel { background: #f5f5f5 !important; border: 1px solid #ddd !important; box-shadow: none !important; }
+    section { break-inside: avoid; page-break-inside: avoid; }
+    a { color: #000 !important; text-decoration: underline; }
+    .hero-section .name { -webkit-text-fill-color: #000 !important; color: #000 !important; }
+}
+
+/* ============================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ============================================================ */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .glass-panel { border: 2px solid var(--primary) !important; }
+    .section-title { text-decoration: underline; }
+}
+
+/* Skip to content link (hidden until focused) */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: var(--secondary);
+    padding: 12px 24px;
+    border-radius: 0 0 8px 8px;
+    z-index: 100000;
+    font-weight: 600;
+    transition: top 0.3s ease;
+}
+.skip-link:focus {
+    top: 0;
+}

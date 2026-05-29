@@ -607,3 +607,297 @@ if (nums.length) {
     }, { threshold: 0.5 });
     nums.forEach(n => io.observe(n));
 }
+
+// ============================================================
+// PREMIUM INTERACTIVE FEATURES (8 Features)
+// All appended — never modifies existing code above.
+// ============================================================
+(function premiumFeatures() {
+    'use strict';
+
+    // --- Helper: safely query ---
+    const $ = (sel, ctx) => (ctx || document).querySelector(sel);
+    const $$ = (sel, ctx) => Array.from((ctx || document).querySelectorAll(sel));
+
+    // =========================================================
+    // 1. DYNAMIC HERO GREETING
+    // =========================================================
+    (function dynamicGreeting() {
+        const greetingEl = $('.greeting');
+        if (!greetingEl) return;
+        const hour = new Date().getHours();
+        let greeting;
+        if (hour >= 5 && hour < 12)       greeting = 'Good Morning, my name is';
+        else if (hour >= 12 && hour < 17)  greeting = 'Good Afternoon, my name is';
+        else                               greeting = 'Good Evening, my name is';
+        greetingEl.textContent = greeting;
+    })();
+
+    // =========================================================
+    // 2. KEYBOARD SHORTCUTS + Floating Hint Badge
+    // =========================================================
+    (function keyboardShortcuts() {
+        // Section targets for number keys
+        const sectionIds = [
+            'hero', 'about', 'traits', 'projects', 'certifications',
+            'awards', 'experience', 'skills', 'software', 'education', 'contact'
+        ];
+
+        // Create shortcuts modal
+        const overlay = document.createElement('div');
+        overlay.className = 'shortcuts-modal-overlay';
+        overlay.innerHTML = `
+            <div class="shortcuts-modal">
+                <h3>⌨️ Keyboard Shortcuts</h3>
+                <div class="shortcut-row"><span>Jump to section</span><span class="shortcut-key">1</span>–<span class="shortcut-key">9</span></div>
+                <div class="shortcut-row"><span>Home</span><span class="shortcut-key">1</span></div>
+                <div class="shortcut-row"><span>About</span><span class="shortcut-key">2</span></div>
+                <div class="shortcut-row"><span>Traits</span><span class="shortcut-key">3</span></div>
+                <div class="shortcut-row"><span>Projects</span><span class="shortcut-key">4</span></div>
+                <div class="shortcut-row"><span>Certifications</span><span class="shortcut-key">5</span></div>
+                <div class="shortcut-row"><span>Awards</span><span class="shortcut-key">6</span></div>
+                <div class="shortcut-row"><span>Experience</span><span class="shortcut-key">7</span></div>
+                <div class="shortcut-row"><span>Skills</span><span class="shortcut-key">8</span></div>
+                <div class="shortcut-row"><span>Software</span><span class="shortcut-key">9</span></div>
+                <div class="shortcut-row"><span>Toggle AI Mode</span><span class="shortcut-key">/</span></div>
+                <div class="shortcut-row"><span>Show shortcuts</span><span class="shortcut-key">?</span></div>
+                <button class="shortcuts-modal-close">Close</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        const closeModal = () => overlay.classList.remove('visible');
+        overlay.querySelector('.shortcuts-modal-close').addEventListener('click', closeModal);
+        overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+
+        function showShortcuts() { overlay.classList.add('visible'); }
+
+        // Floating hint button
+        const hintBtn = document.createElement('button');
+        hintBtn.className = 'kbd-hint-btn';
+        hintBtn.innerHTML = '⌨️';
+        hintBtn.setAttribute('aria-label', 'Keyboard shortcuts');
+        hintBtn.setAttribute('title', 'Press ? for shortcuts');
+        hintBtn.addEventListener('click', showShortcuts);
+        document.body.appendChild(hintBtn);
+
+        // Keyboard listener
+        document.addEventListener('keydown', (e) => {
+            // Don't trigger shortcuts when typing in inputs
+            const tag = e.target.tagName;
+            if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
+
+            // Number keys 1-9 to jump to sections
+            const num = parseInt(e.key);
+            if (num >= 1 && num <= 9 && !e.ctrlKey && !e.altKey && !e.metaKey) {
+                const sectionId = sectionIds[num - 1];
+                if (sectionId) {
+                    const target = document.getElementById(sectionId);
+                    if (target) {
+                        const headerOffset = 70;
+                        const top = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+                        window.scrollTo({ top, behavior: 'smooth' });
+                    }
+                }
+                return;
+            }
+
+            // "/" to toggle AI mode
+            if (e.key === '/' && !e.ctrlKey && !e.altKey) {
+                e.preventDefault();
+                const aiBtn = $('.ai-toggle-btn');
+                if (aiBtn) aiBtn.click();
+                return;
+            }
+
+            // "?" to show shortcuts
+            if (e.key === '?' || (e.key === '/' && e.shiftKey)) {
+                showShortcuts();
+                return;
+            }
+
+            // Escape to close shortcuts modal
+            if (e.key === 'Escape' && overlay.classList.contains('visible')) {
+                closeModal();
+            }
+        }, { passive: false });
+    })();
+
+    // =========================================================
+    // 3. ANIMATED SKILL PROGRESS BARS
+    // =========================================================
+    (function skillProgressBars() {
+        const skillCards = $$('.premium-skill-card');
+        if (!skillCards.length) return;
+
+        // Skill proficiency levels (mapped by card order)
+        const levels = [95, 88, 85, 80, 82, 78, 75];
+
+        skillCards.forEach((card, i) => {
+            const bar = document.createElement('div');
+            bar.className = 'skill-progress-bar';
+            const fill = document.createElement('div');
+            fill.className = 'skill-progress-fill';
+            bar.style.setProperty('--progress-width', (levels[i] || 70) + '%');
+            bar.appendChild(fill);
+            card.appendChild(bar);
+        });
+
+        // Observe and animate when in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target.querySelector('.skill-progress-bar');
+                    if (bar && !bar.classList.contains('animated')) {
+                        // Small delay for stagger effect
+                        const idx = skillCards.indexOf(entry.target);
+                        setTimeout(() => bar.classList.add('animated'), idx * 100);
+                    }
+                }
+            });
+        }, { threshold: 0.3 });
+
+        skillCards.forEach(card => observer.observe(card));
+    })();
+
+    // =========================================================
+    // 4. PROJECT HOVER TOOLTIPS
+    // =========================================================
+    (function projectTooltips() {
+        const cards = $$('.project-card');
+        cards.forEach(card => {
+            const techStackEl = card.querySelector('.tech-stack');
+            if (!techStackEl) return;
+            const tooltip = document.createElement('div');
+            tooltip.className = 'project-tooltip';
+            tooltip.textContent = '🛠 ' + techStackEl.textContent.trim();
+            card.appendChild(tooltip);
+        });
+    })();
+
+    // =========================================================
+    // 5. EASTER EGG: KONAMI CODE
+    // =========================================================
+    (function konamiCode() {
+        const sequence = [
+            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+            'b', 'a'
+        ];
+        let position = 0;
+
+        // Create easter egg overlay (once)
+        const eeOverlay = document.createElement('div');
+        eeOverlay.className = 'easter-egg-overlay';
+        eeOverlay.innerHTML = `
+            <div class="easter-egg-content">
+                <span class="ee-icon">🎮</span>
+                <h2>You found the secret!</h2>
+                <p>Maoz is also a gamer at heart! Congrats on cracking the Konami code 🕹️</p>
+            </div>
+        `;
+        document.body.appendChild(eeOverlay);
+
+        eeOverlay.addEventListener('click', () => eeOverlay.classList.remove('visible'));
+
+        document.addEventListener('keydown', (e) => {
+            const expected = sequence[position];
+            if (e.key === expected || e.key.toLowerCase() === expected) {
+                position++;
+                if (position === sequence.length) {
+                    position = 0;
+                    eeOverlay.classList.add('visible');
+                    setTimeout(() => eeOverlay.classList.remove('visible'), 5000);
+                }
+            } else {
+                position = 0;
+                // Check if the pressed key starts the sequence again
+                if (e.key === sequence[0]) position = 1;
+            }
+        }, { passive: true });
+    })();
+
+    // =========================================================
+    // 6. SECTION REVEAL COUNTER
+    // =========================================================
+    (function sectionCounter() {
+        const allSections = $$('section[id]');
+        const total = allSections.length;
+        if (!total) return;
+
+        const viewed = new Set();
+
+        const badge = document.createElement('div');
+        badge.className = 'section-counter-badge';
+        badge.innerHTML = '<span class="counter-highlight">0</span>/' + total + ' sections explored';
+        document.body.appendChild(badge);
+
+        // Show badge after a small delay
+        setTimeout(() => badge.classList.add('visible'), 1500);
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    if (!viewed.has(id)) {
+                        viewed.add(id);
+                        const highlight = badge.querySelector('.counter-highlight');
+                        highlight.textContent = viewed.size;
+
+                        if (viewed.size >= total) {
+                            // All sections explored — fade out after 2s
+                            setTimeout(() => {
+                                badge.classList.remove('visible');
+                                badge.classList.add('complete');
+                            }, 2000);
+                        }
+                    }
+                }
+            });
+        }, { threshold: 0.2 });
+
+        allSections.forEach(sec => observer.observe(sec));
+    })();
+
+    // =========================================================
+    // 7. SMART NAVBAR RIPPLE
+    // =========================================================
+    (function navRipple() {
+        const navLinks = $$('.nav-links a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                // Create ripple element
+                const ripple = document.createElement('span');
+                ripple.className = 'nav-ripple';
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+                ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+                this.appendChild(ripple);
+                // Remove after animation
+                setTimeout(() => ripple.remove(), 550);
+            });
+        });
+    })();
+
+    // =========================================================
+    // 8. READING TIME ESTIMATOR
+    // =========================================================
+    (function readingTime() {
+        // Count all visible text on the page
+        const textContent = document.body.innerText || '';
+        const wordCount = textContent.split(/\s+/).filter(w => w.length > 0).length;
+        const minutes = Math.max(1, Math.round(wordCount / 200)); // avg 200 wpm
+
+        const heroStats = $('.hero-stats');
+        if (!heroStats) return;
+
+        const readingEl = document.createElement('div');
+        readingEl.className = 'reading-time';
+        readingEl.textContent = '~' + minutes + ' min read';
+        // Insert after hero-stats
+        heroStats.parentNode.insertBefore(readingEl, heroStats.nextSibling);
+    })();
+
+})();
