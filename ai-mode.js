@@ -358,9 +358,81 @@
             return `You're welcome! 😊 Feel free to ask anything else about **${KB.name}**'s portfolio!`;
         }
 
+        // === RECRUITER / PROFESSIONAL QUESTIONS ===
+
+        // --- WHY HIRE / SELECT HIM ---
+        if (/why (should|would|shall|will|do).*(hire|select|pick|choose|recruit|take|consider)|why hire|why select|why choose|reason.*(hire|select)/.test(q)) {
+            return `🌟 **Why You Should Hire Syed Maoz Arif:**\n\n**1. Proven Builder, Not Just a Student**\nWhile still in his ${KB.semester}, Maoz has already built **${KB.totalProjects} real-world projects** — from precision digital levels to UAV battery management systems. He doesn't just study theory; he ships products.\n\n**2. Globally Recognized**\n- 🏆 **Runner-Up** in the global Instructables Sensors Contest 2026\n- 🎓 **Altium Global Scholarship** awardee (March 2026)\n- 🥇 **1st Position** in Best Circuit Design competition\n\n**3. Industry-Grade Skills**\nHe's certified in **Altium Designer** (the industry standard), proficient in ESP32/STM32 embedded systems, and delivers production-ready multi-layer PCBs.\n\n**4. Already Has Professional Experience**\nActive freelancer on **Fiverr & Upwork** serving international clients — he understands deadlines, client communication, and professional delivery.\n\n**5. Leadership + Technical = Rare Combination**\nMembership Head at IET On Campus + Cabinet Member of Youth Parliament Pakistan. He can lead teams AND build circuits.\n\n**6. ${KB.totalCertifications} Certifications** across PCB Design, IoT, AI, and Entrepreneurship — continuous learner who invests in growth.`;
+        }
+
+        // --- INTERNSHIP ---
+        if (/intern(ship)?|intern candidate|good.*(intern|trainee)|suitable.*(intern|trainee)/.test(q)) {
+            return `🎯 **Why Maoz is an Ideal Intern:**\n\n**Immediate Value:**\n- Already builds production-ready PCBs in Altium Designer\n- Firmware experience with ESP32, STM32, Arduino\n- Can start contributing from Day 1 — not someone who needs months of training\n\n**Quick Learner with Proof:**\n- ${KB.totalCertifications} certifications earned proactively\n- Won awards in competitive environments (Instructables Global, COMSATS workshops)\n- Teaches himself new tools and technologies continuously\n\n**Professional Maturity:**\n- Already handles international freelance clients on Fiverr & Upwork\n- Understands project scoping, deadlines, and client communication\n- Experience leading teams as IET Membership Head\n\n**Academic Standing:**\n- ${KB.semester} at ${KB.university}\n- Student ID: ${KB.studentId}\n- Specializing in Embedded Systems, PCB Design, Signal Integrity, IoT\n\n📧 Contact: ${KB.email} | 📱 ${KB.phone}`;
+        }
+
+        // --- COMPANY FIT ---
+        if (/company|team|organization|fit|culture|value.*(add|bring)|bring to.*(table|team)|add to.*(team|company)|contribution/.test(q)) {
+            return `🏢 **What Maoz Brings to Your Company/Team:**\n\n**Technical Contributions:**\n- End-to-end hardware development (schematic → PCB → prototype → production)\n- Multi-layer PCB design with signal integrity considerations\n- IoT solutions with ESP32/STM32 + cloud (Firebase, MQTT)\n- 3D mechanical enclosure design (Fusion 360, SolidWorks)\n\n**Soft Value:**\n- Strong communicator — handles international clients on freelance platforms\n- Natural leader — runs membership drives and organizes tech workshops\n- Team player with empathy — recognized by IET for community building\n- Problem solver — wins competitions under strict time constraints\n\n**Growth Mindset:**\n- ${KB.totalCertifications} certifications and counting\n- Actively explores AI tools (Gemini, ChatGPT, Claude) for engineering workflows\n- Bridges engineering with business (Practical Entrepreneurship certified)`;
+        }
+
+        // --- STRENGTHS ---
+        if (/strength|strong point|best at|excel|good at|speciali/.test(q)) {
+            return `💪 **Maoz's Key Strengths:**\n\n1. **Multi-Layer PCB Design** — Professional-grade boards in Altium Designer, certified by Altium themselves\n2. **Embedded Systems** — Real working projects with ESP32, STM32, Arduino Nano\n3. **Full-Stack Hardware** — From schematic capture to 3D-printed enclosures\n4. **Global Competition Winner** — Instructables Sensors Contest Runner-Up\n5. **Freelance Professionalism** — Already serving international clients\n6. **Leadership** — Membership Head (IET) + Cabinet Member (Youth Parliament)\n7. **Rapid Learner** — ${KB.totalCertifications} certifications across diverse fields\n8. **Technical Writing** — LaTeX, Overleaf for professional documentation\n9. **AI Literacy** — Proficient with Gemini, ChatGPT, Claude, Google AI Studio\n10. **Communication** — Public speaking, collaboration, empathy`;
+        }
+
+        // --- WEAKNESSES / IMPROVEMENT ---
+        if (/weakness|improve|lacking|gap|shortcoming|area.*(develop|growth)/.test(q)) {
+            return `📈 **Areas of Growth (Honest Self-Assessment):**\n\nMaoz is still a **${KB.semester} student** (graduating ${KB.expectedGrad}), so naturally:\n\n1. **Limited industry work experience** — But compensates with active freelancing on Fiverr & Upwork\n2. **Still building depth in analog/RF design** — Already started with the Mixed-Signal RF Board project\n3. **Early in career** — But already has ${KB.totalAwards} awards and ${KB.totalCertifications} certifications by semester 4\n\n**How he addresses gaps:**\n- Takes certifications proactively (not waiting for coursework)\n- Builds real projects to learn (not just tutorials)\n- Seeks competitive environments to test himself`;
+        }
+
+        // --- SALARY / COMPENSATION ---
+        if (/salary|pay|compensation|rate|charge|cost|pricing|budget/.test(q)) {
+            return `💰 For compensation discussions, please contact Maoz directly:\n\n📧 **Email:** ${KB.email}\n📱 **Phone:** ${KB.phone}\n🔗 **LinkedIn:** ${KB.linkedin}\n\nHe's available on **Fiverr & Upwork** for freelance project quotes.`;
+        }
+
+        // --- AVAILABILITY ---
+        if (/availab|free|when can.*(start|join|begin)|start date|available to/.test(q)) {
+            return `📅 **Availability:**\n\nMaoz is currently in his **${KB.semester}** at ${KB.university} (graduating ${KB.expectedGrad}).\n\n- ✅ **Available for:** Part-time internships, freelance projects, remote work, summer internships\n- ✅ **Already active on:** Fiverr & Upwork (serving international clients)\n- ✅ **Can work:** Remotely or on-site in ${KB.location}\n\nFor specific availability, contact him at **${KB.email}** or **${KB.phone}**.`;
+        }
+
+        // --- PORTFOLIO SUMMARY / ELEVATOR PITCH ---
+        if (/summary|pitch|elevator|overview|quick.*(intro|summary)|brief|in short|nutshell|tldr/.test(q)) {
+            return `🚀 **${KB.name} in 60 Seconds:**\n\nA **${KB.semester}** EEE student at COMSATS who's already:\n\n✅ Built **${KB.totalProjects}** real-world hardware projects\n✅ Won **${KB.totalAwards}** awards including a **global Instructables contest**\n✅ Earned **${KB.totalCertifications}** certifications (Altium, IoT, AI, Business)\n✅ Received the **Altium Global Scholarship**\n✅ Serves international clients on **Fiverr & Upwork**\n✅ Leads as **Membership Head** at IET and **Cabinet Member** of Youth Parliament\n\n**Core Expertise:** Multi-layer PCB Design | Embedded Systems (ESP32/STM32) | 3D CAD | IoT\n\n📧 ${KB.email} | 📱 ${KB.phone}`;
+        }
+
+        // --- WHAT CAN HE DO FOR US ---
+        if (/what can he do|what (would|could|will) he|how can he help|how (would|could|will) he|services|offer/.test(q)) {
+            return `🛠️ **Services & Capabilities Maoz Offers:**\n\n**Hardware Engineering:**\n- Multi-layer PCB design & layout (Altium Designer)\n- Schematic capture & BOM generation\n- Manufacturing file preparation (Gerber, drill files)\n- Signal integrity & impedance matching\n\n**Embedded Systems:**\n- Firmware development (ESP32, STM32, Arduino)\n- Sensor integration & IoT connectivity\n- Real-time data streaming (MQTT, Firebase)\n- Custom hardware-software integration\n\n**Mechanical Design:**\n- 3D product enclosure design (Fusion 360, SolidWorks)\n- Parametric modeling for 3D printing\n- Assembly design & technical drawings\n\n**Additional:**\n- Technical documentation (LaTeX)\n- Web development (HTML, CSS, JS)\n- AI-assisted engineering workflows\n\n📧 Contact: ${KB.email}`;
+        }
+
+        // --- COMPARE / STAND OUT / UNIQUE ---
+        if (/stand.?out|unique|different|special|distinguish|compet(itive|itor)|edge|advantage|apart/.test(q)) {
+            return `🏅 **What Makes Maoz Stand Out:**\n\n**vs. Typical Students:**\n- Most students build classroom projects → Maoz builds **real products that win global contests**\n- Most students have no work experience → Maoz **already freelances internationally**\n- Most students wait for instructions → Maoz **self-teaches and gets certified proactively**\n\n**Unique Differentiators:**\n1. **Youngest Altium Scholarship awardee** in his cohort\n2. **Global contest winner** (Instructables — competing against professionals worldwide)\n3. **6 projects** by 4th semester — most students have 1-2\n4. **11 certifications** — more than many working professionals\n5. **Dual leadership roles** — IET + Youth Parliament simultaneously\n6. **Full-stack hardware** — can design the PCB, code the firmware, model the enclosure, and write the documentation`;
+        }
+
+        // --- RECOMMENDATION / REFERENCE ---
+        if (/recommend|reference|vouch|endorse|testimonial/.test(q)) {
+            return `📝 **Recommendations & Endorsements:**\n\nMaoz's work has been recognized by:\n\n- **Altium** — Selected for the Global Scholarship Program (March 2026)\n- **Instructables** — Runner-Up in global Sensors Contest (April 2026)\n- **IET** — Multiple certificates for leadership and community contribution\n- **COMSATS University** — Best Project Award\n- **International Clients** — Active on Fiverr & Upwork with professional track record\n\nFor direct references, contact Maoz at **${KB.email}**.`;
+        }
+
+        // --- FUTURE GOALS / PLANS ---
+        if (/goal|plan|future|aspir|dream|vision|ambition|where.*(see|headed|going)/.test(q)) {
+            return `🎯 **Maoz's Vision & Direction:**\n\nCurrently pursuing BSc EEE (graduating ${KB.expectedGrad}), Maoz is focused on:\n\n1. **Deepening hardware expertise** — advanced RF design, signal integrity, power electronics\n2. **Growing his freelance practice** — already serving international clients\n3. **Contributing to open-source hardware** — the IncliSense project is publicly documented\n4. **Leadership development** — active in IET and Youth Parliament\n5. **Bridging engineering and business** — certified in Practical Entrepreneurship\n\nHe aims to become a **leading hardware engineer** who can take products from concept to production.`;
+        }
+
+        // --- TEAMWORK / COLLABORATION ---
+        if (/team|collaborate|group|work with|partner|together/.test(q)) {
+            return `🤝 **Teamwork & Collaboration:**\n\nMaoz thrives in team environments:\n\n- **IET Membership Head** — Organizes workshops, coordinates 50+ members\n- **Youth Parliament Cabinet Member** — Works in policy discussion groups\n- **1st Position in Circuit Design** — Won in a team-based hardware workshop at COMSATS\n- **Freelance Collaborations** — Works with international clients on Fiverr & Upwork\n\n**Interpersonal Skills:** Public Speaking, Communication, Empathy, Collaboration\n\nHe believes "the best solutions come from people who can both think critically and bring others together."`;
+        }
+
+        // --- RELIABILITY / DEADLINE ---
+        if (/reliab|deadline|deliver|trust|depend|punctual|on.?time|commitment/.test(q)) {
+            return `✅ **Reliability & Work Ethic:**\n\nMaoz demonstrates reliability through:\n\n- **Freelance track record** — Delivers projects on Fiverr & Upwork to international clients with deadlines\n- **Competition performance** — Won 1st in Circuit Design under strict time constraints\n- **Leadership consistency** — Membership Head at IET (May 2025 - Present, ongoing)\n- **Self-discipline** — Earned ${KB.totalCertifications} certifications while being a full-time student\n- **Proactive** — Doesn't wait for assignments; builds projects and pursues certifications independently`;
+        }
+
         // --- HELP ---
         if (/what can you|help|what do you know|capable|feature/.test(q)) {
-            return `🧠 I have **deep knowledge** of everything in Maoz's portfolio:\n\n- 👤 **About** — Full bio and background\n- 🚀 **${KB.totalProjects} Projects** — Names, tech stacks, descriptions\n- 📜 **${KB.totalCertifications} Certifications** — Names, issuers, **exact dates**, categories\n- 🏆 **${KB.totalAwards} Awards** — Full details and dates\n- 💼 **${KB.experience.length} Experiences** — Roles, organizations, dates\n- ⚡ **${KB.skills.length} Skills** — Technical and soft skills\n- 🛠️ **${Object.keys(KB.software).length} Software Categories** — Every tool\n- 🎓 **Education** — University, college, student ID\n- 📧 **Contact** — All emails, phone, social links\n\n**Smart queries:** Try "how many Altium certificates?", "when did he get the Arduino cert?", "what IET roles?"`;
+            return `🧠 I have **deep knowledge** of everything in Maoz's portfolio:\n\n- 👤 **About** — Full bio and background\n- 🚀 **${KB.totalProjects} Projects** — Names, tech stacks, descriptions\n- 📜 **${KB.totalCertifications} Certifications** — Names, issuers, **exact dates**, categories\n- 🏆 **${KB.totalAwards} Awards** — Full details and dates\n- 💼 **${KB.experience.length} Experiences** — Roles, organizations, dates\n- ⚡ **${KB.skills.length} Skills** — Technical and soft skills\n- 🛠️ **${Object.keys(KB.software).length} Software Categories** — Every tool\n- 🎓 **Education** — University, college, student ID\n- 📧 **Contact** — All emails, phone, social links\n\n**Recruiter questions:** Try "Why should we hire him?", "Is he good for an internship?", "What makes him stand out?"\n**Detail queries:** "How many Altium certificates?", "When did he get the Arduino cert?"\n**Professional:** "What can he do for us?", "Is he available?", "What are his strengths?"`;
         }
 
         // --- FUZZY SEARCH: try to match any keyword against all data ---
@@ -418,14 +490,16 @@
                 <div class="ai-welcome">
                     <div class="ai-welcome-icon">✨</div>
                     <h2>Hello, I'm Maoz AI</h2>
-                    <p>I have deep knowledge of every detail in Syed Maoz Arif's portfolio — including exact dates, issuers, IDs, and descriptions. Ask me anything!</p>
+                    <p>I know everything about Syed Maoz Arif's portfolio — certifications, dates, projects, and even why he's the right candidate for your team. Ask me anything!</p>
                     <div class="ai-suggestions">
+                        <button class="ai-chip">Why should we hire him?</button>
+                        <button class="ai-chip">Is he good for an internship?</button>
+                        <button class="ai-chip">What makes him stand out?</button>
+                        <button class="ai-chip">What can he do for our company?</button>
+                        <button class="ai-chip">Quick portfolio summary</button>
                         <button class="ai-chip">How many Altium certificates?</button>
-                        <button class="ai-chip">When did he get each certification?</button>
-                        <button class="ai-chip">Tell me about IncliSense</button>
-                        <button class="ai-chip">What are his IET roles?</button>
-                        <button class="ai-chip">What is his student ID?</button>
-                        <button class="ai-chip">Full portfolio stats</button>
+                        <button class="ai-chip">What are his strengths?</button>
+                        <button class="ai-chip">Is he available?</button>
                     </div>
                 </div>
             </div>
