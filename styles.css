@@ -2708,3 +2708,27 @@ html {
 .skip-link:focus {
     top: 0;
 }
+
+/* ============================================================
+   PERFORMANCE: Pause animations when page is not visible
+   ============================================================ */
+body.page-hidden * {
+    animation-play-state: paused !important;
+    transition-duration: 0s !important;
+}
+
+/* GPU acceleration hints for frequently animated elements */
+.navbar, .ai-toggle-btn, .back-to-top, .scroll-progress {
+    will-change: transform, opacity;
+    contain: layout style;
+}
+
+/* Reduce motion preference - respect user settings */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
