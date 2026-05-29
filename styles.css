@@ -46,20 +46,23 @@ body {
     font-family: 'Inter', sans-serif;
     color: var(--text-main);
     background-color: var(--bg-color);
-    overscroll-behavior-y: none; /* Removes taptic bounce effect */
-    
-    /* Animated Mesh Gradient Background (Soft Light Mode) */
+    overscroll-behavior-y: none;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -2;
+    background-color: var(--bg-color);
     background-image: 
         radial-gradient(at 0% 0%, rgba(224, 242, 254, 0.8) 0px, transparent 50%),
         radial-gradient(at 100% 0%, rgba(241, 245, 249, 0.9) 0px, transparent 50%),
         radial-gradient(at 100% 100%, rgba(226, 232, 240, 0.8) 0px, transparent 50%),
         radial-gradient(at 0% 100%, rgba(248, 250, 252, 0.9) 0px, transparent 50%);
-    background-attachment: fixed;
-    background-size: 100% 100%;
-    
-    line-height: 1.6;
-    overflow-x: hidden;
-    position: relative;
 }
 
 /* Overlay grid pattern for texture */
@@ -109,8 +112,8 @@ ul {
 /* Glassmorphism Panel (Glossy & Blurry) */
 .glass-panel {
     background: var(--bg-glass);
-    backdrop-filter: blur(32px) saturate(120%);
-    -webkit-backdrop-filter: blur(32px) saturate(120%);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
     border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 1.25rem;
     box-shadow: 
@@ -247,8 +250,8 @@ ul {
     max-width: 1200px;
     z-index: 1000;
     background: var(--bg-glass);
-    backdrop-filter: blur(32px) saturate(120%);
-    -webkit-backdrop-filter: blur(32px) saturate(120%);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
     border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 50px;
     padding: 0.5rem 0;
@@ -846,8 +849,8 @@ ul {
 }
 .modal-content {
     background: var(--bg-glass);
-    backdrop-filter: blur(32px) saturate(120%);
-    -webkit-backdrop-filter: blur(32px) saturate(120%);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
     margin: 5% auto;
     width: 90%;
     max-width: 1000px;
@@ -1883,7 +1886,7 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 /* ============ SECTION C: NAVBAR & NAVIGATION (40) ============ */
 
 /* C1: Navbar glass effect */
-.navbar { backdrop-filter: blur(20px) saturate(180%) !important; -webkit-backdrop-filter: blur(20px) saturate(180%) !important; }
+.navbar { backdrop-filter: blur(16px) saturate(180%) !important; -webkit-backdrop-filter: blur(16px) saturate(180%) !important; }
 
 /* C2: Navbar gradient line */
 .navbar::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--primary), transparent); opacity: 0.5; }
@@ -2211,7 +2214,7 @@ section { transition: padding 0.5s ease; }
 /* ============ SECTION L: GLASSMORPHISM UPGRADE (20) ============ */
 
 /* L1: Enhanced glass blur */
-.glass-panel { backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); }
+.glass-panel { backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%); }
 
 
 /* ============ GPU PERFORMANCE HINTS ============ */
@@ -2788,4 +2791,5 @@ body.page-hidden * {
         scroll-behavior: auto !important;
     }
 }
+
 
