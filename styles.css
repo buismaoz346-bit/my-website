@@ -1,31 +1,31 @@
 /* Global Variables & Theme */
 :root {
-    /* Liquid Glass Theme Colors */
-    --primary: #00E5E5; /* Electric Cyan */
-    --primary-light: #4DFFFF;
-    --primary-glow: rgba(0, 229, 229, 0.4);
+    /* Minimal White Glass Theme Colors */
+    --primary: #0F172A; /* Deep Slate / Black for high contrast */
+    --primary-light: #334155;
+    --primary-glow: rgba(15, 23, 42, 0.15);
     
-    --secondary: #5758BB; /* Cyber Violet */
-    --secondary-light: #7E7FD5;
+    --secondary: #94A3B8; /* Soft Slate */
+    --secondary-light: #CBD5E1;
     
-    --accent: #00FFC2; /* Mint */
+    --accent: #38BDF8; /* Soft Blue accent */
     
-    --bg-color: #0F172A; /* Deep Obsidian */
+    --bg-color: #F8FAFC; /* Clean Off-White */
     
-    /* True Glass Variables */
-    --bg-glass: rgba(255, 255, 255, 0.04); /* Lighter glass */
-    --bg-glass-hover: rgba(255, 255, 255, 0.08);
+    /* True Glass Variables (Light Mode) */
+    --bg-glass: rgba(255, 255, 255, 0.65); /* Frosted White Glass */
+    --bg-glass-hover: rgba(255, 255, 255, 0.9);
     
-    --text-main: #FFFFFF;
-    --text-muted: #94A3B8;
+    --text-main: #0F172A; /* Very Dark Slate */
+    --text-muted: #475569; /* Medium Slate */
     
-    --border-color: rgba(255, 255, 255, 0.1);
-    --border-glow: rgba(0, 229, 229, 0.3);
+    --border-color: rgba(255, 255, 255, 1);
+    --border-glow: rgba(255, 255, 255, 0.8);
     
-    --shadow-sm: 0 4px 30px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
-    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.3);
-    --shadow-neon: 0 0 20px var(--primary-glow), 0 0 40px rgba(87, 88, 187, 0.2);
+    --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 8px 32px 0 rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.08);
+    --shadow-neon: 0 0 20px rgba(255, 255, 255, 0.8);
     
     --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -43,12 +43,12 @@ body {
     color: var(--text-main);
     background-color: var(--bg-color);
     
-    /* Animated Mesh Gradient Background */
+    /* Animated Mesh Gradient Background (Soft Light Mode) */
     background-image: 
-        radial-gradient(at 0% 0%, rgba(87, 88, 187, 0.35) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(0, 229, 229, 0.25) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(87, 88, 187, 0.35) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, rgba(0, 229, 229, 0.25) 0px, transparent 50%);
+        radial-gradient(at 0% 0%, rgba(224, 242, 254, 0.8) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(241, 245, 249, 0.9) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(226, 232, 240, 0.8) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(248, 250, 252, 0.9) 0px, transparent 50%);
     background-attachment: fixed;
     background-size: 100% 100%;
     
@@ -63,8 +63,8 @@ body::before {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
     background-size: 40px 40px;
     z-index: -1;
     pointer-events: none;
@@ -156,16 +156,16 @@ ul {
 
 .btn-primary {
     background: var(--primary);
-    color: var(--bg-color); /* Dark text for contrast on cyan */
+    color: #fff;
     border: none;
-    box-shadow: 0 4px 14px 0 rgba(0, 229, 229, 0.4);
+    box-shadow: 0 4px 14px 0 rgba(15, 23, 42, 0.2);
 }
 
 .btn-primary:hover {
     background: var(--primary-light);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 229, 229, 0.6);
-    color: var(--bg-color);
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.3);
+    color: #fff;
 }
 
 .btn-secondary {
@@ -190,10 +190,10 @@ ul {
     font-family: 'Outfit', sans-serif;
     letter-spacing: 0.5px;
     cursor: pointer;
-    background: linear-gradient(135deg, var(--secondary) 0%, rgba(87, 88, 187, 0.5) 100%);
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-light) 100%);
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 15px rgba(87, 88, 187, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
