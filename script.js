@@ -307,66 +307,7 @@ function setGalleryMain(projectId, thumbElement, src) {
 }
 
 
-// --- Overscroll Stretch Effect ---
-let stretchFrame = null;
-let currentStretch = 1;
-let targetStretch = 1;
-let isStretchingTop = true;
 
-function applyStretch(delta, isTop) {
-    const maxStretch = 1.04; // Max stretch limit
-    const stretchAmount = 1 + (Math.abs(delta) * 0.001); // Sensitivity
-    targetStretch = Math.min(stretchAmount, maxStretch);
-    
-    if (isStretchingTop !== isTop) {
-        isStretchingTop = isTop;
-        document.body.style.transformOrigin = isTop ? 'top center' : 'bottom center';
-    }
-    
-    document.body.style.transition = 'none';
-    
-    if (!stretchFrame) {
-        animateStretch();
-    }
-}
-
-function animateStretch() {
-    currentStretch += (targetStretch - currentStretch) * 0.2; // Lerp towards target
-    
-    if (Math.abs(currentStretch - 1) < 0.001 && targetStretch <= 1.001) {
-        document.body.style.transform = `scaleY(1)`;
-        document.body.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-        stretchFrame = null;
-        return;
-    }
-    
-    document.body.style.transform = `scaleY(${currentStretch})`;
-    targetStretch += (1 - targetStretch) * 0.1; // Decay target back to 1
-    
-    stretchFrame = requestAnimationFrame(animateStretch);
-}
-
-window.addEventListener('wheel', (e) => {
-    if (e.deltaY < 0 && window.scrollY <= 0) {
-        applyStretch(e.deltaY, true);
-    } else if (e.deltaY > 0 && Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight) {
-        applyStretch(e.deltaY, false);
-    }
-}, { passive: true });
-
-let touchStartYPos = 0;
-window.addEventListener('touchstart', (e) => {
-    touchStartYPos = e.touches[0].clientY;
-}, { passive: true });
-
-window.addEventListener('touchmove', (e) => {
-    const deltaY = touchStartYPos - e.touches[0].clientY;
-    if (deltaY < -2 && window.scrollY <= 0) {
-        applyStretch(deltaY, true);
-    } else if (deltaY > 2 && Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight) {
-        applyStretch(deltaY, false);
-    }
-}, { passive: true });
 
 // Typewriter Effect
 const roles = ["Hardware Developer", "PCB Designer", "Embedded Engineer"];
