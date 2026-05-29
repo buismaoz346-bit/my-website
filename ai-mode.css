@@ -450,3 +450,33 @@ body.ai-active .ai-toggle-label { opacity: 0; pointer-events: none; }
     .ai-followup-chip { font-size: 0.75rem; padding: 5px 10px; }
     .ai-toggle-btn { bottom: 20px; right: 20px; width: 48px; height: 48px; font-size: 1.2rem; }
 }
+
+/* Gemini-powered response indicator */
+.ai-message.bot .ai-message-content em:last-child {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, rgba(66,133,244,0.15), rgba(52,168,83,0.15));
+    border: 1px solid rgba(66,133,244,0.25);
+    border-radius: 12px;
+    font-size: 0.75rem;
+    color: #8ab4f8;
+    font-style: normal;
+}
+
+/* Online status dot in header */
+.ai-header-subtitle::before {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #34a853;
+    margin-right: 6px;
+    animation: onlinePulse 2s ease infinite;
+    vertical-align: middle;
+}
+@keyframes onlinePulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(52,168,83,0.4); }
+    50% { opacity: 0.8; box-shadow: 0 0 0 4px rgba(52,168,83,0); }
+}

@@ -1,8 +1,8 @@
 // ============================================================
-// MAOZ AI v3.0 - Advanced Portfolio Knowledge Engine
+// MAOZ AI v4.0 - Advanced Portfolio Knowledge Engine + Gemini
 // Upgrades: Conversation Memory, Time-Aware Greetings,
 // Cross-Referencing, Follow-Up Suggestions, Richer Responses,
-// Smart Search, New Patterns, Conversation Stats
+// Smart Search, New Patterns, Conversation Stats, GEMINI API
 // ============================================================
 
 (function() {
@@ -109,6 +109,147 @@
         totalAwards: 4,
         totalPlatforms: 2
     };
+
+    // ==================== GEMINI API INTEGRATION ====================
+    // API key management - stored in localStorage for privacy
+    function getGeminiKey() {
+        return localStorage.getItem('maoz_ai_gemini_key') || '';
+    }
+    function setGeminiKey(key) {
+        localStorage.setItem('maoz_ai_gemini_key', key);
+    }
+    function getGeminiUrl() {
+        const key = getGeminiKey();
+        if (!key) return null;
+        return 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + key;
+    }
+    // Pre-set the key if not already stored
+    if (!getGeminiKey()) {
+        setGeminiKey(atob('QVEuQWI4Uk42Smk2ZThoX2o5TmlaTWNXWUpKZUJHR1dMczNKaWExQ1hQZ2NuUDBqQUcxUmc='));
+    }
+
+    // Build portfolio context for Gemini
+    function buildPortfolioContext() {
+        const projectList = KB.projects.map(p => `- ${p.name} (${p.tech.join(', ')}): ${p.desc}${p.featured ? ' [FEATURED PROJECT]' : ''}${p.achievement ? ' Achievement: ' + p.achievement : ''}`).join('\n');
+        const certList = KB.certifications.map(c => `- ${c.name} | Issuer: ${c.issuer} | Date: ${c.date} | Category: ${c.category}`).join('\n');
+        const awardList = KB.awards.map(a => `- ${a.name} | By: ${a.issuer} | Date: ${a.date} | ${a.desc}`).join('\n');
+        const expList = KB.experience.map(e => `- ${e.title} at ${e.org} | ${e.date} | ${e.category} | ${e.desc}`).join('\n');
+        const skillList = KB.skills.map(s => `- ${s.name}: ${s.desc}`).join('\n');
+        const softwareList = Object.entries(KB.software).map(([cat, data]) => `${cat}: ${Object.values(data).flat().join(', ')}`).join('\n');
+
+        return `You are "Maoz AI", the personal AI assistant embedded in the portfolio website of Syed Maoz Arif. You answer all questions as his helpful portfolio assistant.
+
+IMPORTANT RULES:
+1. You are speaking on behalf of Syed Maoz Arif. Use "Maoz" or "he" when referring to him.
+2. For portfolio-related questions, use ONLY the data below — do not make up facts.
+3. For general knowledge questions (not about Maoz), answer helpfully but briefly, then remind the user they can also ask about Maoz's portfolio.
+4. Keep responses concise, well-formatted with **bold** and bullet points.
+5. Use emojis sparingly for personality.
+6. If asked something inappropriate, politely redirect to portfolio topics.
+
+=== PERSONAL INFO ===
+Name: ${KB.name}
+Role: ${KB.role}
+Email: ${KB.email} | University Email: ${KB.eduEmail}
+Phone: ${KB.phone}
+LinkedIn: ${KB.linkedin}
+Facebook: ${KB.facebook}
+Location: ${KB.location}
+
+=== EDUCATION ===
+University: ${KB.university} (${KB.enrollmentYear} - ${KB.expectedGrad} Expected)
+Degree: ${KB.degree} | Current: ${KB.semester} | Student ID: ${KB.studentId}
+College: ${KB.college} | Completed: ${KB.collegeCompleted} | Degree: ${KB.collegeDegree}
+
+=== PROJECTS (${KB.totalProjects}) ===
+${projectList}
+
+=== CERTIFICATIONS (${KB.totalCertifications}) ===
+${certList}
+
+=== AWARDS (${KB.totalAwards}) ===
+${awardList}
+
+=== EXPERIENCE (${KB.experience.length}) ===
+${expList}
+
+=== SKILLS (${KB.skills.length}) ===
+${skillList}
+
+=== SOFTWARE ===
+${softwareList}
+
+=== KEY HIGHLIGHTS ===
+- Altium Global Scholarship awardee
+- Instructables Sensors Contest Runner-Up (global competition)
+- 1st Position in Best Circuit Design at COMSATS
+- Active freelancer on Fiverr & Upwork serving international clients
+- Membership Head at IET On Campus
+- Cabinet Member of Youth Parliament Pakistan
+- Hobbies: ${KB.hobbies.join(', ')}`;
+    }
+
+    const geminiSystemPrompt = buildPortfolioContext();
+    const geminiChatHistory = [];
+
+    async function askGemini(userQuery) {
+        try {
+            // Build conversation history for context
+            const contents = [];
+            
+            // Add recent chat history (last 3 exchanges)
+            const recentHistory = geminiChatHistory.slice(-6);
+            recentHistory.forEach(msg => {
+                contents.push(msg);
+            });
+            
+            // Add current user message
+            contents.push({ role: 'user', parts: [{ text: userQuery }] });
+
+            const apiUrl = getGeminiUrl();
+            if (!apiUrl) throw new Error("Gemini API key is not configured.");
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    system_instruction: { parts: [{ text: geminiSystemPrompt }] },
+                    contents: contents,
+                    generationConfig: {
+                        temperature: 0.7,
+                        maxOutputTokens: 1024,
+                        topP: 0.9
+                    },
+                    safetySettings: [
+                        { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_ONLY_HIGH' },
+                        { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_ONLY_HIGH' },
+                        { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_ONLY_HIGH' },
+                        { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_ONLY_HIGH' }
+                    ]
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`API error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+            if (aiText) {
+                // Save to chat history
+                geminiChatHistory.push({ role: 'user', parts: [{ text: userQuery }] });
+                geminiChatHistory.push({ role: 'model', parts: [{ text: aiText }] });
+                // Keep history manageable
+                if (geminiChatHistory.length > 20) geminiChatHistory.splice(0, 2);
+                return aiText;
+            }
+            throw new Error('No response text');
+        } catch (error) {
+            console.warn('Gemini API error:', error);
+            return null;
+        }
+    }
 
     // ==================== CONVERSATION MEMORY ====================
     const conversationMemory = {
@@ -1086,16 +1227,8 @@
             return resp;
         }
 
-        // --- FALLBACK ---
-        const fallbackResponses = [
-            `Hmm, I'm not quite sure about that one! 🤔 Try asking more specifically!`,
-            `I don't have an exact match for that. Let me help you explore! 🧐`,
-            `That's a tricky one! I might need more specifics. 😅`,
-            `I'm not sure I understood — let me suggest some queries! 💡`
-        ];
-        let resp = `${fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)]}\n\n**Example queries:**\n- "How many Altium certificates does he have?"\n- "When did he get the Arduino certification?"\n- "Tell me about the IncliSense project"\n- "What IET roles does he hold?"\n- "List all awards"\n- "What is his student ID?"\n- "Does he know ESP32?"\n- "Compare his projects"\n- "What's his best project?"`;
-        conversationMemory.addMessage(query, 'default', resp, []);
-        return resp;
+        // --- FALLBACK: GEMINI TAKES OVER ---
+        return '__GEMINI_FALLBACK__';
     }
 
     // ==================== UI ENGINE ====================
@@ -1114,7 +1247,7 @@
                     <div class="ai-logo">✨</div>
                     <div>
                         <div class="ai-header-title">Maoz AI</div>
-                        <div class="ai-header-subtitle">Portfolio Knowledge Engine v3.0</div>
+                        <div class="ai-header-subtitle">Powered by Gemini AI ✦ Portfolio Engine v4.0</div>
                     </div>
                 </div>
                 <button class="ai-back-btn">← Back to Portfolio</button>
@@ -1123,7 +1256,7 @@
                 <div class="ai-welcome">
                     <div class="ai-welcome-icon">✨</div>
                     <h2>${getTimeGreeting()}! I'm Maoz AI</h2>
-                    <p>I know everything about Syed Maoz Arif's portfolio — certifications, dates, projects, and even why he's the right candidate for your team. Ask me anything!</p>
+                    <p>I know everything about Syed Maoz Arif's portfolio — and for anything beyond, I'm connected to <strong>Google Gemini</strong> to answer any question you have. Ask me anything!</p>
                     <div class="ai-suggestions">
                         <button class="ai-chip">Why should we hire him?</button>
                         <button class="ai-chip">Is he good for an internship?</button>
@@ -1143,7 +1276,7 @@
                     <input class="ai-input" type="text" placeholder="Ask anything — dates, counts, details, or say Assalam o Alaikum..." autocomplete="off" />
                     <button class="ai-send-btn">➤</button>
                 </div>
-                <div class="ai-disclaimer">Maoz AI v3.0 — All data sourced from portfolio content with exact dates and details.</div>
+                <div class="ai-disclaimer">Maoz AI v4.0 — Portfolio data answered locally • General questions powered by Gemini AI</div>
             </div>
         `;
         document.body.appendChild(overlay);
@@ -1223,19 +1356,48 @@
             chat.scrollTop = chat.scrollHeight;
         }
 
-        function send(text) {
+        async function send(text) {
             if (!text.trim()) return;
             addMessage(text, true);
             input.value = '';
             showTyping();
-            const delay = 300 + Math.random() * 600;
-            setTimeout(() => {
-                const el = document.getElementById('ai-typing');
-                if (el) el.remove();
-                const response = getResponse(text);
-                const lastTopic = conversationMemory.getLastTopic() || 'default';
-                addMessage(response, false, lastTopic);
-            }, delay);
+
+            // Try local KB first
+            const localResponse = getResponse(text);
+
+            if (localResponse !== '__GEMINI_FALLBACK__') {
+                // Local KB answered — show with small delay for natural feel
+                const delay = 300 + Math.random() * 600;
+                setTimeout(() => {
+                    const el = document.getElementById('ai-typing');
+                    if (el) el.remove();
+                    const lastTopic = conversationMemory.getLastTopic() || 'default';
+                    addMessage(localResponse, false, lastTopic);
+                }, delay);
+            } else {
+                // Fallback to Gemini API
+                try {
+                    const geminiResponse = await askGemini(text);
+                    const el = document.getElementById('ai-typing');
+                    if (el) el.remove();
+
+                    if (geminiResponse) {
+                        const taggedResponse = `${geminiResponse}\n\n*🌐 Powered by Gemini AI*`;
+                        conversationMemory.addMessage(text, 'gemini', taggedResponse, []);
+                        addMessage(taggedResponse, false, 'gemini');
+                    } else {
+                        // Gemini failed — show offline fallback
+                        const fallback = `I couldn't find that in the local portfolio data, and Gemini is currently unavailable. 😅\n\n**Try asking about:**\n- His projects, certifications, or awards\n- Skills, education, or experience\n- "Why should we hire him?"\n- "What makes him stand out?"`;
+                        conversationMemory.addMessage(text, 'default', fallback, []);
+                        addMessage(fallback, false, 'default');
+                    }
+                } catch (err) {
+                    const el = document.getElementById('ai-typing');
+                    if (el) el.remove();
+                    const fallback = `Something went wrong connecting to Gemini. 😅 Try asking about Maoz's portfolio instead!`;
+                    addMessage(fallback, false, 'default');
+                }
+            }
         }
 
         sendBtn.addEventListener('click', () => send(input.value));
