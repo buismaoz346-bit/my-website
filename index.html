@@ -112,7 +112,7 @@
                 <h3 class="role">I am a <span class="typewriter-text"></span><span class="cursor">|</span></h3>
                 
                 <div class="hero-stats">
-                    <div class="stat"><span class="stat-num">6</span> Projects</div>
+                    <div class="stat"><span class="stat-num">7</span> Projects</div>
                     <div class="stat-divider">·</div>
                     <div class="stat"><span class="stat-num">11</span> Certifications</div>
                     <div class="stat-divider">·</div>
@@ -208,6 +208,16 @@
                 </div>
 
                 <!-- Regular Grid Projects -->
+                <div class="project-card glass-panel hidden delay-2" onclick="openProjectModal('p7', this)">
+                    <div class="project-bg" style="background-image: url('Picture/portfolio_website.jpg');"></div>
+                    <div class="project-content-overlay">
+                        <h3>Personal Portfolio Website</h3>
+                        <p class="tech-stack">HTML5 · CSS3 · JS · UI/UX</p>
+                        <span class="project-link">View Details &rarr;</span>
+                    </div>
+                </div>
+
+
                 <div class="project-card glass-panel hidden delay-2" onclick="openProjectModal('p1', this)" onmouseenter="startCoverSlideshow('p1', this)" onmouseleave="stopCoverSlideshow('p1', this)">
                     <div class="project-bg" style="background-image: url('Documents/Projects/P1/Cover.jpg');"></div>
                     <div class="project-content-overlay">
@@ -457,6 +467,7 @@
         <h2 class="section-title text-center hidden">My Experience</h2>
         
         <div class="timeline">
+
             <!-- 3. IET On Campus Abbottabad -->
             <div class="timeline-item hidden">
                 <div class="timeline-dot"></div>
@@ -777,6 +788,32 @@
             <p class="footer-credit">Designed & Engineered by <span class="credit-name">Syed Maoz Arif</span></p>
         </div>
     </footer>
+
+    <!-- Project 7 Modal (Portfolio Website) -->
+    <div id="project-modal-p7" class="modal">
+        <div class="modal-content glass-panel">
+            <span class="modal-close" onclick="closeProjectModal('p7')">&times;</span>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <div class="gallery-image-container">
+                        <img loading="lazy" src="Picture/portfolio_website.jpg" class="gallery-main-img" id="gallery-main-img-p7">
+                    </div>
+                </div>
+                <div class="modal-info">
+                    <h2>Personal Portfolio Website</h2>
+                    <p class="modal-tech">Tech Stack: HTML5, CSS3, Vanilla JavaScript, UI/UX Design</p>
+                    <div class="modal-desc">
+                        <p>A modern, highly responsive personal portfolio website designed to showcase my projects, certifications, and skills.</p>
+                        <ul>
+                            <li><strong>UI/UX Design:</strong> Implemented a "White Glassmorphism" theme featuring frosted glass panels, soft mesh gradients, and a clean, minimalistic aesthetic.</li>
+                            <li><strong>Performance Optimization:</strong> Engineered to run at a silky smooth 60 FPS by offloading expensive CSS paints to the GPU and highly compressing visual assets.</li>
+                            <li><strong>Interactive Elements:</strong> Developed custom JavaScript interactions including dynamic modals, an AI-Assistant simulation mode, intersection observer animations, and native-feeling elastic scroll physics.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Project 1 Modal -->
     <div id="project-modal-p1" class="modal">
