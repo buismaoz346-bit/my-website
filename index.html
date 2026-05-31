@@ -1115,7 +1115,9 @@
         <img class="lightbox-content" id="lightbox-img">
     </div>
 
-    <script type="module" src="firebase-integration.js"></script>
+    <!-- Firebase SDK (Compat Version for file:// protocol support) -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
     <script src="script.js"></script>
     <script src="ai-mode.js"></script>
     <script src="premium-extras.js" defer></script>
