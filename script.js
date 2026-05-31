@@ -860,6 +860,10 @@ window.handleLike = async function(projectId) {
     const btn = document.querySelector(`#project-modal-${projectId} .like-btn`);
     
     if(btn && btn.classList.contains('liked')) return;
+    
+    // Save to local storage
+    localStorage.setItem('liked_' + projectId, 'true');
+
     if(btn) {
         btn.classList.add('liked');
         btn.innerHTML = `❤️ Liked`;
@@ -908,10 +912,14 @@ window.renderSocialUI = function(projectId) {
     if (!socialContainer) {
         socialContainer = document.createElement('div');
         socialContainer.className = 'social-container glass-panel';
+        const isLiked = localStorage.getItem('liked_' + projectId) === 'true';
+        const btnClass = isLiked ? 'like-btn liked' : 'like-btn';
+        const btnText = isLiked ? '❤️ Liked' : '🤍 Like';
+
         socialContainer.innerHTML = `
             <div class="social-header">
-                <button class="like-btn" onclick="handleLike('${projectId}')">
-                    🤍 Like <span class="like-count">0</span>
+                <button class="${btnClass}" onclick="handleLike('${projectId}')">
+                    ${btnText} <span class="like-count">0</span>
                 </button>
             </div>
             <div class="comments-section">
@@ -927,7 +935,12 @@ window.renderSocialUI = function(projectId) {
                 </div>
             </div>
         `;
-        modalBody.appendChild(socialContainer);
+        const modalGallery = modalBody.querySelector('.modal-gallery');
+        if (modalGallery) {
+            modalGallery.appendChild(socialContainer);
+        } else {
+            modalBody.appendChild(socialContainer);
+        }
     }
 
     if (currentUnsubscribeDoc) currentUnsubscribeDoc();
