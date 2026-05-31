@@ -857,12 +857,12 @@ async function initProjectDoc(projectId) {
 
 window.handleLike = async function(projectId) {
     const docRef = db.collection("projects").doc(projectId);
-    const btn = document.querySelector(#project-modal- + projectId +  .like-btn);
+    const btn = document.querySelector(`#project-modal-${projectId} .like-btn`);
     
     if(btn && btn.classList.contains('liked')) return;
     if(btn) {
         btn.classList.add('liked');
-        btn.innerHTML = ?? Liked;
+        btn.innerHTML = `❤️ Liked`;
     }
 
     try {
@@ -877,8 +877,8 @@ window.handleLike = async function(projectId) {
 };
 
 window.submitComment = async function(projectId) {
-    const input = document.querySelector(#project-modal- + projectId +  .comment-input);
-    const nameInput = document.querySelector(#project-modal- + projectId +  .comment-name);
+    const input = document.querySelector(`#project-modal-${projectId} .comment-input`);
+    const nameInput = document.querySelector(`#project-modal-${projectId} .comment-name`);
     
     const text = input.value.trim();
     const author = nameInput.value.trim() || "Anonymous";
@@ -900,7 +900,7 @@ window.submitComment = async function(projectId) {
 };
 
 window.renderSocialUI = function(projectId) {
-    const modalBody = document.querySelector(#project-modal- + projectId +  .modal-body);
+    const modalBody = document.querySelector(`#project-modal-${projectId} .modal-body`);
     if (!modalBody) return;
 
     let socialContainer = modalBody.querySelector('.social-container');
@@ -908,25 +908,25 @@ window.renderSocialUI = function(projectId) {
     if (!socialContainer) {
         socialContainer = document.createElement('div');
         socialContainer.className = 'social-container glass-panel';
-        socialContainer.innerHTML = \
+        socialContainer.innerHTML = `
             <div class="social-header">
-                <button class="like-btn" onclick="handleLike('\')">
-                    ?? Like <span class="like-count">0</span>
+                <button class="like-btn" onclick="handleLike('${projectId}')">
+                    🤍 Like <span class="like-count">0</span>
                 </button>
             </div>
             <div class="comments-section">
                 <h4>Comments (<span class="comment-count">0</span>)</h4>
-                <div class="comments-list" id="comments-list-\">
+                <div class="comments-list" id="comments-list-${projectId}">
                 </div>
                 <div class="comment-form">
                     <input type="text" class="comment-name" placeholder="Name (optional)" maxlength="30">
                     <div class="comment-input-wrapper">
-                        <input type="text" class="comment-input" placeholder="Add a comment..." onkeypress="if(event.key === 'Enter') submitComment('\')">
-                        <button class="comment-submit" onclick="submitComment('\')">Post</button>
+                        <input type="text" class="comment-input" placeholder="Add a comment..." onkeypress="if(event.key === 'Enter') submitComment('${projectId}')">
+                        <button class="comment-submit" onclick="submitComment('${projectId}')">Post</button>
                     </div>
                 </div>
             </div>
-        \;
+        `;
         modalBody.appendChild(socialContainer);
     }
 
@@ -949,7 +949,7 @@ window.renderSocialUI = function(projectId) {
     const commentsRef = db.collection("projects").doc(projectId).collection("comments").orderBy("timestamp", "asc");
     
     currentUnsubscribeCol = commentsRef.onSnapshot((snapshot) => {
-        const commentsList = socialContainer.querySelector(#comments-list-\);
+        const commentsList = socialContainer.querySelector(`#comments-list-${projectId}`);
         const commentCountEl = socialContainer.querySelector('.comment-count');
         if (!commentsList) return;
 
@@ -967,10 +967,10 @@ window.renderSocialUI = function(projectId) {
             const escAuthor = data.author.replace(/[&<>'"]/g, t => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[t] || t));
             const escText = data.text.replace(/[&<>'"]/g, t => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[t] || t));
 
-            commentEl.innerHTML = \
-                <div class="comment-author">\ <span class="comment-date">\</span></div>
-                <div class="comment-text">\</div>
-            \;
+            commentEl.innerHTML = `
+                <div class="comment-author">${escAuthor} <span class="comment-date">${dateStr}</span></div>
+                <div class="comment-text">${escText}</div>
+            `;
             commentsList.appendChild(commentEl);
         });
         
