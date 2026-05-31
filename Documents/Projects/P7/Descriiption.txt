@@ -1,0 +1,24 @@
+Project Overview
+A custom-built DC power bank / uninterruptible power supply (UPS) designed to provide reliable backup power for a Wi-Fi router during outages.
+
+Hardware & Components
+Enclosure: Custom white plastic housing with a textured black faceplate.
+
+Battery System: A lithium-ion battery pack equipped with an integrated Battery Management System (BMS) board to ensure safe charging, discharging, and cell balancing (likely a 3S 12.6V configuration).
+
+Power Regulation: A DC-DC step-down/step-up converter module featuring onboard inductors, capacitors, and a potentiometer to regulate a stable output voltage regardless of the battery's charge level.
+
+Interface & I/O:
+
+Digital 3-digit 7-segment display for real-time voltage monitoring.
+
+Rotary knob for voltage adjustment.
+
+Dual DC barrel jacks (standard 5.5mm) for charging input and power output.
+
+Main power toggle switch.
+
+Protection Circuitry: A panel-mounted fuse holder protects against overcurrent, and an inline diode is wired in series with the output to prevent reverse polarity or backfeeding.
+
+Testing & Calibration
+The internal wiring routes the battery through the BMS, switch, and DC-DC converter before reaching the output jack. During testing, a digital multimeter (VC9205A) was used to probe the output line (post-diode) and calibrate the system to exactly 13.0V. This slightly elevated voltage likely compensates for the forward voltage drop of the inline diode, ensuring a clean 12V reaches the router under load.

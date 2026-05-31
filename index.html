@@ -112,7 +112,7 @@
                 <h3 class="role">I am a <span class="typewriter-text"></span><span class="cursor">|</span></h3>
                 
                 <div class="hero-stats">
-                    <div class="stat"><span class="stat-num">7</span> Projects</div>
+                    <div class="stat"><span class="stat-num">8</span> Projects</div>
                     <div class="stat-divider">·</div>
                     <div class="stat"><span class="stat-num">11</span> Certifications</div>
                     <div class="stat-divider">·</div>
@@ -208,7 +208,16 @@
                 </div>
 
                 <!-- Regular Grid Projects -->
-                <div class="project-card glass-panel hidden delay-2" onclick="openProjectModal('p7', this)">
+                <div class="project-card glass-panel hidden delay-2" onclick="openProjectModal('p7', this)" onmouseenter="startCoverSlideshow('p7', this)" onmouseleave="stopCoverSlideshow('p7', this)">
+                    <div class="project-bg" style="background-image: url('Documents/Projects/P7/Cover.jpg');"></div>
+                    <div class="project-content-overlay">
+                        <h3>Wi-Fi Router UPS Power Bank</h3>
+                        <p class="tech-stack">Hardware Design · BMS · DC-DC Conversion</p>
+                        <span class="project-link">View Details &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-panel hidden delay-3" onclick="openProjectModal('p8', this)">
                     <div class="project-bg" style="background-image: url('Picture/portfolio_website.jpg');"></div>
                     <div class="project-content-overlay">
                         <h3>Personal Portfolio Website</h3>
@@ -789,14 +798,53 @@
         </div>
     </footer>
 
-    <!-- Project 7 Modal (Portfolio Website) -->
+    <!-- Project 7 Modal (UPS Power Bank) -->
     <div id="project-modal-p7" class="modal">
         <div class="modal-content glass-panel">
             <span class="modal-close" onclick="closeProjectModal('p7')">&times;</span>
             <div class="modal-body">
                 <div class="modal-gallery">
                     <div class="gallery-image-container">
-                        <img loading="lazy" src="Picture/portfolio_website.jpg" class="gallery-main-img" id="gallery-main-img-p7">
+                        <img loading="lazy" src="Documents/Projects/P7/Cover.jpg" class="gallery-main-img" id="gallery-main-img-p7">
+                        <div class="gallery-nav-left" onclick="navigateProjectGalleryClick('p7', -1, event)"></div>
+                        <div class="gallery-nav-right" onclick="navigateProjectGalleryClick('p7', 1, event)"></div>
+                    </div>
+                    <div class="gallery-thumbnails">
+                        <img loading="lazy" src="Documents/Projects/P7/Cover.jpg" onclick="setGalleryMain('p7', this, 'Documents/Projects/P7/Cover.jpg')" class="active-thumb">
+                        <img loading="lazy" src="Documents/Projects/P7/1.jpg" onclick="setGalleryMain('p7', this, 'Documents/Projects/P7/1.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P7/2.jpg" onclick="setGalleryMain('p7', this, 'Documents/Projects/P7/2.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P7/3.jpg" onclick="setGalleryMain('p7', this, 'Documents/Projects/P7/3.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P7/4.jpg" onclick="setGalleryMain('p7', this, 'Documents/Projects/P7/4.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P7/5.jpg" onclick="setGalleryMain('p7', this, 'Documents/Projects/P7/5.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P7/6.jpg" onclick="setGalleryMain('p7', this, 'Documents/Projects/P7/6.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P7/7.jpg" onclick="setGalleryMain('p7', this, 'Documents/Projects/P7/7.jpg')">
+                        <img loading="lazy" src="Documents/Projects/P7/8.jpg" onclick="setGalleryMain('p7', this, 'Documents/Projects/P7/8.jpg')">
+                    </div>
+                </div>
+                <div class="modal-info">
+                    <h2>Wi-Fi Router UPS Power Bank</h2>
+                    <p class="tech-stack-details"><strong>Technologies:</strong> BMS Integration, DC-DC Converters, 3S Lithium-ion, Circuit Calibration</p>
+                    <div class="modal-description">
+                        <p>A custom-built DC Uninterruptible Power Supply (UPS) designed to seamlessly provide reliable backup power for a Wi-Fi router during grid outages.</p>
+                        <ul>
+                            <li><strong>Robust Interface:</strong> Housed in a clean, custom white enclosure with a textured black faceplate. The control panel includes a 3-digit 7-segment display for real-time voltage monitoring, a rotary knob for fine voltage adjustment, dual 5.5mm DC jacks, and a main toggle switch.</li>
+                            <li><strong>Power Management:</strong> Powered by a 3S 12.6V lithium-ion battery pack with a dedicated Battery Management System (BMS) for safe charging, discharging, and cell balancing. A DC-DC converter module with onboard inductors and capacitors regulates a highly stable output voltage.</li>
+                            <li><strong>Protection & Precision Calibration:</strong> Engineered with a panel-mounted fuse for overcurrent protection and an inline diode to prevent reverse polarity backfeeding. The system was meticulously calibrated with a VC9205A multimeter to exactly 13.0V, perfectly compensating for the diode's forward voltage drop to ensure a clean 12.0V reaches the router under load.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 8 Modal (Portfolio Website) -->
+    <div id="project-modal-p8" class="modal">
+        <div class="modal-content glass-panel">
+            <span class="modal-close" onclick="closeProjectModal('p8')">&times;</span>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <div class="gallery-image-container">
+                        <img loading="lazy" src="Picture/portfolio_website.jpg" class="gallery-main-img" id="gallery-main-img-p8">
                     </div>
                 </div>
                 <div class="modal-info">
