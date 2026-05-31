@@ -192,6 +192,9 @@ window.openProjectModal = function(projectId, cardElement) {
         modalContent.style.transition = 'none';
         modal.style.display = 'block';
         
+        // Init Social UI if Firebase is loaded
+        if(window.renderSocialUI) window.renderSocialUI(projectId);
+        
         // If we clicked a card, calculate FLIP positions
         if (cardElement) {
             const cardRect = cardElement.getBoundingClientRect();

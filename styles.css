@@ -2794,3 +2794,139 @@ body.page-hidden * {
 
 
 
+
+/* ================= FIREBASE SOCIAL UI ================= */
+.social-container {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.social-header {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.like-btn {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.like-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.9);
+    border-color: #ff4757;
+}
+
+.like-btn.liked {
+    background: #ff4757;
+    color: white;
+    border-color: #ff4757;
+}
+
+.comments-section h4 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.comments-list {
+    max-height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    padding-right: 0.5rem;
+}
+
+.comment-item {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 0.8rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.4);
+}
+
+.comment-author {
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment-date {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: normal;
+}
+
+.comment-text {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    line-height: 1.4;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.comment-name, .comment-input {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--border-color);
+    padding: 0.8rem;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.comment-name:focus, .comment-input:focus {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.1);
+}
+
+.comment-input-wrapper {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.comment-input {
+    flex: 1;
+}
+
+.comment-submit {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 0 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.comment-submit:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+}
