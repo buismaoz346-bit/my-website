@@ -917,10 +917,13 @@ window.renderSocialUI = function(projectId) {
         const btnText = isLiked ? '❤️ Liked' : '🤍 Like';
 
         socialContainer.innerHTML = `
-            <div class="social-header">
+            <div class="social-header" style="align-items: center; gap: 1rem;">
                 <button class="${btnClass}" onclick="handleLike('${projectId}')">
-                    ${btnText} <span class="like-count">0</span>
+                    ${btnText}
                 </button>
+                <div class="like-stats" style="font-size: 0.9rem; color: var(--text-color); font-weight: 500;">
+                    ❤️ <span class="like-count">0</span> likes
+                </div>
             </div>
             <div class="comments-section">
                 <h4>Comments (<span class="comment-count">0</span>)</h4>
