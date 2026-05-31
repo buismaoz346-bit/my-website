@@ -966,13 +966,27 @@ window.renderSocialUI = function(projectId) {
     initProjectDoc(projectId);
     
     currentUnsubscribeDoc = docRef.onSnapshot((docSnap) => {
+        const likeCountEl = socialContainer.querySelector('.like-count');
         if (docSnap.exists) {
             const data = docSnap.data();
-            const likeCountEl = socialContainer.querySelector('.like-count');
             if (likeCountEl) {
-                likeCountEl.innerText = data.likes || 0;
+                // Ensure absolute numerical value is printed, overriding any falsy bugs
+                const count = typeof data.likes !== 'undefined' ? data.likes : 0;
+                likeCountEl.innerText = count;
+                // Force a color flash to visually prove to the user that onSnapshot fired!
+                likeCountEl.style.color = 'red';
+                setTimeout(() => likeCountEl.style.color = '', 500);
+            }
+        } else {
+            // Document doesn't exist yet, force 0
+            if (likeCountEl) {
+                likeCountEl.innerText = "0";
             }
         }
+    }, (error) => {
+        console.error("Snapshot error: ", error);
+        const likeCountEl = socialContainer.querySelector('.like-count');
+        if(likeCountEl) likeCountEl.innerText = "Error";
     });
 
     const commentsRef = db.collection("projects").doc(projectId).collection("comments").orderBy("timestamp", "asc");
