@@ -859,7 +859,20 @@ window.handleLike = async function(projectId) {
     const docRef = db.collection("projects").doc(projectId);
     const btn = document.querySelector(`#project-modal-${projectId} .like-btn`);
     
-    if(btn && btn.classList.contains('liked')) return;
+    if(btn && btn.classList.contains('liked')) {
+        // Unlike Logic
+        btn.classList.remove('liked');
+        btn.innerHTML = `🤍 Like`;
+        localStorage.removeItem('liked_' + projectId);
+        try {
+            await docRef.update({
+                likes: firebase.firestore.FieldValue.increment(-1)
+            });
+        } catch (e) {
+            console.error("Error updating likes: ", e);
+        }
+        return;
+    }
     
     // Save to local storage
     localStorage.setItem('liked_' + projectId, 'true');
