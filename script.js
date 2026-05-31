@@ -971,7 +971,14 @@ window.renderSocialUI = function(projectId) {
             const data = docSnap.data();
             if (likeCountEl) {
                 // Ensure absolute numerical value is printed, overriding any falsy bugs
-                const count = typeof data.likes !== 'undefined' ? data.likes : 0;
+                let count = typeof data.likes !== 'undefined' ? data.likes : 0;
+                
+                // Auto-heal negative likes (happens if a user 'Unlikes' after a database wipe)
+                if (count < 0) {
+                    count = 0;
+                    docRef.update({ likes: 0 }).catch(e => console.error(e));
+                }
+                
                 likeCountEl.innerText = count;
                 // Force a color flash to visually prove to the user that onSnapshot fired!
                 likeCountEl.style.color = 'red';
