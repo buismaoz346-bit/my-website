@@ -207,6 +207,17 @@
                     </div>
                 </div>
 
+                <div class="project-card glass-panel hidden delay-2" onclick="openProjectModal('p9_fpga', this)">
+                    <video autoplay loop muted playsinline class="project-bg" style="object-fit: cover; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0.85;">
+                        <source src="Documents/Projects/P8/Project_video.mp4" type="video/mp4">
+                    </video>
+                    <div class="project-content-overlay" style="position: relative; z-index: 2;">
+                        <h3>First FPGA Programming - iCEbreaker</h3>
+                        <p class="tech-stack">Verilog · iCEbreaker FPGA · Digital Logic</p>
+                        <span class="project-link">View Details &rarr;</span>
+                    </div>
+                </div>
+
                 <!-- Regular Grid Projects -->
                 <div class="project-card glass-panel hidden delay-2" onclick="openProjectModal('p7', this)" onmouseenter="startCoverSlideshow('p7', this)" onmouseleave="stopCoverSlideshow('p7', this)">
                     <div class="project-bg" style="background-image: url('Documents/Projects/P7/Cover.jpg');"></div>
@@ -883,6 +894,32 @@
             <p class="footer-credit">Designed & Engineered by <span class="credit-name">Syed Maoz Arif</span></p>
         </div>
     </footer>
+
+    <!-- Project 9 Modal (FPGA iCEbreaker) -->
+    <div id="project-modal-p9_fpga" class="modal">
+        <div class="modal-content glass-panel">
+            <span class="modal-close" onclick="closeProjectModal('p9_fpga')">&times;</span>
+            <div class="modal-body">
+                <div class="modal-gallery" style="display:flex; align-items:center; justify-content:center; background:#0a0a0a; border-radius:8px; overflow:hidden;">
+                    <video autoplay loop muted controls playsinline style="width:100%; max-height:400px; object-fit:contain;">
+                        <source src="Documents/Projects/P8/Project_video.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="modal-info">
+                    <h2>First FPGA Programming - iCEbreaker</h2>
+                    <p class="tech-stack-details"><strong>Technologies:</strong> Verilog, iCEbreaker FPGA, Digital Logic Design, iceStorm Toolchain</p>
+                    <div class="modal-description">
+                        <p>This project marks my foray into Field-Programmable Gate Arrays (FPGAs) using the iCEbreaker development board. I implemented a simple LED blinking circuit using hardware description languages to understand the core concepts of digital logic synthesis and bitstream generation.</p>
+                        <ul>
+                            <li><strong>Hardware Configuration:</strong> Pin assignment and clock routing on the iCEbreaker board.</li>
+                            <li><strong>HDL Programming:</strong> Writing and simulating Verilog code to create a functional hardware timer.</li>
+                            <li><strong>Toolchain:</strong> Utilizing the open-source iceStorm toolchain to synthesize, place, route, and upload the bitstream.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Project 7 Modal (UPS Power Bank) -->
     <div id="project-modal-p7" class="modal">

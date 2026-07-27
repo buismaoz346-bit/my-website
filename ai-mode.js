@@ -45,6 +45,7 @@
         ],
 
         projects: [
+            { id: "p9_fpga", name: "First FPGA Programming - iCEbreaker", tech: ["Verilog", "iCEbreaker", "FPGA", "Digital Logic"], desc: "My foray into Field-Programmable Gate Arrays (FPGAs) using the iCEbreaker development board, featuring a simple LED blinking circuit implemented in Verilog using the open-source iceStorm toolchain.", date: "2026" },
             { id: "p6", name: "IncliSense Digital Level", tech: ["Arduino Nano", "MPU6050", "IoT", "3D Printing"], desc: "A precision digital leveling device built to provide high-accuracy numerical feedback, featuring PC telemetry and a responsive 11-LED interface.", featured: true, achievement: "Won Runner-Up in Instructables Sensors Contest 2026", date: "2026" },
             { id: "p1", name: "Smart Lighting System", tech: ["Altium Designer", "ATMEGA328PB-AU", "Time-of-Flight Sensor"], desc: "A smart lighting system designed with advanced PCB layout in Altium Designer, using Time-of-Flight sensors for intelligent light control." },
             { id: "p2", name: "Omni-Sense Node", tech: ["ESP32", "SPI", "PWM", "RFID"], desc: "A multi-sensor IoT node built around the ESP32 platform, integrating SPI, PWM, and RFID communication protocols." },
