@@ -64,14 +64,16 @@
             { name: "Arduino & IoT - Cardiff Institute", issuer: "Cardiff Institute", date: "February 23, 2026", category: "IoT/Embedded", desc: "Completed the comprehensive Arduino and IoT course from Cardiff Institute, gaining hands-on experience in building smart, connected hardware devices and sensor networks.", tags: ["arduino", "iot", "cardiff", "embedded"] },
             { name: "Practical Entrepreneurship", issuer: "Training Institute", date: "February 23, 2026", category: "Business", desc: "Completed intensive training in Practical Entrepreneurship, learning how to bridge the gap between technical engineering solutions and real-world business applications.", tags: ["entrepreneurship", "business"] },
             { name: "Unleashing Creativity with AI", issuer: "Workshop Organizer", date: "February 23, 2026", category: "AI", desc: "Participated in the Unleashing Creativity with AI program, exploring innovative applications and the intersection of artificial intelligence with creative engineering processes.", tags: ["ai", "creativity", "workshop"] },
-            { name: "IET On Campus Recognition", issuer: "IET (Institution of Engineering and Technology)", date: "February 23, 2026", category: "Community", desc: "Acknowledged for active participation and dedication to the IET On Campus community, fostering technical growth and professional collaboration.", tags: ["iet", "recognition", "community"] }
+            { name: "IET On Campus Recognition", issuer: "IET (Institution of Engineering and Technology)", date: "February 23, 2026", category: "Community", desc: "Acknowledged for active participation and dedication to the IET On Campus community, fostering technical growth and professional collaboration.", tags: ["iet", "recognition", "community"] },
+            { name: "Best CEP Project Award — 1st Position", issuer: "COMSATS University & District Youth Office Abbottabad", date: "July 22, 2026", category: "Academic", desc: "Secured First Position in the Complex Engineering Problem Exhibition SP26 (Software Category) for the project 'Industrial Edge AI Condition Monitoring and 3D Digital Twin' at COMSATS University Islamabad, Abbottabad Campus.", tags: ["cep", "project", "award", "best", "first", "1st", "comsats", "ai", "digital twin", "exhibition"] }
         ],
 
         awards: [
             { name: "Best Project Award", issuer: "COMSATS University", date: "2026", desc: "Awarded 'Best Project' for outstanding engineering design, technical execution, and innovation at COMSATS University.", tags: ["best", "project"] },
             { name: "1st Position - Best Circuit Design", issuer: "COMSATS University & IET", date: "2026", desc: "Secured first place in a competitive hardware workshop at COMSATS University Islamabad, Abbottabad Campus in collaboration with IET. Demonstrated advanced proficiency in applied electronics by engineering an efficient, functional circuit layout under strict time constraints.", tags: ["circuit", "design", "first", "1st", "iet", "workshop"] },
             { name: "Altium Designer Essentials Certification", issuer: "Altium", date: "April 5, 2026", desc: "Successfully fulfilled the certification requirements for the Altium Designer Essentials program, demonstrating proficiency in professional PCB design and schematic capture.", tags: ["altium", "certification"] },
-            { name: "Instructables Sensors Contest Runner-Up", issuer: "Instructables (Global)", date: "April 2026", desc: "Awarded Runner Up in the global Instructables Sensors Contest for the 'IncliSense' project, earning a bronze medal and recognition for precision-engineered dual-axis digital level design.", tags: ["instructables", "contest", "sensors", "runner", "inclisense", "global", "bronze"] }
+            { name: "Instructables Sensors Contest Runner-Up", issuer: "Instructables (Global)", date: "April 2026", desc: "Awarded Runner Up in the global Instructables Sensors Contest for the 'IncliSense' project, earning a bronze medal and recognition for precision-engineered dual-axis digital level design.", tags: ["instructables", "contest", "sensors", "runner", "inclisense", "global", "bronze"] },
+            { name: "Best CEP Project Award — 1st Position", issuer: "COMSATS University & District Youth Office Abbottabad", date: "July 22, 2026", desc: "Secured First Position in the Complex Engineering Problem Exhibition SP26 (Software Category) for the project 'Industrial Edge AI Condition Monitoring and 3D Digital Twin' at COMSATS University Islamabad, Abbottabad Campus, in collaboration with District Youth Office Abbottabad and IET.", tags: ["cep", "project", "award", "best", "first", "1st", "comsats", "ai", "digital twin", "exhibition", "sp26"] }
         ],
 
         experience: [
@@ -105,8 +107,8 @@
 
         platforms: ["Fiverr", "Upwork"],
         totalProjects: 6,
-        totalCertifications: 11,
-        totalAwards: 4,
+        totalCertifications: 12,
+        totalAwards: 5,
         totalPlatforms: 2
     };
 
