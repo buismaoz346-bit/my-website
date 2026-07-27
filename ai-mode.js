@@ -77,6 +77,7 @@
         ],
 
         experience: [
+            { title: "Acting Vice President", org: "IET On Campus CUI Abbottabad", date: "July 2026 - Present", category: "Leadership", desc: "Assuming executive leadership responsibilities, guiding chapter operations, and representing the student branch to foster engineering excellence and professional development among members.", tags: ["iet", "vice", "president", "leadership", "executive"] },
             { title: "Membership Head", org: "IET On Campus Abbottabad", date: "May 2025 - Present", category: "Leadership", desc: "Leading membership initiatives and organizing technical events, including coordinating workshops like Computer Vision & AI in UAVs.", tags: ["iet", "membership", "head", "leadership"] },
             { title: "Cabinet Member", org: "Youth Parliament Pakistan", date: "2025 - 2027 Session", category: "Leadership", desc: "Serving in a leadership capacity for youth advocacy and policy discussions.", tags: ["youth", "parliament", "cabinet", "leadership", "politics"] },
             { title: "Runner-Up", org: "Instructables Sensors Contest 2026", date: "April 2026", category: "Award", desc: "Recognized for designing and developing the 'IncliSense' project.", tags: ["instructables", "contest", "award"] },
@@ -90,7 +91,7 @@
             { name: "3D Modeling & CAD", desc: "Mechanical product design, parametric modeling, and assembly creation for 3D printing using Autodesk Fusion 360 and Inventor.", tags: ["3d", "cad", "fusion", "inventor", "modeling", "printing"] },
             { name: "Programming & Technical Writing", desc: "Object-oriented programming and automation using Python, alongside professional document and report formatting utilizing LaTeX and Overleaf.", tags: ["python", "programming", "latex", "overleaf", "writing"] },
             { name: "Web Development & UI/UX", desc: "Designing and building responsive, modern, and interactive websites using HTML, CSS, JavaScript.", tags: ["web", "html", "css", "javascript", "frontend"] },
-            { name: "Leadership & Project Management", desc: "Delivering freelance engineering projects on Upwork and Fiverr, combined with organizational leadership as Membership Head for IET On Campus and Cabinet Member of Youth Parliament Pakistan.", tags: ["leadership", "management", "freelance"] },
+            { name: "Leadership & Project Management", desc: "Delivering freelance engineering projects on Upwork and Fiverr, combined with organizational leadership as Acting Vice President for IET On Campus and Cabinet Member of Youth Parliament Pakistan.", tags: ["leadership", "management", "freelance"] },
             { name: "Interpersonal Skills", desc: "Public Speaking, Teamwork Skills, Communication, Collaboration, Empathy.", tags: ["speaking", "teamwork", "communication"] },
             { name: "Critical Thinking", desc: "Creativity, Problem Solving, Organization.", tags: ["critical", "thinking", "creativity", "problem"] }
         ],
