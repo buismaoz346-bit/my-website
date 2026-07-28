@@ -313,7 +313,7 @@ function setGalleryMain(projectId, thumbElement, src) {
 
 
 // Typewriter Effect
-const roles = ["Hardware Developer", "PCB Designer", "Embedded Engineer"];
+const roles = ["Hardware Developer", "Acting Vice President @ IET", "PCB Designer", "Embedded Engineer"];
 let roleIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
