@@ -1808,9 +1808,30 @@ footer {
 /* A46 */ @keyframes zoomPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.02); } }
 /* A47 */ @keyframes colorShift { 0% { color: var(--text-main); } 50% { color: var(--primary); } 100% { color: var(--text-main); } }
 /* A48 */ @keyframes barFill { from { width: 0%; } to { width: var(--fill, 100%); } }
-/* A49 */ @keyframes flipX { 0% { transform: perspective(600px) rotateX(90deg); opacity: 0; } 100% { transform: perspective(600px) rotateX(0); opacity: 1; } }
-/* A50 */ @keyframes flipY { 0% { transform: perspective(600px) rotateY(90deg); opacity: 0; } 100% { transform: perspective(600px) rotateY(0); opacity: 1; } }
 
+/* --- Enforce Circular Avatars --- */
+.nav-logo-avatar {
+    width: 40px !important;
+    height: 40px !important;
+    aspect-ratio: 1 / 1 !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    flex-shrink: 0 !important;
+    border: 2px solid var(--primary) !important;
+    box-shadow: 0 0 10px rgba(15, 23, 42, 0.2) !important;
+    overflow: hidden !important;
+}
+
+.image-wrapper {
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    aspect-ratio: 1 / 1 !important;
+}
+
+.image-wrapper img {
+    border-radius: 50% !important;
+    object-fit: cover !important;
+}
 
 /* ============ SECTION B: HERO SECTION EFFECTS (50) ============ */
 
