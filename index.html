@@ -38,8 +38,8 @@
     <!-- Link Preview Fallback -->
     <link rel="image_src" href="https://buismaoz346-bit.github.io/my-website/Picture/my_pic_optimized.jpg?v=3">
     
-    <!-- Favicon (SVG) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%2364ffda%22 font-family=%22sans-serif%22 font-weight=%22bold%22>SMA</text></svg>">
+    <!-- Favicon (Profile Picture) -->
+    <link rel="icon" href="Picture/my_pic_optimized.jpg?v=3" type="image/jpeg">
 
 </head>
 <body>
@@ -74,7 +74,10 @@
     <!-- Header / Navbar -->
     <header class="navbar">
         <div class="nav-container">
-            <div class="logo">Syed Maoz Arif</div>
+            <div class="logo" style="display: flex; align-items: center; gap: 0.75rem;">
+                <img src="Picture/my_pic_optimized.jpg?v=3" alt="Syed Maoz Arif" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary); box-shadow: 0 0 10px rgba(15, 23, 42, 0.15);">
+                <span>Syed Maoz Arif</span>
+            </div>
             
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
