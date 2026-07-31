@@ -1,0 +1,298 @@
+/* ============================================================
+   BENTO BOX ARCHITECTURE & LIQUID GLASS AESTHETIC
+   ============================================================ */
+
+/* --- 1. Morphing Liquid Glass Background --- */
+.liquid-bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -3; /* Behind PCB canvas and content */
+    background-color: #050505;
+    pointer-events: none;
+}
+
+.liquid-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    animation: liquidMorph 20s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    will-change: transform, border-radius;
+}
+
+.blob-1 {
+    width: 600px;
+    height: 600px;
+    background: linear-gradient(135deg, #7C3AED, #38BDF8);
+    top: -100px;
+    left: -100px;
+    animation-delay: 0s;
+}
+
+.blob-2 {
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(135deg, #DB2777, #7C3AED);
+    bottom: -150px;
+    right: -100px;
+    animation-delay: -5s;
+}
+
+.blob-3 {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, #0EA5E9, #10B981);
+    top: 30%;
+    left: 40%;
+    animation-delay: -10s;
+}
+
+@keyframes liquidMorph {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    }
+    33% {
+        transform: translate(10vw, -10vh) scale(1.1) rotate(120deg);
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    66% {
+        transform: translate(-5vw, 15vh) scale(0.9) rotate(240deg);
+        border-radius: 30% 70% 50% 50% / 50% 60% 40% 60%;
+    }
+    100% {
+        transform: translate(0, 0) scale(1) rotate(360deg);
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    }
+}
+
+
+/* --- 2. Bento Grid Architecture --- */
+.bento-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(220px, auto);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 120px auto 4rem auto;
+    padding: 0 1.5rem;
+}
+
+/* Liquid Glass Bento Tile */
+.bento-tile {
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 32px;
+    padding: 2rem;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    color: #F8FAFC;
+}
+
+/* Internal Shimmer Trace Effect */
+.bento-tile::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 32px;
+    padding: 2px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.1) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* Tile Spans (Desktop) */
+.bento-hero {
+    grid-column: span 2;
+    grid-row: span 2;
+    padding: 3rem;
+}
+
+.bento-about {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.bento-stat {
+    grid-column: span 1;
+    grid-row: span 1;
+    align-items: center;
+    text-align: center;
+}
+
+.bento-skills {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.bento-map {
+    grid-column: span 1;
+    grid-row: span 2;
+    padding: 0;
+    background: rgba(15, 23, 42, 0.7);
+}
+
+.bento-resume {
+    grid-column: span 1;
+    grid-row: span 1;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0EA5E9, #7C3AED);
+}
+
+.bento-resume:hover {
+    box-shadow: 0 0 40px rgba(124, 58, 237, 0.6);
+}
+
+/* Tile Internal Typography (Space Grotesk & Archivo) */
+.bento-tile h1, .bento-tile h2, .bento-tile h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.bento-hero h1 {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 1.1;
+    background: linear-gradient(to right, #FFFFFF, #94A3B8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.bento-hero .role-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    color: #38BDF8;
+    margin-bottom: 1.5rem;
+}
+
+.bento-tile p {
+    font-family: 'Archivo', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #CBD5E1;
+}
+
+.bento-stat h2 {
+    font-size: 3.5rem;
+    margin-bottom: 0.2rem;
+    background: linear-gradient(135deg, #38BDF8, #7C3AED);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.bento-stat p {
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Skills Tags in Bento */
+.bento-skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.bento-tag {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.bento-tag:hover {
+    background: rgba(56, 189, 248, 0.2);
+    border-color: #38BDF8;
+    transform: translateY(-2px);
+}
+
+/* Map/Location Tile Details */
+.map-bg {
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at center, rgba(56,189,248,0.2) 0%, transparent 60%),
+                      repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(255,255,255,0.05) 20px),
+                      repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(255,255,255,0.05) 20px);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.location-dot {
+    width: 16px;
+    height: 16px;
+    background: #38BDF8;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 20px #38BDF8;
+}
+
+.location-dot::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    border-radius: 50%;
+    border: 2px solid #38BDF8;
+    animation: radarPulse 2s infinite ease-out;
+}
+
+@keyframes radarPulse {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+
+.location-text {
+    margin-top: 1.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+
+/* --- Responsive Breakpoints --- */
+@media (max-width: 1024px) {
+    .bento-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .bento-hero { grid-column: span 2; grid-row: span 2; }
+    .bento-about { grid-column: span 2; grid-row: span 1; }
+    .bento-stat { grid-column: span 1; grid-row: span 1; }
+    .bento-skills { grid-column: span 2; grid-row: span 1; }
+    .bento-map { grid-column: span 1; grid-row: span 1; padding: 2rem; }
+    .bento-resume { grid-column: span 1; grid-row: span 1; }
+}
+
+@media (max-width: 640px) {
+    .bento-container {
+        grid-template-columns: 1fr;
+    }
+    .bento-hero, .bento-about, .bento-stat, .bento-skills, .bento-map, .bento-resume {
+        grid-column: span 1;
+        grid-row: auto;
+    }
+    .bento-hero { padding: 2rem; }
+}
