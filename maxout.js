@@ -12,11 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     themeBtn.innerHTML = '🌙';
 
     // Insert theme toggle next to logo in navbar container
-    const navContainer = document.querySelector('.nav-container');
-    const logo = document.querySelector('.logo');
-    if (navContainer && logo) {
-        logo.after(themeBtn);
-    }
+    // Append to body as a fixed floating button on the bottom left
+    document.body.appendChild(themeBtn);
 
     // Load saved theme preference
     const savedTheme = localStorage.getItem('maoz_theme');
