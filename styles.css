@@ -284,6 +284,38 @@ ul {
     gap: 1.2rem;
     flex-wrap: nowrap;
     align-items: center;
+    position: relative;
+}
+
+/* Flowing pill indicator */
+.nav-pill-indicator {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 32px;
+    transform: translateY(-50%);
+    background: rgba(15, 23, 42, 0.08);
+    border: 1.5px solid rgba(15, 23, 42, 0.15);
+    border-radius: 50px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s ease,
+                box-shadow 0.4s ease;
+    list-style: none;
+    box-shadow: 0 0 12px rgba(15, 23, 42, 0.06);
+}
+
+.nav-pill-indicator.visible {
+    opacity: 1;
+}
+
+.nav-pill-indicator.glowing {
+    background: rgba(15, 23, 42, 0.12);
+    border-color: rgba(15, 23, 42, 0.25);
+    box-shadow: 0 0 18px rgba(15, 23, 42, 0.12), 0 0 6px rgba(15, 23, 42, 0.08);
 }
 
 .nav-links a {
@@ -292,6 +324,8 @@ ul {
     color: var(--text-main);
     position: relative;
     white-space: nowrap;
+    z-index: 1;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .nav-links a::after {

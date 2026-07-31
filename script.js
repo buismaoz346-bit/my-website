@@ -444,39 +444,103 @@ window.stopCoverSlideshow = function(projectId, cardElement) {
 };
 
 
-// --- Active Navbar Highlighter ---
+// --- Active Navbar Highlighter + Flowing Pill Indicator ---
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-links a');
+    const pill = document.querySelector('.nav-pill-indicator');
+    const navLinksContainer = document.querySelector('.nav-links');
 
+    // Position the pill over a given link element
+    function movePill(link) {
+        if (!pill || !link || !navLinksContainer) return;
+        const containerRect = navLinksContainer.getBoundingClientRect();
+        const linkRect = link.getBoundingClientRect();
+        const paddingX = 12; // extra breathing room around text
+
+        pill.style.left = (linkRect.left - containerRect.left - paddingX) + 'px';
+        pill.style.width = (linkRect.width + paddingX * 2) + 'px';
+        pill.classList.add('visible');
+    }
+
+    // Hide the pill
+    function hidePill() {
+        if (!pill) return;
+        pill.classList.remove('visible', 'glowing');
+    }
+
+    // Update active link + pill on scroll
+    let ticking = false;
     window.addEventListener('scroll', () => {
-        let current = '';
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            // Add a 200px offset to trigger slightly before reaching the section
-            if (window.scrollY >= sectionTop - 200) {
-                current = section.getAttribute('id');
-            }
-        });
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                let current = '';
 
-        // Special case: If user is at the absolute top
-        if (window.scrollY < 50) {
-            current = 'hero';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                // Special case: at the absolute top
+                if (window.scrollY < 50) {
+                    current = 'hero';
+                }
+
+                // Special case: scrolled to absolute bottom
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
+                    current = 'contact';
+                }
+
+                let activeLink = null;
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                        activeLink = link;
+                    }
+                });
+
+                // Move the pill to the active link
+                if (activeLink && !activeLink.classList.contains('btn-primary')) {
+                    movePill(activeLink);
+                    pill.classList.add('glowing');
+                } else {
+                    hidePill();
+                }
+
+                ticking = false;
+            });
+            ticking = true;
         }
+    });
 
-        // Special case: If user scrolled to the absolute bottom
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
-            current = 'contact'; // Contact is the last section
-        }
+    // Hover: pill follows hovered link smoothly
+    navLinks.forEach(link => {
+        if (link.classList.contains('btn-primary') || link.classList.contains('nav-cv-link')) return;
 
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
+        link.addEventListener('mouseenter', () => {
+            movePill(link);
+            pill.classList.remove('glowing');
         });
     });
+
+    // Mouse leaves nav: snap pill back to active link
+    if (navLinksContainer) {
+        navLinksContainer.addEventListener('mouseleave', () => {
+            const activeLink = document.querySelector('.nav-links a.active');
+            if (activeLink && !activeLink.classList.contains('btn-primary')) {
+                movePill(activeLink);
+                pill.classList.add('glowing');
+            } else {
+                hidePill();
+            }
+        });
+    }
+
+    // Initial position on load
+    window.dispatchEvent(new Event('scroll'));
 });
 
 // === PREMIUM EFFECTS (Lightweight, GPU-optimized) ===
