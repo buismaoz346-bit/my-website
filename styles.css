@@ -277,6 +277,8 @@ ul {
     font-weight: 800;
     color: var(--primary);
     letter-spacing: -0.5px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .nav-links {
