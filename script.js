@@ -42,6 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const hiddenElements = document.querySelectorAll('.hidden');
     hiddenElements.forEach((el) => observer.observe(el));
 
+    window.isAutoScrolling = false;
+    window.autoScrollTimeout = null;
+
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -51,6 +54,17 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
+                // Prevent scroll listener from thrashing the pill position (vibration fix)
+                window.isAutoScrolling = true;
+                if (window.autoScrollTimeout) clearTimeout(window.autoScrollTimeout);
+                window.autoScrollTimeout = setTimeout(() => {
+                    window.isAutoScrolling = false;
+                }, 1000); // Timeout covers the smooth scroll duration
+
+                // Force active state immediately
+                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
                 // Adjust for fixed navbar height
                 const headerOffset = 70;
                 const elementPosition = targetElement.getBoundingClientRect().top;
@@ -484,6 +498,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         if (!ticking) {
             window.requestAnimationFrame(() => {
+                if (window.isAutoScrolling) {
+                    ticking = false;
+                    return;
+                }
+                
                 let current = '';
 
                 sections.forEach(section => {
