@@ -12,12 +12,11 @@
     <!-- Google Fonts: Outfit for headings, Inter for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=15">
     <link rel="stylesheet" href="ai-mode.css?v=2">
     <link rel="stylesheet" href="uiux-enhancements.css?v=1">
     <link rel="stylesheet" href="maxout.css?v=1">
-    <link rel="stylesheet" href="bento.css?v=1">
     <meta name="theme-color" content="#F8FAFC">
 
     <!-- Open Graph Meta Tags -->
@@ -118,78 +117,51 @@
         </div>
     </header>
 
-    <!-- Liquid Glass Morphing Background -->
-    <div class="liquid-bg-container">
-        <div class="liquid-blob blob-1"></div>
-        <div class="liquid-blob blob-2"></div>
-        <div class="liquid-blob blob-3"></div>
-    </div>
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-container container">
+            <div class="hero-content">
+                <div class="freelance-badge">
+                    <span class="dot"></span> Acting Vice President @ IET On Campus
+                </div>
+                <h2 class="greeting">Hello, my name is</h2>
+                <h1 class="name">Syed Maoz Arif</h1>
+                <h3 class="role">I am a <span class="typewriter-text"></span><span class="cursor">|</span></h3>
+                
+                <div class="hero-stats">
+                    <div class="stat"><span class="stat-num">9</span> Projects</div>
+                    <div class="stat-divider">·</div>
+                    <div class="stat"><span class="stat-num">17</span> Certifications</div>
+                    <div class="stat-divider">·</div>
+                    <div class="stat"><span class="stat-num">5</span> Awards</div>
+                    <div class="stat-divider">·</div>
+                    <div class="stat"><span class="stat-num">2</span> Platforms</div>
+                </div>
 
-    <!-- BENTO BOX ARCHITECTURE -->
-    <section id="hero" class="bento-container">
-        
-        <!-- Bento 1: Hero Profile -->
-        <div class="bento-tile bento-hero project-card">
-            <div class="freelance-badge mb-3" style="width: fit-content;">
-                <span class="dot"></span> Acting Vice President @ IET On Campus
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn-primary">Explore My Work</a>
+                    <a href="Documents/CV_Syed_Maoz_Arif.pdf" target="_blank" class="btn-download">
+                        <span class="icon">📄</span> Download CV
+                    </a>
+                </div>
             </div>
-            <h2 class="greeting" style="font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; color: #94A3B8;">Hello, my name is</h2>
-            <h1 class="name">Syed Maoz Arif</h1>
-            <h3 class="role-text">I am a <span class="typewriter-text"></span><span class="cursor">|</span></h3>
-            
-            <p style="margin-top: 1rem; max-width: 90%;">Hardware developer & electronics engineering student focused on multi-layer PCB design and embedded systems.</p>
-
-            <div class="hero-buttons" style="margin-top: 2rem;">
-                <a href="#projects" class="btn-primary" style="padding: 0.8rem 2rem; border-radius: 50px;">Explore My Work</a>
-            </div>
-        </div>
-
-        <!-- Bento 2: Stats (Projects) -->
-        <div class="bento-tile bento-stat trait-card">
-            <h2>9</h2>
-            <p>Projects</p>
-        </div>
-
-        <!-- Bento 3: Stats (Certs) -->
-        <div class="bento-tile bento-stat trait-card">
-            <h2>17</h2>
-            <p>Certifications</p>
-        </div>
-
-        <!-- Bento 4: About Me -->
-        <div class="bento-tile bento-about cert-card">
-            <h3>About Me</h3>
-            <p>Beyond the lab, I believe great engineers also lead. As a Cabinet Member of the Youth Parliament Pakistan, I've learned that the best solutions come from people who can both think critically and bring others together. I'm always chasing the intersection of technical depth and real-world impact.</p>
-        </div>
-
-        <!-- Bento 5: Map / Location -->
-        <div class="bento-tile bento-map premium-skill-card">
-            <div class="map-bg">
-                <div class="location-dot"></div>
-                <div class="location-text">Abbottabad, PK</div>
+            <div class="hero-image">
+                <div class="image-wrapper">
+                    <img src="Picture/my_pic_optimized.jpg" alt="Syed Maoz Arif" fetchpriority="high" decoding="sync">
+                </div>
             </div>
         </div>
+    </section>
 
-        <!-- Bento 6: Quick Skills -->
-        <div class="bento-tile bento-skills cert-card">
-            <h3>Core Expertise</h3>
-            <div class="bento-skill-tags mt-2">
-                <span class="bento-tag">Altium Designer</span>
-                <span class="bento-tag">Embedded Systems</span>
-                <span class="bento-tag">IoT (ESP32/STM32)</span>
-                <span class="bento-tag">Fusion 360</span>
-                <span class="bento-tag">PCB Routing</span>
-                <span class="bento-tag">Python</span>
-            </div>
+<!-- About Section -->
+    <section id="about" class="about-section container">
+        <div class="about-card glass-panel hidden">
+            <h2 class="section-title">About me</h2>
+            <p>I'm a hardware developer and electronics engineering student in my 4th semester at COMSATS University, with hands-on experience in multi-layer PCB design and embedded systems. I don't just study engineering I build things that work in the real world, from first schematic to final production.</p>
+            <p>Beyond the lab, I believe great engineers also lead. As Acting Vice President for IET On Campus and a Cabinet Member of the Youth Parliament Pakistan, I've learned that the best solutions come from people who can both think critically and bring others together.</p>
+            <p>I'm always chasing the intersection of technical depth and real-world impact and I'm just getting started.</p>
+            <a href="#traits" class="btn-secondary mt-4">Discover More</a>
         </div>
-
-        <!-- Bento 7: Resume CTA -->
-        <div class="bento-tile bento-resume trait-card">
-            <a href="Documents/CV_Syed_Maoz_Arif.pdf" target="_blank" style="text-decoration: none; color: white;">
-                <h3 style="margin-bottom: 0;">📄 Download CV</h3>
-            </a>
-        </div>
-
     </section>
 
 <!-- Traits Section (What defines...) -->

@@ -28,7 +28,7 @@ function initMaxoutAnimations() {
 
     /* --- 1. TACTILE 3D CARD HOVER EFFECTS (Vanilla-Tilt) --- */
     if (typeof VanillaTilt !== 'undefined') {
-        const tiltElements = document.querySelectorAll('.project-card, .cert-card, .trait-card, .premium-skill-card, .bento-tile');
+        const tiltElements = document.querySelectorAll('.project-card, .cert-card, .trait-card, .premium-skill-card');
         
         // Initialize Tilt only on non-touch devices for better performance
         if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
@@ -44,24 +44,7 @@ function initMaxoutAnimations() {
         }
     }
 
-    /* --- 2. BENTO GRID ASSEMBLY (GSAP) --- */
-    const bentoTiles = document.querySelectorAll('.bento-tile');
-    
-    if (bentoTiles.length > 0) {
-        gsap.set(bentoTiles, { opacity: 0, y: 50, scale: 0.95 });
-        
-        gsap.to(bentoTiles, {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.9,
-            stagger: 0.1,
-            ease: 'expo.out',
-            delay: 0.2
-        });
-    }
-
-    // Hide original hero elements from animation since they are replaced
+    /* --- 2. CINEMATIC HERO ENTRANCE (GSAP) --- */
     const heroElements = [
         '.freelance-badge', 
         '.greeting', 
@@ -70,7 +53,28 @@ function initMaxoutAnimations() {
         '.hero-stats', 
         '.hero-buttons'
     ];
-    // We don't need to animate these separately anymore because they are inside the bento tiles
+
+    const tlHero = gsap.timeline();
+    
+    // Hide initially via GSAP to prevent flash
+    gsap.set(heroElements, { opacity: 0, y: 30 });
+    gsap.set('.image-wrapper', { opacity: 0, scale: 0.9, rotate: -5 });
+
+    tlHero.to(heroElements, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power4.out',
+        delay: 0.2
+    })
+    .to('.image-wrapper', {
+        opacity: 1,
+        scale: 1,
+        rotate: 0,
+        duration: 1.2,
+        ease: 'elastic.out(1, 0.5)'
+    }, "-=0.6");
 
 
     /* --- 3. PREMIUM SCROLL REVEALS (GSAP ScrollTrigger) --- */
