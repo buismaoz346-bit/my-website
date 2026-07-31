@@ -1,0 +1,343 @@
+/* ============================================================
+   MAXOUT ENGINE — THEME, PCB CANVAS, FILTERS, SEARCH, CONTACT
+   ============================================================ */
+
+/* --- Dark Theme Variables --- */
+body.dark-mode {
+    --primary: #F8FAFC;
+    --primary-light: #94A3B8;
+    --primary-glow: rgba(56, 189, 248, 0.25);
+    
+    --secondary: #CBD5E1;
+    --secondary-light: #64748B;
+    
+    --accent: #38BDF8;
+    --accent-glow: rgba(56, 189, 248, 0.4);
+    
+    --bg-color: #0B0F19;
+    --bg-glass: rgba(15, 23, 42, 0.65);
+    --bg-glass-hover: rgba(30, 41, 59, 0.85);
+    
+    --text-main: #F1F5F9;
+    --text-muted: #94A3B8;
+    
+    --border-color: rgba(255, 255, 255, 0.12);
+    --border-glow: rgba(56, 189, 248, 0.3);
+    
+    --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.8);
+    
+    color: var(--text-main);
+    background-color: var(--bg-color);
+}
+
+body.dark-mode::before {
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(15, 23, 42, 0.95) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(30, 41, 59, 0.9) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(11, 15, 25, 0.95) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(15, 23, 42, 0.9) 0px, transparent 50%) !important;
+}
+
+body.dark-mode .glass-panel,
+body.dark-mode .trait-card,
+body.dark-mode .cert-card,
+body.dark-mode .edu-card,
+body.dark-mode .timeline-content,
+body.dark-mode .premium-skill-card,
+body.dark-mode .about-card,
+body.dark-mode .contact-card,
+body.dark-mode .navbar {
+    background: rgba(15, 23, 42, 0.65) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .nav-pill-indicator {
+    background: rgba(56, 189, 248, 0.15) !important;
+    border-color: rgba(56, 189, 248, 0.35) !important;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2) !important;
+}
+
+body.dark-mode .nav-links a {
+    color: #CBD5E1 !important;
+}
+
+body.dark-mode .nav-links a:hover,
+body.dark-mode .nav-links a.active {
+    color: #38BDF8 !important;
+}
+
+body.dark-mode .btn-primary {
+    background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%) !important;
+    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.4) !important;
+    color: #FFFFFF !important;
+}
+
+body.dark-mode .btn-download {
+    border-color: #38BDF8 !important;
+    color: #38BDF8 !important;
+}
+
+body.dark-mode .btn-download:hover {
+    background: #38BDF8 !important;
+    color: #0F172A !important;
+}
+
+/* --- Theme Toggle Switch Button --- */
+.theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: var(--text-main);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-left: 0.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+}
+
+body.dark-mode .theme-toggle-btn {
+    background: rgba(15, 23, 42, 0.6);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #FCD34D;
+}
+
+/* --- PCB Background Canvas --- */
+#pcb-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: -2;
+    opacity: 0.35;
+    transition: opacity 0.5s ease;
+}
+
+body.dark-mode #pcb-canvas {
+    opacity: 0.55;
+}
+
+/* --- Filter & Search Controls --- */
+.filter-search-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem 1.5rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+body.dark-mode .filter-search-container {
+    background: rgba(15, 23, 42, 0.5);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.filter-tab {
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    background: transparent;
+    border: 1px solid rgba(15, 23, 42, 0.15);
+    color: var(--text-main);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.dark-mode .filter-tab {
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #CBD5E1;
+}
+
+.filter-tab:hover {
+    background: rgba(15, 23, 42, 0.08);
+    transform: translateY(-1px);
+}
+
+body.dark-mode .filter-tab:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.filter-tab.active {
+    background: var(--primary) !important;
+    color: #FFFFFF !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.2);
+}
+
+body.dark-mode .filter-tab.active {
+    background: #38BDF8 !important;
+    color: #0F172A !important;
+    border-color: #38BDF8 !important;
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+}
+
+.search-box-wrapper {
+    position: relative;
+    min-width: 240px;
+    flex: 1;
+    max-width: 320px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.5rem 1rem 0.5rem 2.2rem;
+    border-radius: 50px;
+    border: 1px solid rgba(15, 23, 42, 0.2);
+    background: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    color: var(--text-main);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .search-input {
+    background: rgba(15, 23, 42, 0.6);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #F1F5F9;
+}
+
+.search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+body.dark-mode .search-input:focus {
+    background: rgba(15, 23, 42, 0.9);
+}
+
+.search-icon-hint {
+    position: absolute;
+    left: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.85rem;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Card filtered out animation */
+.card-filtered-out {
+    display: none !important;
+}
+
+/* --- Interactive Contact Form --- */
+.contact-form-wrapper {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+body.dark-mode .contact-form-wrapper {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.contact-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-group-full {
+    grid-column: span 2;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    border-radius: 14px;
+    border: 1px solid rgba(15, 23, 42, 0.15);
+    background: rgba(255, 255, 255, 0.4);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.dark-mode .form-input,
+body.dark-mode .form-textarea {
+    background: rgba(15, 23, 42, 0.5);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #F1F5F9;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+body.dark-mode .form-input:focus,
+body.dark-mode .form-textarea:focus {
+    background: rgba(15, 23, 42, 0.85);
+}
+
+.form-status-msg {
+    grid-column: span 2;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: none;
+    text-align: center;
+}
+
+.form-status-msg.success {
+    display: block;
+    background: rgba(34, 197, 94, 0.15);
+    color: #16A34A;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.form-status-msg.error {
+    display: block;
+    background: rgba(239, 68, 68, 0.15);
+    color: #DC2626;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+@media (max-width: 640px) {
+    .contact-form {
+        grid-template-columns: 1fr;
+    }
+    .form-group-full {
+        grid-column: span 1;
+    }
+    .filter-search-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .search-box-wrapper {
+        max-width: 100%;
+    }
+}
