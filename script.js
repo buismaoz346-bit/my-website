@@ -11,6 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (entry.isIntersecting) {
                 // Add the 'show' class to animate in
                 entry.target.classList.add('show');
+
+                // Stagger animation for grid children (UI/UX Pro Max Motion preset)
+                const gridChildren = entry.target.querySelectorAll('.trait-card, .cert-card, .premium-skill-card, .edu-card, .timeline-item');
+                gridChildren.forEach((child, index) => {
+                    const delayClass = `delay-${Math.min(index % 4 + 1, 4)}`;
+                    child.classList.add(delayClass);
+                    // Slight additional per-item delay for natural stagger
+                    child.style.transitionDelay = `${index * 60}ms`;
+                    requestAnimationFrame(() => child.classList.add('show'));
+                });
                 
                 // If the element has a progress bar, trigger the width animation
                 const progressBar = entry.target.querySelector('.progress');
