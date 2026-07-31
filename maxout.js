@@ -108,7 +108,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         requestAnimationFrame(drawPCB);
     }
-    requestAnimationFrame(drawPCB);
+    
+    // Performance Optimization: Only draw when the canvas is in the viewport
+    let animationFrameId;
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            // Start animation
+            if (!animationFrameId) {
+                animationFrameId = requestAnimationFrame(drawPCB);
+            }
+        } else {
+            // Pause animation
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+            }
+        }
+    });
+    
+    // Observe the hero section (or body) to know when top is visible
+    const heroSection = document.getElementById('hero') || document.body;
+    observer.observe(heroSection);
 
 
     // --- 3. LIVE FILTER & SEARCH ENGINE FOR PROJECTS & CERTS ---
