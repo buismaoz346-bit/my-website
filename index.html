@@ -947,8 +947,18 @@
             <span class="modal-close" onclick="closeProjectModal('p10')">&times;</span>
             <div class="modal-body">
                 <div class="modal-gallery">
-                    <img src="Picture/EdgeAI-P10-Featured.jpeg" alt="Industrial Edge-AI Board Populated" style="width:100%; border-radius: 8px;">
-                    <img src="Picture/EdgeAI-P10-Routing.jpeg" alt="Industrial Edge-AI Board Altium Routing" style="width:100%; border-radius: 8px; margin-top: 10px;">
+                    <div class="gallery-image-container">
+                        <img loading="lazy" src="Picture/EdgeAI-P10-Featured.jpeg" class="gallery-main-img" id="gallery-main-img-p10">
+                        <div class="gallery-nav-left" onclick="navigateProjectGalleryClick('p10', -1, event)"></div>
+                        <div class="gallery-nav-right" onclick="navigateProjectGalleryClick('p10', 1, event)"></div>
+                    </div>
+                    <div class="gallery-thumbnails">
+                        <img loading="lazy" src="Picture/EdgeAI-P10-Featured.jpeg" onclick="setGalleryMain('p10', this, 'Picture/EdgeAI-P10-Featured.jpeg')" class="active-thumb">
+                        <img loading="lazy" src="Picture/EdgeAI-P10-Routing.jpeg" onclick="setGalleryMain('p10', this, 'Picture/EdgeAI-P10-Routing.jpeg')">
+                        <img loading="lazy" src="Picture/EdgeAI-P10-1.jpeg" onclick="setGalleryMain('p10', this, 'Picture/EdgeAI-P10-1.jpeg')">
+                        <img loading="lazy" src="Picture/EdgeAI-P10-2.jpeg" onclick="setGalleryMain('p10', this, 'Picture/EdgeAI-P10-2.jpeg')">
+                        <img loading="lazy" src="Picture/EdgeAI-P10-3.jpeg" onclick="setGalleryMain('p10', this, 'Picture/EdgeAI-P10-3.jpeg')">
+                    </div>
                 </div>
                 <div class="modal-info">
                     <h2>Industrial Edge-AI Condition Monitoring & 3D Digital Twin</h2>
