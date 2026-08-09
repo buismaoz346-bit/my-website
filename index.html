@@ -213,14 +213,24 @@
             <div class="projects-grid">
                 
                 <!-- Featured Project (Full Width) -->
-                <div class="project-card featured-project glass-panel hidden delay-1" onclick="openProjectModal('p6', this)" onmouseenter="startCoverSlideshow('p6', this)" onmouseleave="stopCoverSlideshow('p6', this)">
-                    <div class="project-bg" style="background-image: url('Documents/Projects/P6/Cover.png');"></div>
+                <div class="project-card featured-project glass-panel hidden delay-1" onclick="openProjectModal('p10', this)">
+                    <div class="project-bg" style="background-image: url('Picture/EdgeAI-P10-Featured.jpeg');"></div>
                     <div class="project-content-overlay">
                         <div class="featured-label">⭐ Featured Project</div>
-                        <h3>IncliSense Digital Level</h3>
-                        <p class="tech-stack">Arduino Nano · MPU6050 · IoT · 3D Printing</p>
-                        <p class="project-summary">A precision digital leveling device built to provide high-accuracy numerical feedback, featuring PC telemetry and a responsive 11-LED interface.</p>
+                        <h3>Industrial Edge-AI Condition Monitoring & 3D Digital Twin</h3>
+                        <p class="tech-stack">STM32H7 • ESP32 • Ethernet • Panasonic Relays</p>
+                        <p class="project-summary">A 1st Position-winning industrial-grade development board featuring dual-MCU architecture, hardware calibration, and 70 GPIOs for advanced edge AI applications.</p>
                         <span class="project-link">View Case Study &rarr;</span>
+                    </div>
+                </div>
+
+                <!-- Regular Grid Projects -->
+                <div class="project-card glass-panel hidden delay-2" onclick="openProjectModal('p6', this)" onmouseenter="startCoverSlideshow('p6', this)" onmouseleave="stopCoverSlideshow('p6', this)">
+                    <div class="project-bg" style="background-image: url('Documents/Projects/P6/Cover.png');"></div>
+                    <div class="project-content-overlay">
+                      <h3>IncliSense Digital Level</h3>
+                      <p class="tech-stack">Arduino Nano • MPU6050 • IoT • 3D Printing</p>
+                      <span class="project-link">View Details &rarr;</span>
                     </div>
                 </div>
 
@@ -932,7 +942,8 @@
     </footer>
 
     <!-- Project 9 Modal (FPGA iCEbreaker) -->
-    <div id="project-modal-p9_fpga" class="modal">
+    $modalHtml
+<div id="project-modal-p9_fpga" class="modal">
         <div class="modal-content glass-panel">
             <span class="modal-close" onclick="closeProjectModal('p9_fpga')">&times;</span>
             <div class="modal-body">
