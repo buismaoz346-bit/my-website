@@ -76,7 +76,8 @@
             { name: "1st Position - Best Circuit Design", issuer: "COMSATS University & IET", date: "2026", desc: "Secured first place in a competitive hardware workshop at COMSATS University Islamabad, Abbottabad Campus in collaboration with IET. Demonstrated advanced proficiency in applied electronics by engineering an efficient, functional circuit layout under strict time constraints.", tags: ["circuit", "design", "first", "1st", "iet", "workshop"] },
             { name: "Altium Designer Essentials Certification", issuer: "Altium", date: "April 5, 2026", desc: "Successfully fulfilled the certification requirements for the Altium Designer Essentials program, demonstrating proficiency in professional PCB design and schematic capture.", tags: ["altium", "certification"] },
             { name: "Instructables Sensors Contest Runner-Up", issuer: "Instructables (Global)", date: "April 2026", desc: "Awarded Runner Up in the global Instructables Sensors Contest for the 'IncliSense' project, earning a bronze medal and recognition for precision-engineered dual-axis digital level design.", tags: ["instructables", "contest", "sensors", "runner", "inclisense", "global", "bronze"] },
-            { name: "Best CEP Project Award — 1st Position", issuer: "COMSATS University & District Youth Office Abbottabad", date: "July 22, 2026", desc: "Secured First Position in the Complex Engineering Problem Exhibition SP26 (Software Category) for the project 'Industrial Edge AI Condition Monitoring and 3D Digital Twin' at COMSATS University Islamabad, Abbottabad Campus, in collaboration with District Youth Office Abbottabad and IET.", tags: ["cep", "project", "award", "best", "first", "1st", "comsats", "ai", "digital twin", "exhibition", "sp26"] }
+            { name: "Best CEP Project Award — 1st Position", issuer: "COMSATS University & District Youth Office Abbottabad", date: "July 22, 2026", desc: "Secured First Position in the Complex Engineering Problem Exhibition SP26 (Software Category) for the project 'Industrial Edge AI Condition Monitoring and 3D Digital Twin' at COMSATS University Islamabad, Abbottabad Campus, in collaboration with District Youth Office Abbottabad and IET.", tags: ["cep", "project", "award", "best", "first", "1st", "comsats", "ai", "digital twin", "exhibition", "sp26"] },
+            { name: "2nd Position — EMCOT 2026 Best Complex Engineering Project", issuer: "Department of Electrical Engineering, COMSATS Abbottabad & IET", date: "August 18, 2026", desc: "Secured 2nd Position in the Best Complex Engineering Project Award at EMCOT 2026 (Exhibition of Major Complex Outstanding Tasks) at COMSATS University Islamabad, Abbottabad Campus. The project 'Industrial Edge-AI Condition Monitoring & 3D Digital Twin for 3-Phase Induction Motors' was awarded under the supervision of Dr. Faisal Khan. Event co-organized with Technolean Lab.", tags: ["emcot", "2nd", "second", "best", "cep", "exhibition", "comsats", "iet", "2026", "ai", "edge-ai", "digital twin"] }
         ],
 
         experience: [
@@ -111,8 +112,8 @@
 
         platforms: ["Fiverr", "Upwork"],
         totalProjects: 9,
-        totalCertifications: 17,
-        totalAwards: 5,
+        totalCertifications: 18,
+        totalAwards: 6,
         totalPlatforms: 2
     };
 
