@@ -47,6 +47,7 @@
         projects: [
             { id: "p10", name: "Industrial Edge-AI Condition Monitoring & 3D Digital Twin", tech: ["STM32H7", "ESP32 WROOM", "Ethernet", "Panasonic Relays", "Altium Designer"], desc: "An industrial-grade development board for Edge-AI condition monitoring and 3D digital twin applications for 3-Phase Induction Motors. Features dual-MCU architecture, robust 24V power, and 70 GPIOs.", featured: true, achievement: "Won 1st Position in Complex Engineering Project Exhibition (102 projects)", date: "2026" },
             { id: "p9_fpga", name: "First FPGA Programming - iCEbreaker", tech: ["Verilog", "iCEbreaker", "FPGA", "Digital Logic"], desc: "My foray into Field-Programmable Gate Arrays (FPGAs) using the iCEbreaker development board, featuring a simple LED blinking circuit implemented in Verilog using the open-source iceStorm toolchain.", date: "2026" },
+            { id: "p11", name: "Stratum-1 Precision Hardware Clock", tech: ["Verilog", "Lattice iCE40UP5K FPGA", "GPS NMEA", "Digital Logic"], desc: "Designed and implemented a Stratum-1 precision hardware clock synchronizer and GPS pass-through bridge using pure digital logic on a Lattice iCE40UP5K FPGA (iCEBreaker) and a NEO-6M GPS module. Completely bypasses the need for microprocessors.", date: "2026" },
             { id: "p6", name: "IncliSense Digital Level", tech: ["Arduino Nano", "MPU6050", "IoT", "3D Printing"], desc: "A precision digital leveling device built to provide high-accuracy numerical feedback, featuring PC telemetry and a responsive 11-LED interface.", featured: false, achievement: "Won Runner-Up in Instructables Sensors Contest 2026", date: "2026" },
             { id: "p1", name: "Smart Lighting System", tech: ["Altium Designer", "ATMEGA328PB-AU", "Time-of-Flight Sensor"], desc: "A smart lighting system designed with advanced PCB layout in Altium Designer, using Time-of-Flight sensors for intelligent light control." },
             { id: "p2", name: "Omni-Sense Node", tech: ["ESP32", "SPI", "PWM", "RFID"], desc: "A multi-sensor IoT node built around the ESP32 platform, integrating SPI, PWM, and RFID communication protocols." },
@@ -111,7 +112,7 @@
         },
 
         platforms: ["Fiverr", "Upwork"],
-        totalProjects: 9,
+        totalProjects: 10,
         totalCertifications: 18,
         totalAwards: 6,
         totalPlatforms: 2

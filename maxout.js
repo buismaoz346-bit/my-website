@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.fill();
         });
 
-        requestAnimationFrame(drawPCB);
+        animationFrameId = requestAnimationFrame(drawPCB);
     }
     
     // Performance Optimization: Only draw when the canvas is in the viewport
