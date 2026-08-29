@@ -1,0 +1,21 @@
+Project Type: Full-Stack Web & Native Android Application
+Tech Stack: JavaScript (ES6+), HTML5, CSS3, Firebase (Auth & Realtime Database), CapacitorJS, JsBarcode, Html5Qrcode
+
+Overview
+ElectroParts IMS is a cross-platform Inventory Management System engineered specifically for hardware developers, robotics engineers, and makers. Designed to replace chaotic spreadsheets and generic inventory apps, it provides a highly tailored environment to track thousands of electronic components—ranging from microcontrollers and NEMA stepper motors to PCB etching chemicals.
+
+The Problem
+Hardware engineering requires managing hundreds of tiny, distinct components with highly specific attributes (e.g., voltage ratings, package types, resistance tolerances). Existing inventory solutions are built for retail and lack the specificity, speed, and cross-device sync required for a fast-paced electronics workshop.
+
+The Solution & Technical Implementation
+I architected a completely custom, offline-first application that runs natively on Android and perfectly in the web browser, ensuring inventory is always accessible whether at the workbench or on the go.
+
+Key Engineering Features:
+
+Native Barcode Architecture: Integrated JsBarcode for generating CODE128 linear barcodes, paired with native camera APIs to allow instant point-and-scan part retrieval directly from storage drawers.
+Real-time Cloud Sync & Offline-First UX: Engineered a dual-storage system. Data is saved locally to the device (localStorage) for zero-latency UI updates and offline access, while silently syncing to a Firebase Realtime Database in the background when an internet connection is available.
+Cross-Platform Authentication: Implemented Firebase Authentication with seamless Google Sign-In, utilizing Capacitor's native plugins to bridge Android OS-level credentials with the Web SDK.
+Hardware-Specific Data Structures: Built a dynamic categorization engine supporting 32 bespoke electronics categories, complete with unique metadata tracking (e.g., separating "Healthy" stock from "Faulty/Burnt-out" stock).
+Responsive, Native-Feel UI: Designed a responsive, mobile-first interface utilizing CSS variables for dynamic Dark/Light themes, safe-area insets for notched displays, and custom touch-event handling to eliminate web-app delay on mobile devices.
+Outcome
+ElectroParts IMS successfully bridged the gap between web development and native device APIs, resulting in a production-ready tool that drastically reduces Bill of Materials (BOM) preparation time and eliminates the friction of workshop organization.
