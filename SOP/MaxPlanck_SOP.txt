@@ -1,0 +1,15 @@
+To the Selection Committee at the Max Planck Society,
+
+I have always viewed hardware not as a collection of black boxes, but as a deterministic canvas where physics meets logic. My journey into electrical and computer engineering has been driven by a relentless desire to understand systems down to their foundational silicon, peeling back the layers of high-level abstractions to manipulate data at the clock-cycle level. It is this exact pursuit of fundamental engineering truth that draws me to the Max Planck Society—an institution synonymous with pushing the boundaries of human knowledge and technological capability.
+
+As a fifth-semester Electrical Engineering student at COMSATS University, I have consistently sought out challenges that force me to bridge the gap between theoretical principles and physical reality. When I needed highly accurate timekeeping, I did not reach for an off-the-shelf microcontroller. Instead, I engineered a Stratum-1 precision hardware clock using pure digital logic on a Lattice iCE40UP5K FPGA. By writing a custom Verilog UART and an NMEA state machine to parse GPS signals directly in silicon, I bypassed operating system latency entirely, syncing a hardware pulse with satellite atomic clocks at the speed of light. This project taught me the profound difference between writing software that runs on hardware, and designing the hardware itself.
+
+My passion for bridging physical and digital domains also led me to architect an Industrial Edge-AI Condition Monitoring system for 3-phase induction motors. Utilizing a dual-MCU architecture (STM32H7 and ESP32), I built a platform capable of high-speed data acquisition, translating physical motor vibrations into a real-time 3D Digital Twin. This work, which secured top national awards at EMCOT 2026, reinforced my belief that the future of intelligent systems lies at the extreme edge—where compute meets the physical sensor.
+
+Beyond the workbench, serving as the President of the IET On Campus has taught me how to lead technical teams, scope complex projects, and foster a culture of rigorous peer review. I have learned to communicate complex engineering concepts clearly and manage timelines effectively. However, I know that my current academic environment is only the beginning of my research journey.
+
+I am applying for a research internship at the Max Planck Institute because I want to surround myself with minds that operate at the absolute cutting edge of scientific discovery. I bring to the table a robust fluency in embedded systems, FPGA architecture, and mixed-signal PCB design, coupled with a deep, personal curiosity for how things work at their core. I am eager to contribute my hands-on hardware expertise to your ongoing research initiatives, and I am confident that the rigorous, uncompromising research environment at Max Planck is exactly where I can make the most meaningful impact.
+
+Sincerely,
+
+Syed Maoz Arif

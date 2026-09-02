@@ -15,7 +15,7 @@
         university: "COMSATS University Islamabad, Abbottabad Campus",
         universityUrl: "https://cuiatd.edu.pk/",
         degree: "BSc Electrical and Electronics Engineering (EEE)",
-        semester: "4th Semester",
+        semester: "5th semester",
         expectedGrad: "2028",
         enrollmentYear: "2024",
         studentId: "FA24-EEE-014",
@@ -32,10 +32,10 @@
         location: "Abbottabad, Pakistan",
         hobbies: ["Cricket", "Trekking", "Exploring new places"],
 
-        about: "Syed Maoz Arif is a hardware developer and electronics engineering student in his 4th semester at COMSATS University, with hands-on experience in multi-layer PCB design and embedded systems. He doesn't just study engineering — he builds things that work in the real world, from first schematic to final production. Beyond the lab, he believes great engineers also lead. As President for IET On Campus and a Cabinet Member of the Youth Parliament Pakistan, he's learned that the best solutions come from people who can both think critically and bring others together.",
+        about: "Syed Maoz Arif is a hardware developer and electronics engineering student in his 5th semester at COMSATS University, with hands-on experience in multi-layer PCB design and embedded systems. He doesn't just study engineering — he builds things that work in the real world, from first schematic to final production. Beyond the lab, he believes great engineers also lead. As President for IET On Campus and a Cabinet Member of the Youth Parliament Pakistan, he's learned that the best solutions come from people who can both think critically and bring others together.",
 
         traits: [
-            { trait: "Engineering Academic", detail: "4th-semester Electrical (Electronics) Engineering undergraduate at COMSATS University Abbottabad." },
+            { trait: "Engineering Academic", detail: "5th-semester Electrical (Electronics) Engineering undergraduate at COMSATS University Abbottabad." },
             { trait: "Technical Specialist", detail: "Expert in multi-layer PCB design, embedded systems/IoT (ESP32, STM32), and 3D mechanical modeling." },
             { trait: "Active Freelancer", detail: "Professional hardware and mechanical designer providing services on Fiverr and Upwork." },
             { trait: "Recognized Innovator", detail: "Altium Global Scholarship awardee and runner-up in the Instructables Sensors Contest." },
@@ -295,7 +295,7 @@ ${softwareList}
 
     // ==================== FUN FACTS ====================
     const funFacts = [
-        `🎲 **Fun Fact:** Maoz has earned more certifications (${KB.totalCertifications}) by his 4th semester than most engineers earn in their entire degree!`,
+        `🎲 **Fun Fact:** Maoz has earned more certifications (${KB.totalCertifications}) by his 5th semester than most engineers earn in their entire degree!`,
         `🎲 **Fun Fact:** The IncliSense project competed against entries from professionals worldwide — and Maoz was still a student when he won Runner-Up!`,
         `🎲 **Fun Fact:** Maoz uses ${Object.values(KB.software).reduce((acc, cat) => acc + Object.values(cat).reduce((a, arr) => a + arr.length, 0), 0)}+ different software tools across ${Object.keys(KB.software).length} categories!`,
         `🎲 **Fun Fact:** Maoz is simultaneously a Membership Head at IET AND a Cabinet Member of Youth Parliament — talk about multitasking! 🚀`,
@@ -1172,7 +1172,7 @@ ${softwareList}
         // --- COMPARE / STAND OUT / UNIQUE ---
         if (/stand.?out|unique|different|special|distinguish|compet(itive|itor)|edge|advantage|apart/.test(q)) {
             topic = 'recruiter';
-            const resp = `🏅 **What Makes Maoz Stand Out:**\n\n**vs. Typical Students:**\n- Most students build classroom projects → Maoz builds **real products that win global contests**\n- Most students have no work experience → Maoz **already freelances internationally**\n- Most students wait for instructions → Maoz **self-teaches and gets certified proactively**\n\n**Unique Differentiators:**\n1. **Youngest Altium Scholarship awardee** in his cohort\n2. **Global contest winner** (Instructables — competing against professionals worldwide)\n3. **6 projects** by 4th semester — most students have 1-2\n4. **11 certifications** — more than many working professionals\n5. **Dual leadership roles** — IET President + Youth Parliament simultaneously\n6. **Full-stack hardware** — can design the PCB, code the firmware, model the enclosure, and write the documentation 🚀`;
+            const resp = `🏅 **What Makes Maoz Stand Out:**\n\n**vs. Typical Students:**\n- Most students build classroom projects → Maoz builds **real products that win global contests**\n- Most students have no work experience → Maoz **already freelances internationally**\n- Most students wait for instructions → Maoz **self-teaches and gets certified proactively**\n\n**Unique Differentiators:**\n1. **Youngest Altium Scholarship awardee** in his cohort\n2. **Global contest winner** (Instructables — competing against professionals worldwide)\n3. **6 projects** by 5th semester — most students have 1-2\n4. **11 certifications** — more than many working professionals\n5. **Dual leadership roles** — IET President + Youth Parliament simultaneously\n6. **Full-stack hardware** — can design the PCB, code the firmware, model the enclosure, and write the documentation 🚀`;
             conversationMemory.addMessage(query, topic, resp, []);
             return resp;
         }

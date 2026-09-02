@@ -1,0 +1,165 @@
+%% CV - Syed Maoz Arif (Max Planck Research Focused)
+%% Compiled with pdflatex or tectonic
+\documentclass[a4paper,10pt]{article}
+
+% ==================== Packages ====================
+\usepackage[margin=0.55in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+
+% ==================== Colors ====================
+\definecolor{accent}{HTML}{0F172A}
+\definecolor{linkblue}{HTML}{1E40AF}
+\definecolor{lightgray}{HTML}{6B7280}
+\definecolor{rulecol}{HTML}{CBD5E1}
+\definecolor{RULECOL}{HTML}{CBD5E1}
+
+% ==================== Hyperref ====================
+\hypersetup{colorlinks=true, linkcolor=linkblue, urlcolor=linkblue, pdfauthor={Syed Maoz Arif}, pdftitle={CV - Syed Maoz Arif}}
+
+% ==================== Section formatting ====================
+\titleformat{\section}{\large\bfseries\color{accent}\uppercase}{}{0em}{}[\vspace{-0.6em}\textcolor{rulecol}{\rule{\textwidth}{1.2pt}}]
+\titlespacing*{\section}{0pt}{0.9em}{0.5em}
+
+% ==================== List formatting ====================
+\setlist[itemize]{nosep, left=0pt, label=\textbullet, itemsep=1.5pt}
+
+% ==================== No page numbers ====================
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\footnotesize\textcolor{lightgray}{Syed Maoz Arif\enspace\textbullet\enspace syedmaoza@gmail.com\enspace\textbullet\enspace +92 321 914 3144\enspace\textbullet\enspace Page \thepage}}
+
+% ==================== Commands ====================
+\newcommand{\cventry}[4]{%
+  {\textbf{#1}}\hfill{\small\textcolor{lightgray}{#2}}\\
+  {\textit{#3}}\hfill{\small\textcolor{lightgray}{#4}}\vspace{2pt}
+}
+
+\newcommand{\cvaward}[3]{%
+  \textbf{#1} - {\small #2} \hfill {\small\textcolor{lightgray}{#3}}
+}
+
+% ====================================================================================
+\begin{document}
+
+% ==================== HEADER ====================
+\begin{center}
+  {\LARGE\bfseries\color{accent} SYED MAOZ ARIF}\\[4pt]
+  {\normalsize Hardware \& Embedded Systems Engineer}\\[3pt]
+  {\small
+    \href{mailto:syedmaoza@gmail.com}{syedmaoza@gmail.com}\enspace\textbar\enspace
+    +92 321 914 3144\enspace\textbar\enspace
+    \href{https://www.linkedin.com/in/syed-maoz}{LinkedIn}\enspace\textbar\enspace
+    \href{https://buismaoz346-bit.github.io/my-website/}{Portfolio}\enspace\textbar\enspace
+    Abbottabad, Pakistan
+  }
+\end{center}
+
+\vspace{-0.3em}
+
+% ==================== RESEARCH PROFILE ====================
+\section{Research Profile}
+Electrical and Computer Engineering student specializing in embedded systems, custom silicon (FPGA) architecture, and edge computing. Proficient in hardware description languages (Verilog), mixed-signal PCB design, and IoT-driven digital twins. Recognized globally for precision engineering (Instructables Sensors Contest) and awarded multiple national positions for solving complex engineering tasks. Passionate about contributing to cutting-edge scientific research, hardware optimization, and advanced electronics at the Max Planck Society.
+
+% ==================== EDUCATION ====================
+\section{Education}
+\cventry{B.S. Electrical Engineering}{Expected 2028}{COMSATS University Islamabad, Abbottabad Campus}{GPA: 3.61 / 4.0 (5th semester)}
+\begin{itemize}
+  \item Focus Areas: Embedded Systems, Digital Logic Design, PCB Architecture, Signal Integrity
+  \item Altium Global Scholarship Awardee (March 2026)
+\end{itemize}
+
+% ==================== RESEARCH & TECHNICAL PROJECTS ====================
+\section{Key Engineering \& Research Projects}
+
+\textbf{Stratum-1 Precision Hardware Clock \& GPS Bridge} \hfill {\small\textcolor{lightgray}{August 2026}}\\
+{\small Verilog \textbar{} Lattice iCE40UP5K FPGA (iCEBreaker) \textbar{} Digital Logic \textbar{} NEO-6M GPS \textbar{} NMEA}
+\begin{itemize}
+  \item Engineered a Stratum-1 precision hardware clock synchronizer using pure digital logic, completely bypassing the latency of microprocessors and software operating systems.
+  \item Developed a custom hardware UART receiver in Verilog to sample 9600 baud serial data directly from the GPS module.
+  \item Engineered a robust state machine to parse the live NMEA stream, isolating \ atomic time sentences to pulse a hardware LED in absolute synchronization with satellite atomic clocks.
+  \item Overcame complex Physical Constraint File (PCF) routing challenges by dynamically remapping internal oscillator clocks.
+\end{itemize}
+\vspace{3pt}
+
+\textbf{Industrial Edge-AI Condition Monitoring \& 3D Digital Twin} \hfill {\small\textcolor{lightgray}{July 2026}}\\
+{\small STM32H7 \textbar{} ESP32 WROOM \textbar{} Panasonic Relays \textbar{} Altium Designer \textbar{} Ethernet}
+\begin{itemize}
+  \item Designed a 1st Position-winning industrial-grade development board featuring dual-MCU architecture, hardware calibration, and 70 GPIOs for advanced edge AI and Digital Twin applications on 3-Phase Induction Motors.
+  \item Achieved robust 24V power handling and real-time telemetry extraction for complex diagnostic AI models.
+\end{itemize}
+\vspace{3pt}
+
+\textbf{ElectroParts IMS: Offline-First Embedded Component Architecture} \hfill {\small\textcolor{lightgray}{August 2026}}\\
+{\small JavaScript (ES6+) \textbar{} Firebase Realtime DB \textbar{} CapacitorJS \textbar{} JsBarcode}
+\begin{itemize}
+  \item Architected a cross-platform (Web/Native Android) inventory engine supporting 32 bespoke electronics categories to manage thousands of integrated circuits, microcontrollers, and precision passives.
+  \item Implemented dual-storage local/cloud sync and integrated linear barcode generation algorithms for zero-latency retrieval.
+\end{itemize}
+\vspace{3pt}
+
+\textbf{IncliSense Precision Digital Level} \hfill {\small\textcolor{lightgray}{April 2026 \enspace\textbar\enspace \textbf{Global Runner-Up, Instructables}}}\\
+{\small Arduino Nano \textbar{} MPU6050 \textbar{} 3D Printing \textbar{} I2C \textbar{} Spatial Telemetry}
+\begin{itemize}
+  \item Developed a precision leveling device analyzing dual-axis spatial data via I2C, yielding high-accuracy numerical feedback with PC telemetry processing. Published detailed engineering documentation for the global maker community.
+\end{itemize}
+\vspace{3pt}
+
+\textbf{High-Frequency \& Power Management Systems (Mixed-Signal PCBs)} \hfill {\small\textcolor{lightgray}{2025 -- 2026}}\\
+{\small Altium Designer \textbar{} Impedance Control \textbar{} MOSFETs \textbar{} BQ76930}
+\begin{itemize}
+  \item \textbf{RF Transceiver Board:} Designed a mixed-signal ESP32 PCB with 50$\Omega$ impedance-matched RF traces and a unified ground plane utilizing 312 stitching vias for a Faraday cage effect.
+  \item \textbf{6S UAV BMS:} Developed a 6-cell battery management system schematic ensuring high-current safety via specialized charge/discharge MOSFET configurations and hardware protection.
+\end{itemize}
+
+% ==================== AWARDS & HONORS ====================
+\section{Awards \& Honors}
+\begin{itemize}
+  \item \cvaward{2nd Position -- EMCOT 2026 Best Complex Engineering Project}{COMSATS University \& IET}{August 2026}
+  \item \cvaward{1st Position -- Best CEP Project Award (Software Category)}{COMSATS University \& District Youth}{July 2026}
+  \item \cvaward{Runner-Up -- Instructables Sensors Contest 2026 (Global)}{Bronze Medal for `IncliSense'' project}{April 2026}
+  \item \cvaward{Altium Global Scholarship Awardee}{Selected for emerging engineering excellence}{March 2026}
+  \item \cvaward{1st Position -- Best Circuit Design}{COMSATS University \& IET Hardware Workshop}{Feb 2026}
+\end{itemize}
+
+% ==================== PROFESSIONAL EXPERIENCE ====================
+\section{Professional Experience \& Leadership}
+
+\cventry{President (Previously Vice President \& Membership Head)}{May 2025 -- Present}{IET On Campus, CUI Abbottabad}{Leadership}
+\begin{itemize}
+  \item Directing student branch operations, promoting academic research excellence, and spearheading technical initiatives.
+  \item Organized specialized workshops including `Computer Vision \& AI in UAVs'' and PCB fabrication seminars.
+\end{itemize}
+\vspace{4pt}
+
+\cventry{Freelance Hardware \& Mechanical Designer}{Ongoing}{Fiverr \& Upwork}{Professional}
+\begin{itemize}
+  \item Conducting professional multi-layer PCB design, schematic capture, and 3D CAD modeling for international clientele.
+\end{itemize}
+\vspace{4pt}
+
+\cventry{Cabinet Member}{2025 -- 2027 Session}{Youth Parliament Pakistan}{Governance}
+\begin{itemize}
+  \item Selected for national advocacy and policy analysis representing the youth engineering demographic.
+\end{itemize}
+
+% ==================== TECHNICAL SKILLS ====================
+\section{Technical Skills}
+\begin{tabularx}{\textwidth}{@{} >{\bfseries}l X @{}}
+Hardware Design   & Altium Designer, CircuitStudio, KiCad, Proteus, LTspice, Multisim \\[2pt]
+Embedded Systems  & FPGA (Lattice), ESP32, STM32, Arduino, ATMEGA, I2C, SPI, UART, RF Control \\[2pt]
+Programming       & Verilog, C/C++ (Embedded), Python, JavaScript (ES6+), HTML5, CSS3, MATLAB \\[2pt]
+Software/Cloud    & CapacitorJS, Firebase, Firebase Auth, Git, iceStorm Toolchain, LaTeX \\[2pt]
+3D CAD \& Modeling & Autodesk Inventor, SolidWorks, Fusion 360, AutoCAD, 3D Printing \\[2pt]
+\end{tabularx}
+
+\end{document}
