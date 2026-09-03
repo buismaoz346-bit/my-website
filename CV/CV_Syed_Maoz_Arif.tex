@@ -3,7 +3,8 @@
 \usepackage{cmap} % Ensure Unicode mapping
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{lmodern} % Clean ATS-readable fonts
+\usepackage{helvet} % Switch to Helvetica/Arial to prevent ATS OCR confusing 'I' and '1' or '0' and 'O'
+\renewcommand{\familydefault}{\sfdefault}
 \usepackage[empty]{fullpage}
 \usepackage{titlesec}
 \usepackage{enumitem}
@@ -36,6 +37,12 @@
       \textbf{#1} & #2 \\
     \end{tabular*}\vspace{-6pt}
 }
+\newcommand{\resumeCert}[3]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} $|$ \textit{\small #2} & \textit{\small #3} \\
+    \end{tabular*}\vspace{-6pt}
+}
 
 \begin{document}
 
@@ -49,13 +56,13 @@
 %-----------SUMMARY-----------
 \section{Summary}
 \vspace{1pt}
-\small{Detail-oriented Hardware Developer and Electronics Engineer with a proven track record in multi-layer PCB design, embedded systems, and IoT architecture. Developed 12+ real-world engineering projects and achieved 17 technical certifications. Recognized for innovative problem-solving, securing 1st Position in national engineering exhibitions and a Global Instructables Contest win. Adept at cross-functional leadership, managing 50+ members as IET Chapter President, and delivering high-quality freelance engineering solutions with a 100\% client satisfaction rate.}
+\small{Detail-oriented Hardware Developer and Electronics Engineer with a proven track record in multi-layer PCB design, embedded systems, and IoT architecture. Developed 12+ real-world engineering projects and achieved 17 technical certifications. Recognized for innovative problem-solving, securing First Position in national engineering exhibitions and a Global Instructables Contest win. Adept at cross-functional leadership, managing 50+ members serving as IET Chapter President, and delivering high-quality freelance engineering solutions with a 100\% client satisfaction rate.}
 
 %-----------EDUCATION-----------
 \section{Education}
   \begin{itemize}[leftmargin=0.15in, label={}]
     \resumeSubheading
-      {COMSATS University Islamabad, Abbottabad Campus}{Expected 2028}
+      {COMSATS University Islamabad, Abbottabad Campus}{Expected Aug 2028}
       {B.S. Electrical Engineering (Electronics)}{Abbottabad, Pakistan}
       \begin{itemize}[leftmargin=0.15in, label=\textbullet]
         \resumeItem{\textbf{Honors:} Altium Global Scholarship Awardee (Selected among top 1\% globally for engineering excellence).}
@@ -71,16 +78,16 @@
       {Freelance Hardware \& Mechanical Designer}{Jan 2024 -- Present}
       {Fiverr \& Upwork}{Remote}
       \begin{itemize}[leftmargin=0.15in, label=\textbullet]
-        \resumeItem{Delivered over 15 multi-layer PCBs and 3D CAD models to global clients, achieving 100\% on-time delivery and 5-star ratings across four industry sectors.}
-        \resumeItem{Optimized component selection (BOM) and schematic captures, reducing overall hardware prototyping costs by 25\% for 10+ clients.}
+        \resumeItem{Deliver over 15 multi-layer PCBs and 3D CAD models to global clients, achieving 100\% on-time delivery and 5-star ratings across four industry sectors.}
+        \resumeItem{Optimize component selection (BOM) and schematic captures, reducing overall hardware prototyping costs by 25\% for 10+ clients.}
       \end{itemize}
 
     \resumeSubheading
       {President (Previously VP \& Membership Head)}{May 2025 -- Present}
       {IET On Campus, CUI Abbottabad}{Abbottabad, Pakistan}
       \begin{itemize}[leftmargin=0.15in, label=\textbullet]
-        \resumeItem{Directed chapter operations and managed a 5-person cross-functional executive team, fostering engineering excellence for 50+ active members.}
-        \resumeItem{Organized 5+ technical workshops (e.g., AI in UAVs) with 100+ attendees, increasing year-over-year student engagement by 40\%.}
+        \resumeItem{Direct chapter operations and manage a 5-person cross-functional executive team, fostering engineering excellence for 50+ active members.}
+        \resumeItem{Organize 5+ technical workshops (e.g., AI in UAVs) with 100+ attendees, increasing year-over-year student engagement by 40\%.}
       \end{itemize}
 
   \end{itemize}
@@ -93,13 +100,13 @@
       {Industrial Edge AI Condition Monitoring \& 3D Digital Twin}{Jul 2026}
       \begin{itemize}[leftmargin=0.15in, label=\textbullet]
         \resumeItem{Designed a dual-MCU industrial development board integrating 70 GPIOs, reducing 3-phase induction motor diagnostic time by 40\% for predictive maintenance applications.}
-        \resumeItem{Secured 1st Position (Software Category) at CEP Exhibition SP26 and 2nd Position at EMCOT 2026 out of 50+ competing projects.}
+        \resumeItem{Secured First Position (Software Category) at CEP Exhibition SP26 and 2nd Position at EMCOT 2026 out of 50+ competing projects.}
       \end{itemize}
 
     \resumeProjectHeading
       {Stratum-1 Precision Hardware Clock \& GPS Bridge}{Aug 2026}
       \begin{itemize}[leftmargin=0.15in, label=\textbullet]
-        \resumeItem{Engineered a hardware time synchronizer using pure digital logic, bypassing OS latency to achieve 0ms delay and 100\% synchronization accuracy.}
+        \resumeItem{Engineered a hardware time synchronizer using pure digital logic, bypassing OS latency to achieve 0 ms delay and 100\% synchronization accuracy.}
         \resumeItem{Developed a custom Verilog UART receiver and NMEA state machine on a Lattice FPGA to process live GPS signals directly in silicon.}
       \end{itemize}
 
@@ -113,7 +120,7 @@
     \resumeProjectHeading
       {IncliSense Precision Digital Level}{Apr 2026}
       \begin{itemize}[leftmargin=0.15in, label=\textbullet]
-        \resumeItem{Built a precision leveling device analyzing dual-axis spatial data via I2C, yielding high-accuracy PC telemetry for real-time monitoring.}
+        \resumeItem{Built a precision leveling device analyzing dual-axis spatial data via Inter-Integrated Circuit (I2C), yielding high-accuracy PC telemetry for real-time monitoring.}
         \resumeItem{Awarded Global Runner-Up in the Instructables Sensors Contest out of 500+ international submissions.}
       \end{itemize}
 
@@ -128,6 +135,15 @@
       \textbf{Programming}{: C/C++, Python, Verilog (HDL), MATLAB, JavaScript, HTML5/CSS3} \\
       \textbf{3D CAD \& Tools}{: SolidWorks, Fusion 360, AutoCAD, 3D Printing, Git, LaTeX, Agile Methodologies}
     }}
+  \end{itemize}
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    \resumeCert{Altium Certified: Designer Essentials}{Altium Education}{Mar 2026}
+    \resumeCert{Generative AI Mastermind}{Outskill}{Jan 2026}
+    \resumeCert{Arduino \& IoT Certification}{Cardiff Institute}{Aug 2025}
+    \resumeCert{3D Printing \& CAD Engineering Certificate}{Online Institute}{May 2025}
   \end{itemize}
 
 \end{document}
