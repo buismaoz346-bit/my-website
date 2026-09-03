@@ -3,26 +3,27 @@
 \usepackage{cmap}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{helvet} 
+\usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage[empty]{fullpage}
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
 \usepackage{geometry}
+\usepackage[none]{hyphenat} % Prevents words from splitting across lines
 
 \geometry{
-  top=0.6in,
-  bottom=0.6in,
-  left=0.6in,
-  right=0.6in
+  top=0.5in,
+  bottom=0.5in,
+  left=0.5in,
+  right=0.5in
 }
 
 % Section formatting
 \titleformat{\section}{\large\bfseries\uppercase}{}{0em}{}[\vspace{-0.6em}\rule{\textwidth}{1pt}]
-\titlespacing*{\section}{0pt}{1em}{0.5em}
+\titlespacing*{\section}{0pt}{0.8em}{0.4em}
 
-% Clean, pure-text macros that will never overlap or break alignment
+% Clean, pure-text macros
 \newcommand{\resumeItem}[1]{\item\small{#1}}
 
 \newcommand{\resumeSubheading}[4]{
@@ -31,17 +32,14 @@
     \textit{\small#3} \hfill \textit{\small #4}
 }
 
-\newcommand{\resumeProjectHeading}[2]{
-  \item
-    \textbf{#1} \hfill #2
-}
-
 \newcommand{\resumeCert}[3]{
   \item
-    \textbf{#1} $|$ \textit{\small #2} \hfill \textit{\small #3}
+    \textbf{#1} \hfill #3 \\
+    \textit{\small#2} \hfill \textit{\small Online}
 }
 
 \begin{document}
+\raggedright % Ensures strict left alignment, no weird spacing stretches
 \pagestyle{empty}
 
 %----------HEADING----------
@@ -56,7 +54,7 @@
 %-----------SUMMARY-----------
 \section{Summary}
 \vspace{2pt}
-\small{Detail-oriented Hardware Developer and Electronics Engineer with a proven track record in multi-layer PCB design, embedded systems, and IoT architecture. Developed 12+ real-world engineering projects and achieved 17 technical certifications. Recognized for innovative problem-solving, securing First Position in national engineering exhibitions and a Global Instructables Contest win. Adept at cross-functional leadership, managing 50+ members serving as IET Chapter President, and delivering high-quality freelance engineering solutions with a 100\% client satisfaction rate.}
+\small{Hardware Developer and Electronics Engineer experienced in multi-layer PCB design, embedded systems, and Internet of Things (IoT) architecture. Developed 12+ hardware projects and earned 17 technical certifications. Secured First Position in national Complex Engineering Project (CEP) exhibitions. Manage 50+ members serving as Institution of Engineering and Technology (IET) Chapter President, and deliver freelance hardware designs maintaining a 100\% on-time delivery rate.}
 
 %-----------EDUCATION-----------
 \section{Education}
@@ -66,32 +64,32 @@
       {B.S. Electrical Engineering (Electronics)}{Abbottabad, Pakistan}
       \vspace{-4pt}
       \begin{itemize}[leftmargin=0.2in, label=\textbullet, itemsep=1pt]
-        \resumeItem{\textbf{Honors:} Altium Global Scholarship Awardee (Selected among top 1\% globally for engineering excellence).}
+        \resumeItem{\textbf{Honors:} Altium Global Scholarship Awardee (Selected among top 1\% globally).}
         \resumeItem{\textbf{Relevant Coursework:} Embedded Systems, Digital Logic Design, Signal Integrity, C/C++ Programming.}
       \end{itemize}
   \end{itemize}
 
-%-----------WORK EXPERIENCE-----------
-\section{Work Experience}
+%-----------EXPERIENCE-----------
+\section{Experience}
   \begin{itemize}[leftmargin=0in, label={}]
     
     \resumeSubheading
-      {Freelance Hardware \& Mechanical Designer}{Jan 2024 -- Present}
-      {Fiverr \& Upwork}{Remote}
+      {President}{May 2025 -- Present}
+      {Institution of Engineering and Technology (IET) On Campus}{Abbottabad, Pakistan}
       \vspace{-4pt}
       \begin{itemize}[leftmargin=0.2in, label=\textbullet, itemsep=1pt]
-        \resumeItem{Deliver over 15 multi-layer PCBs and 3D CAD models to global clients, achieving 100\% on-time delivery and 5-star ratings across four industry sectors.}
-        \resumeItem{Optimize component selection (BOM) and schematic captures, reducing overall hardware prototyping costs by 25\% for 10+ clients.}
+        \resumeItem{Direct chapter operations and manage a 5-person cross-functional executive team, organizing initiatives for 50+ active members.}
+        \resumeItem{Organize 5+ technical workshops (including Artificial Intelligence in UAVs) with 100+ attendees, increasing student engagement by 40\%.}
       \end{itemize}
       \vspace{4pt}
 
     \resumeSubheading
-      {President (Previously VP \& Membership Head)}{May 2025 -- Present}
-      {IET On Campus, CUI Abbottabad}{Abbottabad, Pakistan}
+      {Freelance Hardware \& Mechanical Designer}{Jan 2024 -- Present}
+      {Fiverr \& Upwork (Freelance Client Platforms)}{Remote}
       \vspace{-4pt}
       \begin{itemize}[leftmargin=0.2in, label=\textbullet, itemsep=1pt]
-        \resumeItem{Direct chapter operations and manage a 5-person cross-functional executive team, fostering engineering excellence for 50+ active members.}
-        \resumeItem{Organize 5+ technical workshops (e.g., AI in UAVs) with 100+ attendees, increasing year-over-year student engagement by 40\%.}
+        \resumeItem{Deliver over 15 multi-layer PCBs and 3D CAD models to global clients, achieving 100\% on-time delivery and 5-star ratings across four sectors.}
+        \resumeItem{Optimize component selection (BOM) and schematic captures, reducing overall hardware prototyping costs by 25\% for 10+ clients.}
       \end{itemize}
 
   \end{itemize}
@@ -100,17 +98,19 @@
 \section{Projects}
   \begin{itemize}[leftmargin=0in, label={}]
     
-    \resumeProjectHeading
-      {Industrial Edge AI Condition Monitoring \& 3D Digital Twin}{Jul 2026}
+    \resumeSubheading
+      {Industrial Edge AI Condition Monitoring}{May 2026 -- Jul 2026}
+      {Academic Project $|$ Dual-MCU, GPIO, C/C++}{Abbottabad, Pakistan}
       \vspace{-4pt}
       \begin{itemize}[leftmargin=0.2in, label=\textbullet, itemsep=1pt]
-        \resumeItem{Designed a dual-MCU industrial development board integrating 70 GPIOs, reducing 3-phase induction motor diagnostic time by 40\% for predictive maintenance applications.}
-        \resumeItem{Secured First Position (Software Category) at CEP Exhibition SP26 and 2nd Position at EMCOT 2026 out of 50+ competing projects.}
+        \resumeItem{Designed an industrial development board integrating 70 GPIOs, reducing 3-phase induction motor diagnostic time by 40\%.}
+        \resumeItem{Secured First Position at Complex Engineering Project (CEP) Exhibition and 2nd Position at EMCOT out of 50+ competing projects.}
       \end{itemize}
       \vspace{4pt}
 
-    \resumeProjectHeading
-      {Stratum-1 Precision Hardware Clock \& GPS Bridge}{Aug 2026}
+    \resumeSubheading
+      {Stratum-1 Precision Hardware Clock}{Jul 2026 -- Aug 2026}
+      {Independent Project $|$ FPGA, Verilog}{Abbottabad, Pakistan}
       \vspace{-4pt}
       \begin{itemize}[leftmargin=0.2in, label=\textbullet, itemsep=1pt]
         \resumeItem{Engineered a hardware time synchronizer using pure digital logic, bypassing OS latency to achieve 0 ms delay and 100\% synchronization accuracy.}
@@ -118,8 +118,9 @@
       \end{itemize}
       \vspace{4pt}
 
-    \resumeProjectHeading
-      {ElectroParts IMS: Inventory Architecture}{Aug 2026}
+    \resumeSubheading
+      {ElectroParts Inventory Architecture}{Jul 2026 -- Aug 2026}
+      {Independent Project $|$ Firebase, CapacitorJS}{Abbottabad, Pakistan}
       \vspace{-4pt}
       \begin{itemize}[leftmargin=0.2in, label=\textbullet, itemsep=1pt]
         \resumeItem{Architected a cross-platform inventory management system supporting 32 distinct electronics categories, increasing component retrieval efficiency by 50\%.}
@@ -127,30 +128,32 @@
       \end{itemize}
       \vspace{4pt}
 
-    \resumeProjectHeading
-      {IncliSense Precision Digital Level}{Apr 2026}
+    \resumeSubheading
+      {IncliSense Precision Digital Level}{Mar 2026 -- Apr 2026}
+      {Independent Project $|$ I2C, Arduino, Telemetry}{Abbottabad, Pakistan}
       \vspace{-4pt}
       \begin{itemize}[leftmargin=0.2in, label=\textbullet, itemsep=1pt]
-        \resumeItem{Built a precision leveling device analyzing dual-axis spatial data via Inter-Integrated Circuit (I2C), yielding high-accuracy PC telemetry for real-time monitoring.}
+        \resumeItem{Built a precision leveling device analyzing dual-axis spatial data via Inter-Integrated Circuit (I2C), yielding high-accuracy PC telemetry.}
         \resumeItem{Awarded Global Runner-Up in the Instructables Sensors Contest out of 500+ international submissions.}
       \end{itemize}
 
   \end{itemize}
 
-%-----------TECHNICAL SKILLS-----------
-\section{Technical Skills}
+%-----------SKILLS-----------
+\section{Skills}
   \begin{itemize}[leftmargin=0in, label={}]
     \small{\item{
-      \textbf{Hardware Design}{: Altium Designer, KiCad, Proteus, LTspice, Multisim, Schematic Capture, Signal Integrity} \\
-      \textbf{Embedded Systems}{: ESP32, STM32, Arduino, Lattice FPGA, I2C, SPI, UART, MQTT, Firebase} \\
+      \textbf{Hardware Design}{: Altium Designer, KiCad, Proteus, Schematic Capture, Signal Integrity, PCB Design} \\
+      \textbf{Embedded Systems}{: ESP32, STM32, Arduino, Lattice FPGA, I2C, SPI, UART, MQTT, Firebase, IoT} \\
       \textbf{Programming}{: C/C++, Python, Verilog (HDL), MATLAB, JavaScript, HTML5/CSS3} \\
-      \textbf{3D CAD \& Tools}{: SolidWorks, Fusion 360, AutoCAD, 3D Printing, Git, LaTeX, Agile Methodologies}
+      \textbf{3D CAD \& Tools}{: SolidWorks, Fusion 360, AutoCAD, 3D Printing, Git, LaTeX} \\
+      \textbf{Soft Skills \& Management}{: Cross-functional Leadership, Stakeholder Communication, Project Management, Agile Methodologies}
     }}
   \end{itemize}
 
 %-----------CERTIFICATIONS-----------
 \section{Certifications}
-  \begin{itemize}[leftmargin=0in, label={}, itemsep=2pt]
+  \begin{itemize}[leftmargin=0in, label={}, itemsep=1pt]
     \resumeCert{Altium Certified: Designer Essentials}{Altium Education}{Mar 2026}
     \resumeCert{Generative AI Mastermind}{Outskill}{Jan 2026}
     \resumeCert{Arduino \& IoT Certification}{Cardiff Institute}{Aug 2025}
