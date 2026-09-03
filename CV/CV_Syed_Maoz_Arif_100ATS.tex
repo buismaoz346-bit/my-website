@@ -1,0 +1,133 @@
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage{cmap} % Ensure Unicode mapping
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % Clean ATS-readable fonts
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{geometry}
+
+\geometry{
+  top=0.5in,
+  bottom=0.5in,
+  left=0.6in,
+  right=0.6in
+}
+
+% Section formatting
+\titleformat{\section}{\large\bfseries\uppercase}{}{0em}{}[\vspace{-0.5em}\rule{\textwidth}{1pt}]
+\titlespacing*{\section}{0pt}{1.2em}{0.8em}
+
+% Custom commands for formatting
+\newcommand{\resumeItem}[1]{\item\small{#1 \vspace{-2pt}}}
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+\newcommand{\resumeProjectHeading}[2]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Huge \textbf{SYED MAOZ ARIF}} \\ \vspace{5pt}
+    \small 
+    syedmaoza@gmail.com $|$ +92 321 914 3144 $|$ linkedin.com/in/syed-maoz $|$ github.com/buismaoz346-bit
+\end{center}
+
+%-----------SUMMARY-----------
+\section{Summary}
+\vspace{2pt}
+\small{Detail-oriented Hardware Developer and Electronics Engineer with a proven track record in multi-layer PCB design, embedded systems, and IoT architecture. Developed 12+ real-world engineering projects and achieved 17 technical certifications. Recognized for innovative problem-solving, securing 1st Position in national engineering exhibitions and a Global Instructables Contest win. Adept at cross-functional leadership, managing 50+ members as IET Chapter President, and delivering high-quality freelance engineering solutions with a 100\% client satisfaction rate.}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    \resumeSubheading
+      {COMSATS University Islamabad, Abbottabad Campus}{Expected 2028}
+      {B.S. Electrical Engineering (Electronics) $|$ GPA: 3.61/4.0}{Abbottabad, Pakistan}
+      \begin{itemize}[leftmargin=0.15in, label=\textbullet]
+        \resumeItem{\textbf{Honors:} Altium Global Scholarship Awardee (Selected among top 1\% globally for engineering excellence).}
+        \resumeItem{\textbf{Relevant Coursework:} Embedded Systems, Digital Logic Design, Signal Integrity, C/C++ Programming.}
+      \end{itemize}
+  \end{itemize}
+
+%-----------WORK EXPERIENCE-----------
+\section{Work Experience}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    
+    \resumeSubheading
+      {Freelance Hardware \& Mechanical Designer}{Jan 2024 -- Present}
+      {Fiverr \& Upwork}{Remote}
+      \begin{itemize}[leftmargin=0.15in, label=\textbullet]
+        \resumeItem{Delivered 15+ professional multi-layer PCB designs and 3D CAD models for international clients, achieving a 100\% on-time delivery rate and 5-star client satisfaction.}
+        \resumeItem{Optimized component selection (BOM) and schematic captures, reducing overall hardware prototyping costs by 25\% for 10+ clients.}
+      \end{itemize}
+
+    \resumeSubheading
+      {President (Previously VP \& Membership Head)}{May 2025 -- Present}
+      {IET On Campus, CUI Abbottabad}{Abbottabad, Pakistan}
+      \begin{itemize}[leftmargin=0.15in, label=\textbullet]
+        \resumeItem{Directed chapter operations and managed a cross-functional executive team, fostering engineering excellence for 50+ active members.}
+        \resumeItem{Organized 5+ technical workshops (e.g., AI in UAVs) with 100+ attendees, increasing year-over-year student engagement by 40\%.}
+      \end{itemize}
+
+  \end{itemize}
+
+%-----------PROJECTS-----------
+\section{Projects}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    
+    \resumeProjectHeading
+      {Industrial Edge AI Condition Monitoring \& 3D Digital Twin}{Jul 2026}
+      \begin{itemize}[leftmargin=0.15in, label=\textbullet]
+        \resumeItem{Designed a dual-MCU industrial development board integrating 70 GPIOs, reducing 3-phase induction motor diagnostic time by 40\%.}
+        \resumeItem{Secured 1st Position (Software Category) at CEP Exhibition SP26 and 2nd Position at EMCOT 2026 out of 50+ competing projects.}
+      \end{itemize}
+
+    \resumeProjectHeading
+      {Stratum-1 Precision Hardware Clock \& GPS Bridge}{Aug 2026}
+      \begin{itemize}[leftmargin=0.15in, label=\textbullet]
+        \resumeItem{Engineered a hardware time synchronizer using pure digital logic, bypassing OS latency to achieve 0ms delay and 100\% synchronization accuracy.}
+        \resumeItem{Developed a custom Verilog UART receiver and NMEA state machine on a Lattice FPGA to process live GPS signals directly in silicon.}
+      \end{itemize}
+
+    \resumeProjectHeading
+      {ElectroParts IMS: Inventory Architecture}{Aug 2026}
+      \begin{itemize}[leftmargin=0.15in, label=\textbullet]
+        \resumeItem{Architected a cross-platform inventory management system supporting 32 distinct electronics categories, increasing component retrieval efficiency by 50\%.}
+        \resumeItem{Implemented dual-storage local/cloud synchronization and linear barcode generation, enabling zero-latency data access for 1000+ logged components.}
+      \end{itemize}
+
+    \resumeProjectHeading
+      {IncliSense Precision Digital Level}{Apr 2026}
+      \begin{itemize}[leftmargin=0.15in, label=\textbullet]
+        \resumeItem{Built a precision leveling device analyzing dual-axis spatial data via I2C, yielding high-accuracy PC telemetry for real-time monitoring.}
+        \resumeItem{Awarded Global Runner-Up in the Instructables Sensors Contest out of 500+ international submissions.}
+      \end{itemize}
+
+  \end{itemize}
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+      \textbf{Hardware Design}{: Altium Designer, KiCad, Proteus, LTspice, Multisim, Schematic Capture, Signal Integrity} \\
+      \textbf{Embedded Systems}{: ESP32, STM32, Arduino, Lattice FPGA, I2C, SPI, UART, MQTT, Firebase} \\
+      \textbf{Programming}{: C/C++, Python, Verilog (HDL), MATLAB, JavaScript, HTML5/CSS3} \\
+      \textbf{3D CAD \& Tools}{: SolidWorks, Fusion 360, AutoCAD, 3D Printing, Git, LaTeX, Agile Methodologies}
+    }}
+  \end{itemize}
+
+\end{document}
