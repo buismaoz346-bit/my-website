@@ -1,243 +1,134 @@
-%% CV — Syed Maoz Arif
-%% Compiled with pdflatex
 \documentclass[a4paper,10pt]{article}
-
-% ── Packages ──
-\usepackage[margin=0.55in]{geometry}
-\usepackage{titlesec}
+\usepackage{cmap} % ATS friendliness - Unicode font mapping
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % Better ATS fonts
+\usepackage[margin=0.6in]{geometry}
 \usepackage{enumitem}
 \usepackage{hyperref}
-\usepackage{xcolor}
-\usepackage{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{multicol}
-\usepackage{tabularx}
-\usepackage{fancyhdr}
-\usepackage{graphicx}
+\usepackage{titlesec}
 
-% ── Colors ──
-\definecolor{accent}{HTML}{0F172A}
-\definecolor{linkblue}{HTML}{1E40AF}
-\definecolor{lightgray}{HTML}{6B7280}
-\definecolor{rulecol}{HTML}{CBD5E1}
-\definecolor{RULECOL}{HTML}{CBD5E1}
+% Section formatting
+\titleformat{\section}{\large\bfseries\uppercase}{}{0em}{}[\vspace{-0.6em}\rule{\textwidth}{1pt}]
+\titlespacing*{\section}{0pt}{1em}{0.5em}
 
-% ── Hyperref ──
-\hypersetup{colorlinks=true, linkcolor=linkblue, urlcolor=linkblue, pdfauthor={Syed Maoz Arif}, pdftitle={CV - Syed Maoz Arif}}
+\setlist[itemize]{nosep, left=0pt, label=\textbullet, itemsep=2pt}
 
-% ── Section formatting ──
-\titleformat{\section}{\large\bfseries\color{accent}\uppercase}{}{0em}{}[\vspace{-0.6em}\textcolor{rulecol}{\rule{\textwidth}{1.2pt}}]
-\titlespacing*{\section}{0pt}{0.9em}{0.5em}
-
-% ── List formatting ──
-\setlist[itemize]{nosep, left=0pt, label=\textbullet, itemsep=1.5pt}
-
-% ── No page numbers ──
-\pagestyle{fancy}
-\fancyhf{}
-\renewcommand{\headrulewidth}{0pt}
-\fancyfoot[C]{\footnotesize\textcolor{lightgray}{Syed Maoz Arif\enspace\textbullet\enspace syedmaoza@gmail.com\enspace\textbullet\enspace +92 321 914 3144\enspace\textbullet\enspace Page \thepage}}
-
-% ── Commands ──
 \newcommand{\cventry}[4]{%
-  {\textbf{#1}}\hfill{\small\textcolor{lightgray}{#2}}\\
-  {\textit{#3}}\hfill{\small\textcolor{lightgray}{#4}}\vspace{2pt}
+  \noindent \textbf{#1} \hfill #2 \\
+  \noindent \textit{#3} \hfill \textit{#4} \vspace{2pt}
 }
 
-\newcommand{\cvaward}[3]{%
-  \textbf{#1} — {\small #2} \hfill {\small\textcolor{lightgray}{#3}}
-}
-
-% ══════════════════════════════════════════════════
 \begin{document}
+\pagestyle{empty} % No page numbers for cleaner ATS parsing
 
-% ── HEADER ──
+% HEADER
 \begin{center}
-  {\LARGE\bfseries\color{accent} SYED MAOZ ARIF}\\[4pt]
-  {\normalsize Hardware Developer \& Electronics Engineer}\\[3pt]
-  {\small President @ IET On Campus CUI Abbottabad}\\[6pt]
-  {\small
-    \href{mailto:syedmaoza@gmail.com}{syedmaoza@gmail.com}\enspace\textbar\enspace
-    +92 321 914 3144\enspace\textbar\enspace
-    \href{https://www.linkedin.com/in/syed-maoz}{LinkedIn}\enspace\textbar\enspace
-    \href{https://buismaoz346-bit.github.io/my-website/}{Portfolio}\enspace\textbar\enspace
-    Abbottabad, Pakistan
-  }
+  {\LARGE \textbf{SYED MAOZ ARIF}}\\[4pt]
+  {\large Hardware Developer \& Electronics Engineer}\\[2pt]
+  syedmaoza@gmail.com | +92 321 914 3144 | linkedin.com/in/syed-maoz | buismaoz346-bit.github.io/my-website | Abbottabad, Pakistan
 \end{center}
 
-\vspace{-0.3em}
+\vspace{-0.5em}
 
-% ── PROFESSIONAL SUMMARY ──
+% SUMMARY
 \section{Professional Summary}
-Hardware developer and electronics engineering student (5th semester) at COMSATS University with hands-on experience in multi-layer PCB design, embedded systems, and IoT. Builder of 9 real-world projects, holder of 17 certifications, and winner of 5 awards including a global Instructables contest. Active freelancer on Fiverr \& Upwork serving international clients. President at IET On Campus and Cabinet Member of the Youth Parliament Pakistan.
+Hardware developer and electronics engineering student (5th semester) at COMSATS University with hands-on experience in multi-layer PCB design, embedded systems, firmware development, and IoT. Builder of 12 real-world projects, holder of 17 certifications, and winner of 5 awards including a global Instructables contest. Active freelancer serving international clients. Proven leadership abilities as President of IET On Campus.
 
-% ── EDUCATION ──
+% EDUCATION
 \section{Education}
-\cventry{BSc Electrical and Electronics Engineering (EEE)}{2024 -- 2028 (Expected)}{COMSATS University Islamabad, Abbottabad Campus}{5th semester}
+\cventry{B.S. Electrical Engineering (Focus: Electronics)}{2024 -- 2028 (Expected)}{COMSATS University Islamabad, Abbottabad Campus}{5th Semester | GPA: 3.61/4.0}
 \begin{itemize}
-  \item Student ID: FA24-EEE-014 \enspace\textbar\enspace Focus: Embedded Systems, PCB Design, Signal Integrity, IoT
-  \item Altium Global Scholarship Awardee (March 2026)
+  \item \textbf{Focus Areas:} Embedded Systems, PCB Design, Signal Integrity, IoT, Firmware Engineering, Digital Logic
+  \item \textbf{Honors:} Altium Global Scholarship Awardee (March 2026)
+\end{itemize}
+
+% TECHNICAL SKILLS
+\section{Technical Skills}
+\begin{itemize}
+  \item \textbf{PCB \& Hardware Design:} Altium Designer, Altium 365, CircuitStudio, KiCad, EasyEDA, Proteus, LTspice, Multisim, Schematic Capture, Impedance Matching, Signal Integrity
+  \item \textbf{Embedded Systems \& IoT:} ESP32, STM32, Arduino, ATMEGA, Lattice FPGA, I2C, SPI, UART, RF, MQTT, Firebase, Digital Logic
+  \item \textbf{Programming \& Firmware:} C/C++ (Embedded C), Python, Verilog (HDL), MATLAB, JavaScript, HTML5, CSS3
+  \item \textbf{3D CAD \& Modeling:} Autodesk Inventor, SolidWorks, Fusion 360, AutoCAD, 3D Printing, Enclosure Design
+\end{itemize}
+
+% EXPERIENCE
+\section{Professional Experience \& Leadership}
+\cventry{Freelance Hardware \& Mechanical Designer}{January 2024 -- Present}{Fiverr \& Upwork}{Remote}
+\begin{itemize}
+  \item Deliver professional multi-layer PCB designs, schematic capture, and 3D CAD modeling for international clients.
+  \item Manage project scoping, component selection (BOM), deadline management, and technical documentation.
 \end{itemize}
 \vspace{4pt}
-\cventry{FSc Pre-Engineering}{Completed 2024}{Peace Group of School \& College, Abbottabad}{Higher Secondary}
+\cventry{President (Previously VP \& Membership Head)}{May 2025 -- Present}{IET On Campus, CUI Abbottabad}{Abbottabad, PK}
 \begin{itemize}
-  \item Core Subjects: Mathematics, Physics, Analytical Reasoning
-\end{itemize}
-
-% ── EXPERIENCE ──
-\section{Leadership \& Professional Experience}
-
-\cventry{President}{August 2026 -- Present}{IET On Campus, CUI Abbottabad}{Leadership}
-\begin{itemize}
-  \item Guiding chapter operations and representing the student branch to foster engineering excellence
-  \item Organizing technical events and professional development initiatives for 50+ members
+  \item Guide chapter operations and represent the student branch to foster engineering excellence for 50+ members.
+  \item Organize technical events, professional development initiatives, and specialized workshops (e.g., AI in UAVs).
 \end{itemize}
 \vspace{4pt}
-
-\cventry{Vice President}{July 2026 -- August 2026}{IET On Campus, CUI Abbottabad}{Leadership}
+\cventry{Cabinet Member}{2025 -- 2027}{Youth Parliament Pakistan}{National}
 \begin{itemize}
-  \item Led organizational initiatives and managed branch operations
-  \item Served as acting executive leader prior to presidential promotion
-\end{itemize}
-\vspace{4pt}
-
-\cventry{Membership Head}{May 2025 -- July 2026}{IET On Campus, Abbottabad}{Leadership}
-\begin{itemize}
-  \item Led membership initiatives and organized technical workshops (Computer Vision \& AI in UAVs)
-  \item Commended for extraordinary leadership, team management, and problem-solving abilities
-\end{itemize}
-\vspace{4pt}
-
-\cventry{Cabinet Member}{2025 -- 2027 Session}{Youth Parliament Pakistan}{Governance}
-\begin{itemize}
-  \item Serving in a leadership capacity for youth advocacy and national policy discussions
-\end{itemize}
-\vspace{4pt}
-
-\cventry{Freelance Hardware \& Mechanical Designer}{Ongoing}{Fiverr \& Upwork}{Professional}
-\begin{itemize}
-  \item Professional multi-layer PCB design, schematic capture, and 3D CAD modeling for international clients
-  \item Project scoping, deadline management, and professional client communication
+  \item Serve in a leadership capacity for youth advocacy, engineering sector representation, and national policy discussions.
 \end{itemize}
 
-% ── PROJECTS ──
+% PROJECTS
 \section{Key Projects}
 
-\textbf{IncliSense Precision Digital Level} \hfill {\small\textcolor{lightgray}{2026 \enspace\textbar\enspace \textbf{Runner-Up, Instructables Sensors Contest (Global)}}}\\
-{\small Arduino Nano \textbar{} MPU6050 \textbar{} IoT \textbar{} 3D Printing}
+\noindent \textbf{Industrial Edge AI Condition Monitoring \& 3D Digital Twin} \hfill \textit{July 2026} \\
+\textit{STM32H7, ESP32 WROOM, Ethernet, Altium Designer, C/C++}
 \begin{itemize}
-  \item Precision leveling device with dual-axis spatial data, 11-LED interface, integrated buzzer, and PC telemetry
-  \item Custom 3D-printed ABS enclosure; documented and published on Instructables
+  \item Designed an industrial-grade development board with dual-MCU architecture, hardware calibration, and 70 GPIOs.
+  \item Secured 1st Position (Software Category) at CEP Exhibition SP26 and 2nd Position at EMCOT 2026.
 \end{itemize}
-\vspace{3pt}
+\vspace{4pt}
 
-\textbf{Industrial Edge AI Condition Monitoring \& 3D Digital Twin} \hfill {\small\textcolor{lightgray}{July 2026 \enspace\textbar\enspace \textbf{1st Position, CEP Exhibition SP26}}}\\
-{\small Edge AI \textbar{} Condition Monitoring \textbar{} 3D Digital Twin \textbar{} IoT}
+\noindent \textbf{Stratum-1 Precision Hardware Clock \& GPS Bridge} \hfill \textit{August 2026} \\
+\textit{Verilog, Lattice iCE40UP5K FPGA, NEO-6M GPS, Digital Logic}
 \begin{itemize}
-  \item Complex Engineering Problem project; secured 1st Position in Software Category at COMSATS University
+  \item Engineered a Stratum-1 time synchronizer using pure digital logic to bypass microprocessor latency entirely.
+  \item Developed a custom hardware UART receiver and NMEA state machine to parse GPS signals directly in silicon.
 \end{itemize}
-\vspace{3pt}
+\vspace{4pt}
 
-\textbf{First FPGA Programming -- iCEbreaker} \hfill {\small\textcolor{lightgray}{2026}}\\
-{\small Verilog \textbar{} iCEbreaker FPGA \textbar{} Digital Logic \textbar{} iceStorm Toolchain}
+\noindent \textbf{ElectroParts IMS: Inventory Architecture} \hfill \textit{August 2026} \\
+\textit{JavaScript, Firebase, CapacitorJS, HTML5/CSS3}
 \begin{itemize}
-  \item LED blinking via Verilog HDL; learned digital logic synthesis, pin assignment, and bitstream generation
+  \item Architected a cross-platform (Web/Native Android) inventory engine supporting 32 electronics categories.
+  \item Implemented dual-storage local/cloud sync and linear barcode generation algorithms for zero-latency retrieval.
 \end{itemize}
-\vspace{3pt}
+\vspace{4pt}
 
-\textbf{6S UAV Battery Management System (BMS)} \hfill {\small\textcolor{lightgray}{2026}}\\
-{\small BQ76930 \textbar{} XT60 \textbar{} MOSFETs \textbar{} UAV Architecture}
+\noindent \textbf{IncliSense Precision Digital Level} \hfill \textit{April 2026} \\
+\textit{Arduino Nano, MPU6050, IoT, C++, 3D Printing}
 \begin{itemize}
-  \item Complete 6-cell BMS schematic with charge/discharge protection MOSFETs and hardware telemetry
+  \item Built a precision leveling device analyzing dual-axis spatial data via I2C, yielding high-accuracy PC telemetry.
+  \item Awarded Global Runner-Up in the Instructables Sensors Contest.
 \end{itemize}
-\vspace{3pt}
+\vspace{4pt}
 
-\textbf{Mixed-Signal RF Transceiver Board} \hfill {\small\textcolor{lightgray}{2026}}\\
-{\small ESP32 \textbar{} RF TX/RX \textbar{} 50$\Omega$ Impedance Matching}
+\noindent \textbf{Mixed-Signal RF Transceiver \& 6S UAV BMS} \hfill \textit{2026} \\
+\textit{ESP32, RF Routing, BQ76930, Altium Designer}
 \begin{itemize}
-  \item 50$\Omega$ impedance-matched RF traces, unified ground plane with 312 stitching vias (Faraday cage)
-\end{itemize}
-\vspace{3pt}
-
-\textbf{Smart Lighting System with Obstacle Detection} \hfill {\small\textcolor{lightgray}{2026}}\\
-{\small Altium Designer \textbar{} ATMEGA328PB-AU \textbar{} VL53L0X ToF \textbar{} TP4056 USB-C}
-\begin{itemize}
-  \item Custom PCB with Time-of-Flight sensor, dual LED arrays, and USB-C battery charging circuit
-\end{itemize}
-\vspace{3pt}
-
-\textbf{Omni-Sense Node: Mixed-Signal DAQ} \hfill {\small\textcolor{lightgray}{2026}}\\
-{\small ESP32 \textbar{} SPI \textbar{} PWM \textbar{} RFID \textbar{} MQ-Series Sensors}
-\begin{itemize}
-  \item Centralized DAQ system with 15 heterogeneous peripherals; dual-rail power distribution network
-\end{itemize}
-\vspace{3pt}
-
-\textbf{Wi-Fi Router UPS Power Bank} \hfill {\small\textcolor{lightgray}{2026}}\\
-{\small Hardware Design \textbar{} BMS \textbar{} DC-DC Conversion \textbar{} 3S Li-ion}
-\begin{itemize}
-  \item Custom DC UPS with 7-segment voltage display, rotary adjustment, and fused overcurrent protection
-\end{itemize}
-\vspace{3pt}
-
-\textbf{Personal Portfolio Website} \hfill {\small\textcolor{lightgray}{2026}}\\
-{\small HTML5 \textbar{} CSS3 \textbar{} JavaScript \textbar{} Firebase Firestore \textbar{} UI/UX}
-\begin{itemize}
-  \item Responsive glassmorphism design with Firebase social features, AI assistant mode, and GPU-optimized animations
+  \item Designed an ESP32 PCB with 50-ohm impedance-matched RF traces and 312 stitching vias for a Faraday cage.
+  \item Developed a 6-cell battery management system schematic ensuring high-current safety via MOSFET protections.
 \end{itemize}
 
-% ── AWARDS ──
+% AWARDS
 \section{Awards \& Honors}
 \begin{itemize}
-  \item \cvaward{Runner-Up -- Instructables Sensors Contest 2026 (Global)}{Bronze Medal for ``IncliSense'' project}{April 2026}
-  \item \cvaward{1st Position -- Best CEP Project Award}{COMSATS University \& District Youth Office Abbottabad}{July 2026}
-  \item \cvaward{1st Position -- Best Circuit Design}{COMSATS University \& IET Hardware Workshop}{Feb 2026}
-  \item \cvaward{Altium Global Scholarship Awardee}{Selected for emerging engineering excellence}{March 2026}
-  \item \cvaward{Best Project Award}{COMSATS University -- Outstanding engineering design \& innovation}{Feb 2026}
+  \item \textbf{1st Position, Best CEP Project Award (Software Category)} - COMSATS University \& District Youth (July 2026)
+  \item \textbf{2nd Position, EMCOT 2026 Best Complex Engineering Project} - COMSATS \& IET (August 2026)
+  \item \textbf{Runner-Up, Global Sensors Contest} - Instructables (April 2026)
+  \item \textbf{Altium Global Scholarship Awardee} - Altium Education (March 2026)
+  \item \textbf{1st Position, Best Circuit Design} - COMSATS University \& IET Hardware Workshop (Feb 2026)
 \end{itemize}
 
-% ── CERTIFICATIONS ──
-\section{Certifications (17)}
-\begin{multicols}{2}
-\begin{itemize}[itemsep=2pt]
-  \item Altium Certified: Designer Essentials
-  \item Altium Education PCB Basic Design
-  \item Generative AI Mastermind (Outskill)
-  \item Arduino \& IoT -- Cardiff Institute
-  \item Unleashing Creativity with AI
-  \item Practical Entrepreneurship
-  \item 3D Printing Certificate
-  \item Solar Solution for Pakistan
-  \item IET On Campus Leadership
-  \item IET On Campus Recognition
-  \item IET Experience Certificate
-  \item Student Week SP26 Certificate
-  \item Kangaroo Test Achievement
-  \item Best Project Award Certificate
-  \item Inovatex Project 2025
-  \item Best CEP Project Award -- 1st Position
-  \item Organizer -- Project Exhibition 2026
+% CERTIFICATIONS
+\section{Certifications}
+\begin{itemize}
+  \item Altium Certified: Designer Essentials | Altium Education PCB Basic Design | Generative AI Mastermind
+  \item Arduino \& IoT (Cardiff Institute) | 3D Printing Certificate | Solar Solution for Pakistan
+  \item Additional 11 certifications in Leadership, AI, and Engineering Project Management.
 \end{itemize}
-\end{multicols}
-
-% ── TECHNICAL SKILLS ──
-\section{Technical Skills}
-\begin{tabularx}{\textwidth}{@{} >{\bfseries}l X @{}}
-PCB \& Hardware   & Altium Designer, Altium 365, CircuitStudio, KiCad, EasyEDA, Proteus, LTspice, Multisim \\[2pt]
-Embedded \& IoT   & ESP32, STM32, Arduino, ATMEGA328PB, Verilog (FPGA), MQTT, Firebase, Blynk \\[2pt]
-3D CAD            & Autodesk Inventor, SolidWorks, Fusion 360, AutoCAD, Tinkercad \\[2pt]
-Programming       & Python, MATLAB, C/C++ (Embedded), Verilog, HTML5, CSS3, JavaScript \\[2pt]
-Documentation     & LaTeX, Overleaf, draw.io, Microsoft Office Suite \\[2pt]
-AI Tools          & Gemini, ChatGPT, Claude, Google AI Studio, Microsoft Copilot \\[2pt]
-Design \& Media   & Adobe Photoshop, Canva, Inkscape \\[2pt]
-\end{tabularx}
-
-% ── SOFT SKILLS ──
-\section{Interpersonal Skills}
-Public Speaking \enspace\textbar\enspace Leadership \& Team Management \enspace\textbar\enspace Communication \& Client Relations \enspace\textbar\enspace Collaboration \& Empathy \enspace\textbar\enspace Critical Thinking \& Problem Solving \enspace\textbar\enspace Project Scoping \& Time Management
-
-% ── INTERESTS ──
-\section{Interests}
-Cricket \enspace\textbar\enspace Trekking \enspace\textbar\enspace Exploring New Places
 
 \end{document}
