@@ -215,9 +215,6 @@ body > footer {
         background-color 0.25s ease !important;
 }
 
-.cert-card:hover .cert-info {
-    padding-left: 1.5rem !important;
-}
 .timeline-item:hover .timeline-content {
     transform: translateY(-3px) !important;
 }
@@ -746,8 +743,24 @@ body.dark-mode .form-textarea {
     border-top-color: rgba(255, 255, 255, 0.14) !important;
 }
 
-/* --- 6. Project Cards (Frosted Glass Dock Over Imagery) --- */
-.project-card {
+/* --- 6. Project Cards & Grid (Uncropped Full-Frame Media + Clean Viewport Fit) --- */
+.projects-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)) !important;
+    gap: 1.65rem !important;
+    column-count: initial !important;
+    align-items: stretch !important;
+    margin-top: 2.5rem !important;
+}
+.project-card:not(.card-filtered-out) {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    break-inside: auto !important;
+    overflow: hidden !important;
     background: rgba(10, 14, 24, 0.72) !important;
     border: 1px solid rgba(255, 255, 255, 0.18) !important;
     border-radius: 22px !important;
@@ -757,24 +770,53 @@ body.dark-mode .form-textarea {
 }
 .project-card:hover {
     transform: translateY(-4px) !important;
-    border-color: rgba(255, 255, 255, 0.32) !important;
+    border-color: rgba(255, 255, 255, 0.34) !important;
 }
 .project-card .project-bg {
-    filter: brightness(0.90) contrast(1.04);
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 10 !important;
+    flex-shrink: 0 !important;
+    display: block !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-color: rgba(6, 10, 20, 0.88) !important;
+    object-fit: contain !important;
+    filter: brightness(0.96) contrast(1.03) !important;
+    transform: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 .project-card:hover .project-bg {
-    filter: brightness(0.76) contrast(1.08);
+    filter: brightness(1.02) contrast(1.04) !important;
+    transform: none !important;
 }
-.project-content-overlay,
+.project-card .project-content-overlay,
 .project-card:hover .project-content-overlay {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    flex: 1 1 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
     background: rgba(8, 12, 22, 0.78) !important;
     backdrop-filter: blur(8px) saturate(150%) !important;
     -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.24);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.20);
-    transform: translateY(0) !important;
+    border-top: none !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    transform: none !important;
     opacity: 1 !important;
-    padding: 1.35rem 1.6rem !important;
+    padding: 1.25rem 1.45rem !important;
 }
 .project-content-overlay h3 {
     color: #FFFFFF !important;
@@ -795,7 +837,9 @@ body.dark-mode .form-textarea {
     color: #7DD3FC !important;
 }
 .project-content-overlay .project-link {
-    opacity: 0.94;
+    margin-top: auto;
+    padding-top: 0.45rem;
+    opacity: 0.96;
     transform: translateX(0);
 }
 .project-card:hover .project-content-overlay .project-link,
@@ -809,20 +853,80 @@ body.dark-mode .form-textarea {
     border-color: rgba(255, 255, 255, 0.18) !important;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 900px) {
+    .featured-project:not(.card-filtered-out) {
+        grid-column: 1 / -1 !important;
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) !important;
+        align-items: stretch !important;
+        height: auto !important;
+    }
     .featured-project .project-content-overlay,
     .featured-project:hover .project-content-overlay {
-        border-top: none;
-        border-right: 1px solid rgba(255, 255, 255, 0.18);
-        padding: 2.25rem !important;
+        order: 1 !important;
+        justify-content: center !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.16) !important;
+        border-bottom: none !important;
+        padding: 2rem 2.25rem !important;
+    }
+    .featured-project .project-bg {
+        order: 2 !important;
+        aspect-ratio: auto !important;
+        min-height: 320px !important;
+        height: 100% !important;
+        width: 100% !important;
+        border-bottom: none !important;
+        background-size: contain !important;
+        background-position: center center !important;
     }
 }
+.card-filtered-out {
+    display: none !important;
+}
 
-/* --- 7. Certs, Education & Timeline --- */
+/* --- 7. Certs, Awards, Education & Timeline --- */
+section:not(#publications) .cert-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)) !important;
+    gap: 1.65rem !important;
+    margin-top: 2.5rem !important;
+}
+@media (min-width: 1100px) {
+    section:not(#publications) .cert-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+}
+#publications .cert-grid {
+    grid-template-columns: minmax(min(100%, 280px), 780px) !important;
+}
 .cert-image {
     padding: 12px;
-    background: rgba(0, 0, 0, 0.28);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(6, 10, 20, 0.72);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+section:not(#publications) .cert-image img {
+    width: 100% !important;
+    height: 225px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+}
+.cert-card:hover .cert-image img {
+    transform: scale(1.02) !important;
+    filter: brightness(1.04) !important;
+}
+.cert-info {
+    padding: 1.25rem 1.35rem !important;
+}
+.cert-card:hover .cert-info {
+    padding-left: 1.35rem !important;
+}
+@media (max-width: 768px) {
+    .certifications-section {
+        padding: 4.5rem 1rem !important;
+    }
+    section:not(#publications) .cert-image img {
+        height: 200px !important;
+    }
 }
 .edu-logo-img {
     background-color: rgba(255, 255, 255, 0.94) !important;
@@ -879,12 +983,27 @@ footer .credit-name {
     animation: none !important;
 }
 
+.modal {
+    z-index: 10050 !important;
+    padding: 1.25rem 1rem !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
 .modal,
 .shortcuts-modal-overlay,
 .easter-egg-overlay {
     background-color: rgba(0, 0, 0, 0.56) !important;
     backdrop-filter: blur(6px) !important;
     -webkit-backdrop-filter: blur(6px) !important;
+}
+.modal-content {
+    width: min(94vw, 1160px) !important;
+    max-width: 1160px !important;
+    max-height: calc(100vh - 2.5rem) !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
 }
 .modal-content,
 .shortcuts-modal {
@@ -909,6 +1028,69 @@ footer .credit-name {
         inset 0 -1.5px 0 0 rgba(125, 211, 252, 0.30),
         inset -1.5px 0 0 0 rgba(192, 132, 252, 0.22),
         0 32px 80px -12px rgba(0, 0, 0, 0.78) !important;
+}
+.modal-body {
+    position: relative;
+    z-index: 4;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    padding: 2rem 2.25rem !important;
+    gap: 2rem !important;
+    align-items: flex-start !important;
+}
+.modal-gallery {
+    flex: 1.15 1 400px !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+}
+.modal-info {
+    flex: 1 1 360px !important;
+    min-width: 0 !important;
+}
+.modal-info h2 {
+    padding-right: 2.5rem;
+}
+.gallery-image-container {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 100% !important;
+    background: rgba(6, 10, 20, 0.86) !important;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    overflow: hidden;
+    margin-bottom: 0.85rem;
+}
+.gallery-main-img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 58vh !important;
+    min-height: 220px;
+    object-fit: contain !important;
+    object-position: center !important;
+    background: transparent !important;
+    border: none !important;
+    margin-bottom: 0 !important;
+    padding: 8px;
+    display: block !important;
+    box-shadow: none !important;
+}
+.modal-gallery video {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 58vh !important;
+    object-fit: contain !important;
+    display: block;
+}
+.gallery-thumbnails img {
+    width: 72px !important;
+    height: 54px !important;
+    flex-shrink: 0;
+    object-fit: contain !important;
+    background: rgba(6, 10, 20, 0.84) !important;
+    padding: 2px;
 }
 .modal-content::before,
 .shortcuts-modal::before {
@@ -985,6 +1167,22 @@ footer .credit-name {
     border: 1px solid rgba(125, 211, 252, 0.28);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.20);
 }
+.modal-close {
+    z-index: 25 !important;
+    top: 14px !important;
+    right: 18px !important;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(10, 14, 24, 0.76);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    font-size: 26px !important;
+    line-height: 1 !important;
+    color: #F8FAFC !important;
+}
 .modal-close:hover {
     color: #FFFFFF !important;
 }
@@ -1025,11 +1223,66 @@ footer .credit-name {
 }
 
 .lightbox {
+    z-index: 10100 !important;
+    padding: 1.25rem !important;
+    box-sizing: border-box !important;
     background-color: rgba(0, 0, 0, 0.90) !important;
     backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+}
+.lightbox-content {
+    max-width: 94vw !important;
+    max-height: 90vh !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    border-radius: 12px !important;
 }
 .lightbox-close {
+    z-index: 10110 !important;
+    top: 18px !important;
+    right: 24px !important;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(10, 14, 24, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.26);
     color: #FFFFFF !important;
+    font-size: 28px !important;
+    line-height: 1 !important;
+}
+@media (max-width: 768px) {
+    .modal {
+        padding: 0.65rem !important;
+    }
+    .modal-content {
+        width: 100% !important;
+        max-height: calc(100vh - 1.3rem) !important;
+        border-radius: 20px !important;
+    }
+    .modal-body {
+        padding: 3.1rem 1.15rem 1.15rem !important;
+        gap: 1.25rem !important;
+    }
+    .modal-gallery,
+    .modal-info {
+        flex: 1 1 100% !important;
+    }
+    .gallery-main-img,
+    .modal-gallery video {
+        max-height: 44vh !important;
+        min-height: 180px;
+    }
+    .modal-info h2 {
+        font-size: 1.4rem !important;
+        padding-right: 2.25rem;
+    }
+    .section-counter-badge {
+        display: none !important;
+    }
 }
 
 /* --- Floating Clear Liquid Glass Water Soundscape Toggle --- */
