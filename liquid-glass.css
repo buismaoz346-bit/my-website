@@ -145,9 +145,25 @@ body::after {
     ) !important;
 }
 
+/* Fixed WebGL Liquid Glass canvas (when WebGL active) */
+#lg-canvas {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    display: block !important;
+}
+
+/* When WebGL Liquid Glass is active, #lg-canvas draws the wallpaper + optical glass */
+html.lg-active body::before,
+html.lg-active body::after {
+    display: none !important;
+}
+
 /* Hide legacy canvases & section tint overlays */
 #pcb-canvas,
-#lg-canvas,
 .hero-section::before,
 .hero-section::after,
 .contact-section::after,
@@ -217,7 +233,8 @@ body > footer {
     transform: translateY(-3px) !important;
 }
 
-/* --- 3. Real Frosted Glass Cards (Matches Reference Wallpaper Aesthetic) --- */
+/* --- 3. Real Clear Liquid Glass Cards (WebGL Optical Refraction, NO Frosted Blur) --- */
+/* Fallback clear glass if WebGL is unavailable (e.g. file://) */
 .glass-panel:not(.project-card):not(.modal-content),
 .about-card,
 .traits-summary,
@@ -246,93 +263,54 @@ body.dark-mode .hero-stats {
     overflow: hidden;
     background: linear-gradient(
         145deg,
-        rgba(255, 255, 255, 0.085) 0%,
-        rgba(18, 22, 36, 0.34) 48%,
-        rgba(10, 14, 24, 0.44) 100%
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(12, 16, 28, 0.36) 50%,
+        rgba(8, 12, 22, 0.42) 100%
     ) !important;
-    backdrop-filter: blur(22px) saturate(145%) !important;
-    -webkit-backdrop-filter: blur(22px) saturate(145%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.16) !important;
-    border-radius: 22px !important;
+    backdrop-filter: blur(4px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(4px) saturate(140%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    border-radius: 24px !important;
     box-shadow:
-        inset 0 1px 0 0 rgba(255, 255, 255, 0.26),
-        inset 1px 0 0 0 rgba(255, 255, 255, 0.12),
-        inset 0 -1px 0 0 rgba(255, 255, 255, 0.06),
+        inset 0 1.5px 0 0 rgba(255, 255, 255, 0.36),
+        inset 1px 0 0 0 rgba(255, 255, 255, 0.16),
+        inset 0 -1px 0 0 rgba(255, 255, 255, 0.08),
         0 20px 50px -12px rgba(0, 0, 0, 0.55) !important;
 }
 
-/* Subtle pointer-tracking specular sheen */
-.glass-panel:not(.project-card):not(.modal-content)::before,
-.about-card::before,
-.traits-summary::before,
-.trait-card::before,
-.cert-card::before,
-.timeline-content::before,
-.premium-skill-card::before,
-.edu-card::before,
-.contact-card::before,
-.filter-search-container::before,
-.freelance-badge::before,
-.hero-stats::before {
-    content: '' !important;
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    top: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-    border-radius: inherit !important;
-    background: radial-gradient(
-        360px circle at var(--gx, 25%) var(--gy, 0%),
-        rgba(255, 255, 255, 0.13) 0%,
-        rgba(56, 189, 248, 0.06) 38%,
-        transparent 70%
-    ) !important;
-    opacity: calc(0.35 + var(--glint, 0) * 0.65) !important;
-    transition: opacity 0.3s ease !important;
-    pointer-events: none !important;
-    z-index: 2 !important;
+/* WebGL Active: cards become pure clear containers; GPU shader draws real optical refraction, dispersion & rim */
+html.lg-active body .lg-glass.lg-glass,
+html.lg-active body .lg-glass.lg-glass:hover,
+html.lg-active body .lg-glass.lg-glass:active,
+html.lg-active body.dark-mode .lg-glass.lg-glass,
+html.lg-active body.dark-mode .lg-glass.lg-glass:hover,
+html.lg-active body.dark-mode .lg-glass.lg-glass:active {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
 }
 
-/* Razor-thin luminous specular rim light */
-.glass-panel:not(.project-card):not(.modal-content)::after,
-.about-card::after,
-.traits-summary::after,
-.trait-card::after,
-.cert-card::after,
-.timeline-content::after,
-.premium-skill-card::after,
-.edu-card::after,
-.contact-card::after,
-.filter-search-container::after,
-.freelance-badge::after,
-.hero-stats::after {
-    content: '' !important;
-    position: absolute !important;
-    inset: 0 !important;
-    width: auto !important;
-    height: auto !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    border: none !important;
-    border-radius: inherit !important;
-    padding: 1px !important;
-    background: radial-gradient(
-        300px circle at var(--gx, 18%) var(--gy, 0%),
-        rgba(255, 255, 255, 0.55) 0%,
-        rgba(125, 211, 252, 0.25) 38%,
-        rgba(255, 255, 255, 0.06) 75%,
-        transparent 100%
-    ) !important;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
-    -webkit-mask-composite: xor !important;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
-    mask-composite: exclude !important;
-    pointer-events: none !important;
-    z-index: 3 !important;
+html.lg-active body .lg-glass.lg-glass::before,
+html.lg-active body .lg-glass.lg-glass::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Crisp text readability over clear refracted liquid glass (zero blending with background ribbon) */
+html.lg-active .lg-glass h1,
+html.lg-active .lg-glass h2,
+html.lg-active .lg-glass h3,
+html.lg-active .lg-glass h4,
+html.lg-active .lg-glass p,
+html.lg-active .lg-glass li,
+html.lg-active .lg-glass a,
+html.lg-active .lg-glass span,
+html.lg-active .lg-glass strong {
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.78), 0 0 2px rgba(0, 0, 0, 0.55);
 }
 
 .trait-card:hover,
@@ -342,31 +320,6 @@ body.dark-mode .hero-stats {
 .about-card:hover,
 .contact-card:hover {
     transform: translateY(-4px) !important;
-    border-color: rgba(255, 255, 255, 0.28) !important;
-    box-shadow:
-        inset 0 1px 0 0 rgba(255, 255, 255, 0.34),
-        inset 1px 0 0 0 rgba(255, 255, 255, 0.16),
-        0 26px 60px -12px rgba(0, 0, 0, 0.68) !important;
-}
-
-/* Tactile specular glass tap ripple */
-.lg-ripple {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 4;
-    transform: translate(-50%, -50%) scale(0);
-    background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.28) 0%,
-        rgba(56, 189, 248, 0.14) 48%,
-        transparent 72%
-    );
-    animation: lgRipple 0.62s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-@keyframes lgRipple {
-    0%   { transform: translate(-50%, -50%) scale(0); opacity: 0.9; }
-    100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
 }
 
 .hero-stats,
@@ -394,16 +347,16 @@ body.dark-mode .hero-stats {
     box-shadow: 0 0 10px rgba(56, 189, 248, 0.85) !important;
 }
 
-/* --- 4. Floating Navbar & Controls (Dark Frosted Glass) --- */
+/* --- 4. Floating Navbar & Controls (Clear Smoked Optical Glass, Zero Bleed-Through) --- */
 .navbar,
 body.dark-mode .navbar {
-    background: rgba(10, 14, 24, 0.52) !important;
-    backdrop-filter: blur(24px) saturate(155%) !important;
-    -webkit-backdrop-filter: blur(24px) saturate(155%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    background: rgba(8, 12, 22, 0.72) !important;
+    backdrop-filter: blur(10px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(160%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.24),
-        0 16px 40px rgba(0, 0, 0, 0.50) !important;
+        inset 0 1px 0 rgba(255, 255, 255, 0.32),
+        0 16px 40px rgba(0, 0, 0, 0.55) !important;
 }
 .navbar::after {
     display: none !important;
@@ -643,11 +596,11 @@ body.dark-mode .form-textarea {
 }
 .project-content-overlay,
 .project-card:hover .project-content-overlay {
-    background: rgba(8, 12, 22, 0.72) !important;
-    backdrop-filter: blur(18px) saturate(150%) !important;
-    -webkit-backdrop-filter: blur(18px) saturate(150%) !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.20);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    background: rgba(8, 12, 22, 0.78) !important;
+    backdrop-filter: blur(8px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.24);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.20);
     transform: translateY(0) !important;
     opacity: 1 !important;
     padding: 1.35rem 1.6rem !important;
