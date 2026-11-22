@@ -70,7 +70,10 @@
             { name: "Unleashing Creativity with AI", issuer: "Workshop Organizer", date: "February 23, 2026", category: "AI", desc: "Participated in the Unleashing Creativity with AI program, exploring innovative applications and the intersection of artificial intelligence with creative engineering processes.", tags: ["ai", "creativity", "workshop"] },
             { name: "IET On Campus Recognition", issuer: "IET (Institution of Engineering and Technology)", date: "February 23, 2026", category: "Community", desc: "Acknowledged for active participation and dedication to the IET On Campus community, fostering technical growth and professional collaboration.", tags: ["iet", "recognition", "community"] },
             { name: "Best CEP Project Award — 1st Position", issuer: "COMSATS University & District Youth Office Abbottabad", date: "July 22, 2026", category: "Academic", desc: "Secured First Position in the Complex Engineering Problem Exhibition SP26 (Software Category) for the project 'Industrial Edge AI Condition Monitoring and 3D Digital Twin' at COMSATS University Islamabad, Abbottabad Campus.", tags: ["cep", "project", "award", "best", "first", "1st", "comsats", "ai", "digital twin", "exhibition"] },
-            { name: "Organizer Certificate — Project Exhibition 2026", issuer: "COMSATS University Islamabad, Abbottabad Campus", date: "July 2026", category: "Leadership/Organizing", desc: "Awarded in recognition of outstanding efforts and valuable contributions as an Organizer for the CEP & Semester Project Exhibition Spring 2026.", tags: ["organizer", "certificate", "exhibition", "comsats", "cep", "sp26"] }
+            { name: "Organizer Certificate — Project Exhibition 2026", issuer: "COMSATS University Islamabad, Abbottabad Campus", date: "July 2026", category: "Leadership/Organizing", desc: "Awarded in recognition of outstanding efforts and valuable contributions as an Organizer for the CEP & Semester Project Exhibition Spring 2026.", tags: ["organizer", "certificate", "exhibition", "comsats", "cep", "sp26"] },
+            { name: "Certificate of Participation — EMCOT 2026", issuer: "Department of Electrical Engineering, COMSATS Abbottabad & IET", date: "August 18, 2026", category: "Exhibition", desc: "Presented to Syed Maoz Arif, M. Shahzaib, and Arsalan Khan in recognition of commendable effort and successful project presentation at the EMCOT 2026 Exhibition, co-organized with IET and Technolean Lab.", tags: ["emcot", "participation", "exhibition", "comsats", "iet", "2026"] },
+            { name: "President of Organizing Committee — EMCOT 2026", issuer: "IET On Campus COMSATS Abbottabad", date: "August 18, 2026", category: "Leadership/Organizing", desc: "IET On Campus Outstanding and Valued certificate awarded for outstanding contribution as President of the Organizing Committee during the EMCOT 2026 Project Exhibition, issued by Dr. Jawad Saleem.", tags: ["emcot", "president", "organizer", "iet", "leadership", "2026"] },
+            { name: "IET Volunteer — Compliance Tasks (CPD)", issuer: "The Institution of Engineering and Technology (IET)", date: "November 14, 2026", category: "Professional Development", desc: "Certificate of Achievement for completing the IET Volunteer - Compliance Tasks course, contributing towards the IET Continuing Professional Development (CPD) Monitoring Scheme.", tags: ["iet", "volunteer", "compliance", "cpd", "2026"] }
         ],
 
         awards: [
@@ -114,7 +117,7 @@
 
         platforms: ["Fiverr", "Upwork"],
         totalProjects: 11,
-        totalCertifications: 18,
+        totalCertifications: 21,
         totalAwards: 6,
         totalPlatforms: 2
     };
