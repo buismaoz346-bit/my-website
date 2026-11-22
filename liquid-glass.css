@@ -799,20 +799,91 @@ footer .credit-name {
 .modal,
 .shortcuts-modal-overlay,
 .easter-egg-overlay {
-    background-color: rgba(0, 0, 0, 0.74) !important;
-    backdrop-filter: blur(14px) !important;
-    -webkit-backdrop-filter: blur(14px) !important;
+    background-color: rgba(0, 0, 0, 0.56) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
 }
 .modal-content,
 .shortcuts-modal {
-    background: rgba(12, 16, 28, 0.88) !important;
-    backdrop-filter: blur(28px) saturate(160%) !important;
-    -webkit-backdrop-filter: blur(28px) saturate(160%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        148deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(12, 16, 28, 0.48) 42%,
+        rgba(6, 10, 20, 0.58) 100%
+    ) !important;
+    backdrop-filter: blur(10px) saturate(165%) brightness(1.06) contrast(1.04) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(165%) brightness(1.06) contrast(1.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.26) !important;
+    border-radius: 26px !important;
     color: #F8FAFC !important;
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.22),
-        0 30px 70px rgba(0, 0, 0, 0.72) !important;
+        inset 0 1.5px 0 0 rgba(255, 255, 255, 0.65),
+        inset 1.5px 0 0 0 rgba(255, 255, 255, 0.32),
+        inset 0 16px 28px -12px rgba(255, 255, 255, 0.22),
+        inset 0 -14px 24px -12px rgba(56, 189, 248, 0.24),
+        inset 0 -1.5px 0 0 rgba(125, 211, 252, 0.30),
+        inset -1.5px 0 0 0 rgba(192, 132, 252, 0.22),
+        0 32px 80px -12px rgba(0, 0, 0, 0.78) !important;
+}
+.modal-content::before,
+.shortcuts-modal::before {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    border-radius: inherit !important;
+    background:
+        linear-gradient(
+            132deg,
+            rgba(255, 255, 255, 0.18) 0%,
+            rgba(255, 255, 255, 0.04) 22%,
+            transparent 46%
+        ),
+        radial-gradient(
+            420px circle at var(--gx, 24%) var(--gy, 0%),
+            rgba(255, 255, 255, 0.18) 0%,
+            rgba(125, 211, 252, 0.09) 36%,
+            transparent 68%
+        ) !important;
+    opacity: calc(0.45 + var(--glint, 0) * 0.55) !important;
+    transition: opacity 0.28s ease !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+}
+.modal-content::after,
+.shortcuts-modal::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    border: none !important;
+    border-radius: inherit !important;
+    padding: 1.5px !important;
+    background: radial-gradient(
+        340px circle at var(--gx, 18%) var(--gy, 0%),
+        rgba(255, 255, 255, 0.88) 0%,
+        rgba(125, 211, 252, 0.45) 32%,
+        rgba(245, 158, 11, 0.20) 58%,
+        rgba(168, 85, 247, 0.24) 82%,
+        rgba(255, 255, 255, 0.14) 100%
+    ) !important;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
+    -webkit-mask-composite: xor !important;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
+    mask-composite: exclude !important;
+    pointer-events: none !important;
+    z-index: 3 !important;
 }
 .modal-info h2,
 .modal-description h3,
@@ -823,18 +894,33 @@ footer .credit-name {
 .easter-egg-content h2,
 .easter-egg-content p {
     color: #F1F5F9 !important;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.78), 0 0 2px rgba(0, 0, 0, 0.5);
 }
 .tech-stack-details {
     background: rgba(56, 189, 248, 0.14) !important;
     color: #BAE6FD !important;
-    border: 1px solid rgba(125, 211, 252, 0.25);
+    border: 1px solid rgba(125, 211, 252, 0.28);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.20);
 }
 .modal-close:hover {
     color: #FFFFFF !important;
 }
 .social-container {
-    background: rgba(255, 255, 255, 0.05) !important;
-    border-color: rgba(255, 255, 255, 0.14) !important;
+    background: linear-gradient(
+        148deg,
+        rgba(255, 255, 255, 0.09) 0%,
+        rgba(12, 16, 28, 0.36) 50%,
+        rgba(6, 10, 20, 0.44) 100%
+    ) !important;
+    backdrop-filter: blur(4px) saturate(155%) !important;
+    -webkit-backdrop-filter: blur(4px) saturate(155%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    border-radius: 20px !important;
+    box-shadow:
+        inset 0 1.5px 0 rgba(255, 255, 255, 0.48),
+        inset 1px 0 0 rgba(255, 255, 255, 0.20),
+        inset 0 -1px 0 rgba(125, 211, 252, 0.22),
+        0 12px 32px rgba(0, 0, 0, 0.45) !important;
 }
 .like-btn,
 .comment-item,

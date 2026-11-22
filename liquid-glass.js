@@ -16,7 +16,10 @@
     var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 
     var CARD_SELECTOR = [
-        '.glass-panel:not(.project-card):not(.modal-content)',
+        '.glass-panel:not(.project-card)',
+        '.modal-content',
+        '.shortcuts-modal',
+        '.social-container',
         '.about-card',
         '.traits-summary',
         '.trait-card',
