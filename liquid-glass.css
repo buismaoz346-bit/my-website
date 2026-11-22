@@ -538,6 +538,14 @@ body.dark-mode .nav-links a.active {
     letter-spacing: normal !important;
     text-shadow: 0 0 12px rgba(125, 211, 252, 0.45) !important;
 }
+.nav-links a.btn-primary,
+.nav-links a.btn-primary:hover,
+.nav-links a.btn-primary.active,
+body.dark-mode .nav-links a.btn-primary,
+body.dark-mode .nav-links a.btn-primary:hover {
+    color: #090D16 !important;
+    text-shadow: none !important;
+}
 .nav-links a::after {
     display: none !important;
 }
@@ -589,8 +597,8 @@ body.dark-mode .nav-pill-indicator {
     color: #FFFFFF !important;
 }
 .section-counter-badge {
-    left: 30px !important;
-    bottom: 30px !important;
+    left: 92px !important;
+    bottom: 35px !important;
 }
 .section-counter-badge .counter-highlight {
     color: #7DD3FC !important;
@@ -1071,5 +1079,208 @@ footer .credit-name {
         left: 20px;
         width: 44px;
         height: 44px;
+    }
+}
+
+/* --- 9. Pure Liquid UI & Originkit Motion Text Wave System --- */
+
+/* 9A. Motion Text Wave Headings */
+.lw-heading,
+.hero-section .name.lw-heading,
+.section-title.lw-heading {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+}
+.lw-word {
+    display: inline-block;
+    white-space: nowrap;
+}
+.lw-char {
+    display: inline-block;
+    will-change: transform, opacity;
+    background: linear-gradient(180deg, #FFFFFF 0%, #E0F2FE 56%, #7DD3FC 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.72));
+}
+.hero-section .greeting .lw-char {
+    background: linear-gradient(180deg, #F8FAFC 0%, #BAE6FD 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.lw-wave-in .lw-char {
+    animation: lgMotionTextWaveIn 0.72s cubic-bezier(0.22, 1.38, 0.36, 1) both;
+    animation-delay: calc(var(--char-i, 0) * 24ms);
+}
+.lw-wave-pulse .lw-char {
+    animation: lgCharRipple 0.56s cubic-bezier(0.22, 1.38, 0.36, 1) both;
+    animation-delay: calc(var(--char-i, 0) * 18ms);
+}
+@keyframes lgMotionTextWaveIn {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 22px, 0) rotate(6deg) scale(0.84);
+    }
+    64% {
+        opacity: 1;
+        transform: translate3d(0, -4px, 0) rotate(-1.5deg) scale(1.03);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    }
+}
+@keyframes lgCharRipple {
+    0%   { transform: translate3d(0, 0, 0); }
+    42%  { transform: translate3d(0, -7px, 0) scale(1.06); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+
+/* 9B. Liquid Gradient Sheen on Card Titles & Headlines */
+.lw-liquid-text {
+    background: linear-gradient(
+        112deg,
+        #FFFFFF 14%,
+        #BAE6FD 38%,
+        #38BDF8 50%,
+        #E0F2FE 62%,
+        #FFFFFF 86%
+    ) !important;
+    background-size: 220% auto !important;
+    background-position: 0% center !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.78));
+    transition: background-position 0.75s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+.project-card:hover .lw-liquid-text,
+.cert-card:hover .lw-liquid-text,
+.trait-card:hover .lw-liquid-text,
+.premium-skill-card:hover .lw-liquid-text,
+.edu-card:hover .lw-liquid-text,
+.timeline-content:hover .lw-liquid-text,
+.lw-liquid-text:hover {
+    background-position: 100% center !important;
+}
+
+/* Flowing liquid accent underline under Section Titles */
+.section-title::after {
+    height: 5px !important;
+    border-radius: 999px !important;
+    background: linear-gradient(90deg, #38BDF8, #E0F2FE, #A855F7, #38BDF8) !important;
+    background-size: 220% 100% !important;
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.55) !important;
+}
+
+/* 9C. Rising Liquid Wave Hover Fill on Buttons & Filter Tabs */
+.btn-primary,
+.btn-download,
+.btn-secondary,
+.filter-tab,
+.stl-download-btn {
+    position: relative !important;
+    overflow: hidden !important;
+    z-index: 1;
+}
+.btn-primary::before,
+.btn-download::before,
+.btn-secondary::before,
+.filter-tab::before,
+.stl-download-btn::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 108%;
+    width: 220%;
+    height: 260%;
+    border-radius: 42% 58% 64% 36% / 44% 46% 54% 56%;
+    background: linear-gradient(
+        135deg,
+        rgba(56, 189, 248, 0.42),
+        rgba(14, 165, 233, 0.68),
+        rgba(168, 85, 247, 0.38)
+    );
+    transform: translate3d(-50%, 0, 0) rotate(0deg);
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: -1;
+    pointer-events: none;
+}
+.btn-primary::before,
+.stl-download-btn::before,
+.filter-tab.active::before {
+    background: linear-gradient(
+        135deg,
+        rgba(14, 165, 233, 0.28),
+        rgba(56, 189, 248, 0.42),
+        rgba(125, 211, 252, 0.30)
+    );
+}
+.btn-primary:hover::before,
+.btn-download:hover::before,
+.btn-secondary:hover::before,
+.filter-tab:hover::before,
+.stl-download-btn:hover::before {
+    transform: translate3d(-50%, -62%, 0) rotate(145deg);
+}
+
+/* 9D. Organic Liquid Blob Portrait & Droplet Icons */
+.hero-section .image-wrapper,
+.hero-section .image-wrapper img {
+    border-radius: 58% 42% 46% 54% / 54% 44% 56% 46% !important;
+    transition: border-radius 0.6s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+    .hero-section .image-wrapper,
+    .hero-section .image-wrapper img {
+        animation: lgOrganicBlob 10s ease-in-out infinite alternate;
+    }
+    @keyframes lgOrganicBlob {
+        0%   { border-radius: 58% 42% 46% 54% / 54% 44% 56% 46%; }
+        50%  { border-radius: 44% 56% 60% 40% / 48% 58% 42% 52%; }
+        100% { border-radius: 52% 48% 42% 58% / 60% 42% 58% 40%; }
+    }
+}
+
+.icon-wrapper,
+.contact-icon {
+    border-radius: 54% 46% 44% 56% / 52% 56% 44% 48% !important;
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.45),
+        inset 0 -6px 12px rgba(56, 189, 248, 0.25),
+        0 8px 20px rgba(0, 0, 0, 0.35) !important;
+    transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1), border-radius 0.38s ease !important;
+}
+.trait-card:hover .icon-wrapper,
+.contact-card:hover .contact-icon {
+    border-radius: 46% 54% 56% 44% / 44% 48% 52% 56% !important;
+    transform: scale(1.08, 0.94) translateY(-2px) !important;
+}
+
+/* 9E. Concentric Double Water-Ring Tap Ripple */
+.lg-ripple {
+    border: 1.5px solid rgba(186, 230, 253, 0.74);
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.30) 0%,
+        rgba(56, 189, 248, 0.20) 44%,
+        transparent 72%
+    ) !important;
+    box-shadow:
+        inset 0 0 18px rgba(56, 189, 248, 0.38),
+        0 0 14px rgba(56, 189, 248, 0.28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lw-wave-in .lw-char,
+    .lw-wave-pulse .lw-char,
+    .hero-section .image-wrapper,
+    .hero-section .image-wrapper img {
+        animation: none !important;
     }
 }

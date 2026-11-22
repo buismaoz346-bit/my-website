@@ -96,24 +96,126 @@
         window.addEventListener('blur', clearActive);
     }
 
-    // Crisp radial crystal tap ripple on pointerdown
+    var RIPPLE_SELECTOR = CARD_SELECTOR + ',.btn-primary,.btn-download,.btn-secondary,.filter-tab,.stl-download-btn,.nav-links a';
+
+    // Crisp concentric water-ring tap ripple on pointerdown
     document.addEventListener('pointerdown', function (e) {
         if (reduceMQ.matches) return;
-        var card = e.target && e.target.closest ? e.target.closest(CARD_SELECTOR) : null;
-        if (!card || e.target.closest('input, textarea, select')) return;
+        var target = e.target && e.target.closest ? e.target.closest(RIPPLE_SELECTOR) : null;
+        if (!target || e.target.closest('input, textarea, select')) return;
 
-        var rect = card.getBoundingClientRect();
-        var size = Math.max(rect.width, rect.height) * 1.35;
+        var rect = target.getBoundingClientRect();
+        var size = Math.max(rect.width, rect.height) * 1.4;
         var ripple = document.createElement('span');
         ripple.className = 'lg-ripple';
         ripple.style.width = size + 'px';
         ripple.style.height = size + 'px';
         ripple.style.left = (e.clientX - rect.left) + 'px';
         ripple.style.top = (e.clientY - rect.top) + 'px';
-        card.appendChild(ripple);
+        target.appendChild(ripple);
 
         ripple.addEventListener('animationend', function () {
             if (ripple.parentNode) ripple.parentNode.removeChild(ripple);
         }, { once: true });
     }, { passive: true });
+
+    // --- Originkit-inspired Per-Character Motion Text Wave + Card Liquid Text ---
+    function splitTextToWaveChars(el) {
+        if (!el || el.dataset.lwSplit === '1') return;
+        var rawText = (el.textContent || '').replace(/\s+/g, ' ').trim();
+        if (!rawText) return;
+
+        el.setAttribute('aria-label', rawText);
+        el.classList.add('lw-heading');
+        el.dataset.lwSplit = '1';
+
+        var frag = document.createDocumentFragment();
+        var words = rawText.split(' ');
+        var charIndex = 0;
+
+        words.forEach(function (word, wIdx) {
+            var wordSpan = document.createElement('span');
+            wordSpan.className = 'lw-word';
+            wordSpan.setAttribute('aria-hidden', 'true');
+
+            for (var i = 0; i < word.length; i++) {
+                var chSpan = document.createElement('span');
+                chSpan.className = 'lw-char';
+                chSpan.style.setProperty('--char-i', String(charIndex++));
+                chSpan.textContent = word[i];
+                wordSpan.appendChild(chSpan);
+            }
+            frag.appendChild(wordSpan);
+            if (wIdx < words.length - 1) {
+                frag.appendChild(document.createTextNode(' '));
+            }
+        });
+
+        el.textContent = '';
+        el.appendChild(frag);
+    }
+
+    function pulseHeading(el) {
+        if (!el || reduceMQ.matches) return;
+        if (el._lwTimer) clearTimeout(el._lwTimer);
+        el.classList.remove('lw-wave-pulse');
+        void el.offsetWidth;
+        el.classList.add('lw-wave-pulse');
+        el._lwTimer = setTimeout(function () {
+            el.classList.remove('lw-wave-pulse');
+        }, 900);
+    }
+
+    function initLiquidTypography() {
+        var headings = document.querySelectorAll('.hero-section .greeting, .hero-section .name, .section-title');
+        headings.forEach(splitTextToWaveChars);
+
+        document.querySelectorAll('.project-content-overlay h3, .cert-info h3, .trait-card h3, .premium-skill-card h3, .edu-content h3, .timeline-company').forEach(function (h) {
+            h.classList.add('lw-liquid-text');
+        });
+
+        if (reduceMQ.matches) {
+            headings.forEach(function (h) { h.classList.add('lw-wave-in'); });
+            return;
+        }
+
+        if (typeof IntersectionObserver !== 'undefined') {
+            var io = new IntersectionObserver(function (entries, obs) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('lw-wave-in');
+                    obs.unobserve(entry.target);
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+
+            headings.forEach(function (h) {
+                var r = h.getBoundingClientRect();
+                if (r.top < (window.innerHeight || 900) * 0.92) {
+                    h.classList.add('lw-wave-in');
+                } else {
+                    io.observe(h);
+                }
+            });
+        } else {
+            headings.forEach(function (h) { h.classList.add('lw-wave-in'); });
+        }
+
+        if (finePointer.matches) {
+            headings.forEach(function (h) {
+                h.addEventListener('pointerenter', function () {
+                    pulseHeading(h);
+                }, { passive: true });
+            });
+        }
+    }
+
+    var bootTypography = function () {
+        // Wait one animation frame so script.js updates time-aware .greeting text first
+        requestAnimationFrame(initLiquidTypography);
+    };
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bootTypography);
+    } else {
+        bootTypography();
+    }
 })();
