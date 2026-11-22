@@ -113,7 +113,7 @@ body {
     animation: none !important;
 }
 
-/* Fixed GPU-composited wallpaper layer (never repaints or jitters on scroll) */
+/* Single fixed GPU-composited wallpaper + vignette layer (cuts full-screen compositing in half) */
 body::before {
     content: '' !important;
     display: block !important;
@@ -123,26 +123,24 @@ body::before {
     height: 100vh !important;
     z-index: 0 !important;
     pointer-events: none !important;
-    background: #000000 url('Picture/glass-bg.jpg') center center / cover no-repeat !important;
+    background:
+        radial-gradient(ellipse at center, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.45) 100%),
+        #000000 url('Picture/glass-bg.jpg') center center / cover no-repeat !important;
     transform: translateZ(0);
+    will-change: transform;
 }
 
-/* Subtle dark edge vignette so text stays effortless to read anywhere */
 body::after {
-    content: '' !important;
-    display: block !important;
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    z-index: 0 !important;
-    pointer-events: none !important;
-    animation: none !important;
-    background: radial-gradient(
-        ellipse at center,
-        rgba(0, 0, 0, 0.12) 0%,
-        rgba(0, 0, 0, 0.45) 100%
-    ) !important;
+    display: none !important;
+    content: none !important;
+}
+
+/* GPU-only scroll progress bar (zero layout reflow on scroll) */
+.scroll-progress {
+    width: 100% !important;
+    transform-origin: left center;
+    transform: scaleX(0);
+    will-change: transform;
 }
 
 /* Hide legacy canvases & section tint overlays */
@@ -163,6 +161,13 @@ body > footer {
     background: transparent !important;
     border-top-color: transparent !important;
     border-bottom-color: transparent !important;
+}
+
+/* Defer offscreen section painting & compositing for silky Edge + mobile scroll */
+body > section:not(#hero),
+body > footer {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
 }
 
 /* Hide theme toggle since this dark sculptural glass aesthetic is unified */
@@ -250,22 +255,53 @@ body.dark-mode .hero-stats {
         rgba(12, 16, 28, 0.34) 44%,
         rgba(6, 10, 20, 0.44) 100%
     ) !important;
-    /* Clear crystal glass — crisp micro-optical sheen without heavy frosted blur */
-    backdrop-filter: blur(2.5px) saturate(165%) brightness(1.06) contrast(1.04) !important;
-    -webkit-backdrop-filter: blur(2.5px) saturate(165%) brightness(1.06) contrast(1.04) !important;
+    /* Clear crystal glass — streamlined 2-op filter for fast Edge DirectComposition */
+    backdrop-filter: blur(3px) saturate(145%) !important;
+    -webkit-backdrop-filter: blur(3px) saturate(145%) !important;
     border: 1px solid rgba(255, 255, 255, 0.24) !important;
     border-radius: 24px !important;
     box-shadow:
-        /* Sharp Fresnel top-left specular catchlight */
         inset 0 1.5px 0 0 rgba(255, 255, 255, 0.62),
-        inset 1.5px 0 0 0 rgba(255, 255, 255, 0.30),
-        /* Sculpted glass rim curvature & prismatic cyan/violet inner reflection */
-        inset 0 14px 26px -12px rgba(255, 255, 255, 0.20),
-        inset 0 -12px 22px -12px rgba(56, 189, 248, 0.22),
-        inset 0 -1.5px 0 0 rgba(125, 211, 252, 0.28),
-        inset -1.5px 0 0 0 rgba(192, 132, 252, 0.20),
-        /* Soft studio elevation shadow */
-        0 20px 50px -12px rgba(0, 0, 0, 0.62) !important;
+        inset 0 -10px 20px -10px rgba(56, 189, 248, 0.24),
+        0 18px 42px -12px rgba(0, 0, 0, 0.60) !important;
+    contain: layout style paint;
+}
+
+/* Mobile / touch GPUs: keep identical glossy clear-glass rims & translucency without per-card backdrop readback stalls */
+@media (hover: none), (pointer: coarse), (max-width: 768px) {
+    .glass-panel:not(.project-card):not(.modal-content),
+    .about-card,
+    .traits-summary,
+    .trait-card,
+    .cert-card,
+    .timeline-content,
+    .premium-skill-card,
+    .edu-card,
+    .contact-card,
+    .filter-search-container,
+    .freelance-badge,
+    .hero-stats,
+    body.dark-mode .glass-panel:not(.project-card):not(.modal-content),
+    body.dark-mode .about-card,
+    body.dark-mode .traits-summary,
+    body.dark-mode .trait-card,
+    body.dark-mode .cert-card,
+    body.dark-mode .timeline-content,
+    body.dark-mode .premium-skill-card,
+    body.dark-mode .edu-card,
+    body.dark-mode .contact-card,
+    body.dark-mode .filter-search-container,
+    body.dark-mode .freelance-badge,
+    body.dark-mode .hero-stats {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: linear-gradient(
+            148deg,
+            rgba(255, 255, 255, 0.13) 0%,
+            rgba(12, 18, 34, 0.56) 46%,
+            rgba(6, 10, 22, 0.68) 100%
+        ) !important;
+    }
 }
 
 /* Polished crystal surface reflection sheen (follows cursor on hover, 0% scroll CPU) */
@@ -309,7 +345,7 @@ body.dark-mode .hero-stats {
     z-index: 2 !important;
 }
 
-/* Prismatic optical dispersion rim (razor-thin 1.5px curved glass edge) */
+/* Prismatic optical dispersion rim — active ONLY on desktop hover (0 mask surfaces during scroll!) */
 .glass-panel:not(.project-card):not(.modal-content)::after,
 .about-card::after,
 .traits-summary::after,
@@ -322,32 +358,49 @@ body.dark-mode .hero-stats {
 .filter-search-container::after,
 .freelance-badge::after,
 .hero-stats::after {
-    content: '' !important;
-    position: absolute !important;
-    inset: 0 !important;
-    width: auto !important;
-    height: auto !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    border: none !important;
-    border-radius: inherit !important;
-    padding: 1.5px !important;
-    background: radial-gradient(
-        280px circle at var(--gx, 18%) var(--gy, 0%),
-        rgba(255, 255, 255, 0.85) 0%,
-        rgba(125, 211, 252, 0.42) 32%,
-        rgba(245, 158, 11, 0.18) 58%,
-        rgba(168, 85, 247, 0.22) 82%,
-        rgba(255, 255, 255, 0.12) 100%
-    ) !important;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
-    -webkit-mask-composite: xor !important;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
-    mask-composite: exclude !important;
-    pointer-events: none !important;
-    z-index: 3 !important;
+    content: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .glass-panel:not(.project-card):not(.modal-content):hover::after,
+    .about-card:hover::after,
+    .traits-summary:hover::after,
+    .trait-card:hover::after,
+    .cert-card:hover::after,
+    .timeline-content:hover::after,
+    .premium-skill-card:hover::after,
+    .edu-card:hover::after,
+    .contact-card:hover::after,
+    .filter-search-container:hover::after,
+    .freelance-badge:hover::after,
+    .hero-stats:hover::after {
+        content: '' !important;
+        position: absolute !important;
+        inset: 0 !important;
+        width: auto !important;
+        height: auto !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        border: none !important;
+        border-radius: inherit !important;
+        padding: 1.5px !important;
+        background: radial-gradient(
+            280px circle at var(--gx, 18%) var(--gy, 0%),
+            rgba(255, 255, 255, 0.85) 0%,
+            rgba(125, 211, 252, 0.42) 32%,
+            rgba(245, 158, 11, 0.18) 58%,
+            rgba(168, 85, 247, 0.22) 82%,
+            rgba(255, 255, 255, 0.12) 100%
+        ) !important;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
+        -webkit-mask-composite: xor !important;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
+        mask-composite: exclude !important;
+        pointer-events: none !important;
+        z-index: 3 !important;
+    }
 }
 
 /* Crisp text readability over clear optical glass (never blends with bright ribbon folds) */

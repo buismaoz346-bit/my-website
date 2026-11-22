@@ -480,20 +480,39 @@ document.addEventListener('DOMContentLoaded', () => {
         pill.classList.remove('visible', 'glowing');
     }
 
+    // Cache section positions so scroll never triggers forced layout (getBoundingClientRect) per frame
+    let cachedSectionTops = [];
+    let cachedMaxScroll = 1;
+    function refreshLayoutCache() {
+        const scrollY = window.scrollY;
+        cachedSectionTops = Array.from(sections).map(sec => ({
+            id: sec.getAttribute('id'),
+            top: sec.getBoundingClientRect().top + scrollY
+        }));
+        cachedMaxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    }
+    refreshLayoutCache();
+    window.addEventListener('load', refreshLayoutCache, { passive: true });
+    if (typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(refreshLayoutCache).observe(document.body);
+    }
+
     function syncActiveSection(force) {
         if (window.isAutoScrolling && !force) return;
 
         let current = 'hero';
         const threshold = 180;
+        const y = window.scrollY;
 
-        if (window.scrollY < 50) {
+        if (y < 50) {
             current = 'hero';
-        } else if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 20) {
+        } else if (y >= cachedMaxScroll - 20) {
             current = 'contact';
         } else {
-            for (let i = 0; i < sections.length; i++) {
-                if (sections[i].getBoundingClientRect().top <= threshold) {
-                    current = sections[i].getAttribute('id');
+            const probe = y + threshold;
+            for (let i = 0; i < cachedSectionTops.length; i++) {
+                if (cachedSectionTops[i].top <= probe) {
+                    current = cachedSectionTops[i].id;
                 }
             }
         }
@@ -530,7 +549,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: true });
 
-    window.addEventListener('resize', () => syncActiveSection(true), { passive: true });
+    window.addEventListener('resize', () => {
+        refreshLayoutCache();
+        syncActiveSection(true);
+    }, { passive: true });
 
     // Hover: pill follows hovered link smoothly
     navLinks.forEach(link => {
@@ -587,12 +609,21 @@ document.body.appendChild(topBtn);
 topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 let raf = false;
+let cachedDocScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+const updateDocScroll = () => {
+    cachedDocScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+};
+window.addEventListener('resize', updateDocScroll, { passive: true });
+window.addEventListener('load', updateDocScroll, { passive: true });
+if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(updateDocScroll).observe(document.body);
+}
 window.addEventListener('scroll', () => {
     if (!raf) {
         requestAnimationFrame(() => {
             const y = window.scrollY;
-            const h = document.documentElement.scrollHeight - window.innerHeight;
-            scrollBar.style.width = ((y / h) * 100) + '%';
+            const ratio = Math.min(1, Math.max(0, y / cachedDocScroll));
+            scrollBar.style.transform = `scaleX(${ratio})`;
             topBtn.classList.toggle('visible', y > 500);
             raf = false;
         });
