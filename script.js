@@ -452,96 +452,101 @@ window.stopCoverSlideshow = function(projectId, cardElement) {
 };
 
 
-// --- Active Navbar Highlighter + Flowing Pill Indicator ---
+// --- Active Navbar Highlighter + Flowing Pill Indicator (Zero-Jitter) ---
 document.addEventListener('DOMContentLoaded', () => {
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = Array.from(document.querySelectorAll('section[id]'));
+    const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
     const pill = document.querySelector('.nav-pill-indicator');
     const navLinksContainer = document.querySelector('.nav-links');
 
-    // Position the pill over a given link element
+    let lastActiveId = null;
+    let isHoveringNav = false;
+
+    // Position the pill cleanly (only called on section change, hover, or resize)
     function movePill(link) {
         if (!pill || !link || !navLinksContainer) return;
         const containerRect = navLinksContainer.getBoundingClientRect();
         const linkRect = link.getBoundingClientRect();
-        const paddingX = 12; // extra breathing room around text
+        const left = Math.round(linkRect.left - containerRect.left - 12);
+        const width = Math.round(linkRect.width + 24);
 
-        pill.style.left = (linkRect.left - containerRect.left - paddingX) + 'px';
-        pill.style.width = (linkRect.width + paddingX * 2) + 'px';
+        pill.style.left = left + 'px';
+        pill.style.width = width + 'px';
         pill.classList.add('visible');
     }
 
-    // Hide the pill
     function hidePill() {
         if (!pill) return;
         pill.classList.remove('visible', 'glowing');
     }
 
-    // Update active link + pill on scroll
+    function syncActiveSection(force) {
+        if (window.isAutoScrolling && !force) return;
+
+        let current = 'hero';
+        const threshold = 180;
+
+        if (window.scrollY < 50) {
+            current = 'hero';
+        } else if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 20) {
+            current = 'contact';
+        } else {
+            for (let i = 0; i < sections.length; i++) {
+                if (sections[i].getBoundingClientRect().top <= threshold) {
+                    current = sections[i].getAttribute('id');
+                }
+            }
+        }
+
+        // Only update DOM & pill when the active section ACTUALLY changes (stops all scroll jitter)
+        if (!force && current === lastActiveId) return;
+        lastActiveId = current;
+
+        let activeLink = null;
+        navLinks.forEach(link => {
+            const isMatch = link.getAttribute('href') === `#${current}`;
+            link.classList.toggle('active', isMatch);
+            if (isMatch) activeLink = link;
+        });
+
+        if (!isHoveringNav) {
+            if (activeLink && !activeLink.classList.contains('btn-primary')) {
+                movePill(activeLink);
+                pill.classList.add('glowing');
+            } else {
+                hidePill();
+            }
+        }
+    }
+
     let ticking = false;
     window.addEventListener('scroll', () => {
         if (!ticking) {
+            ticking = true;
             window.requestAnimationFrame(() => {
-                if (window.isAutoScrolling) {
-                    ticking = false;
-                    return;
-                }
-                
-                let current = '';
-
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (window.scrollY >= sectionTop - 200) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                // Special case: at the absolute top
-                if (window.scrollY < 50) {
-                    current = 'hero';
-                }
-
-                // Special case: scrolled to absolute bottom
-                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
-                    current = 'contact';
-                }
-
-                let activeLink = null;
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-                        activeLink = link;
-                    }
-                });
-
-                // Move the pill to the active link
-                if (activeLink && !activeLink.classList.contains('btn-primary')) {
-                    movePill(activeLink);
-                    pill.classList.add('glowing');
-                } else {
-                    hidePill();
-                }
-
+                syncActiveSection(false);
                 ticking = false;
             });
-            ticking = true;
         }
-    });
+    }, { passive: true });
+
+    window.addEventListener('resize', () => syncActiveSection(true), { passive: true });
 
     // Hover: pill follows hovered link smoothly
     navLinks.forEach(link => {
         if (link.classList.contains('btn-primary') || link.classList.contains('nav-cv-link')) return;
 
         link.addEventListener('mouseenter', () => {
+            isHoveringNav = true;
             movePill(link);
             pill.classList.remove('glowing');
         });
     });
 
-    // Mouse leaves nav: snap pill back to active link
+    // Mouse leaves nav: snap pill cleanly back to active link
     if (navLinksContainer) {
         navLinksContainer.addEventListener('mouseleave', () => {
+            isHoveringNav = false;
             const activeLink = document.querySelector('.nav-links a.active');
             if (activeLink && !activeLink.classList.contains('btn-primary')) {
                 movePill(activeLink);
@@ -552,8 +557,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initial position on load
-    window.dispatchEvent(new Event('scroll'));
+    // Also update pill cleanly when clicking a nav link
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') && link.getAttribute('href').startsWith('#') && !link.classList.contains('btn-primary')) {
+            link.addEventListener('click', () => {
+                lastActiveId = link.getAttribute('href').slice(1);
+                movePill(link);
+                pill.classList.add('glowing');
+            });
+        }
+    });
+
+    // Initial position on load (wait a frame for fonts/layout)
+    requestAnimationFrame(() => syncActiveSection(true));
 });
 
 // === PREMIUM EFFECTS (Lightweight, GPU-optimized) ===
