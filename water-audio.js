@@ -6,7 +6,7 @@
    - Velocity-modulated ambient stream synced to scroll speed.
    - Isolated droplet sprites on taps/presses with cursor stereo pan.
    - Filtered bubble shimmer on desktop card/button hover.
-   - Crisp splash dive on opening project modals & lightbox images.
+   - Refined Liquid Glass harmonic bloom on opening projects & certificates.
    ============================================================ */
 (function () {
     'use strict';
@@ -17,8 +17,7 @@
     const FILES = {
         stream: 'stream.mp3',
         drops: 'drops.mp3',
-        bubbles: 'bubbles.mp3',
-        splash: 'splash.mp3'
+        bubbles: 'bubbles.mp3'
     };
 
     const DROP_SLICES = [
@@ -30,7 +29,6 @@
         [0.13, 0.14], [0.69, 0.14], [0.91, 0.14], [1.09, 0.12],
         [1.31, 0.13], [1.57, 0.15], [2.07, 0.11], [2.31, 0.13]
     ];
-    const SPLASH_SLICE = [0.18, 1.25];
 
     const ICON_SOUND_ON = '<svg class="ui-icon ui-icon-md" viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>';
     const ICON_SOUND_OFF = '<svg class="ui-icon ui-icon-md" viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></svg>';
@@ -340,17 +338,56 @@
         }
     }
 
-    function playSplash(clientX) {
-        if (!playSprite('splash', SPLASH_SLICE[0], SPLASH_SLICE[1], {
-            gain: 0.24,
-            rate: 0.98 + Math.random() * 0.06,
-            lowpass: 3400,
-            clientX,
-            fadeIn: 0.012,
-            fadeOut: 0.18
-        })) {
-            playSynthDroplet(0.16);
+    function routeToDestination(node, clientX) {
+        if (typeof clientX === 'number' && typeof ctx.createStereoPanner === 'function') {
+            const pan = ctx.createStereoPanner();
+            const panVal = Math.max(-0.45, Math.min(0.45, ((clientX / (window.innerWidth || 1280)) * 2 - 1) * 0.42));
+            pan.pan.setValueAtTime(panVal, ctx.currentTime);
+            node.connect(pan);
+            pan.connect(compressor);
+        } else {
+            node.connect(compressor);
         }
+    }
+
+    function playGlassTone(freqs, attackSec, releaseSec, peakGain, clientX) {
+        if (!enabled || !ctx || document.hidden) return;
+        if (ctx.state === 'suspended') ctx.resume().catch(() => {});
+        const now = ctx.currentTime;
+        const lpf = ctx.createBiquadFilter();
+        lpf.type = 'lowpass';
+        lpf.frequency.setValueAtTime(2400, now);
+        lpf.Q.setValueAtTime(0.6, now);
+        routeToDestination(lpf, clientX);
+
+        freqs.forEach(([startHz, endHz, weight]) => {
+            const osc = ctx.createOscillator();
+            const g = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(startHz, now);
+            if (endHz && endHz !== startHz) {
+                osc.frequency.exponentialRampToValueAtTime(endHz, now + releaseSec * 0.7);
+            }
+            const level = Math.max(0.002, peakGain * weight);
+            g.gain.setValueAtTime(0.0001, now);
+            g.gain.exponentialRampToValueAtTime(level, now + attackSec);
+            g.gain.exponentialRampToValueAtTime(0.0001, now + attackSec + releaseSec);
+            osc.connect(g);
+            g.connect(lpf);
+            osc.start(now);
+            osc.stop(now + attackSec + releaseSec + 0.02);
+        });
+    }
+
+    function playGlassOpen(clientX) {
+        // Soft harmonic crystal bloom (440 Hz + 659.25 Hz) layered with softened liquid resonance
+        playGlassTone([[440, 440, 1.0], [659.25, 659.25, 0.62]], 0.020, 0.28, 0.065, clientX);
+        playSprite('drops', 1.60, 0.20, { gain: 0.08, rate: 0.98, lowpass: 2200, clientX, fadeIn: 0.022, fadeOut: 0.08 });
+    }
+
+    function playGlassClose(clientX) {
+        // Subtle descending Liquid Glass exit tone (587.33 Hz -> 440 Hz)
+        playGlassTone([[587.33, 440, 1.0]], 0.015, 0.17, 0.065, clientX);
     }
 
     function decayStream() {
@@ -420,13 +457,11 @@
         if (!target || !target.closest) return;
 
         if (target.closest('.modal-close, .lightbox-close')) {
-            if (!playSprite('drops', 2.80, 0.16, { gain: 0.18, rate: 1.26, clientX: e.clientX })) {
-                playSynthDroplet(0.14);
-            }
+            playGlassClose(e.clientX);
             return;
         }
-        if (target.closest('.project-card, .clickable-image')) {
-            playSplash(e.clientX);
+        if (target.closest('.project-card, .cert-card, .clickable-image')) {
+            playGlassOpen(e.clientX);
             return;
         }
         if (target.closest(PRESS_SELECTOR)) {
