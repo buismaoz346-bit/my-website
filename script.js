@@ -6,34 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
         threshold: 0.15
     };
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Add the 'show' class to animate in
                 entry.target.classList.add('show');
-
-                // Stagger animation for grid children (UI/UX Pro Max Motion preset)
-                const gridChildren = entry.target.querySelectorAll('.trait-card, .cert-card, .premium-skill-card, .edu-card, .timeline-item');
-                gridChildren.forEach((child, index) => {
-                    const delayClass = `delay-${Math.min(index % 4 + 1, 4)}`;
-                    child.classList.add(delayClass);
-                    // Slight additional per-item delay for natural stagger
-                    child.style.transitionDelay = `${index * 60}ms`;
-                    requestAnimationFrame(() => child.classList.add('show'));
-                });
-                
-                // If the element has a progress bar, trigger the width animation
                 const progressBar = entry.target.querySelector('.progress');
                 if (progressBar) {
                     const targetWidth = progressBar.getAttribute('data-width');
-                    // Add a small delay for better visual effect
                     setTimeout(() => {
                         progressBar.style.width = targetWidth;
-                    }, 300);
+                    }, 200);
                 }
-                
-                // Optional: Stop observing once animated in
-                // observer.unobserve(entry.target);
+                obs.unobserve(entry.target);
             }
         });
     }, observerOptions);
@@ -581,7 +565,7 @@ document.body.appendChild(scrollBar);
 
 const topBtn = document.createElement('button');
 topBtn.className = 'back-to-top';
-topBtn.innerHTML = '↑';
+topBtn.innerHTML = '<svg class="ui-icon ui-icon-md" viewBox="0 0 24 24" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>';
 topBtn.setAttribute('aria-label', 'Back to top');
 document.body.appendChild(topBtn);
 topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
@@ -600,15 +584,7 @@ window.addEventListener('scroll', () => {
     }
 }, { passive: true });
 
-// 2. Cursor Glow (GPU-only, uses transform not left/top)
-if (window.matchMedia('(pointer: fine)').matches) {
-    const g = document.createElement('div');
-    g.style.cssText = 'position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(100,255,218,0.05) 0%,transparent 70%);pointer-events:none;z-index:999;will-change:transform;left:0;top:0;';
-    document.body.appendChild(g);
-    let gx = 0, gy = 0;
-    document.addEventListener('mousemove', e => { gx = e.clientX; gy = e.clientY; }, { passive: true });
-    (function mv() { g.style.transform = `translate(${gx-150}px,${gy-150}px)`; requestAnimationFrame(mv); })();
-}
+// 2. Cursor Glow disabled for clean white background & zero idle RAF overhead
 
 // 3. Animated Counters (one-time, IntersectionObserver)
 function animateNum(el, target, ms) {
@@ -662,12 +638,14 @@ if (nums.length) {
             'awards', 'experience', 'skills', 'software', 'education', 'contact'
         ];
 
+        const kbdIcon = '<svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.001"/><path d="M10 8h.001"/><path d="M14 8h.001"/><path d="M18 8h.001"/><path d="M8 12h.001"/><path d="M12 12h.001"/><path d="M16 12h.001"/><path d="M7 16h10"/></svg>';
+
         // Create shortcuts modal
         const overlay = document.createElement('div');
         overlay.className = 'shortcuts-modal-overlay';
         overlay.innerHTML = `
             <div class="shortcuts-modal">
-                <h3>⌨️ Keyboard Shortcuts</h3>
+                <h3>${kbdIcon} Keyboard Shortcuts</h3>
                 <div class="shortcut-row"><span>Jump to section</span><span class="shortcut-key">1</span>–<span class="shortcut-key">9</span></div>
                 <div class="shortcut-row"><span>Home</span><span class="shortcut-key">1</span></div>
                 <div class="shortcut-row"><span>About</span><span class="shortcut-key">2</span></div>
@@ -694,7 +672,7 @@ if (nums.length) {
         // Floating hint button
         const hintBtn = document.createElement('button');
         hintBtn.className = 'kbd-hint-btn';
-        hintBtn.innerHTML = '⌨️';
+        hintBtn.innerHTML = kbdIcon;
         hintBtn.setAttribute('aria-label', 'Keyboard shortcuts');
         hintBtn.setAttribute('title', 'Press ? for shortcuts');
         hintBtn.addEventListener('click', showShortcuts);
@@ -789,7 +767,8 @@ if (nums.length) {
             if (!techStackEl) return;
             const tooltip = document.createElement('div');
             tooltip.className = 'project-tooltip';
-            tooltip.textContent = '🛠 ' + techStackEl.textContent.trim();
+            tooltip.innerHTML = '<svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>';
+            tooltip.appendChild(document.createTextNode(techStackEl.textContent.trim()));
             card.appendChild(tooltip);
         });
     })();
@@ -810,9 +789,9 @@ if (nums.length) {
         eeOverlay.className = 'easter-egg-overlay';
         eeOverlay.innerHTML = `
             <div class="easter-egg-content">
-                <span class="ee-icon">🎮</span>
+                <span class="ee-icon" aria-hidden="true"><svg class="ui-icon ui-icon-xl" viewBox="0 0 24 24"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect width="20" height="12" x="2" y="6" rx="2"/></svg></span>
                 <h2>You found the secret!</h2>
-                <p>Maoz is also a gamer at heart! Congrats on cracking the Konami code 🕹️</p>
+                <p>Maoz is also a gamer at heart! Congrats on cracking the Konami code.</p>
             </div>
         `;
         document.body.appendChild(eeOverlay);
@@ -914,7 +893,7 @@ if (nums.length) {
 
         const readingEl = document.createElement('div');
         readingEl.className = 'reading-time';
-        readingEl.textContent = '~' + minutes + ' min read';
+        readingEl.innerHTML = `<svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>~${minutes} min read`;
         // Insert after hero-stats
         heroStats.parentNode.insertBefore(readingEl, heroStats.nextSibling);
     })();
@@ -948,6 +927,9 @@ async function initProjectDoc(projectId) {
     }
 }
 
+const HEART_OUTLINE = '<svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>';
+const HEART_FILLED = '<svg class="ui-icon ui-icon-sm ui-icon-filled ui-icon-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>';
+
 window.handleLike = async function(projectId) {
     const docRef = db.collection("projects").doc(projectId);
     const btn = document.querySelector(`#project-modal-${projectId} .like-btn`);
@@ -955,7 +937,7 @@ window.handleLike = async function(projectId) {
     if(btn && btn.classList.contains('liked')) {
         // Unlike Logic
         btn.classList.remove('liked');
-        btn.innerHTML = `🤍 Like`;
+        btn.innerHTML = `${HEART_OUTLINE} Like`;
         localStorage.removeItem('liked_' + projectId);
         try {
             await docRef.update({
@@ -972,7 +954,7 @@ window.handleLike = async function(projectId) {
 
     if(btn) {
         btn.classList.add('liked');
-        btn.innerHTML = `❤️ Liked`;
+        btn.innerHTML = `${HEART_FILLED} Liked`;
     }
 
     try {
@@ -1020,7 +1002,7 @@ window.renderSocialUI = function(projectId) {
         socialContainer.className = 'social-container glass-panel';
         const isLiked = localStorage.getItem('liked_' + projectId) === 'true';
         const btnClass = isLiked ? 'like-btn liked' : 'like-btn';
-        const btnText = isLiked ? '❤️ Liked' : '🤍 Like';
+        const btnText = isLiked ? `${HEART_FILLED} Liked` : `${HEART_OUTLINE} Like`;
 
         socialContainer.innerHTML = `
             <div class="social-header" style="align-items: center; gap: 1rem;">
@@ -1028,7 +1010,7 @@ window.renderSocialUI = function(projectId) {
                     ${btnText}
                 </button>
                 <div class="like-stats" style="font-size: 0.9rem; color: var(--text-color); font-weight: 500;">
-                    ❤️ <span class="like-count">0</span> likes
+                    ${HEART_FILLED} <span class="like-count">0</span> likes
                 </div>
             </div>
             <div class="comments-section">

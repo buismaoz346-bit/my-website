@@ -105,7 +105,7 @@
     if (aiBtn) {
         const label = document.createElement('div');
         label.className = 'ai-toggle-label';
-        label.textContent = '✨ Ask AI about me';
+        label.innerHTML = '<svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg> Ask AI about me';
         document.body.appendChild(label);
 
         // Hide label after first use
@@ -116,21 +116,7 @@
         }, { once: true });
     }
 
-    // 7. SMOOTH SECTION TRANSITIONS WITH INTERSECTION OBSERVER
-    // Add subtle parallax-like effect to section backgrounds
-    const sections = document.querySelectorAll('section');
-    const sectionBgObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.transition = 'transform 0.6s ease-out';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
-
-    sections.forEach(section => {
-        sectionBgObserver.observe(section);
-    });
+    // 7. Section reveals handled smoothly by maxout-animations.js (zero scroll transform churn)
 
     // 8. PREFERS-REDUCED-MOTION RESPECT
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

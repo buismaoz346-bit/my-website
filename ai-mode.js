@@ -153,7 +153,7 @@ IMPORTANT RULES:
 2. For portfolio-related questions, use ONLY the data below — do not make up facts.
 3. For general knowledge questions (not about Maoz), answer helpfully but briefly, then remind the user they can also ask about Maoz's portfolio.
 4. Keep responses concise, well-formatted with **bold** and bullet points.
-5. Use emojis sparingly for personality.
+5. Do not use emojis; keep responses crisp and professional.
 6. If asked something inappropriate, politely redirect to portfolio topics.
 
 === PERSONAL INFO ===
@@ -295,14 +295,14 @@ ${softwareList}
 
     // ==================== FUN FACTS ====================
     const funFacts = [
-        `🎲 **Fun Fact:** Maoz has earned more certifications (${KB.totalCertifications}) by his 5th semester than most engineers earn in their entire degree!`,
-        `🎲 **Fun Fact:** The IncliSense project competed against entries from professionals worldwide — and Maoz was still a student when he won Runner-Up!`,
-        `🎲 **Fun Fact:** Maoz uses ${Object.values(KB.software).reduce((acc, cat) => acc + Object.values(cat).reduce((a, arr) => a + arr.length, 0), 0)}+ different software tools across ${Object.keys(KB.software).length} categories!`,
-        `🎲 **Fun Fact:** Maoz is simultaneously a Membership Head at IET AND a Cabinet Member of Youth Parliament — talk about multitasking! 🚀`,
-        `🎲 **Fun Fact:** From schematic to 3D-printed enclosure, Maoz can handle the ENTIRE hardware product pipeline solo!`,
-        `🎲 **Fun Fact:** Maoz started freelancing on Fiverr & Upwork while still in university — he doesn't wait for graduation to make an impact!`,
-        `🎲 **Fun Fact:** The Mixed-Signal RF Board project involves 50Ω impedance matching — that's advanced RF engineering usually tackled by senior engineers!`,
-        `🎲 **Fun Fact:** Maoz's 6S UAV BMS manages batteries for drones — a safety-critical system where a design error could mean a crash! 🛩️`
+        `**Fun Fact:** Maoz has earned more certifications (${KB.totalCertifications}) by his 5th semester than most engineers earn in their entire degree!`,
+        `**Fun Fact:** The IncliSense project competed against entries from professionals worldwide — and Maoz was still a student when he won Runner-Up!`,
+        `**Fun Fact:** Maoz uses ${Object.values(KB.software).reduce((acc, cat) => acc + Object.values(cat).reduce((a, arr) => a + arr.length, 0), 0)}+ different software tools across ${Object.keys(KB.software).length} categories!`,
+        `**Fun Fact:** Maoz is simultaneously a Membership Head at IET AND a Cabinet Member of Youth Parliament — talk about multitasking!`,
+        `**Fun Fact:** From schematic to 3D-printed enclosure, Maoz can handle the ENTIRE hardware product pipeline solo!`,
+        `**Fun Fact:** Maoz started freelancing on Fiverr & Upwork while still in university — he doesn't wait for graduation to make an impact!`,
+        `**Fun Fact:** The Mixed-Signal RF Board project involves 50Ω impedance matching — that's advanced RF engineering usually tackled by senior engineers!`,
+        `**Fun Fact:** Maoz's 6S UAV BMS manages batteries for drones — a safety-critical system where a design error could mean a crash!`
     ];
 
     // ==================== TIME-AWARE GREETINGS ====================
@@ -317,11 +317,11 @@ ${softwareList}
     function getRandomGreeting() {
         const timeGreet = getTimeGreeting();
         const greetings = [
-            `${timeGreet}! 👋 I'm **Maoz AI**, the intelligent assistant for **${KB.name}**'s portfolio.`,
-            `${timeGreet}! ✨ Welcome! I'm **Maoz AI** — ask me anything about **${KB.name}**'s work, projects, and achievements.`,
-            `Hey there! ${timeGreet}! 🌟 I'm **Maoz AI**, and I know everything about **${KB.name}**'s engineering journey.`,
-            `${timeGreet}! 🚀 I'm **Maoz AI** — your guide to **${KB.name}**'s portfolio. What would you like to explore?`,
-            `${timeGreet} and welcome! 😊 I'm **Maoz AI**, ready to tell you all about **${KB.name}**'s ${KB.totalProjects} projects, ${KB.totalCertifications} certifications, and more!`
+            `${timeGreet}! I'm **Maoz AI**, the intelligent assistant for **${KB.name}**'s portfolio.`,
+            `${timeGreet}! Welcome! I'm **Maoz AI** — ask me anything about **${KB.name}**'s work, projects, and achievements.`,
+            `Hey there! ${timeGreet}! I'm **Maoz AI**, and I know everything about **${KB.name}**'s engineering journey.`,
+            `${timeGreet}! I'm **Maoz AI** — your guide to **${KB.name}**'s portfolio. What would you like to explore?`,
+            `${timeGreet} and welcome! I'm **Maoz AI**, ready to tell you all about **${KB.name}**'s ${KB.totalProjects} projects, ${KB.totalCertifications} certifications, and more!`
         ];
         return greetings[Math.floor(Math.random() * greetings.length)];
     }
@@ -329,13 +329,13 @@ ${softwareList}
     // ==================== VARIED RESPONSE OPENINGS ====================
     function getVariedOpening(category) {
         const openings = {
-            projects: ["🚀 Here's the scoop on the projects!", "🔧 Let me walk you through the projects!", "💡 Check out these awesome builds!", "⚡ Here's what Maoz has been building!"],
-            certifications: ["📜 Here's the certification lineup!", "🎓 Let me pull up the certifications!", "📋 Check out these credentials!", "✅ Here are the certifications Maoz has earned!"],
-            awards: ["🏆 Time to showcase some achievements!", "🥇 Here's the trophy collection!", "🌟 Let me highlight these wins!", "🎉 Check out these well-deserved awards!"],
-            skills: ["⚡ Let's talk skills!", "💪 Here's what Maoz brings to the table!", "🛠️ Check out this skill set!", "🔥 Here are the core competencies!"],
-            experience: ["💼 Let's dive into the experience!", "📌 Here's the professional journey!", "🗂️ Let me outline the experience!", "👔 Here's the career track record!"],
+            projects: ["Here's the scoop on the projects!", "Let me walk you through the projects!", "Check out these awesome builds!", "Here's what Maoz has been building!"],
+            certifications: ["Here's the certification lineup!", "Let me pull up the certifications!", "Check out these credentials!", "Here are the certifications Maoz has earned!"],
+            awards: ["Time to showcase some achievements!", "Here's the trophy collection!", "Let me highlight these wins!", "Check out these well-deserved awards!"],
+            skills: ["Let's talk skills!", "Here's what Maoz brings to the table!", "Check out this skill set!", "Here are the core competencies!"],
+            experience: ["Let's dive into the experience!", "Here's the professional journey!", "Let me outline the experience!", "Here's the career track record!"],
             general: ["Great question!", "Glad you asked!", "Here's what I found!", "Let me tell you about that!", "Absolutely — here's the info!"],
-            search: ["🔍 Let me dig into that for you!", "🔎 Searching the portfolio...", "🧐 Let me find that!", "📡 Running a search on that!"]
+            search: ["Let me dig into that for you!", "Searching the portfolio...", "Let me find that!", "Running a search on that!"]
         };
         const arr = openings[category] || openings.general;
         return arr[Math.floor(Math.random() * arr.length)];
@@ -370,13 +370,13 @@ ${softwareList}
 
     function buildCrossRef(type, items) {
         if (!items || items.length === 0) return '';
-        let ref = '\n\n🔗 **Related:** ';
+        let ref = '\n\n**Related:** ';
         if (type === 'certs') {
-            ref += items.slice(0, 2).map(c => `📜 ${c.name}`).join(' • ');
+            ref += items.slice(0, 2).map(c => c.name).join(' • ');
         } else if (type === 'projects') {
-            ref += items.slice(0, 2).map(p => `🚀 ${p.name}`).join(' • ');
+            ref += items.slice(0, 2).map(p => p.name).join(' • ');
         } else if (type === 'skills') {
-            ref += items.slice(0, 2).map(s => `⚡ ${s.name}`).join(' • ');
+            ref += items.slice(0, 2).map(s => s.name).join(' • ');
         }
         return ref;
     }
@@ -384,75 +384,75 @@ ${softwareList}
     // ==================== FOLLOW-UP SUGGESTIONS ENGINE ====================
     const followUpMap = {
         'projects': [
-            "Want to see his awards? 🏆",
-            "Ask about his tech stack 🛠️",
-            "What certifications does he have? 📜",
-            "Which is his best project? ⭐",
-            "Compare his projects 📊"
+            "Want to see his awards?",
+            "Ask about his tech stack",
+            "What certifications does he have?",
+            "Which is his best project?",
+            "Compare his projects"
         ],
         'certifications': [
-            "How many Altium certs does he have? 🔧",
-            "Tell me about his awards 🏆",
-            "What skills does he have? ⚡",
-            "Who recognizes his work? 🏛️"
+            "How many Altium certs does he have?",
+            "Tell me about his awards",
+            "What skills does he have?",
+            "Who recognizes his work?"
         ],
         'awards': [
-            "Tell me about the IncliSense project 🚀",
-            "What certifications does he have? 📜",
-            "What makes him stand out? 🌟",
-            "Is he good for an internship? 🎯"
+            "Tell me about the IncliSense project",
+            "What certifications does he have?",
+            "What makes him stand out?",
+            "Is he good for an internship?"
         ],
         'skills': [
-            "What software tools does he use? 🛠️",
-            "Show me his projects 🚀",
-            "What are his strengths? 💪",
-            "Is he experienced in PCB design? 🔧"
+            "What software tools does he use?",
+            "Show me his projects",
+            "What are his strengths?",
+            "Is he experienced in PCB design?"
         ],
         'experience': [
-            "What projects has he built? 🚀",
-            "Tell me about his leadership roles 🏛️",
-            "Is he available for work? 📅",
-            "Why should we hire him? 🌟"
+            "What projects has he built?",
+            "Tell me about his leadership roles",
+            "Is he available for work?",
+            "Why should we hire him?"
         ],
         'education': [
-            "What's his student ID? 🆔",
-            "What certifications does he have? 📜",
-            "Tell me about his projects 🚀",
-            "What are his hobbies? 🏏"
+            "What's his student ID?",
+            "What certifications does he have?",
+            "Tell me about his projects",
+            "What are his hobbies?"
         ],
         'contact': [
-            "Tell me about his experience 💼",
-            "What can he do for our company? 🛠️",
-            "Is he available? 📅"
+            "Tell me about his experience",
+            "What can he do for our company?",
+            "Is he available?"
         ],
         'about': [
-            "What are his skills? ⚡",
-            "Show me his projects 🚀",
-            "Why should we hire him? 🌟",
-            "What awards has he won? 🏆"
+            "What are his skills?",
+            "Show me his projects",
+            "Why should we hire him?",
+            "What awards has he won?"
         ],
         'recruiter': [
-            "What makes him stand out? 🌟",
-            "What are his strengths? 💪",
-            "Is he available? 📅",
-            "Show me his certifications 📜"
+            "What makes him stand out?",
+            "What are his strengths?",
+            "Is he available?",
+            "Show me his certifications"
         ],
         'altium': [
-            "How many Altium certs? 📜",
-            "What other PCB tools does he use? 🛠️",
-            "Tell me about the Smart Lighting project 🚀",
-            "What makes him stand out? 🌟"
+            "How many Altium certs?",
+            "What other PCB tools does he use?",
+            "Tell me about the Smart Lighting project",
+            "What makes him stand out?"
         ],
         'iot': [
-            "Tell me about the Omni-Sense Node 📡",
-            "What is IncliSense? 🚀",
-            "What certifications does he have? 📜",
-            "Does he know ESP32? ⚡"
+            "Tell me about the Omni-Sense Node",
+            "What is IncliSense?",
+            "What certifications does he have?",
+            "Does he know ESP32?"
         ],
         'default': [
-            "Tell me about his projects 🚀",
-            "What certifications does he have? 📜",
-            "Why should we hire him? 🌟"
+            "Tell me about his projects",
+            "What certifications does he have?",
+            "Why should we hire him?"
         ]
     };
 
@@ -476,11 +476,11 @@ ${softwareList}
 
     function smartSearch(query) {
         const allItems = [
-            ...KB.certifications.map(c => ({ ...c, type: 'Certification', icon: '📜' })),
-            ...KB.awards.map(a => ({ ...a, type: 'Award', icon: '🏆' })),
-            ...KB.experience.map(e => ({ ...e, name: `${e.title} at ${e.org}`, type: 'Experience', icon: '💼' })),
-            ...KB.skills.map(s => ({ ...s, type: 'Skill', icon: '⚡' })),
-            ...KB.projects.map(p => ({ ...p, tags: p.tech.map(t => t.toLowerCase()), type: 'Project', icon: '🚀' }))
+            ...KB.certifications.map(c => ({ ...c, type: 'Certification', icon: '' })),
+            ...KB.awards.map(a => ({ ...a, type: 'Award', icon: '' })),
+            ...KB.experience.map(e => ({ ...e, name: `${e.title} at ${e.org}`, type: 'Experience', icon: '' })),
+            ...KB.skills.map(s => ({ ...s, type: 'Skill', icon: '' })),
+            ...KB.projects.map(p => ({ ...p, tags: p.tech.map(t => t.toLowerCase()), type: 'Project', icon: '' }))
         ];
 
         const scored = allItems.map(item => ({
@@ -1218,19 +1218,19 @@ ${softwareList}
         if (searchResults.length > 0) {
             topic = 'default';
             const maxScore = searchResults[0].score;
-            const relevanceLabels = ['🟢 High Match', '🟡 Partial Match', '🟠 Related'];
+            const relevanceLabels = ['High Match', 'Partial Match', 'Related'];
 
             let resp = `${getVariedOpening('search')} Found **${searchResults.length} result(s)**:\n\n`;
             searchResults.forEach((r, i) => {
                 const m = r.item;
                 const label = i === 0 && r.score >= 2 ? relevanceLabels[0] : (r.score >= 1 ? relevanceLabels[1] : relevanceLabels[2]);
-                resp += `**${i+1}. ${m.icon} [${m.type}] ${m.name}** — ${label}\n`;
+                resp += `**${i+1}. [${m.type}] ${m.name}** — ${label}\n`;
                 if (m.date) resp += `- Date: **${m.date}**\n`;
                 if (m.issuer) resp += `- Issued by: ${m.issuer}\n`;
                 if (m.desc) resp += `- ${m.desc}\n`;
                 resp += '\n';
             });
-            resp += `\n💡 *Tip: Ask me more specifically for detailed info on any of these!*`;
+            resp += `\n*Tip: Ask me more specifically for detailed info on any of these!*`;
             discussedItems = searchResults.map(r => r.item);
             conversationMemory.addMessage(query, topic, resp, discussedItems);
             return resp;
@@ -1242,10 +1242,16 @@ ${softwareList}
 
     // ==================== UI ENGINE ====================
     function createUI() {
+        const ICON_SPARKLES = '<svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>';
+        const ICON_SPARKLES_LG = '<svg class="ui-icon ui-icon-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>';
+        const ICON_SEND = '<svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>';
+        const ICON_ARROW_LEFT = '<svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>';
+
         const toggleBtn = document.createElement('button');
         toggleBtn.className = 'ai-toggle-btn';
-        toggleBtn.innerHTML = '✨';
+        toggleBtn.innerHTML = ICON_SPARKLES;
         toggleBtn.title = 'Switch to AI Mode';
+        toggleBtn.setAttribute('aria-label', 'Switch to AI Mode');
         document.body.appendChild(toggleBtn);
 
         const overlay = document.createElement('div');
@@ -1253,17 +1259,17 @@ ${softwareList}
         overlay.innerHTML = `
             <div class="ai-header">
                 <div class="ai-header-left">
-                    <div class="ai-logo">✨</div>
+                    <div class="ai-logo">${ICON_SPARKLES}</div>
                     <div>
                         <div class="ai-header-title">Maoz AI</div>
-                        <div class="ai-header-subtitle">Powered by Gemini AI ✦ Portfolio Engine v4.0</div>
+                        <div class="ai-header-subtitle">Powered by Gemini AI · Portfolio Engine v4.0</div>
                     </div>
                 </div>
-                <button class="ai-back-btn">← Back to Portfolio</button>
+                <button class="ai-back-btn">${ICON_ARROW_LEFT} Back to Portfolio</button>
             </div>
             <div class="ai-chat-container" id="ai-chat">
                 <div class="ai-welcome">
-                    <div class="ai-welcome-icon">✨</div>
+                    <div class="ai-welcome-icon">${ICON_SPARKLES_LG}</div>
                     <h2>${getTimeGreeting()}! I'm Maoz AI</h2>
                     <p>I know everything about Syed Maoz Arif's portfolio — and for anything beyond, I'm connected to <strong>Google Gemini</strong> to answer any question you have. Ask me anything!</p>
                     <div class="ai-suggestions">
@@ -1283,7 +1289,7 @@ ${softwareList}
             <div class="ai-input-area">
                 <div class="ai-input-wrapper">
                     <input class="ai-input" type="text" placeholder="Ask anything — dates, counts, details, or say Assalam o Alaikum..." autocomplete="off" />
-                    <button class="ai-send-btn">➤</button>
+                    <button class="ai-send-btn" aria-label="Send message">${ICON_SEND}</button>
                 </div>
                 <div class="ai-disclaimer">Maoz AI v4.0 — Portfolio data answered locally • General questions powered by Gemini AI</div>
             </div>
@@ -1340,7 +1346,7 @@ ${softwareList}
             }
 
             msg.innerHTML = `
-                <div class="ai-message-avatar">${isUser ? 'Y' : '✨'}</div>
+                <div class="ai-message-avatar">${isUser ? 'Y' : ICON_SPARKLES}</div>
                 <div class="ai-message-content">${contentHtml}</div>
             `;
             chat.appendChild(msg);
@@ -1360,7 +1366,7 @@ ${softwareList}
         function showTyping() {
             const t = document.createElement('div');
             t.className = 'ai-message bot'; t.id = 'ai-typing';
-            t.innerHTML = `<div class="ai-message-avatar">✨</div><div class="ai-message-content"><div class="ai-typing"><div class="ai-typing-dot"></div><div class="ai-typing-dot"></div><div class="ai-typing-dot"></div></div></div>`;
+            t.innerHTML = `<div class="ai-message-avatar">${ICON_SPARKLES}</div><div class="ai-message-content"><div class="ai-typing"><div class="ai-typing-dot"></div><div class="ai-typing-dot"></div><div class="ai-typing-dot"></div></div></div>`;
             chat.appendChild(t);
             chat.scrollTop = chat.scrollHeight;
         }
@@ -1391,19 +1397,19 @@ ${softwareList}
                     if (el) el.remove();
 
                     if (geminiResponse) {
-                        const taggedResponse = `${geminiResponse}\n\n*🌐 Powered by Gemini AI*`;
+                        const taggedResponse = `${geminiResponse}\n\n*Powered by Gemini AI*`;
                         conversationMemory.addMessage(text, 'gemini', taggedResponse, []);
                         addMessage(taggedResponse, false, 'gemini');
                     } else {
                         // Gemini failed — show offline fallback
-                        const fallback = `I couldn't find that in the local portfolio data, and Gemini is currently unavailable. 😅\n\n**Try asking about:**\n- His projects, certifications, or awards\n- Skills, education, or experience\n- "Why should we hire him?"\n- "What makes him stand out?"`;
+                        const fallback = `I couldn't find that in the local portfolio data, and Gemini is currently unavailable.\n\n**Try asking about:**\n- His projects, certifications, or awards\n- Skills, education, or experience\n- "Why should we hire him?"\n- "What makes him stand out?"`;
                         conversationMemory.addMessage(text, 'default', fallback, []);
                         addMessage(fallback, false, 'default');
                     }
                 } catch (err) {
                     const el = document.getElementById('ai-typing');
                     if (el) el.remove();
-                    const fallback = `Something went wrong connecting to Gemini. 😅 Try asking about Maoz's portfolio instead!`;
+                    const fallback = `Something went wrong connecting to Gemini. Try asking about Maoz's portfolio instead!`;
                     addMessage(fallback, false, 'default');
                 }
             }

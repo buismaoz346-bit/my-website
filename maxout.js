@@ -5,11 +5,19 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    const ICON_MOON = '<svg class="ui-icon ui-icon-md" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
+    const ICON_SUN = '<svg class="ui-icon ui-icon-md" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>';
+    const ICON_ZAP = '<svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>';
+    const ICON_CPU = '<svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>';
+    const ICON_CODE = '<svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>';
+    const ICON_SEARCH = '<svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>';
+    const ICON_SEND = '<svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>';
+
     // --- 1. DARK / LIGHT THEME TOGGLE ---
     const themeBtn = document.createElement('button');
     themeBtn.className = 'theme-toggle-btn';
     themeBtn.setAttribute('aria-label', 'Toggle dark or light mode');
-    themeBtn.innerHTML = '🌙';
+    themeBtn.innerHTML = ICON_MOON;
 
     // Insert theme toggle next to logo in navbar container
     // Append to body as a fixed floating button on the bottom left
@@ -19,13 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('maoz_theme');
     if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.body.classList.add('dark-mode');
-        themeBtn.innerHTML = '☀️';
+        themeBtn.innerHTML = ICON_SUN;
     }
 
     themeBtn.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
         const isDark = document.body.classList.contains('dark-mode');
-        themeBtn.innerHTML = isDark ? '☀️' : '🌙';
+        themeBtn.innerHTML = isDark ? ICON_SUN : ICON_MOON;
         localStorage.setItem('maoz_theme', isDark ? 'dark' : 'light');
     });
 
@@ -154,12 +162,12 @@ document.addEventListener('DOMContentLoaded', () => {
         controlBox.innerHTML = `
             <div class="filter-tabs">
                 <button class="filter-tab active" data-filter="all">All Projects</button>
-                <button class="filter-tab" data-filter="pcb">⚡ Hardware & PCB</button>
-                <button class="filter-tab" data-filter="embedded">🤖 Embedded & IoT</button>
-                <button class="filter-tab" data-filter="webai">💻 Web & AI</button>
+                <button class="filter-tab" data-filter="pcb">${ICON_ZAP} Hardware & PCB</button>
+                <button class="filter-tab" data-filter="embedded">${ICON_CPU} Embedded & IoT</button>
+                <button class="filter-tab" data-filter="webai">${ICON_CODE} Web & AI</button>
             </div>
             <div class="search-box-wrapper">
-                <span class="search-icon-hint">🔍</span>
+                <span class="search-icon-hint">${ICON_SEARCH}</span>
                 <input type="text" class="search-input" id="project-search-input" placeholder="Search projects by tech or keyword...">
             </div>
         `;
@@ -225,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <textarea class="form-textarea" id="cf-message" rows="4" placeholder="Your Message *" required></textarea>
                 </div>
                 <div class="form-group-full text-center">
-                    <button type="submit" class="btn-primary" style="width: 100%; max-width: 280px;">🚀 Send Message</button>
+                    <button type="submit" class="btn-primary" style="width: 100%; max-width: 280px; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;">${ICON_SEND} Send Message</button>
                 </div>
                 <div class="form-status-msg" id="cf-status"></div>
             </form>

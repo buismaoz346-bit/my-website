@@ -2550,9 +2550,6 @@ section { transition: padding 0.5s ease; }
     margin-top: 0.5rem;
     letter-spacing: 0.3px;
 }
-.reading-time::before {
-    content: '📖 ';
-}
 
 /* ============================================================
    SCROLL-DRIVEN ANIMATIONS & ADVANCED MICRO-INTERACTIONS

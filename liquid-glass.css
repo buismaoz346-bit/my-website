@@ -1,0 +1,823 @@
+/* ============================================================
+   SCULPTURAL DARK GLASSMORPHISM LAYER
+   - Fixed GPU-composited 3D sculptural ribbon wallpaper on pure #000.
+   - Native GPU backdrop-filter frosted glass cards with crisp 1px
+     specular rims and 0px scroll jitter.
+   - High-contrast white/ice-slate typography on every surface.
+   ============================================================ */
+
+/* --- 0. Crisp Vector UI Icons (unconditional) --- */
+.ui-icon {
+    display: inline-block;
+    width: 1.05em;
+    height: 1.05em;
+    vertical-align: -0.16em;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.85;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.ui-icon-sm { width: 15px; height: 15px; }
+.ui-icon-md { width: 22px; height: 22px; }
+.ui-icon-lg { width: 30px; height: 30px; }
+.ui-icon-xl { width: 44px; height: 44px; }
+.ui-icon-filled { fill: currentColor; }
+.ui-icon-heart { color: #ef4444; }
+.like-btn.liked .ui-icon-heart { color: #ffffff; }
+
+.icon-wrapper {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    color: #E0F2FE !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    line-height: 1 !important;
+}
+.contact-icon {
+    color: #7DD3FC !important;
+    background: rgba(255, 255, 255, 0.07) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+}
+.featured-label,
+.filter-tab,
+.reading-time,
+.ai-toggle-label,
+.project-tooltip,
+.like-stats,
+.shortcuts-modal h3,
+.stl-download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+}
+.btn-download .icon {
+    display: inline-flex;
+    align-items: center;
+}
+.search-icon-hint {
+    display: inline-flex;
+    align-items: center;
+    color: #94A3B8;
+}
+.ai-toggle-btn,
+.ai-logo,
+.ai-welcome-icon,
+.ai-send-btn,
+.ai-message.bot .ai-message-avatar {
+    color: #ffffff;
+}
+.ee-icon {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    color: #7DD3FC;
+}
+
+/* --- 1. Pure Black + Fixed 3D Sculptural Ribbon Wallpaper (Zero Scroll Jank) --- */
+* {
+    scroll-behavior: auto;
+}
+
+html,
+body,
+body.dark-mode {
+    --primary: #FFFFFF;
+    --primary-light: #BAE6FD;
+    --primary-glow: rgba(56, 189, 248, 0.28);
+    --secondary: #CBD5E1;
+    --secondary-light: rgba(255, 255, 255, 0.08);
+    --secondary-lightest: rgba(255, 255, 255, 0.14);
+    --accent: #38BDF8;
+    --bg-color: #000000;
+    --text-main: #FFFFFF;
+    --text-color: #F8FAFC;
+    --text-light: #E2E8F0;
+    --text-muted: #CBD5E1;
+    --border-color: rgba(255, 255, 255, 0.16);
+    --border-glow: rgba(255, 255, 255, 0.34);
+    background: #000000 !important;
+    background-color: #000000 !important;
+    background-image: none !important;
+    color: #F8FAFC !important;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    animation: none !important;
+}
+
+/* Fixed GPU-composited wallpaper layer (never repaints or jitters on scroll) */
+body::before {
+    content: '' !important;
+    display: block !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    background: #000000 url('Picture/glass-bg.jpg') center center / cover no-repeat !important;
+    transform: translateZ(0);
+}
+
+/* Subtle dark edge vignette so text stays effortless to read anywhere */
+body::after {
+    content: '' !important;
+    display: block !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    animation: none !important;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0, 0, 0, 0.12) 0%,
+        rgba(0, 0, 0, 0.45) 100%
+    ) !important;
+}
+
+/* Hide legacy canvases & section tint overlays */
+#pcb-canvas,
+#lg-canvas,
+.hero-section::before,
+.hero-section::after,
+.contact-section::after,
+section + section::before {
+    display: none !important;
+    content: none !important;
+}
+
+body > section,
+body > footer {
+    position: relative;
+    z-index: 1;
+    background: transparent !important;
+    border-top-color: transparent !important;
+    border-bottom-color: transparent !important;
+}
+
+/* Hide theme toggle since this dark sculptural glass aesthetic is unified */
+.theme-toggle-btn {
+    display: none !important;
+}
+
+/* --- 2. Eliminate All Scroll-Jitter CSS Animations --- */
+@supports (animation-timeline: view()) {
+    .hidden,
+    .trait-card,
+    .cert-card,
+    .cert-card:nth-child(odd),
+    .cert-card:nth-child(even),
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content,
+    .timeline-dot,
+    .edu-card,
+    .premium-skill-card,
+    .contact-item,
+    .section-title,
+    footer {
+        animation: none !important;
+        animation-timeline: auto !important;
+    }
+}
+
+.glass-panel,
+.trait-card,
+.cert-card,
+.edu-card,
+.timeline-content,
+.premium-skill-card,
+.about-card,
+.contact-card,
+.traits-summary,
+.filter-search-container {
+    perspective: none !important;
+    transform-style: flat !important;
+    filter: none !important;
+    transition:
+        transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.25s ease,
+        background-color 0.25s ease !important;
+}
+
+.cert-card:hover .cert-info {
+    padding-left: 1.5rem !important;
+}
+.timeline-item:hover .timeline-content {
+    transform: translateY(-3px) !important;
+}
+
+/* --- 3. Real Frosted Glass Cards (Matches Reference Wallpaper Aesthetic) --- */
+.glass-panel:not(.project-card):not(.modal-content),
+.about-card,
+.traits-summary,
+.trait-card,
+.cert-card,
+.timeline-content,
+.premium-skill-card,
+.edu-card,
+.contact-card,
+.filter-search-container,
+.freelance-badge,
+.hero-stats,
+body.dark-mode .glass-panel:not(.project-card):not(.modal-content),
+body.dark-mode .about-card,
+body.dark-mode .traits-summary,
+body.dark-mode .trait-card,
+body.dark-mode .cert-card,
+body.dark-mode .timeline-content,
+body.dark-mode .premium-skill-card,
+body.dark-mode .edu-card,
+body.dark-mode .contact-card,
+body.dark-mode .filter-search-container,
+body.dark-mode .freelance-badge,
+body.dark-mode .hero-stats {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.085) 0%,
+        rgba(18, 22, 36, 0.34) 48%,
+        rgba(10, 14, 24, 0.44) 100%
+    ) !important;
+    backdrop-filter: blur(22px) saturate(145%) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(145%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    border-radius: 22px !important;
+    box-shadow:
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.26),
+        inset 1px 0 0 0 rgba(255, 255, 255, 0.12),
+        inset 0 -1px 0 0 rgba(255, 255, 255, 0.06),
+        0 20px 50px -12px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* Subtle pointer-tracking specular sheen */
+.glass-panel:not(.project-card):not(.modal-content)::before,
+.about-card::before,
+.traits-summary::before,
+.trait-card::before,
+.cert-card::before,
+.timeline-content::before,
+.premium-skill-card::before,
+.edu-card::before,
+.contact-card::before,
+.filter-search-container::before,
+.freelance-badge::before,
+.hero-stats::before {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    border-radius: inherit !important;
+    background: radial-gradient(
+        360px circle at var(--gx, 25%) var(--gy, 0%),
+        rgba(255, 255, 255, 0.13) 0%,
+        rgba(56, 189, 248, 0.06) 38%,
+        transparent 70%
+    ) !important;
+    opacity: calc(0.35 + var(--glint, 0) * 0.65) !important;
+    transition: opacity 0.3s ease !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+}
+
+/* Razor-thin luminous specular rim light */
+.glass-panel:not(.project-card):not(.modal-content)::after,
+.about-card::after,
+.traits-summary::after,
+.trait-card::after,
+.cert-card::after,
+.timeline-content::after,
+.premium-skill-card::after,
+.edu-card::after,
+.contact-card::after,
+.filter-search-container::after,
+.freelance-badge::after,
+.hero-stats::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    border: none !important;
+    border-radius: inherit !important;
+    padding: 1px !important;
+    background: radial-gradient(
+        300px circle at var(--gx, 18%) var(--gy, 0%),
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(125, 211, 252, 0.25) 38%,
+        rgba(255, 255, 255, 0.06) 75%,
+        transparent 100%
+    ) !important;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
+    -webkit-mask-composite: xor !important;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
+    mask-composite: exclude !important;
+    pointer-events: none !important;
+    z-index: 3 !important;
+}
+
+.trait-card:hover,
+.cert-card:hover,
+.edu-card:hover,
+.premium-skill-card:hover,
+.about-card:hover,
+.contact-card:hover {
+    transform: translateY(-4px) !important;
+    border-color: rgba(255, 255, 255, 0.28) !important;
+    box-shadow:
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.34),
+        inset 1px 0 0 0 rgba(255, 255, 255, 0.16),
+        0 26px 60px -12px rgba(0, 0, 0, 0.68) !important;
+}
+
+/* Tactile specular glass tap ripple */
+.lg-ripple {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 4;
+    transform: translate(-50%, -50%) scale(0);
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.28) 0%,
+        rgba(56, 189, 248, 0.14) 48%,
+        transparent 72%
+    );
+    animation: lgRipple 0.62s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes lgRipple {
+    0%   { transform: translate(-50%, -50%) scale(0); opacity: 0.9; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+}
+
+.hero-stats,
+.hero-stats:hover {
+    display: inline-flex !important;
+    width: auto;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0.65rem 1.4rem !important;
+    border-radius: 999px !important;
+    color: #E2E8F0 !important;
+}
+.hero-stats .stat-num {
+    color: #FFFFFF !important;
+    text-shadow: none !important;
+}
+.freelance-badge,
+.freelance-badge:hover {
+    padding: 0.55rem 1.15rem !important;
+    border-radius: 999px !important;
+    color: #F8FAFC !important;
+}
+.freelance-badge .dot {
+    background: #38BDF8 !important;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.85) !important;
+}
+
+/* --- 4. Floating Navbar & Controls (Dark Frosted Glass) --- */
+.navbar,
+body.dark-mode .navbar {
+    background: rgba(10, 14, 24, 0.52) !important;
+    backdrop-filter: blur(24px) saturate(155%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(155%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.24),
+        0 16px 40px rgba(0, 0, 0, 0.50) !important;
+}
+.navbar::after {
+    display: none !important;
+}
+.logo {
+    color: #FFFFFF !important;
+}
+.nav-logo-avatar {
+    border-color: rgba(255, 255, 255, 0.45) !important;
+}
+.nav-links a,
+body.dark-mode .nav-links a {
+    color: #CBD5E1 !important;
+}
+.nav-links a:hover,
+.nav-links a.active,
+body.dark-mode .nav-links a:hover,
+body.dark-mode .nav-links a.active {
+    color: #FFFFFF !important;
+    text-shadow: 0 0 12px rgba(125, 211, 252, 0.45) !important;
+}
+.nav-links a::after {
+    background: #7DD3FC !important;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.7) !important;
+}
+.nav-cv-link {
+    color: #7DD3FC !important;
+}
+.nav-pill-indicator,
+body.dark-mode .nav-pill-indicator {
+    background: rgba(255, 255, 255, 0.10) !important;
+    border-color: rgba(255, 255, 255, 0.20) !important;
+    box-shadow: none !important;
+}
+.menu-toggle .bar {
+    background-color: #FFFFFF !important;
+}
+
+@media (max-width: 900px) {
+    .nav-menu,
+    body.dark-mode .nav-menu {
+        background: rgba(8, 12, 22, 0.90) !important;
+        backdrop-filter: blur(24px) saturate(150%) !important;
+        -webkit-backdrop-filter: blur(24px) saturate(150%) !important;
+        border-left: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: -12px 0 40px rgba(0, 0, 0, 0.65);
+    }
+}
+
+.back-to-top,
+.kbd-hint-btn,
+.section-counter-badge,
+.ai-toggle-label {
+    background: rgba(14, 18, 30, 0.62) !important;
+    backdrop-filter: blur(20px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: #F8FAFC !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        0 10px 28px rgba(0, 0, 0, 0.50) !important;
+}
+.back-to-top:hover,
+.kbd-hint-btn:hover {
+    background: rgba(255, 255, 255, 0.16) !important;
+    border-color: rgba(255, 255, 255, 0.36) !important;
+    color: #FFFFFF !important;
+}
+.section-counter-badge {
+    left: 30px !important;
+    bottom: 30px !important;
+}
+.section-counter-badge .counter-highlight {
+    color: #7DD3FC !important;
+}
+
+/* --- 5. Typography, Buttons & Hero --- */
+h1, h2, h3, h4, h5, h6,
+.section-title {
+    color: #FFFFFF !important;
+}
+.section-title {
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55);
+}
+.section-title::after {
+    background: linear-gradient(90deg, #38BDF8, #A855F7) !important;
+}
+p,
+.about-card p,
+.trait-card p,
+.cert-info p,
+.timeline-content p,
+.premium-skill-card p,
+.summary-list li,
+.contact-lead,
+.edu-content h4,
+.timeline-role {
+    color: #CBD5E1 !important;
+}
+.summary-list strong,
+.edu-degree,
+.edu-content h3,
+.timeline-company,
+.contact-details h4,
+.premium-skill-card h3 {
+    color: #FFFFFF !important;
+}
+.summary-list li::before {
+    color: #7DD3FC !important;
+}
+
+.greeting {
+    color: #CBD5E1 !important;
+}
+.hero-section .name {
+    background: linear-gradient(135deg, #FFFFFF 0%, #E0F2FE 58%, #7DD3FC 100%) !important;
+    background-size: 100% 100% !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
+    animation: none !important;
+}
+.role {
+    background: linear-gradient(90deg, #F8FAFC 0%, #7DD3FC 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+.reading-time {
+    color: #CBD5E1 !important;
+    opacity: 0.85 !important;
+}
+.image-wrapper {
+    border: 3px solid rgba(255, 255, 255, 0.30) !important;
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.65),
+        0 0 40px rgba(56, 189, 248, 0.18) !important;
+}
+
+/* Buttons */
+.btn-primary,
+body.dark-mode .btn-primary {
+    background: #FFFFFF !important;
+    color: #090D16 !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.35) !important;
+}
+.btn-primary:hover,
+body.dark-mode .btn-primary:hover {
+    background: #E0F2FE !important;
+    color: #090D16 !important;
+    box-shadow: 0 12px 32px rgba(56, 189, 248, 0.30) !important;
+}
+.btn-download,
+.btn-secondary,
+body.dark-mode .btn-download {
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.28) !important;
+    color: #FFFFFF !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
+}
+.btn-download:hover,
+.btn-secondary:hover,
+body.dark-mode .btn-download:hover {
+    background: rgba(255, 255, 255, 0.18) !important;
+    border-color: rgba(255, 255, 255, 0.55) !important;
+    color: #FFFFFF !important;
+}
+
+/* Filter Tabs & Inputs */
+.filter-tab,
+body.dark-mode .filter-tab {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    color: #E2E8F0 !important;
+}
+.filter-tab:hover,
+body.dark-mode .filter-tab:hover {
+    background: rgba(255, 255, 255, 0.14) !important;
+    color: #FFFFFF !important;
+}
+.filter-tab.active,
+body.dark-mode .filter-tab.active {
+    background: #FFFFFF !important;
+    color: #090D16 !important;
+    border-color: #FFFFFF !important;
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.20) !important;
+}
+
+.search-input,
+.form-input,
+.form-textarea,
+body.dark-mode .search-input,
+body.dark-mode .form-input,
+body.dark-mode .form-textarea {
+    background: rgba(0, 0, 0, 0.36) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: #FFFFFF !important;
+}
+.search-input::placeholder,
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: #94A3B8 !important;
+}
+.search-input:focus,
+.form-input:focus,
+.form-textarea:focus {
+    background: rgba(0, 0, 0, 0.55) !important;
+    border-color: #7DD3FC !important;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.22) !important;
+}
+.contact-form-wrapper {
+    border-top-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+/* --- 6. Project Cards (Frosted Glass Dock Over Imagery) --- */
+.project-card {
+    background: rgba(10, 14, 24, 0.72) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 22px !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        0 20px 50px -12px rgba(0, 0, 0, 0.65) !important;
+}
+.project-card:hover {
+    transform: translateY(-4px) !important;
+    border-color: rgba(255, 255, 255, 0.32) !important;
+}
+.project-card .project-bg {
+    filter: brightness(0.90) contrast(1.04);
+}
+.project-card:hover .project-bg {
+    filter: brightness(0.76) contrast(1.08);
+}
+.project-content-overlay,
+.project-card:hover .project-content-overlay {
+    background: rgba(8, 12, 22, 0.72) !important;
+    backdrop-filter: blur(18px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(150%) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.20);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    padding: 1.35rem 1.6rem !important;
+}
+.project-content-overlay h3 {
+    color: #FFFFFF !important;
+    margin-bottom: 0.35rem;
+}
+.project-content-overlay .tech-stack,
+.tech-stack {
+    color: #7DD3FC !important;
+    margin-bottom: 0.55rem;
+}
+.project-content-overlay .project-summary {
+    color: #E2E8F0 !important;
+}
+.project-content-overlay .project-link,
+.project-link,
+.edu-link,
+.contact-details a {
+    color: #7DD3FC !important;
+}
+.project-content-overlay .project-link {
+    opacity: 0.94;
+    transform: translateX(0);
+}
+.project-card:hover .project-content-overlay .project-link,
+.edu-link:hover,
+.contact-details a:hover {
+    color: #FFFFFF !important;
+}
+.project-tooltip {
+    background: rgba(10, 14, 24, 0.85) !important;
+    color: #E0F2FE !important;
+    border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+@media (min-width: 769px) {
+    .featured-project .project-content-overlay,
+    .featured-project:hover .project-content-overlay {
+        border-top: none;
+        border-right: 1px solid rgba(255, 255, 255, 0.18);
+        padding: 2.25rem !important;
+    }
+}
+
+/* --- 7. Certs, Education & Timeline --- */
+.cert-image {
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.28);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+.edu-logo-img {
+    background-color: rgba(255, 255, 255, 0.94) !important;
+    padding: 6px !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+.edu-date {
+    color: #7DD3FC !important;
+}
+
+.timeline::before {
+    background: linear-gradient(to bottom, #7DD3FC, rgba(255, 255, 255, 0.15), transparent) !important;
+}
+.timeline-dot {
+    background: #090D16 !important;
+    border: 3px solid #7DD3FC !important;
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.45) !important;
+}
+.timeline-content hr {
+    background: rgba(255, 255, 255, 0.14) !important;
+}
+.timeline-category {
+    background: rgba(56, 189, 248, 0.18) !important;
+    color: #E0F2FE !important;
+    border: 1px solid rgba(125, 211, 252, 0.32) !important;
+}
+.timeline-date,
+.timeline-item:hover .timeline-date {
+    background: rgba(255, 255, 255, 0.10) !important;
+    color: #E2E8F0 !important;
+}
+.skill-progress-bar {
+    background: rgba(255, 255, 255, 0.12) !important;
+}
+.skill-progress-fill {
+    background: linear-gradient(90deg, #38BDF8, #A855F7) !important;
+}
+
+/* --- 8. Footer, Modals & Lightbox --- */
+footer {
+    background: rgba(8, 12, 22, 0.62) !important;
+    backdrop-filter: blur(22px) saturate(145%) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(145%) !important;
+    color: #CBD5E1 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+footer .credit-name {
+    background: none !important;
+    -webkit-background-clip: border-box !important;
+    background-clip: border-box !important;
+    -webkit-text-fill-color: #7DD3FC !important;
+    color: #7DD3FC !important;
+    animation: none !important;
+}
+
+.modal,
+.shortcuts-modal-overlay,
+.easter-egg-overlay {
+    background-color: rgba(0, 0, 0, 0.74) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+}
+.modal-content,
+.shortcuts-modal {
+    background: rgba(12, 16, 28, 0.88) !important;
+    backdrop-filter: blur(28px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(160%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: #F8FAFC !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        0 30px 70px rgba(0, 0, 0, 0.72) !important;
+}
+.modal-info h2,
+.modal-description h3,
+.modal-description p,
+.modal-description li,
+.shortcuts-modal h3,
+.shortcut-row span,
+.easter-egg-content h2,
+.easter-egg-content p {
+    color: #F1F5F9 !important;
+}
+.tech-stack-details {
+    background: rgba(56, 189, 248, 0.14) !important;
+    color: #BAE6FD !important;
+    border: 1px solid rgba(125, 211, 252, 0.25);
+}
+.modal-close:hover {
+    color: #FFFFFF !important;
+}
+.social-container {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.14) !important;
+}
+.like-btn,
+.comment-item,
+.comment-name,
+.comment-input {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.16) !important;
+    color: #F8FAFC !important;
+}
+.like-btn.liked {
+    background: #ef4444 !important;
+    border-color: #ef4444 !important;
+    color: #FFFFFF !important;
+}
+.comment-submit,
+.stl-download-btn {
+    background: #FFFFFF !important;
+    color: #090D16 !important;
+}
+
+.lightbox {
+    background-color: rgba(0, 0, 0, 0.90) !important;
+    backdrop-filter: blur(14px) !important;
+}
+.lightbox-close {
+    color: #FFFFFF !important;
+}
