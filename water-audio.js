@@ -1,6 +1,9 @@
 /* ============================================================
-   WATER SOUNDSCAPE ENGINE (Synchronized Interactive Web Audio)
-   - Velocity-modulated ambient stream synchronized to scroll speed.
+   WATER SOUNDSCAPE ENGINE (Zero-Delay Boot + Synchronized Web Audio)
+   - Starts fetching & decoding audio immediately at boot (parallel per-file).
+   - Zero-ms procedural pink-noise water stream & chirp drop bridge while
+     network fetches complete, seamlessly swapping to real MP3 buffers.
+   - Velocity-modulated ambient stream synced to scroll speed.
    - Isolated droplet sprites on taps/presses with cursor stereo pan.
    - Filtered bubble shimmer on desktop card/button hover.
    - Crisp splash dive on opening project modals & lightbox images.
@@ -18,7 +21,6 @@
         splash: 'splash.mp3'
     };
 
-    // Exact measured active transient slices [offsetSec, durationSec]
     const DROP_SLICES = [
         [0.52, 0.16],
         [1.60, 0.20],
@@ -41,13 +43,16 @@
     let masterGain = null;
     let compressor = null;
     let buffers = {};
-    let loadPromise = null;
+    let rawBytes = {};
+    let preloadStarted = false;
     let unlocked = false;
 
-    // Continuous scroll stream nodes (started once stream buffer decodes)
+    // Continuous scroll stream nodes
     let streamSource = null;
     let streamFilter = null;
     let streamGain = null;
+    let streamMode = 'idle'; // 'idle' | 'synth' | 'real'
+    let synthStreamBuffer = null;
 
     // Cooldown & anti-repeat state
     let lastDropIdx = -1;
@@ -58,7 +63,7 @@
     let lastSectionCheckTime = 0;
     let lastActiveHref = '';
 
-    // Scroll tracking state (zero layout reads during scroll)
+    // Scroll tracking state
     let lastScrollY = window.scrollY || 0;
     let lastScrollTime = performance.now();
     let smoothVel = 0;
@@ -75,16 +80,114 @@
         toggleBtn.setAttribute('aria-pressed', enabled ? 'true' : 'false');
         const label = !enabled
             ? 'Water sound effects: Muted — click to enable'
-            : (unlocked ? 'Water sound effects: On — click to mute' : 'Water sound effects: Ready (activates on interaction) — click to mute');
+            : (unlocked ? 'Water sound effects: On — click to mute' : 'Water sound effects: Ready (tap/scroll to activate) — click to mute');
         toggleBtn.title = label;
         toggleBtn.setAttribute('aria-label', label);
+    }
+
+    function createPinkWaterBuffer(audioCtx) {
+        if (synthStreamBuffer) return synthStreamBuffer;
+        const sr = audioCtx.sampleRate;
+        const len = Math.floor(sr * 1.5);
+        const buf = audioCtx.createBuffer(2, len, sr);
+        for (let ch = 0; ch < 2; ch++) {
+            const data = buf.getChannelData(ch);
+            let b0 = 0, b1 = 0, b2 = 0, lfo = 0;
+            for (let i = 0; i < len; i++) {
+                const white = Math.random() * 2 - 1;
+                b0 = 0.997 * b0 + white * 0.029;
+                b1 = 0.985 * b1 + white * 0.032;
+                b2 = 0.950 * b2 + white * 0.048;
+                lfo = 0.999 * lfo + (Math.sin(i * 0.0014 + ch * 1.1) * 0.5 + 0.5);
+                data[i] = (b0 + b1 + b2) * (0.28 + 0.08 * (lfo / 1000));
+            }
+        }
+        synthStreamBuffer = buf;
+        return buf;
+    }
+
+    function playSynthDroplet(gainVal) {
+        if (!enabled || !ctx || ctx.state !== 'running' || document.hidden) return;
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = 'sine';
+        const f0 = 490 + Math.random() * 110;
+        osc.frequency.setValueAtTime(f0, now);
+        osc.frequency.exponentialRampToValueAtTime(f0 * 2.35, now + 0.048);
+        g.gain.setValueAtTime(0.0001, now);
+        g.gain.exponentialRampToValueAtTime(gainVal || 0.14, now + 0.006);
+        g.gain.exponentialRampToValueAtTime(0.0001, now + 0.055);
+        osc.connect(g);
+        g.connect(compressor);
+        osc.start(now);
+        osc.stop(now + 0.06);
+    }
+
+    function ensureStreamNodes() {
+        if (!ctx || (streamFilter && streamGain)) return;
+        streamFilter = ctx.createBiquadFilter();
+        streamFilter.type = 'lowpass';
+        streamFilter.frequency.setValueAtTime(700, ctx.currentTime);
+        streamFilter.Q.setValueAtTime(0.8, ctx.currentTime);
+
+        streamGain = ctx.createGain();
+        streamGain.gain.setValueAtTime(0.0001, ctx.currentTime);
+        streamFilter.connect(streamGain);
+        streamGain.connect(compressor);
+    }
+
+    function startOrSwapStream(useReal) {
+        if (!ctx) return;
+        ensureStreamNodes();
+        if (useReal && buffers.stream) {
+            if (streamMode === 'real' && streamSource) return;
+            if (streamSource) {
+                try { streamSource.stop(); streamSource.disconnect(); } catch (_) {}
+            }
+            const src = ctx.createBufferSource();
+            src.buffer = buffers.stream;
+            src.loop = true;
+            src.loopStart = 0.25;
+            src.loopEnd = Math.max(1.5, buffers.stream.duration - 0.25);
+            src.playbackRate.setValueAtTime(streamSource ? streamSource.playbackRate.value : 0.92, ctx.currentTime);
+            src.connect(streamFilter);
+            src.start(0, 0.25);
+            streamSource = src;
+            streamMode = 'real';
+        } else if (!streamSource) {
+            const src = ctx.createBufferSource();
+            src.buffer = createPinkWaterBuffer(ctx);
+            src.loop = true;
+            src.playbackRate.setValueAtTime(0.92, ctx.currentTime);
+            src.connect(streamFilter);
+            src.start(0);
+            streamSource = src;
+            streamMode = 'synth';
+        }
+    }
+
+    function removeUnlockListeners() {
+        ['pointerdown', 'touchstart', 'mousedown', 'keydown', 'wheel', 'scroll'].forEach(evt => {
+            window.removeEventListener(evt, resumeOnGesture, true);
+        });
+    }
+
+    function syncCtxState() {
+        if (!ctx) return;
+        unlocked = (ctx.state === 'running');
+        if (unlocked) {
+            removeUnlockListeners();
+            startOrSwapStream(!!buffers.stream);
+        }
+        updateToggleUI();
     }
 
     function ensureContext() {
         if (ctx) return ctx;
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
         if (!AudioCtx) return null;
-        ctx = new AudioCtx();
+        ctx = new AudioCtx({ latencyHint: 'interactive' });
         compressor = ctx.createDynamicsCompressor();
         compressor.threshold.setValueAtTime(-16, ctx.currentTime);
         compressor.knee.setValueAtTime(14, ctx.currentTime);
@@ -96,74 +199,70 @@
         masterGain.gain.setValueAtTime(enabled ? 0.9 : 0.0001, ctx.currentTime);
         compressor.connect(masterGain);
         masterGain.connect(ctx.destination);
+
+        ctx.onstatechange = syncCtxState;
+        ensureStreamNodes();
+        startOrSwapStream(!!buffers.stream);
+        syncCtxState();
         return ctx;
     }
 
-    function loadAllBuffers() {
-        if (loadPromise) return loadPromise;
+    function decodeBuffer(key, arrayBuf) {
         const audioCtx = ensureContext();
-        if (!audioCtx) return Promise.resolve(buffers);
+        if (!audioCtx || buffers[key]) return Promise.resolve(buffers[key]);
+        // Clone buffer slice so decodeAudioData detaching does not reuse invalid ref
+        return audioCtx.decodeAudioData(arrayBuf.slice(0))
+            .then(decoded => {
+                buffers[key] = decoded;
+                if (key === 'stream') startOrSwapStream(true);
+                return decoded;
+            })
+            .catch(() => null);
+    }
 
-        loadPromise = Promise.all(
-            Object.entries(FILES).map(([key, filename]) =>
-                fetch(AUDIO_BASE + filename)
-                    .then(res => {
-                        if (!res.ok) throw new Error('HTTP ' + res.status);
-                        return res.arrayBuffer();
-                    })
-                    .then(arr => audioCtx.decodeAudioData(arr))
-                    .then(decoded => {
-                        buffers[key] = decoded;
-                    })
-                    .catch(() => { /* Graceful no-op on offline/file:// restrictions */ })
-            )
-        ).then(() => {
-            startStreamLoop();
-            return buffers;
+    // Start fetching & decoding EVERY file immediately in parallel at boot (zero first-click stall)
+    function startImmediatePreload() {
+        if (preloadStarted) return;
+        preloadStarted = true;
+        if (enabled) {
+            const c = ensureContext();
+            if (c && c.state === 'suspended' && !document.hidden) {
+                c.resume().then(syncCtxState).catch(() => {});
+            }
+        }
+        Object.entries(FILES).forEach(([key, filename]) => {
+            fetch(AUDIO_BASE + filename, { priority: key === 'stream' || key === 'drops' ? 'high' : 'auto' })
+                .then(res => {
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    return res.arrayBuffer();
+                })
+                .then(arr => {
+                    rawBytes[key] = arr;
+                    if (enabled) return decodeBuffer(key, arr);
+                })
+                .catch(() => { /* Graceful no-op */ });
         });
-        return loadPromise;
     }
 
-    function startStreamLoop() {
-        if (!ctx || streamSource || !buffers.stream) return;
-        streamSource = ctx.createBufferSource();
-        streamSource.buffer = buffers.stream;
-        streamSource.loop = true;
-        streamSource.loopStart = 0.4;
-        streamSource.loopEnd = Math.min(26.2, Math.max(2.0, buffers.stream.duration - 0.5));
-        streamSource.playbackRate.setValueAtTime(0.92, ctx.currentTime);
-
-        streamFilter = ctx.createBiquadFilter();
-        streamFilter.type = 'lowpass';
-        streamFilter.frequency.setValueAtTime(700, ctx.currentTime);
-        streamFilter.Q.setValueAtTime(0.8, ctx.currentTime);
-
-        streamGain = ctx.createGain();
-        streamGain.gain.setValueAtTime(0.0001, ctx.currentTime);
-
-        streamSource.connect(streamFilter);
-        streamFilter.connect(streamGain);
-        streamGain.connect(compressor);
-        streamSource.start(0, 0.4);
-    }
-
-    function unlockAndPreload() {
+    function resumeOnGesture() {
+        if (!enabled) return;
+        startImmediatePreload();
         const audioCtx = ensureContext();
         if (!audioCtx) return;
-        if (audioCtx.state === 'suspended' && enabled && !document.hidden) {
-            audioCtx.resume().catch(() => {});
+        if (audioCtx.state === 'suspended' && !document.hidden) {
+            audioCtx.resume().then(syncCtxState).catch(() => {});
+        } else {
+            syncCtxState();
         }
-        if (!unlocked && enabled) {
-            unlocked = true;
-            updateToggleUI();
-        }
-        loadAllBuffers();
+        Object.keys(rawBytes).forEach(k => {
+            if (!buffers[k]) decodeBuffer(k, rawBytes[k]);
+        });
     }
 
     function playSprite(bufferKey, offset, duration, opts) {
-        if (!enabled || !ctx || document.hidden) return;
+        if (!enabled || !ctx || document.hidden) return false;
         const buf = buffers[bufferKey];
-        if (!buf) return;
+        if (!buf) return false;
         if (ctx.state === 'suspended') {
             ctx.resume().catch(() => {});
         }
@@ -212,6 +311,7 @@
         }
 
         src.start(now, offset, Math.min(duration, Math.max(0.05, buf.duration - offset)));
+        return true;
     }
 
     function pickSlice(arr, lastIdx) {
@@ -226,28 +326,33 @@
         const [idx, slice] = pickSlice(DROP_SLICES, lastDropIdx);
         lastDropIdx = idx;
         const rate = (pitchBoost || 1.0) * (0.94 + Math.random() * 0.16);
-        playSprite('drops', slice[0], slice[1], { gain: 0.24, rate, clientX, fadeIn: 0.005, fadeOut: 0.03 });
+        if (!playSprite('drops', slice[0], slice[1], { gain: 0.24, rate, clientX, fadeIn: 0.005, fadeOut: 0.03 })) {
+            playSynthDroplet(0.14);
+        }
     }
 
     function playBubble(clientX) {
         const [idx, slice] = pickSlice(BUBBLE_SLICES, lastBubbleIdx);
         lastBubbleIdx = idx;
         const rate = 1.06 + Math.random() * 0.22;
-        playSprite('bubbles', slice[0], slice[1], { gain: 0.085, rate, lowpass: 1850, clientX, fadeIn: 0.008, fadeOut: 0.035 });
+        if (!playSprite('bubbles', slice[0], slice[1], { gain: 0.085, rate, lowpass: 1850, clientX, fadeIn: 0.008, fadeOut: 0.035 })) {
+            playSynthDroplet(0.055);
+        }
     }
 
     function playSplash(clientX) {
-        playSprite('splash', SPLASH_SLICE[0], SPLASH_SLICE[1], {
+        if (!playSprite('splash', SPLASH_SLICE[0], SPLASH_SLICE[1], {
             gain: 0.24,
             rate: 0.98 + Math.random() * 0.06,
             lowpass: 3400,
             clientX,
             fadeIn: 0.012,
             fadeOut: 0.18
-        });
+        })) {
+            playSynthDroplet(0.16);
+        }
     }
 
-    // --- Scroll Velocity Stream Sync (zero forced layout, zero idle rAF) ---
     function decayStream() {
         scrollDecayTimer = 0;
         smoothVel = 0;
@@ -263,7 +368,7 @@
         const nowMs = performance.now();
         const curY = window.scrollY || 0;
         const dt = Math.max(8, nowMs - lastScrollTime);
-        const rawVel = Math.abs(curY - lastScrollY) / dt; // px / ms
+        const rawVel = Math.abs(curY - lastScrollY) / dt;
         lastScrollY = curY;
         lastScrollTime = nowMs;
 
@@ -271,17 +376,22 @@
         if (scrollDecayTimer) clearTimeout(scrollDecayTimer);
         scrollDecayTimer = setTimeout(decayStream, 120);
 
-        if (!ctx || !unlocked || !buffers.stream || !streamGain) return;
+        if (!ctx) ensureContext();
+        if (ctx && ctx.state === 'suspended') {
+            ctx.resume().then(syncCtxState).catch(() => {});
+        }
+        if (!ctx || !streamGain || !streamSource) return;
 
         const norm = Math.min(1, smoothVel / 2.5);
         const t = ctx.currentTime;
-        // Compensate gently for stream.mp3's low RMS (0.024)
-        const targetGain = norm > 0.02 ? (0.08 + norm * 1.45) : 0.0001;
+        const baseScale = streamMode === 'real' ? 1.45 : 0.38;
+        const floorGain = streamMode === 'real' ? 0.08 : 0.03;
+        const targetGain = norm > 0.02 ? (floorGain + norm * baseScale) : 0.0001;
+
         streamGain.gain.setTargetAtTime(targetGain, t, 0.045);
         streamFilter.frequency.setTargetAtTime(700 + norm * 3500, t, 0.05);
         streamSource.playbackRate.setTargetAtTime(0.90 + norm * 0.30, t, 0.06);
 
-        // Whisper-soft droplet when crossing into a new section (throttled >= 800ms)
         if (nowMs - lastSectionCheckTime >= 800) {
             lastSectionCheckTime = nowMs;
             const activeNav = document.querySelector('.nav-links a.active');
@@ -295,7 +405,6 @@
         }
     }
 
-    // --- Pointer Press / Modal Dive & Close ---
     const PRESS_SELECTOR = [
         'a', 'button', '.btn-primary', '.btn-secondary', '.btn-download',
         '.filter-tab', '.cert-card', '.stl-download-btn', '.like-btn',
@@ -306,14 +415,14 @@
     function handlePointerDown(e) {
         if (!enabled) return;
         const target = e.target;
-        if (target && target.closest && target.closest('#water-audio-toggle')) {
-            return; // Toggle handles its own confirmation sound cleanly
-        }
-        unlockAndPreload();
+        if (target && target.closest && target.closest('#water-audio-toggle')) return;
+        resumeOnGesture();
         if (!target || !target.closest) return;
 
         if (target.closest('.modal-close, .lightbox-close')) {
-            playSprite('drops', 2.80, 0.16, { gain: 0.18, rate: 1.26, clientX: e.clientX });
+            if (!playSprite('drops', 2.80, 0.16, { gain: 0.18, rate: 1.26, clientX: e.clientX })) {
+                playSynthDroplet(0.14);
+            }
             return;
         }
         if (target.closest('.project-card, .clickable-image')) {
@@ -329,7 +438,6 @@
         }
     }
 
-    // --- Hover Liquid Shimmer (Desktop Fine Pointers Only) ---
     const HOVER_SELECTOR = [
         '.project-card', '.cert-card', '.trait-card', '.edu-card',
         '.premium-skill-card', '.timeline-content', '.nav-links a',
@@ -338,7 +446,8 @@
     ].join(',');
 
     function handlePointerOver(e) {
-        if (!enabled || !unlocked || REDUCED_MOTION || document.hidden) return;
+        if (!enabled || REDUCED_MOTION || document.hidden) return;
+        if (!ctx || ctx.state !== 'running') return;
         const target = e.target && e.target.closest ? e.target.closest(HOVER_SELECTOR) : null;
         if (!target) {
             lastHoverTarget = null;
@@ -353,7 +462,6 @@
         playBubble(e.clientX);
     }
 
-    // --- Floating Liquid Glass Toggle Button ---
     function mountToggleButton() {
         if (document.getElementById('water-audio-toggle')) return;
         toggleBtn = document.createElement('button');
@@ -363,18 +471,15 @@
             enabled = !enabled;
             localStorage.setItem(STORAGE_KEY, enabled ? 'on' : 'off');
             if (enabled) {
-                unlocked = true;
-                ensureContext();
-                if (ctx && ctx.state === 'suspended') {
-                    ctx.resume().catch(() => {});
+                startImmediatePreload();
+                const c = ensureContext();
+                if (c) {
+                    c.resume().then(() => {
+                        syncCtxState();
+                        if (masterGain) masterGain.gain.setTargetAtTime(0.9, c.currentTime, 0.03);
+                        playDroplet(undefined, 1.08);
+                    }).catch(() => {});
                 }
-                if (masterGain && ctx) {
-                    masterGain.gain.setTargetAtTime(0.9, ctx.currentTime, 0.03);
-                }
-                loadAllBuffers().then(() => {
-                    playDroplet(undefined, 1.08);
-                    updateToggleUI();
-                });
             } else {
                 if (scrollDecayTimer) clearTimeout(scrollDecayTimer);
                 decayStream();
@@ -388,12 +493,16 @@
         updateToggleUI();
     }
 
-    // Bind events cleanly
+    // Boot immediately so fetch, decode, and AudioContext resume start at millisecond 0
+    startImmediatePreload();
+
+    // Auto-unlock on earliest user interaction if browser suspended cold AudioContext
+    ['pointerdown', 'touchstart', 'mousedown', 'keydown', 'wheel', 'scroll'].forEach(evt => {
+        window.addEventListener(evt, resumeOnGesture, { passive: true, capture: true });
+    });
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     document.addEventListener('pointerdown', handlePointerDown, { passive: true });
-    document.addEventListener('keydown', () => {
-        if (enabled && !unlocked) unlockAndPreload();
-    }, { passive: true, once: true });
 
     if (FINE_POINTER.matches) {
         document.addEventListener('pointerover', handlePointerOver, { passive: true });
@@ -407,8 +516,8 @@
         if (document.hidden) {
             decayStream();
             ctx.suspend().catch(() => {});
-        } else if (enabled && unlocked) {
-            ctx.resume().catch(() => {});
+        } else if (enabled) {
+            ctx.resume().then(syncCtxState).catch(() => {});
         }
     });
 
@@ -418,12 +527,12 @@
         mountToggleButton();
     }
 
-    // Minimal diagnostic/state API
     window.__waterAudio = {
         getState: () => ({
             enabled,
             unlocked,
             ctxState: ctx ? ctx.state : 'uninitialized',
+            streamMode,
             decoded: Object.fromEntries(
                 Object.entries(buffers).map(([k, b]) => [k, Number(b.duration.toFixed(2))])
             )
