@@ -96,21 +96,27 @@
 
         skills: [
             { name: "PCB Design & Hardware Engineering", desc: "Professional multi-layer board development, schematic capture, and manufacturing preparation using Altium Designer and Altium 365.", tags: ["pcb", "hardware", "altium", "schematic"] },
+            { name: "High-Speed PCB Engineering", desc: "8-layer HDI stackups, LPDDR4X & PCIe Gen2 controlled-impedance stripline routing, 0 ps differential pair length matching, and BGA fanout.", tags: ["hdi", "lpddr4x", "pcie", "impedance", "bga", "pcb", "high-speed"] },
+            { name: "FPGA & Digital Design", desc: "Verilog, Lattice iCE40UP5K (iCEBreaker), Efinix Titanium (Ti135), and OSS CAD Suite (Yosys, nextpnr, IceStorm, IceStudio, Icarus Verilog).", tags: ["fpga", "verilog", "ice40", "icebreaker", "efinix", "titanium", "yosys", "nextpnr", "icestorm"] },
             { name: "Embedded Systems & IoT", desc: "Firmware development and sensor integration for ESP32, STM32, and Arduino, including real-time data streaming via MQTT and Firebase.", tags: ["embedded", "iot", "esp32", "stm32", "arduino", "mqtt", "firebase"] },
-            { name: "3D Modeling & CAD", desc: "Mechanical product design, parametric modeling, and assembly creation for 3D printing using Autodesk Fusion 360 and Inventor.", tags: ["3d", "cad", "fusion", "inventor", "modeling", "printing"] },
+            { name: "3D Modeling, CAD & Rendering", desc: "Mechanical product design, parametric modeling, and rendering using Autodesk Fusion 360, Inventor, FreeCAD, and Blender (Cycles GPU).", tags: ["3d", "cad", "fusion", "inventor", "freecad", "blender", "cycles", "rendering"] },
+            { name: "Web, 3D & E-Commerce", desc: "React 19, Vite, Tailwind CSS, Three.js / React Three Fiber, WebGL Shaders, Shopify Liquid, Squarespace Custom CSS, HTML, CSS, JavaScript.", tags: ["web", "react", "vite", "tailwind", "threejs", "r3f", "webgl", "shopify", "squarespace", "frontend"] },
+            { name: "Mobile & Desktop Dev", desc: "React Native / Expo, Native Android (Kotlin + Jetpack Compose, Android Studio), CapacitorJS, Electron, and Flutter.", tags: ["mobile", "desktop", "react native", "expo", "android", "kotlin", "compose", "capacitor", "electron", "flutter"] },
+            { name: "Backend, AI & Security", desc: "Python FastAPI, Playwright / Browser Automation, Windows OCR, PyTorch (QAT/BNN), Automotive ECU Reverse Engineering (Bosch MG1CA920 / HSM).", tags: ["backend", "fastapi", "playwright", "ocr", "pytorch", "qat", "bnn", "ecu", "bosch", "hsm", "security", "python"] },
             { name: "Programming & Technical Writing", desc: "Object-oriented programming and automation using Python, alongside professional document and report formatting utilizing LaTeX and Overleaf.", tags: ["python", "programming", "latex", "overleaf", "writing"] },
-            { name: "Web Development & UI/UX", desc: "Designing and building responsive, modern, and interactive websites using HTML, CSS, JavaScript.", tags: ["web", "html", "css", "javascript", "frontend"] },
             { name: "Leadership & Project Management", desc: "Delivering freelance engineering projects on Upwork and Fiverr, combined with organizational leadership as President for IET On Campus and Cabinet Member of Youth Parliament Pakistan.", tags: ["leadership", "management", "freelance"] },
             { name: "Interpersonal Skills", desc: "Public Speaking, Teamwork Skills, Communication, Collaboration, Empathy.", tags: ["speaking", "teamwork", "communication"] },
             { name: "Critical Thinking", desc: "Creativity, Problem Solving, Organization.", tags: ["critical", "thinking", "creativity", "problem"] }
         ],
 
         software: {
-            "Electrical & PCB CAD (ECAD)": { tools: ["Altium Designer", "Altium 365", "CircuitStudio", "KiCad", "EasyEDA"], simulation: ["Proteus", "LTspice", "Multisim"] },
-            "Mechanical CAD & 3D Modeling": { design: ["Autodesk Inventor Professional", "SolidWorks", "Autodesk Fusion 360"], drafting: ["AutoCAD", "Revit", "Tinkercad"] },
-            "Programming & Computing": { languages: ["Python", "MATLAB", "Embedded IDEs (ESP32, STM32, Arduino)"], frameworks: ["Flutter", "Antigravity"] },
+            "Electrical & PCB CAD (ECAD)": { tools: ["Altium Designer", "Altium 365", "CircuitStudio", "KiCad", "EasyEDA", "8-layer HDI / LPDDR4X / PCIe Gen2 / BGA"], simulation: ["Proteus", "LTspice", "Multisim"] },
+            "FPGA & Digital Design": { targets: ["Verilog", "Lattice iCE40UP5K (iCEBreaker)", "Efinix Titanium (Ti135)"], toolchain: ["OSS CAD Suite", "Yosys", "nextpnr", "IceStorm", "IceStudio", "Icarus Verilog"] },
+            "Mechanical CAD & 3D Rendering": { design: ["Autodesk Inventor Professional", "SolidWorks", "Autodesk Fusion 360", "FreeCAD"], rendering: ["Blender (Cycles GPU)", "AutoCAD", "Revit", "Tinkercad"] },
+            "Web, Mobile & Desktop Dev": { web: ["React 19", "Vite", "Tailwind CSS", "Three.js / React Three Fiber", "WebGL Shaders", "Shopify Liquid", "Squarespace Custom CSS"], apps: ["React Native / Expo", "Kotlin + Jetpack Compose (Android Studio)", "CapacitorJS", "Electron", "Flutter"] },
+            "Backend, AI & Security": { backend: ["Python FastAPI", "MATLAB", "Playwright", "Windows OCR", "PyTorch (QAT/BNN)"], security: ["Automotive ECU Reverse Engineering (Bosch MG1CA920 / HSM)"] },
             "IoT & Cloud Platforms": { hardware: ["Blynk", "Firebase"], networking: ["MQTT Clients"] },
-            "AI & Machine Learning": { llms: ["Gemini", "ChatGPT", "Claude", "Perplexity", "Grok"], tools: ["Google AI Studio", "Microsoft Copilot"] },
+            "AI & Machine Learning": { llms: ["Gemini", "ChatGPT", "Claude", "Perplexity", "Grok"], tools: ["Google AI Studio", "Microsoft Copilot", "PyTorch (QAT/BNN)"] },
             "Documentation & Design": { typesetting: ["LaTeX", "Overleaf", "draw.io"], graphics: ["Adobe Photoshop", "Canva", "Inkscape"] },
             "Collaboration & Productivity": { teams: ["Microsoft Teams", "Zoom"], productivity: ["Microsoft Word", "Excel", "PowerPoint", "OneNote"] }
         },
