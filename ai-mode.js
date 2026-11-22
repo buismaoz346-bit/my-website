@@ -116,7 +116,7 @@
         },
 
         platforms: ["Fiverr", "Upwork"],
-        totalProjects: 11,
+        totalProjects: 12,
         totalCertifications: 21,
         totalAwards: 6,
         totalPlatforms: 2
