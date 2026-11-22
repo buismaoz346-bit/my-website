@@ -1,5 +1,5 @@
 from PIL import Image
-path = r"C:\Users\SYED MAOZ ARIF\Downloads\Portfolio\Picture\Best project.jpeg"
+path = r"C:\Users\SYED MAOZ ARIF\Downloads\Portfolio\Certificates\Best project.jpeg"
 try:
     img = Image.open(path)
     img_rotated = img.rotate(180, expand=True)
