@@ -43,9 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 3. LIVE FILTER & SEARCH ENGINE FOR PROJECTS & CERTS ---
 
-    // Tag projects & certs with category attributes
+    // Tag projects & certs with category attributes (respect explicit data-category)
     const projects = document.querySelectorAll('.project-card');
     projects.forEach(card => {
+        if (card.hasAttribute('data-category')) return;
         const text = card.textContent.toLowerCase();
         if (text.includes('altium') || text.includes('pcb') || text.includes('bms') || text.includes('rf') || text.includes('regulator') || text.includes('hardware')) {
             card.setAttribute('data-category', 'pcb');

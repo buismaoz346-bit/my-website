@@ -48,7 +48,17 @@
             { id: "p10", name: "Industrial Edge-AI Condition Monitoring & 3D Digital Twin", tech: ["STM32H7", "ESP32 WROOM", "Ethernet", "Panasonic Relays", "Altium Designer"], desc: "An industrial-grade development board for Edge-AI condition monitoring and 3D digital twin applications for 3-Phase Induction Motors. Features dual-MCU architecture, robust 24V power, and 70 GPIOs.", featured: true, achievement: "Won 1st Position in Complex Engineering Project Exhibition (102 projects)", date: "2026" },
             { id: "p9_fpga", name: "First FPGA Programming - iCEbreaker", tech: ["Verilog", "iCEbreaker", "FPGA", "Digital Logic"], desc: "My foray into Field-Programmable Gate Arrays (FPGAs) using the iCEbreaker development board, featuring a simple LED blinking circuit implemented in Verilog using the open-source iceStorm toolchain.", date: "2026" },
             { id: "p11", name: "Stratum-1 Precision Hardware Clock", tech: ["Verilog", "Lattice iCE40UP5K FPGA", "GPS NMEA", "Digital Logic"], desc: "Designed and implemented a Stratum-1 precision hardware clock synchronizer and GPS pass-through bridge using pure digital logic on a Lattice iCE40UP5K FPGA (iCEBreaker) and a NEO-6M GPS module. Completely bypasses the need for microprocessors.", date: "2026" },
-            { id: "p12", name: "ElectroParts IMS", tech: ["JavaScript", "HTML5", "CSS3", "Firebase", "CapacitorJS"], desc: "A cross-platform Inventory Management System engineered specifically for hardware developers. Features native barcode scanning via JsBarcode, real-time cloud sync with offline-first UX, and hardware-specific data structures with a native-feel mobile UI.", date: "2026" },
+            { id: "p12", name: "ElectroParts IMS v2.0", tech: ["JavaScript", "Electron (Windows EXE)", "CapacitorJS (Android APK)", "Offline-First PWA", "Firebase", "10-Tool Engineering Toolbox"], desc: "3-platform inventory system (Web PWA, Android APK, Windows Desktop EXE) with a 10-tool Engineering Toolbox (IPC-2221 trace width, 555/LM317/resistor calculators), AI Smart Search & Datasheet Summarizer, Visual Workshop Map, RBAC, BOM stock consumption, and 30-day MSL expiry alerts. Live at https://buismaoz346-bit.github.io/inventory-system/ and https://github.com/buismaoz346-bit/inventory-system", date: "2026" },
+            { id: "p13", name: "VAF-M2-2280-Ti135 — 8-Layer HDI PCIe FPGA Compute Accelerator", tech: ["8-Layer HDI PCB", "Efinix Titanium Ti135 (484-BGA)", "Winbond 512 MiB LPDDR4X", "PCIe Gen2", "KiCad 10"], desc: "M.2 2280 PCIe Gen2 FPGA compute accelerator board with controlled-impedance stripline routing (40 ohm single-ended / 80 ohm differential) and 0.00 ps length-matched LPDDR4X & PCIe pairs.", date: "2026" },
+            { id: "p14", name: "EP CONNECT (Everything Preschool) CMS & Shopify Storefront", tech: ["React Native (Expo)", "Firebase", "Shopify Liquid", "Apple Design System", "USDA CACFP"], desc: "126-screen React Native childcare app, role-isolated Firebase enterprise web portals (https://child-care-app-456ad.web.app/), USDA CACFP & LiveScan compliance engine, plus custom Shopify editorial storefront (https://everything-preschool.myshopify.com/).", date: "2026" },
+            { id: "p15", name: "IET On Campus CUI ATD — Official Web Portal & Certificate Studio", tech: ["React 19", "Vite 8", "Tailwind CSS v4", "Firebase", "HTML5 2D Canvas", "IndexedDB", "QR Verification"], desc: "Production official web portal for IET On Campus CUI Abbottabad (https://iet-oncampus.web.app/) featuring online/on-desk registration, full CMS Admin Dashboard, Smart QR Team Cards, and a 300-DPI anti-tamper Canvas Certificate Studio.", date: "2026" },
+            { id: "p16", name: "Universal ESP32-C3 Smart GPS Tracker", tech: ["ESP32-C3 Mini", "NEO-6M GPS", "BLE/Wi-Fi", "Python FastAPI", "Flutter", "Firebase", "Leaflet"], desc: "Complete hardware-to-cloud smart GPS/BLE tracking system shipped abroad to an international client, featuring Flutter Proximity Radar app and live Enterprise Telemetry Dashboard (https://universaltracker-c2976.web.app/).", date: "2026" },
+            { id: "p17", name: "Binary Neural Network (BNN) Hardware Accelerator on iCEBreaker FPGA", tech: ["Verilog HDL", "Lattice iCE40UP5K", "PyTorch QAT", "Yosys / nextpnr / IceStorm", "SPRAM"], desc: "Dual-mode Verilog BNN accelerator (combinational sub-100 ns LIGHTNING mode and 70 MHz pipelined BLITZ mode) paired with PyTorch quantization-aware training for iCE40UP5K.", date: "2026" },
+            { id: "p18", name: "Custom LattePanda Mu x86 Compute Module Carrier Board", tech: ["KiCad", "LattePanda Mu", "PCIe x4", "M.2", "Gigabit Ethernet", "HDMI", "USB 3.2/2.0"], desc: "Modular 9-sheet hierarchical KiCad schematic and custom carrier PCB design breaking out x86 high-speed interfaces (PCIe x4, M.2, GbE, HDMI, USB) with custom module libraries.", date: "2026" },
+            { id: "p19", name: "Ma'at Afrika — E-Commerce Storefront Redesign & Vector Branding", tech: ["Squarespace 7.1", "Custom CSS", "SVG Vector Branding", "Tapstitch / PODpartner"], desc: "Responsive Squarespace 7.1 Fluid Engine custom CSS overhaul and editable print-ready vector logo reconstruction for Ma'at Afrika (https://www.maatafrika.com).", date: "2026" },
+            { id: "p20", name: "Bosch MG1CA920 (SPC58N) Automotive ECU Security & Firmware Audit", tech: ["Reverse Engineering", "Bosch MG1CA920", "ST SPC58N", "HSM Secure Boot", "RSA-65537", "SHA-256", "CRC32"], desc: "Binary security & HSM Secure Boot feasibility audit separating encrypted 32 KB bootloader from calibration maps and mapping SHA-256/RSA-65537/CRC32 verification chains.", date: "2026" },
+            { id: "p21", name: "GIKI Agha Hasan Abedi Auditorium — 3D CAD Replica & Render", tech: ["Autodesk Inventor", "Fusion 360", "Blender Cycles GPU", "FreeCAD", "3D Printing"], desc: "3D-printable architectural scale replica (STEP/STL/IDW) and photorealistic Blender Cycles GPU presentation pipeline for GIK Institute's AHA Auditorium.", date: "2026" },
+            { id: "p22", name: "ESP32 <-> Lattice iCEBreaker FPGA Bidirectional Link", tech: ["ESP32", "Lattice iCEBreaker", "Verilog", "IceStudio", "PMOD UART/GPIO"], desc: "Hardware-tested bidirectional Ping-Pong bridge across iCEBreaker PMOD headers (P1_A2/P1_A4) with 0.5 s synchronized handshaking, loopback diagnostics, and dual telemetry.", date: "2026" },
             { id: "p6", name: "IncliSense Digital Level", tech: ["Arduino Nano", "MPU6050", "IoT", "3D Printing"], desc: "A precision digital leveling device built to provide high-accuracy numerical feedback, featuring PC telemetry and a responsive 11-LED interface.", featured: false, achievement: "Won Runner-Up in Instructables Sensors Contest 2026", date: "2026" },
             { id: "p1", name: "Smart Lighting System", tech: ["Altium Designer", "ATMEGA328PB-AU", "Time-of-Flight Sensor"], desc: "A smart lighting system designed with advanced PCB layout in Altium Designer, using Time-of-Flight sensors for intelligent light control." },
             { id: "p2", name: "Omni-Sense Node", tech: ["ESP32", "SPI", "PWM", "RFID"], desc: "A multi-sensor IoT node built around the ESP32 platform, integrating SPI, PWM, and RFID communication protocols." },
@@ -73,7 +83,12 @@
             { name: "Organizer Certificate — Project Exhibition 2026", issuer: "COMSATS University Islamabad, Abbottabad Campus", date: "July 2026", category: "Leadership/Organizing", desc: "Awarded in recognition of outstanding efforts and valuable contributions as an Organizer for the CEP & Semester Project Exhibition Spring 2026.", tags: ["organizer", "certificate", "exhibition", "comsats", "cep", "sp26"] },
             { name: "Certificate of Participation — EMCOT 2026", issuer: "Department of Electrical Engineering, COMSATS Abbottabad & IET", date: "August 18, 2026", category: "Exhibition", desc: "Presented to Syed Maoz Arif, M. Shahzaib, and Arsalan Khan in recognition of commendable effort and successful project presentation at the EMCOT 2026 Exhibition, co-organized with IET and Technolean Lab.", tags: ["emcot", "participation", "exhibition", "comsats", "iet", "2026"] },
             { name: "President of Organizing Committee — EMCOT 2026", issuer: "IET On Campus COMSATS Abbottabad", date: "August 18, 2026", category: "Leadership/Organizing", desc: "IET On Campus Outstanding and Valued certificate awarded for outstanding contribution as President of the Organizing Committee during the EMCOT 2026 Project Exhibition, issued by Dr. Jawad Saleem.", tags: ["emcot", "president", "organizer", "iet", "leadership", "2026"] },
-            { name: "IET Volunteer — Compliance Tasks (CPD)", issuer: "The Institution of Engineering and Technology (IET)", date: "November 14, 2026", category: "Professional Development", desc: "Certificate of Achievement for completing the IET Volunteer - Compliance Tasks course, contributing towards the IET Continuing Professional Development (CPD) Monitoring Scheme.", tags: ["iet", "volunteer", "compliance", "cpd", "2026"] }
+            { name: "IET Volunteer — Compliance Tasks (CPD)", issuer: "The Institution of Engineering and Technology (IET)", date: "November 14, 2026", category: "Professional Development", desc: "Certificate of Achievement for completing the IET Volunteer - Compliance Tasks course, contributing towards the IET Continuing Professional Development (CPD) Monitoring Scheme.", tags: ["iet", "volunteer", "compliance", "cpd", "2026"] },
+            { name: "Certificate of Appreciation — Hacktoberfest 2026 Host", issuer: "Major League Hacking (MLH), DigitalOcean & IET Robotics Club", date: "October 1, 2026", category: "Leadership/Community", desc: "Recognized for hosting and organizing Hacktoberfest Hack Day Abbottabad x IET Robotics Club on October 1, 2026, powered by MLH and DigitalOcean.", tags: ["hacktoberfest", "mlh", "digitalocean", "iet", "open-source", "host", "2026"] }
+        ],
+
+        publications: [
+            { title: "FPGA & iCEBreaker Design: From Fundamentals to Advanced Embedded Applications", edition: "First Edition, 2026", pages: 87, chapters: "25 Chapters + 7 Technical Appendices", tools: ["LaTeX", "TikZ", "Lattice iCE40UP5K", "Verilog"], desc: "Authored engineering textbook bridging digital logic fundamentals, behavioral & structural Verilog, testbenches, UART/SPI/I2C protocols, ESP32 interfacing, and timing/power optimization on Lattice iCEBreaker." }
         ],
 
         awards: [
@@ -122,8 +137,8 @@
         },
 
         platforms: ["Fiverr", "Upwork"],
-        totalProjects: 12,
-        totalCertifications: 21,
+        totalProjects: 22,
+        totalCertifications: 22,
         totalAwards: 6,
         totalPlatforms: 2
     };
@@ -154,6 +169,7 @@
         const expList = KB.experience.map(e => `- ${e.title} at ${e.org} | ${e.date} | ${e.category} | ${e.desc}`).join('\n');
         const skillList = KB.skills.map(s => `- ${s.name}: ${s.desc}`).join('\n');
         const softwareList = Object.entries(KB.software).map(([cat, data]) => `${cat}: ${Object.values(data).flat().join(', ')}`).join('\n');
+        const pubList = (KB.publications || []).map(pub => `- ${pub.title} (${pub.edition}, ${pub.pages} pages, ${pub.chapters}): ${pub.desc}`).join('\n');
 
         return `You are "Maoz AI", the personal AI assistant embedded in the portfolio website of Syed Maoz Arif. You answer all questions as his helpful portfolio assistant.
 
@@ -190,6 +206,9 @@ ${awardList}
 
 === EXPERIENCE (${KB.experience.length}) ===
 ${expList}
+
+=== PUBLICATIONS (${(KB.publications || []).length}) ===
+${pubList}
 
 === SKILLS (${KB.skills.length}) ===
 ${skillList}
