@@ -219,7 +219,7 @@ body > footer {
     transform: translateY(-3px) !important;
 }
 
-/* --- 3. Compositor-Locked 3D Convex Optical Liquid Glass + Rainbow Chromatic Refraction --- */
+/* --- 3. Compositor-Locked Clear 3D Convex Optical Glass & Genuine Refraction --- */
 .glass-panel,
 .about-card,
 .traits-summary,
@@ -255,39 +255,34 @@ body.dark-mode .project-card:not(.card-filtered-out) {
     background:
         linear-gradient(
             162deg,
-            rgba(255, 255, 255, 0.16) 0%,
-            rgba(186, 230, 253, 0.07) 16%,
-            rgba(14, 18, 32, 0.36) 48%,
-            rgba(6, 10, 20, 0.48) 100%
+            rgba(255, 255, 255, 0.11) 0%,
+            rgba(10, 14, 24, 0.26) 46%,
+            rgba(6, 10, 18, 0.36) 100%
         ) padding-box,
         linear-gradient(
-            132deg,
-            rgba(255, 255, 255, 0.90) 0%,
-            rgba(125, 211, 252, 0.72) 15%,
-            rgba(192, 132, 252, 0.62) 31%,
-            rgba(244, 114, 182, 0.54) 46%,
-            rgba(251, 191, 36, 0.46) 60%,
-            rgba(52, 211, 153, 0.52) 74%,
-            rgba(56, 189, 248, 0.72) 88%,
-            rgba(255, 255, 255, 0.84) 100%
+            135deg,
+            rgba(255, 255, 255, 0.84) 0%,
+            rgba(210, 235, 255, 0.38) 26%,
+            rgba(255, 255, 255, 0.18) 52%,
+            rgba(255, 244, 228, 0.22) 76%,
+            rgba(255, 255, 255, 0.78) 100%
         ) border-box !important;
-    backdrop-filter: blur(8px) saturate(185%) brightness(1.06) contrast(1.06) !important;
-    -webkit-backdrop-filter: blur(8px) saturate(185%) brightness(1.06) contrast(1.06) !important;
+    backdrop-filter: blur(3px) saturate(210%) brightness(1.10) contrast(1.12) !important;
+    -webkit-backdrop-filter: blur(3px) saturate(210%) brightness(1.10) contrast(1.12) !important;
     box-shadow:
-        inset 0 2px 3px 0 rgba(255, 255, 255, 0.80),
-        inset 0 5px 12px -2px rgba(224, 242, 254, 0.24),
-        inset 0 18px 30px -14px rgba(255, 255, 255, 0.20),
-        inset 2px 0 6px -2px rgba(125, 211, 252, 0.44),
-        inset -2px 0 6px -2px rgba(244, 114, 182, 0.36),
-        inset 0 -18px 28px -12px rgba(56, 189, 248, 0.34),
-        inset 0 -3px 6px -1px rgba(168, 85, 247, 0.44),
-        inset 0 -1.5px 2px 0 rgba(251, 191, 36, 0.26),
-        0 24px 54px -14px rgba(0, 0, 0, 0.76),
-        0 4px 20px -6px rgba(56, 189, 248, 0.16) !important;
+        inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.85),
+        inset 1.5px 0 2px 0 rgba(255, 255, 255, 0.38),
+        inset -1px 0 2px 0 rgba(255, 255, 255, 0.24),
+        inset 0 6px 10px -4px rgba(0, 0, 0, 0.30),
+        inset 0 22px 36px -16px rgba(255, 255, 255, 0.22),
+        inset 0 -6px 10px -4px rgba(0, 0, 0, 0.34),
+        inset 0 -14px 24px -14px rgba(224, 242, 254, 0.18),
+        inset 0 -1.5px 2px 0 rgba(255, 255, 255, 0.46),
+        0 24px 52px -14px rgba(0, 0, 0, 0.78) !important;
     contain: layout style paint;
 }
 
-/* Mobile / touch GPUs: keep full 3D convex dome & rainbow chromatic rim without per-card backdrop stalls */
+/* Mobile / touch GPUs: crisp colorless 3D convex bevels without per-card backdrop stalls */
 @media (hover: none), (pointer: coarse), (max-width: 768px) {
     .glass-panel,
     .about-card,
@@ -322,26 +317,22 @@ body.dark-mode .project-card:not(.card-filtered-out) {
         background:
             linear-gradient(
                 162deg,
-                rgba(255, 255, 255, 0.14) 0%,
-                rgba(186, 230, 253, 0.06) 18%,
-                rgba(12, 18, 34, 0.60) 48%,
-                rgba(6, 10, 22, 0.72) 100%
+                rgba(255, 255, 255, 0.13) 0%,
+                rgba(10, 14, 24, 0.56) 46%,
+                rgba(6, 10, 18, 0.68) 100%
             ) padding-box,
             linear-gradient(
-                132deg,
-                rgba(255, 255, 255, 0.88) 0%,
-                rgba(125, 211, 252, 0.68) 16%,
-                rgba(192, 132, 252, 0.58) 32%,
-                rgba(244, 114, 182, 0.50) 48%,
-                rgba(251, 191, 36, 0.42) 64%,
-                rgba(52, 211, 153, 0.48) 78%,
-                rgba(56, 189, 248, 0.68) 90%,
-                rgba(255, 255, 255, 0.80) 100%
+                135deg,
+                rgba(255, 255, 255, 0.82) 0%,
+                rgba(210, 235, 255, 0.34) 28%,
+                rgba(255, 255, 255, 0.16) 54%,
+                rgba(255, 244, 228, 0.20) 78%,
+                rgba(255, 255, 255, 0.74) 100%
             ) border-box !important;
     }
 }
 
-/* Curved convex lens dome arc + chromatic refraction sheen across card surface */
+/* Curved convex optical lens dome arcs + subtle natural glass caustic */
 .glass-panel::before,
 .about-card::before,
 .traits-summary::before,
@@ -367,42 +358,30 @@ body.dark-mode .project-card:not(.card-filtered-out) {
     border-radius: inherit !important;
     background:
         radial-gradient(
-            130% 44% at 50% -8%,
+            125% 42% at 50% -10%,
             rgba(255, 255, 255, 0.30) 0%,
-            rgba(224, 242, 254, 0.11) 34%,
-            rgba(125, 211, 252, 0.04) 54%,
-            transparent 70%
+            rgba(255, 255, 255, 0.08) 38%,
+            transparent 66%
         ),
         radial-gradient(
-            110% 34% at 50% 106%,
-            rgba(168, 85, 247, 0.20) 0%,
-            rgba(56, 189, 248, 0.14) 34%,
-            rgba(244, 114, 182, 0.08) 54%,
-            transparent 74%
-        ),
-        linear-gradient(
-            126deg,
-            rgba(255, 255, 255, 0.10) 0%,
-            rgba(125, 211, 252, 0.05) 18%,
-            rgba(244, 114, 182, 0.04) 32%,
-            rgba(250, 204, 21, 0.03) 44%,
-            transparent 58%
+            100% 26% at 50% 108%,
+            rgba(255, 255, 255, 0.20) 0%,
+            rgba(210, 235, 255, 0.08) 36%,
+            transparent 68%
         ),
         radial-gradient(
             320px circle at var(--gx, 24%) var(--gy, 8%),
-            rgba(255, 255, 255, 0.24) 0%,
-            rgba(125, 211, 252, 0.13) 26%,
-            rgba(244, 114, 182, 0.08) 46%,
-            rgba(250, 204, 21, 0.04) 60%,
-            transparent 74%
+            rgba(255, 255, 255, 0.22) 0%,
+            rgba(210, 235, 255, 0.08) 32%,
+            transparent 72%
         ) !important;
-    opacity: calc(0.78 + var(--glint, 0) * 0.22) !important;
+    opacity: calc(0.75 + var(--glint, 0) * 0.25) !important;
     transition: opacity 0.28s ease !important;
     pointer-events: none !important;
     z-index: 6 !important;
 }
 
-/* Prismatic dispersion rim highlight — cursor-reactive boost on hover */
+/* Crystal rim glint highlight — active ONLY on desktop hover */
 .glass-panel::after,
 .about-card::after,
 .traits-summary::after,
@@ -449,12 +428,10 @@ body.dark-mode .project-card:not(.card-filtered-out) {
         padding: 1.5px !important;
         background: radial-gradient(
             300px circle at var(--gx, 18%) var(--gy, 0%),
-            rgba(255, 255, 255, 0.92) 0%,
-            rgba(125, 211, 252, 0.56) 28%,
-            rgba(244, 114, 182, 0.44) 48%,
-            rgba(250, 204, 21, 0.34) 64%,
-            rgba(168, 85, 247, 0.40) 82%,
-            rgba(255, 255, 255, 0.14) 100%
+            rgba(255, 255, 255, 0.90) 0%,
+            rgba(200, 232, 255, 0.34) 36%,
+            rgba(255, 242, 224, 0.20) 64%,
+            rgba(255, 255, 255, 0.12) 100%
         ) !important;
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
         -webkit-mask-composite: xor !important;
@@ -494,16 +471,15 @@ body.dark-mode .project-card:not(.card-filtered-out) {
     transform: translateY(-4px) !important;
     border-color: transparent !important;
     box-shadow:
-        inset 0 2px 3.5px 0 rgba(255, 255, 255, 0.90),
-        inset 0 6px 14px -2px rgba(224, 242, 254, 0.36),
-        inset 0 24px 40px -14px rgba(255, 255, 255, 0.34),
-        inset 2px 0 7px -2px rgba(125, 211, 252, 0.56),
-        inset -2px 0 7px -2px rgba(244, 114, 182, 0.46),
-        inset 0 -20px 32px -12px rgba(56, 189, 248, 0.42),
-        inset 0 -3px 7px -1px rgba(168, 85, 247, 0.54),
-        inset 0 -1.5px 2px 0 rgba(251, 191, 36, 0.34),
-        0 28px 64px -12px rgba(0, 0, 0, 0.80),
-        0 6px 26px -6px rgba(168, 85, 247, 0.22) !important;
+        inset 0 2px 3px 0 rgba(255, 255, 255, 0.92),
+        inset 1.5px 0 3px 0 rgba(255, 255, 255, 0.48),
+        inset -1px 0 3px 0 rgba(255, 255, 255, 0.32),
+        inset 0 6px 12px -4px rgba(0, 0, 0, 0.28),
+        inset 0 24px 40px -14px rgba(255, 255, 255, 0.26),
+        inset 0 -6px 12px -4px rgba(0, 0, 0, 0.32),
+        inset 0 -16px 28px -12px rgba(224, 242, 254, 0.22),
+        inset 0 -1.5px 2px 0 rgba(255, 255, 255, 0.54),
+        0 28px 64px -12px rgba(0, 0, 0, 0.82) !important;
 }
 
 /* Tactile specular glass tap ripple */
@@ -588,18 +564,16 @@ body.dark-mode .project-card:not(.card-filtered-out) {
         linear-gradient(
             165deg,
             rgba(255, 255, 255, 0.12) 0%,
-            rgba(10, 14, 28, 0.62) 48%,
-            rgba(6, 10, 22, 0.76) 100%
+            rgba(10, 14, 24, 0.56) 48%,
+            rgba(6, 10, 18, 0.70) 100%
         ) padding-box,
         linear-gradient(
-            132deg,
-            rgba(255, 255, 255, 0.88) 0%,
-            rgba(125, 211, 252, 0.72) 18%,
-            rgba(192, 132, 252, 0.60) 36%,
-            rgba(244, 114, 182, 0.52) 52%,
-            rgba(251, 191, 36, 0.42) 68%,
-            rgba(56, 189, 248, 0.70) 86%,
-            rgba(255, 255, 255, 0.84) 100%
+            135deg,
+            rgba(255, 255, 255, 0.84) 0%,
+            rgba(210, 235, 255, 0.36) 28%,
+            rgba(255, 255, 255, 0.18) 54%,
+            rgba(255, 244, 228, 0.22) 78%,
+            rgba(255, 255, 255, 0.78) 100%
         ) border-box !important;
 }
 .freelance-badge::before,
@@ -607,15 +581,15 @@ body.dark-mode .project-card:not(.card-filtered-out) {
 .hero-highlight-chip::before {
     background:
         radial-gradient(
-            120% 55% at 50% -18%,
+            120% 52% at 50% -18%,
             rgba(255, 255, 255, 0.24) 0%,
-            rgba(125, 211, 252, 0.08) 42%,
+            rgba(255, 255, 255, 0.06) 42%,
             transparent 68%
         ),
         radial-gradient(
             260px circle at var(--gx, 24%) var(--gy, 8%),
-            rgba(255, 255, 255, 0.22) 0%,
-            rgba(125, 211, 252, 0.12) 32%,
+            rgba(255, 255, 255, 0.20) 0%,
+            rgba(210, 235, 255, 0.08) 34%,
             transparent 72%
         ) !important;
 }
@@ -663,32 +637,32 @@ body.dark-mode .project-card:not(.card-filtered-out) {
     }
 }
 
-/* --- 4. Floating Navbar & Controls (Convex Smoked Optical Glass + Rainbow Rim) --- */
+/* --- 4. Floating Navbar & Controls (Clear Smoked Convex Optical Glass) --- */
 .navbar,
 body.dark-mode .navbar {
     background:
         linear-gradient(
             180deg,
-            rgba(255, 255, 255, 0.14) 0%,
-            rgba(10, 14, 26, 0.72) 55%,
-            rgba(6, 10, 20, 0.80) 100%
+            rgba(255, 255, 255, 0.12) 0%,
+            rgba(10, 14, 24, 0.68) 55%,
+            rgba(6, 10, 18, 0.78) 100%
         ) padding-box,
         linear-gradient(
-            120deg,
-            rgba(255, 255, 255, 0.82) 0%,
-            rgba(125, 211, 252, 0.58) 22%,
-            rgba(244, 114, 182, 0.42) 48%,
-            rgba(251, 191, 36, 0.32) 66%,
-            rgba(168, 85, 247, 0.52) 84%,
-            rgba(255, 255, 255, 0.78) 100%
+            125deg,
+            rgba(255, 255, 255, 0.78) 0%,
+            rgba(210, 235, 255, 0.34) 28%,
+            rgba(255, 255, 255, 0.18) 54%,
+            rgba(255, 244, 228, 0.20) 78%,
+            rgba(255, 255, 255, 0.74) 100%
         ) border-box !important;
-    backdrop-filter: blur(12px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
+    backdrop-filter: blur(8px) saturate(200%) brightness(1.08) contrast(1.08) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(200%) brightness(1.08) contrast(1.08) !important;
     border: 1.5px solid transparent !important;
     box-shadow:
-        inset 0 2px 3px rgba(255, 255, 255, 0.45),
-        inset 0 -8px 16px -8px rgba(56, 189, 248, 0.24),
-        0 18px 44px rgba(0, 0, 0, 0.62) !important;
+        inset 0 1.5px 2.5px rgba(255, 255, 255, 0.56),
+        inset 0 -1.5px 2px rgba(255, 255, 255, 0.24),
+        inset 0 -8px 16px -8px rgba(0, 0, 0, 0.34),
+        0 18px 44px rgba(0, 0, 0, 0.68) !important;
 }
 .navbar::after {
     display: none !important;
@@ -949,16 +923,15 @@ body.dark-mode .form-textarea {
     transform: translateY(-4px) !important;
     border-color: transparent !important;
     box-shadow:
-        inset 0 2px 3.5px 0 rgba(255, 255, 255, 0.90),
-        inset 0 6px 14px -2px rgba(224, 242, 254, 0.36),
-        inset 0 24px 40px -14px rgba(255, 255, 255, 0.34),
-        inset 2px 0 7px -2px rgba(125, 211, 252, 0.56),
-        inset -2px 0 7px -2px rgba(244, 114, 182, 0.46),
-        inset 0 -20px 32px -12px rgba(56, 189, 248, 0.42),
-        inset 0 -3px 7px -1px rgba(168, 85, 247, 0.54),
-        inset 0 -1.5px 2px 0 rgba(251, 191, 36, 0.34),
-        0 28px 64px -12px rgba(0, 0, 0, 0.80),
-        0 6px 26px -6px rgba(168, 85, 247, 0.22) !important;
+        inset 0 2px 3px 0 rgba(255, 255, 255, 0.92),
+        inset 1.5px 0 3px 0 rgba(255, 255, 255, 0.48),
+        inset -1px 0 3px 0 rgba(255, 255, 255, 0.32),
+        inset 0 6px 12px -4px rgba(0, 0, 0, 0.28),
+        inset 0 24px 40px -14px rgba(255, 255, 255, 0.26),
+        inset 0 -6px 12px -4px rgba(0, 0, 0, 0.32),
+        inset 0 -16px 28px -12px rgba(224, 242, 254, 0.22),
+        inset 0 -1.5px 2px 0 rgba(255, 255, 255, 0.54),
+        0 28px 64px -12px rgba(0, 0, 0, 0.82) !important;
 }
 .project-card .project-bg {
     position: relative !important;
@@ -1200,33 +1173,33 @@ footer .credit-name {
     background:
         linear-gradient(
             160deg,
-            rgba(255, 255, 255, 0.14) 0%,
-            rgba(12, 16, 28, 0.54) 44%,
-            rgba(6, 10, 20, 0.66) 100%
+            rgba(255, 255, 255, 0.11) 0%,
+            rgba(10, 14, 24, 0.46) 44%,
+            rgba(6, 10, 18, 0.58) 100%
         ) padding-box,
         linear-gradient(
-            132deg,
-            rgba(255, 255, 255, 0.90) 0%,
-            rgba(125, 211, 252, 0.72) 18%,
-            rgba(192, 132, 252, 0.62) 34%,
-            rgba(244, 114, 182, 0.54) 50%,
-            rgba(251, 191, 36, 0.44) 66%,
-            rgba(56, 189, 248, 0.70) 84%,
-            rgba(255, 255, 255, 0.82) 100%
+            135deg,
+            rgba(255, 255, 255, 0.84) 0%,
+            rgba(210, 235, 255, 0.36) 28%,
+            rgba(255, 255, 255, 0.18) 54%,
+            rgba(255, 244, 228, 0.22) 78%,
+            rgba(255, 255, 255, 0.78) 100%
         ) border-box !important;
-    backdrop-filter: blur(12px) saturate(185%) brightness(1.06) contrast(1.05) !important;
-    -webkit-backdrop-filter: blur(12px) saturate(185%) brightness(1.06) contrast(1.05) !important;
+    backdrop-filter: blur(8px) saturate(205%) brightness(1.09) contrast(1.10) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(205%) brightness(1.09) contrast(1.10) !important;
     border: 1.5px solid transparent !important;
     border-radius: 26px !important;
     color: #F8FAFC !important;
     box-shadow:
-        inset 0 2px 3.5px 0 rgba(255, 255, 255, 0.78),
-        inset 2px 0 6px -1px rgba(125, 211, 252, 0.42),
-        inset -2px 0 6px -1px rgba(244, 114, 182, 0.34),
-        inset 0 22px 38px -14px rgba(255, 255, 255, 0.26),
-        inset 0 -18px 28px -12px rgba(56, 189, 248, 0.30),
-        inset 0 -2px 4px 0 rgba(192, 132, 252, 0.42),
-        0 34px 86px -12px rgba(0, 0, 0, 0.82) !important;
+        inset 0 1.5px 2.5px 0 rgba(255, 255, 255, 0.84),
+        inset 1.5px 0 2px 0 rgba(255, 255, 255, 0.38),
+        inset -1px 0 2px 0 rgba(255, 255, 255, 0.24),
+        inset 0 6px 10px -4px rgba(0, 0, 0, 0.28),
+        inset 0 22px 38px -16px rgba(255, 255, 255, 0.22),
+        inset 0 -6px 10px -4px rgba(0, 0, 0, 0.32),
+        inset 0 -14px 24px -14px rgba(224, 242, 254, 0.18),
+        inset 0 -1.5px 2px 0 rgba(255, 255, 255, 0.44),
+        0 34px 86px -12px rgba(0, 0, 0, 0.84) !important;
 }
 .modal-body {
     position: relative;
@@ -1304,23 +1277,21 @@ footer .credit-name {
     border-radius: inherit !important;
     background:
         radial-gradient(
-            130% 42% at 50% -6%,
-            rgba(255, 255, 255, 0.34) 0%,
-            rgba(224, 242, 254, 0.12) 34%,
-            rgba(125, 211, 252, 0.04) 54%,
-            transparent 70%
+            125% 40% at 50% -10%,
+            rgba(255, 255, 255, 0.28) 0%,
+            rgba(255, 255, 255, 0.08) 38%,
+            transparent 66%
         ),
         radial-gradient(
-            110% 30% at 50% 106%,
-            rgba(168, 85, 247, 0.20) 0%,
-            rgba(56, 189, 248, 0.14) 36%,
-            transparent 72%
+            100% 24% at 50% 108%,
+            rgba(255, 255, 255, 0.18) 0%,
+            rgba(210, 235, 255, 0.06) 36%,
+            transparent 68%
         ),
         radial-gradient(
             420px circle at var(--gx, 24%) var(--gy, 8%),
-            rgba(255, 255, 255, 0.24) 0%,
-            rgba(125, 211, 252, 0.12) 30%,
-            rgba(244, 114, 182, 0.08) 52%,
+            rgba(255, 255, 255, 0.20) 0%,
+            rgba(210, 235, 255, 0.08) 34%,
             transparent 72%
         ) !important;
     opacity: calc(0.75 + var(--glint, 0) * 0.25) !important;
@@ -1344,11 +1315,10 @@ footer .credit-name {
     padding: 1.5px !important;
     background: radial-gradient(
         340px circle at var(--gx, 18%) var(--gy, 0%),
-        rgba(255, 255, 255, 0.88) 0%,
-        rgba(125, 211, 252, 0.45) 32%,
-        rgba(245, 158, 11, 0.20) 58%,
-        rgba(168, 85, 247, 0.24) 82%,
-        rgba(255, 255, 255, 0.14) 100%
+        rgba(255, 255, 255, 0.90) 0%,
+        rgba(200, 232, 255, 0.34) 36%,
+        rgba(255, 242, 224, 0.20) 64%,
+        rgba(255, 255, 255, 0.12) 100%
     ) !important;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
     -webkit-mask-composite: xor !important;
