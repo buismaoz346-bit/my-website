@@ -16,7 +16,7 @@
     var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 
     var CARD_SELECTOR = [
-        '.glass-panel:not(.project-card)',
+        '.glass-panel',
         '.modal-content',
         '.shortcuts-modal',
         '.social-container',
@@ -30,7 +30,8 @@
         '.contact-card',
         '.filter-search-container',
         '.freelance-badge',
-        '.hero-stats'
+        '.hero-stats',
+        '.hero-highlight-chip'
     ].join(',');
 
     var activeCard = null;

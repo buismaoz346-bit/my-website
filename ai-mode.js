@@ -32,14 +32,14 @@
         location: "Abbottabad, Pakistan",
         hobbies: ["Cricket", "Table Tennis", "Hands-on Hardware Prototyping"],
 
-        about: "Syed Maoz Arif is a hardware developer and 5th-semester Electrical (Electronics) Engineering student at COMSATS University Abbottabad with hands-on experience in multi-layer & HDI PCB design, FPGA digital logic, and embedded systems. He builds working systems from first schematic to final production, further strengthened through his research internship at GIK Institute (GIKI) under Dr. Irfan. Beyond the lab, he leads as President for IET On Campus, EasyEDA Campus Promotion Ambassador, and Cabinet Member of the Youth Parliament Pakistan.",
+        about: "Syed Maoz Arif is a hardware developer and 5th-semester Electrical (Electronics) Engineering student at COMSATS University Abbottabad with hands-on experience in multi-layer & HDI PCB design, FPGA digital logic, and embedded systems. He builds working systems from first schematic to final production, further strengthened through his research internship at GIK Institute (GIKI) under Dr. Irfan. Beyond the lab, he leads as President for IET On Campus, is an active IET International Student Member, EasyEDA Campus Promotion Ambassador, and Cabinet Member of the Youth Parliament Pakistan.",
 
         traits: [
             { trait: "Engineering Academic", detail: "5th-semester Electrical (Electronics) Engineering undergraduate at COMSATS University Abbottabad and Research Intern at GIK Institute (under Dr. Irfan)." },
             { trait: "Technical Specialist", detail: "Hands-on expertise in multi-layer & HDI PCB design, FPGA digital logic (Verilog), embedded systems/IoT (ESP32, STM32), and 3D mechanical modeling." },
             { trait: "Active Freelancer", detail: "Professional hardware and mechanical designer providing services on Fiverr and Upwork." },
             { trait: "Recognized Innovator", detail: "Altium Global Scholarship awardee, Instructables Sensors Contest Runner-Up, and 1st Position CEP Exhibition winner." },
-            { trait: "Community Leader", detail: "President for IET On Campus, EasyEDA Campus Promotion Ambassador, and Cabinet Member of the Youth Parliament Pakistan." },
+            { trait: "Community & Industry Roles", detail: "President for IET On Campus, IET International Student Member (The Institution of Engineering and Technology), EasyEDA Campus Promotion Ambassador, and Cabinet Member of the Youth Parliament Pakistan." },
             { trait: "Core Engineering Toolchain", detail: "Hands-on proficiency in Altium Designer, KiCad, EasyEDA, Verilog HDL, Embedded C/C++, Autodesk Fusion 360, Inventor, and LaTeX—with working Python familiarity and AI-assisted software prototyping for companion tools." },
             { trait: "Published Author", detail: "Author of an 87-page LaTeX & TikZ engineering coursebook on FPGA & iCEBreaker digital design (25 chapters + 7 technical appendices)." },
             { trait: "Hands-on Craftsmanship", detail: "From PCB bring-up and fine-pitch SMD soldering to hardware debugging on the bench, turning schematics and 3D CAD models into reliable physical builds." }
@@ -103,6 +103,7 @@
         ],
 
         experience: [
+            { title: "Student Member — IET International", org: "The Institution of Engineering and Technology (IET)", date: "Ongoing", category: "Membership", desc: "Active International Student Member of The Institution of Engineering and Technology (IET), engaged in CPD compliance training and global engineering community initiatives.", tags: ["iet", "iet international", "student member", "membership", "institution of engineering and technology"] },
             { title: "President", org: "IET On Campus CUI Abbottabad", date: "August 2026 - Present", category: "Leadership", desc: "Assuming executive leadership responsibilities, guiding chapter operations, and representing the student branch to foster engineering excellence and professional development among members.", tags: ["iet", "president", "leadership", "executive"] },
             { title: "Vice President", org: "IET On Campus CUI Abbottabad", date: "July 2026 - August 2026", category: "Leadership", desc: "Led organizational initiatives, managed branch operations, and served as acting executive leader prior to presidential promotion.", tags: ["iet", "vice president", "leadership"] },
             { title: "Membership Head", org: "IET On Campus Abbottabad", date: "May 2025 - July 2026", category: "Leadership", desc: "Led membership initiatives and organized technical events, including coordinating workshops like Computer Vision & AI in UAVs.", tags: ["iet", "membership", "head", "leadership"] },
@@ -228,7 +229,7 @@ ${softwareList}
 - 1st Position at CEP Exhibition SP26 & 2nd Position at EMCOT 2026
 - Research Intern at GIK Institute (GIKI) under Dr. Irfan
 - Active freelancer on Fiverr & Upwork serving international clients
-- President at IET On Campus CUI Abbottabad
+- President at IET On Campus CUI Abbottabad & IET International Student Member (The Institution of Engineering and Technology)
 - EasyEDA Campus Promotion Ambassador
 - Cabinet Member of Youth Parliament Pakistan
 - Hobbies & Interests: ${KB.hobbies.join(', ')}`;
