@@ -1747,8 +1747,20 @@ footer .credit-name {
     background: transparent !important;
     color: inherit;
 }
+#lg-modal-stage {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    min-height: 0 !important;
+    z-index: 10045 !important;
+    pointer-events: none !important;
+    background: transparent !important;
+    color: inherit;
+}
 #lg-viewport-stage::part(fallback),
-#lg-navbar-stage::part(fallback) {
+#lg-navbar-stage::part(fallback),
+#lg-modal-stage::part(fallback) {
     display: none;
 }
 
@@ -1790,6 +1802,46 @@ body[data-lg-nav-webgl="ready"].dark-mode .navbar {
 body[data-lg-nav-webgl="ready"] .navbar .nav-links a,
 body[data-lg-nav-webgl="ready"] .navbar .logo span {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
+}
+
+/* Ray-traced modals (project, certification, award & keyboard shortcuts) */
+.modal-content,
+.shortcuts-modal {
+    --glass-ior: 1.46;
+    --glass-chroma: 0.011;
+    --glass-frost: 0.16;
+    --glass-dome: 1.12;
+    --glass-depth: 1.15;
+    --glass-tint: rgba(6, 10, 22, 0.28);
+    --glass-shadow: 0.85;
+    --glass-pull: 5;
+    --glass-press: 1;
+}
+body[data-lg-modal-webgl="ready"] .modal,
+body[data-lg-modal-webgl="ready"] .shortcuts-modal-overlay {
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+body[data-lg-modal-webgl="ready"] .modal-content,
+body[data-lg-modal-webgl="ready"] .shortcuts-modal {
+    background: transparent !important;
+    background-image: none !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+body[data-lg-modal-webgl="ready"] .modal-content::before,
+body[data-lg-modal-webgl="ready"] .modal-content::after,
+body[data-lg-modal-webgl="ready"] .shortcuts-modal::before,
+body[data-lg-modal-webgl="ready"] .shortcuts-modal::after {
+    display: none !important;
+}
+body[data-lg-modal-webgl="ready"] .modal-content .social-container {
+    background: rgba(6, 10, 22, 0.36) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
 }
 
 /* Crystal clear optical glass for hero pills, badges, and buttons */

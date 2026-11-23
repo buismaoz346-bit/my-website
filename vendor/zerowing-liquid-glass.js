@@ -118,6 +118,7 @@ uniform vec2 u_pointer;            // pointer position, CSS px
 uniform float u_bands[6];          // sound, low to high
 uniform float u_level;
 uniform float u_transparent;
+uniform float u_dim_outside;
 
 const float CAMERA = 780.0;
 const float BACKGROUND = -190.0;
@@ -251,7 +252,7 @@ void main() {
   }
   vec3 outside = base * (1.0 - shade * 0.16);
   if (nearest > 2.0 || u_count == 0) {
-    if (u_transparent > 0.5) { gl_FragColor = vec4(0.0, 0.0, 0.0, shade * 0.45); return; }
+    if (u_transparent > 0.5) { gl_FragColor = u_count == 0 ? vec4(0.0) : vec4(0.0, 0.0, 0.0, max(u_dim_outside, shade * 0.45)); return; }
     gl_FragColor = vec4(pow(outside, vec3(1.0 / 2.2)), 1.0); return;
   }
 
@@ -263,7 +264,7 @@ void main() {
   vec3 front;
   if (!enterSolid(origin, direction, front)) {
     float contact = (1.0 - smoothstep(-2.0, 13.0, outline(local - vec2(2.0, 7.0)))) * 0.045;
-    if (u_transparent > 0.5) { gl_FragColor = vec4(0.0, 0.0, 0.0, clamp(shade * 0.45 + contact * 3.0, 0.0, 0.72)); return; }
+    if (u_transparent > 0.5) { gl_FragColor = vec4(0.0, 0.0, 0.0, clamp(max(u_dim_outside, shade * 0.45) + contact * 3.0, 0.0, 0.85)); return; }
     gl_FragColor = vec4(pow(outside * (1.0 - contact), vec3(1.0 / 2.2)), 1.0);
     return;
   }
@@ -327,7 +328,7 @@ void main() {
   float coverage = max(clamp(0.5 - nearest * u_dpr, 0.0, 1.0), step(nearest, -1.0));
   if (u_transparent > 0.5) {
     vec3 glassSrgb = pow(max(color, vec3(0.0)), vec3(1.0 / 2.2));
-    float outA = shade * 0.45;
+    float outA = max(u_dim_outside, shade * 0.45);
     float finalA = mix(outA, 1.0, coverage);
     vec3 finalRgb = finalA > 0.001 ? (glassSrgb * coverage) / finalA : vec3(0.0);
     gl_FragColor = vec4(finalRgb, finalA);
@@ -358,7 +359,7 @@ function xe(o, e = () => new Image()) {
   });
 }
 const ne = 16, we = "attribute vec2 a_position; void main() { gl_Position = vec4(a_position, 0.0, 1.0); }";
-function _e(o, tr = !1) {
+function _e(o, tr = !1, dimOut = 0) {
   const e = o.getContext("webgl", { alpha: !!tr, antialias: !1, premultipliedAlpha: !1, powerPreference: "low-power" });
   if (!e) throw new Error("WebGL is unavailable.");
   const t = [], n = [];
@@ -386,7 +387,7 @@ function _e(o, tr = !1) {
 ${ye}`), p = e.createBuffer(), A = a(), R = a(), _ = a(), C = e.createFramebuffer(), w = e.createFramebuffer();
   if (!p || !C || !w) throw new Error("Unable to allocate glass buffers.");
   e.bindBuffer(e.ARRAY_BUFFER, p), e.bufferData(e.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), e.STATIC_DRAW);
-  const T = (c, m) => Object.fromEntries(m.map((b) => [b, e.getUniformLocation(c, b)])), l = T(y, ["u_size", "u_dpr", "u_mode", "u_image", "u_crop", "u_time", "u_colors[0]", "u_base", "u_dim", "u_fixed"]), f = T(u, ["u_background", "u_size", "u_step"]), i = T(h, ["u_scene", "u_frost", "u_size", "u_dpr", "u_count", "u_rect[0]", "u_look[0]", "u_tint[0]", "u_profile[0]", "u_lens[0]", "u_extra[0]", "u_light", "u_pointer", "u_bands[0]", "u_level", "u_transparent"]), v = new Float32Array(g * 4), F = new Float32Array(g * 4), U = new Float32Array(g * 4), P = new Float32Array(g * 4), B = new Float32Array(g * 4), q = new Float32Array(g * 4), I = new Float32Array(6);
+  const T = (c, m) => Object.fromEntries(m.map((b) => [b, e.getUniformLocation(c, b)])), l = T(y, ["u_size", "u_dpr", "u_mode", "u_image", "u_crop", "u_time", "u_colors[0]", "u_base", "u_dim", "u_fixed"]), f = T(u, ["u_background", "u_size", "u_step"]), i = T(h, ["u_scene", "u_frost", "u_size", "u_dpr", "u_count", "u_rect[0]", "u_look[0]", "u_tint[0]", "u_profile[0]", "u_lens[0]", "u_extra[0]", "u_light", "u_pointer", "u_bands[0]", "u_level", "u_transparent", "u_dim_outside"]), v = new Float32Array(g * 4), F = new Float32Array(g * 4), U = new Float32Array(g * 4), P = new Float32Array(g * 4), B = new Float32Array(g * 4), q = new Float32Array(g * 4), I = new Float32Array(6);
   let L = 1, E = 1, X = 1, O = !1, G = !1, H = 1, Q = 0, W = { width: 1, height: 1 }, j = new Float32Array([1, 0.35, 0.12, 1, 0.18, 0.54, 0.42, 0.23, 1, 0, 0.76, 1]), K = new Float32Array([0.04, 0.03, 0.12]);
   function $(c) {
     e.useProgram(c), e.bindBuffer(e.ARRAY_BUFFER, p);
@@ -422,7 +423,7 @@ ${ye}`), p = e.createBuffer(), A = a(), R = a(), _ = a(), C = e.createFramebuffe
       v.set([S.x, S.y, S.halfWidth, S.halfHeight], M * 4), F.set([S.radius, S.frost, S.chroma, S.pull], M * 4), U.set(S.tint, M * 4), P.set([S.depth, S.rounding, S.dome, S.ior], M * 4), B.set(S.lens, M * 4), q.set([S.glow, S.shadow, S.press, 0], M * 4);
     }
     for (let M = 0; M < 6; M += 1) I[M] = Number(N.bands[M]) || 0;
-    e.bindFramebuffer(e.FRAMEBUFFER, null), e.viewport(0, 0, o.width, o.height), $(h), e.activeTexture(e.TEXTURE0), e.bindTexture(e.TEXTURE_2D, R), e.activeTexture(e.TEXTURE1), e.bindTexture(e.TEXTURE_2D, _), e.uniform1i(i.u_scene, 0), e.uniform1i(i.u_frost, 1), e.uniform2f(i.u_size, L, E), e.uniform1f(i.u_dpr, X), e.uniform1i(i.u_count, Z), e.uniform4fv(i["u_rect[0]"], v), e.uniform4fv(i["u_look[0]"], F), e.uniform4fv(i["u_tint[0]"], U), e.uniform4fv(i["u_profile[0]"], P), e.uniform4fv(i["u_lens[0]"], B), e.uniform4fv(i["u_extra[0]"], q), e.uniform2f(i.u_light, m.x, m.y), e.uniform2f(i.u_pointer, b.x, b.y), e.uniform1fv(i["u_bands[0]"], I), e.uniform1f(i.u_level, Math.min(1, Math.max(0, N.level))), e.uniform1f(i.u_transparent, tr ? 1 : 0), tr && (e.clearColor(0, 0, 0, 0), e.clear(e.COLOR_BUFFER_BIT)), e.drawArrays(e.TRIANGLES, 0, 3), e.activeTexture(e.TEXTURE0);
+    e.bindFramebuffer(e.FRAMEBUFFER, null), e.viewport(0, 0, o.width, o.height), $(h), e.activeTexture(e.TEXTURE0), e.bindTexture(e.TEXTURE_2D, R), e.activeTexture(e.TEXTURE1), e.bindTexture(e.TEXTURE_2D, _), e.uniform1i(i.u_scene, 0), e.uniform1i(i.u_frost, 1), e.uniform2f(i.u_size, L, E), e.uniform1f(i.u_dpr, X), e.uniform1i(i.u_count, Z), e.uniform4fv(i["u_rect[0]"], v), e.uniform4fv(i["u_look[0]"], F), e.uniform4fv(i["u_tint[0]"], U), e.uniform4fv(i["u_profile[0]"], P), e.uniform4fv(i["u_lens[0]"], B), e.uniform4fv(i["u_extra[0]"], q), e.uniform2f(i.u_light, m.x, m.y), e.uniform2f(i.u_pointer, b.x, b.y), e.uniform1fv(i["u_bands[0]"], I), e.uniform1f(i.u_level, Math.min(1, Math.max(0, N.level))), e.uniform1f(i.u_transparent, tr ? 1 : 0), e.uniform1f(i.u_dim_outside, dimOut), tr && (e.clearColor(0, 0, 0, 0), e.clear(e.COLOR_BUFFER_BIT)), e.drawArrays(e.TRIANGLES, 0, 3), e.activeTexture(e.TEXTURE0);
   }
   function fe() {
     G || (G = !0, t.forEach((c) => e.deleteShader(c)), n.forEach((c) => e.deleteProgram(c)), [A, R, _].forEach((c) => e.deleteTexture(c)), e.deleteFramebuffer(C), e.deleteFramebuffer(w), e.deleteBuffer(p), e.getExtension("WEBGL_lose_context")?.loseContext());
@@ -710,7 +711,7 @@ class se extends HTMLElement {
     this.events = new AbortController();
     const t = this.events.signal;
     try {
-      this.renderer = _e(this.canvas, this.hasAttribute("transparent-bg")), this.dataset.renderer = "webgl";
+      this.renderer = _e(this.canvas, this.hasAttribute("transparent-bg"), Math.min(0.9, Math.max(0, Number(this.getAttribute("dim-outside")) || 0))), this.dataset.renderer = "webgl";
     } catch (n) {
       console.warn("liquid-glass: WebGL is unavailable, using frosted CSS glass.", n), this.dataset.renderer = "css";
     }
